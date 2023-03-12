@@ -20,35 +20,35 @@ const fakeTrips: Trip[] = [
 export function Home(props: { name: string }) {
   return (
     <div className="px-5 py-16">
-      <h1 className="text-5xl font-semibold">Hello {props.name} !</h1>
-      <p className="text-slate-400 text-3xl mt-1">
+      <h1 className="text-4xl font-semibold">Hello {props.name} !</h1>
+      <p className="text-slate-400 text-xl mt-1">
         Here is a resume of your trips
       </p>
-      <div className="bg-slate-800 rounded-2xl h-max p-10 mt-10 border border-slate-600">
-        <div className="flex flex-row items-center justify-evenly">
+      <div className="bg-slate-800 rounded-2xl h-max py-6 px-8 mt-6 border border-slate-600">
+        <div className="flex flex-row items-center justify-between">
           <div className="flex flex-col items-center">
-            <span className="text-emerald-400 text-5xl font-bold">1440</span>
-            <span className="text-slate-400 text-2xl">km</span>
+            <span className="text-emerald-400 text-3xl font-bold">1440</span>
+            <span className="text-slate-400 text-xl">km</span>
           </div>
 
           <div className="flex flex-col items-center">
-            <span className="text-emerald-400 text-5xl font-bold">52</span>
-            <span className="text-slate-400 text-2xl">trips</span>
+            <span className="text-emerald-400 text-3xl font-bold">52</span>
+            <span className="text-slate-400 text-xl">trips</span>
           </div>
 
           <div className="flex flex-col items-center">
-            <span className="text-emerald-400 text-5xl font-bold">1440</span>
-            <span className="text-slate-400 text-2xl">km</span>
+            <span className="text-emerald-400 text-3xl font-bold">1440</span>
+            <span className="text-slate-400 text-xl">km</span>
           </div>
         </div>
 
-        <div className="relative h-10 bg-slate-700 w-full rounded-full mt-8 overflow-hidden">
+        <div className="relative h-6 bg-slate-700 w-full rounded-full mt-8 overflow-hidden">
           <div className={`h-full w-[50%] bg-emerald-400`}></div>
         </div>
         <span className="text-slate-400 font-semibold block mt-2">50%</span>
       </div>
 
-      <h2 className="block my-8 text-3xl font-semibold">Recent trips</h2>
+      <h2 className="block mt-8 mb-4 text-3xl font-semibold">Recent trips</h2>
       {fakeTrips.map((trip) => (
         <RecentTrip from={trip.from} to={trip.to} date={trip.date} kms={trip.kms} duration={trip.duration} />
       ))}
