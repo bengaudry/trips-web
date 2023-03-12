@@ -23,5 +23,8 @@ dist-ssr
 *.sln
 *.sw?
 
+# Useless
+.firebase
+
 # Confidential
 server/firebase/config.ts

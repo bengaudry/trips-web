@@ -7,7 +7,7 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "deploy": "firebase deploy --only hosting:tripsapp"
+    "deploy": "npm run build && firebase deploy --only hosting:tripsapp"
   },
   "dependencies": {
     "@flaticon/flaticon-uicons": "^2.0.1",
