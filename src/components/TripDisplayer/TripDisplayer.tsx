@@ -4,7 +4,7 @@ export type Trip = {
   date: Date;
   kms: number;
   duration: number;
-}
+};
 
 function capitalizeWord(str: string) {
   return str.charAt(0).toUpperCase() + str.slice(1);
@@ -17,9 +17,9 @@ function convertDuration(min: number): string {
   return `${min / 60}h ${min % 60}min`;
 }
 
-export function RecentTrip(props: Trip) {
+export function TripDisplayer(props: Trip) {
   return (
-    <div className="w-full flex flex-row items-center py-4 px-8 bg-slate-800 rounded-xl mb-5">
+    <div className="w-full flex flex-row items-center py-2 px-4 bg-slate-800 rounded-xl mb-3">
       <div className="flex flex-col">
         <span className="font-semibold">
           {capitalizeWord(props.from)} → {capitalizeWord(props.to)}

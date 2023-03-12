@@ -1,4 +1,4 @@
-import { RecentTrip, Trip } from "./components/RecentTrip";
+import { TripDisplayer, Trip } from "../../components/TripDisplayer";
 
 const fakeTrips: Trip[] = [
   {
@@ -6,16 +6,16 @@ const fakeTrips: Trip[] = [
     to: "Feurs",
     date: new Date(),
     kms: 15,
-    duration: 12
+    duration: 12,
   },
   {
     from: "feurs",
     to: "saint-galmier",
     date: new Date(),
     kms: 25,
-    duration: 30
-  }
-]
+    duration: 30,
+  },
+];
 
 export function Home(props: { name: string }) {
   return (
@@ -50,7 +50,13 @@ export function Home(props: { name: string }) {
 
       <h2 className="block mt-8 mb-4 text-3xl font-semibold">Recent trips</h2>
       {fakeTrips.map((trip) => (
-        <RecentTrip from={trip.from} to={trip.to} date={trip.date} kms={trip.kms} duration={trip.duration} />
+        <TripDisplayer
+          from={trip.from}
+          to={trip.to}
+          date={trip.date}
+          kms={trip.kms}
+          duration={trip.duration}
+        />
       ))}
     </div>
   );
