@@ -1,3 +1,7 @@
-export { getFirebaseApp } from "./firebase/init";
-export { getFirebaseAnalytics } from "./firebase/init";
-export { FirebaseConfig } from "./firebase/types";
+export {
+  getFirebaseApp,
+  getFirebaseAnalytics,
+  getFirebaseConfig,
+  getFirebaseAuth,
+} from "./firebase/init";
+export type { FirebaseConfig } from "./firebase/types";

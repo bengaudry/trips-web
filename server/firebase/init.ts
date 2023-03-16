@@ -3,6 +3,7 @@ import { FirebaseApp, initializeApp } from "firebase/app";
 import { Analytics, getAnalytics } from "firebase/analytics";
 import { firebaseConfig } from "./config";
 import { FirebaseConfig } from "../index";
+import { Auth, getAuth } from "firebase/auth";
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
@@ -18,4 +19,8 @@ export function getFirebaseAnalytics(): Analytics {
 
 export function getFirebaseConfig(): FirebaseConfig {
   return firebaseConfig;
+}
+
+export function getFirebaseAuth(): Auth {
+  return getAuth(app);
 }
