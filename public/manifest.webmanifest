@@ -1,0 +1,9 @@
+{
+  "name": "Trips",
+  "theme_color": "#1E313B",
+  "background_color": "#0F172A",
+  "display": "stand-alone",
+  "Scope": "/",
+  "orientation": "portrait",
+  "start_url": "tripsapp.web.app/"
+}
