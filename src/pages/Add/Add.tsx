@@ -1,10 +1,11 @@
 import { useState } from "react";
-import { Input, Select } from "../../components/Forms";
+import { Input, Select, Suggestions } from "../../components/Forms";
 
 export function Add() {
   const [roadType, setRoadType] = useState<string>("");
   const [trafficDensity, setTrafficDensity] = useState<string>("");
   const [weather, setWeather] = useState<string>("");
+  const [from, setFrom] = useState<string>("");
   const [moreOptionsOpened, setMoreOptionsOpened] = useState<boolean>(false);
   return (
     <div className="px-5 py-16 pb-96">
@@ -14,7 +15,18 @@ export function Add() {
         <Input name="Date" type="date" />
         <Input name="Time" type="time" />
       </div>
-      <Input name="from" type="text" />
+      <Input
+        name="from"
+        type="text"
+        defaultValue={from}
+        onChange={(value: string) => setFrom(value)}
+      >
+        <Suggestions
+          onLocationChange={(value: string) => {
+            setFrom(value);
+          }}
+        />
+      </Input>
       <Input name="to" type="text" />
       <div className="grid grid-cols-2 gap-4">
         <Input name="length" type="number" />
@@ -25,13 +37,9 @@ export function Add() {
         className="mt-4"
       >
         <span>
-          See{" "}
-          <span className="inline-block w-9">
-            {moreOptionsOpened ? "less" : "more"}
-          </span>{" "}
-          options{" "}
+          See {moreOptionsOpened ? "less" : "more"} options
           <i
-            className={`fi fi-rr-angle-small-down inline-block transition-transform duration-300 ${
+            className={`fi fi-rr-angle-small-down inline-block transition-transform origin-center duration-300 ${
               moreOptionsOpened ? "rotate-180" : "rotate-0"
             }`}
           ></i>

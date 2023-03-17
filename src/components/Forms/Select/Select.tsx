@@ -44,7 +44,7 @@ export function Select(props: props) {
         <span>{selectedOption}</span>
         <span>
           <i
-            className={`fi fi-rr-angle-small-down inline-block transition-transform duration-300 ${
+            className={`fi fi-rr-angle-small-down inline-block transition-transform duration-300 origin-center ${
               isOpened ? "rotate-180" : "rotate-0"
             }`}
           ></i>
