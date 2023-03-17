@@ -61,10 +61,21 @@ const fakeTrips: Trip[] = [
   //   },
 ];
 
-export function Trips(props: { className: string, setTripsPanelOpened: CallableFunction }) {
+export function Trips(props: {
+  className: string;
+  setTripsPanelOpened: CallableFunction;
+}) {
   return (
-    <div className={`px-5 py-16 pt-4 z-40 fixed top-0 left-0 w-full h-screen bg-slate-900 transition-transform duration-500 ${props.className}`}>
-      <button className="text-slate-400 font-semibold text-lg mb-8"onClick={() => props.setTripsPanelOpened(false)}>&lt; Back</button>
+    <div
+      className={`px-5 py-16 pt-4 z-40 fixed top-0 left-0 w-full h-screen bg-slate-900 transition-transform duration-500 ${props.className}`}
+    >
+      <button
+        className="text-slate-400 font-semibold text-lg mb-8 flex flex-row items-center gap-2"
+        onClick={() => props.setTripsPanelOpened(false)}
+      >
+        <i className="fi fi-rr-angle-left block text-sm"></i>
+        <span className="block h-min -translate-y-0.5">Back</span>
+      </button>
       <h1 className="text-4xl font-semibold mb-5">My trips</h1>
       {fakeTrips.length > 0 ? (
         fakeTrips.map((trip, index) => (
@@ -79,7 +90,9 @@ export function Trips(props: { className: string, setTripsPanelOpened: CallableF
         ))
       ) : (
         <>
-          <p className="text-center block w-full text-2xl my-4 mt-8">No trips yet</p>
+          <p className="text-center block w-full text-2xl my-4 mt-8">
+            No trips yet
+          </p>
           <img src="/empty.png" className="block m-auto w-9/12 py-8" />
           <Cta func="link" to="/add">
             Add one here
