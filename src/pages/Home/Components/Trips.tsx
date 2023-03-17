@@ -93,7 +93,7 @@ export function Trips(props: {
           <p className="text-center block w-full text-2xl my-4 mt-8">
             No trips yet
           </p>
-          <img src="/empty.png" className="block m-auto w-9/12 py-8" />
+          <img src="/empty.png" className="block m-auto w-9/12 py-8 rounded-lg overflow-hidden" />
           <Cta func="link" to="/add">
             Add one here
           </Cta>

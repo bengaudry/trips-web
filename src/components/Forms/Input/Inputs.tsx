@@ -1,10 +1,11 @@
 interface props {
   name: string;
   className?: string;
-  type: "email" | "text" | "password" | "number" | "hidden";
+  type: "email" | "text" | "password" | "number" | "hidden" | "date" | "time";
   onClick?: CallableFunction;
   onInput?: CallableFunction;
   onChange?: CallableFunction;
+  defaultValue?: any;
 }
 
 function capitalizeString (str: string): string {
@@ -29,6 +30,7 @@ export function Input(props: props) {
       onChange={(e) => {
         if (props.onChange) props.onChange(e);
       }}
+      value={props.defaultValue}
     />
   </div>);
 }
