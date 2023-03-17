@@ -7,7 +7,6 @@ import { Layout } from "./components/Layout";
 import { Add } from "./pages/Add";
 import { Home } from "./pages/Home";
 import { Profile } from "./pages/Profile";
-import { Trips } from "./pages/Trips";
 import { NoPage } from "./pages/NoPage";
 
 // Auth pages and layout
@@ -32,7 +31,6 @@ export default function App() {
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Home user={currentUser} />} />
-          <Route path="trips" element={<Trips />} />
           <Route path="add" element={<Add />} />
           <Route
             path="profile"

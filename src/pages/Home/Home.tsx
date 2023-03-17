@@ -1,5 +1,7 @@
 import { UserCredential, User } from "firebase/auth";
 import { TripDisplayer, Trip } from "../../components/TripDisplayer";
+import { Trips } from "./Components";
+import { useState } from "react";
 
 const fakeTrips: Trip[] = [
   {
@@ -19,9 +21,13 @@ const fakeTrips: Trip[] = [
 ];
 
 export function Home(props: { user: User }) {
+  const [tripsPanelOpened, setTripsPanelOpened] = useState<boolean>(false);
+
   return (
     <div className="px-5 py-16">
-      <h1 className="text-4xl font-semibold">Hello {props.user.displayName} !</h1>
+      <h1 className="text-4xl font-semibold">
+        Hello {props.user.displayName} !
+      </h1>
       <p className="text-slate-400 text-xl mt-1">
         Here is a resume of your trips
       </p>
@@ -49,7 +55,15 @@ export function Home(props: { user: User }) {
         <span className="text-slate-400 font-semibold block mt-2">50%</span>
       </div>
 
-      <h2 className="block mt-8 mb-4 text-3xl font-semibold">Recent trips</h2>
+      <div className="flex flex-row items-center justify-between mt-8 mb-4 ">
+        <h2 className="block text-3xl font-semibold">Recent trips</h2>
+        <button
+          className="block h-fit text-slate-500"
+          onClick={() => setTripsPanelOpened(!tripsPanelOpened)}
+        >
+          See all
+        </button>
+      </div>
       {fakeTrips.map((trip) => (
         <TripDisplayer
           from={trip.from}
@@ -59,6 +73,10 @@ export function Home(props: { user: User }) {
           duration={trip.duration}
         />
       ))}
+      <Trips
+        className={`${tripsPanelOpened ? "" : "translate-x-full"}`}
+        setTripsPanelOpened={setTripsPanelOpened}
+      />
     </div>
   );
 }

@@ -19,7 +19,7 @@ function convertDuration(min: number): string {
 
 export function TripDisplayer(props: Trip) {
   return (
-    <div className="w-full flex flex-row items-center py-2 px-4 bg-slate-800 rounded-xl mb-3">
+    <div className="w-full flex flex-row items-center py-2 px-6 bg-slate-800 rounded-xl mb-3">
       <div className="flex flex-col">
         <span className="font-semibold">
           {capitalizeWord(props.from)} → {capitalizeWord(props.to)}
