@@ -13,27 +13,29 @@ export function LoginPage(props: { setCurrentUser: CallableFunction }) {
     <>
       <div className="flex flex-col items-center py-10 px-4">
         <h2 className="text-2xl font-semibold">Login</h2>
-        <Input
-          name="email"
-          type="email"
-          onInput={(e: any) => setEmail(e.target?.value)}
-        />
-        <Input
-          name="password"
-          type="password"
-          onInput={(e: any) => setPassword(e.target?.value)}
-        />
-        <button
-          type="submit"
-          className="bg-emerald-500 px-10 py-2 mt-4 rounded-lg transition-colors duration-300 hover:bg-emerald-700"
-          onClick={() => {
-            signInWithEmailAndPassword(getFirebaseAuth(), email, password)
-              .then((user) => props.setCurrentUser(user))
-              .catch((err) => alert(err));
-          }}
-        >
-          Login
-        </button>
+        <form onSubmit={(e) => e.preventDefault()}>
+          <Input
+            name="email"
+            type="email"
+            onInput={(e: any) => setEmail(e.target?.value)}
+          />
+          <Input
+            name="password"
+            type="password"
+            onInput={(e: any) => setPassword(e.target?.value)}
+          />
+          <button
+            type="submit"
+            className="bg-emerald-500 px-10 py-2 mt-4 rounded-lg transition-colors duration-300 hover:bg-emerald-700 block mx-auto"
+            onClick={() => {
+              signInWithEmailAndPassword(getFirebaseAuth(), email, password)
+                .then((user) => props.setCurrentUser(user))
+                .catch((err) => alert(err));
+            }}
+          >
+            Login
+          </button>
+        </form>
       </div>
       <p className="block w-full text-center">
         Don't have an account ?{" "}

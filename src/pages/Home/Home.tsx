@@ -1,4 +1,4 @@
-import { UserCredential } from "firebase/auth";
+import { UserCredential, User } from "firebase/auth";
 import { TripDisplayer, Trip } from "../../components/TripDisplayer";
 
 const fakeTrips: Trip[] = [
@@ -18,10 +18,10 @@ const fakeTrips: Trip[] = [
   },
 ];
 
-export function Home(props: { user: UserCredential }) {
+export function Home(props: { user: User }) {
   return (
     <div className="px-5 py-16">
-      <h1 className="text-4xl font-semibold">Hello {props.user.user.displayName} !</h1>
+      <h1 className="text-4xl font-semibold">Hello {props.user.displayName} !</h1>
       <p className="text-slate-400 text-xl mt-1">
         Here is a resume of your trips
       </p>

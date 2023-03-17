@@ -1,5 +1,6 @@
 // React routing
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { useState } from "react";
 
 // App pages and layout
 import { Layout } from "./components/Layout";
@@ -16,11 +17,15 @@ import { AuthLayout } from "./pages/Auth/Layout";
 // Styles
 import "/src/assets/index.css";
 import { RegisterPage } from "./pages/Auth/Register";
-import { useState } from "react";
-import { UserCredential } from "firebase/auth";
+import { onAuthStateChanged, User } from "firebase/auth";
+import { getFirebaseAuth } from "../server";
 
 export default function App() {
-  const [currentUser, setCurrentUser] = useState<null | UserCredential>(null);
+  const [currentUser, setCurrentUser] = useState<null | User>(null);
+
+  onAuthStateChanged(getFirebaseAuth(), (user) => {
+    setCurrentUser(user);
+  });
 
   return currentUser ? (
     <BrowserRouter>
@@ -29,7 +34,12 @@ export default function App() {
           <Route index element={<Home user={currentUser} />} />
           <Route path="trips" element={<Trips />} />
           <Route path="add" element={<Add />} />
-          <Route path="profile" element={<Profile />} />
+          <Route
+            path="profile"
+            element={
+              <Profile setCurrentUser={(user: null | User) => setCurrentUser} />
+            }
+          />
           <Route path="*" element={<NoPage />} />
         </Route>
       </Routes>
@@ -42,7 +52,7 @@ export default function App() {
             index
             element={
               <LoginPage
-                setCurrentUser={(user: UserCredential) => setCurrentUser(user)}
+                setCurrentUser={(user: User) => setCurrentUser(user)}
               />
             }
           />
@@ -50,11 +60,18 @@ export default function App() {
             path="register"
             element={
               <RegisterPage
-                setCurrentUser={(user: UserCredential) => setCurrentUser(user)}
+                setCurrentUser={(user: User) => setCurrentUser(user)}
               />
             }
           />
-          <Route path="*" element={<NoPage />} />
+          <Route
+            path="*"
+            element={
+              <LoginPage
+                setCurrentUser={(user: User) => setCurrentUser(user)}
+              />
+            }
+          />
         </Route>
       </Routes>
     </BrowserRouter>
