@@ -2,35 +2,30 @@ import { User } from "firebase/auth";
 import { TripDisplayer, Trip } from "../../components/TripDisplayer";
 import { Trips } from "./Components";
 import { useEffect, useMemo, useState } from "react";
-import { getFirestore, collection, getDocs } from "firebase/firestore";
+import {
+  getFirestore,
+  collection,
+  getDocs,
+  where,
+  query,
+} from "firebase/firestore";
 import { getFirebaseApp } from "../../../server";
-
-async function fetchTrips() {
-  var result;
-
-  return result;
-}
+import { ShortTrip } from "../../types/types";
 
 export function Home(props: { user: User }) {
   const [tripsPanelOpened, setTripsPanelOpened] = useState<boolean>(false);
-  const [data, setData] = useState<
-    {
-      id: string;
-      date: string;
-      from: string;
-      to: string;
-      length: string;
-      duration: string;
-      uid: string;
-    }[]
-  >();
+  const [trips, setTrips] = useState<ShortTrip[]>();
 
   useEffect(() => {
     const db = getFirestore(getFirebaseApp());
     const tripsCollection = collection(db, "/trips");
 
     const fetchData = async () => {
-      const response = await getDocs(tripsCollection);
+      let q = query(
+        tripsCollection,
+        where("uid", "==", "xqWqf8Oaf5aOTribODm3AhYi1em2")
+      );
+      const response = await getDocs(q);
       const newData = response.docs.map((doc) => ({
         id: doc.id,
         date: doc.data().date,
@@ -38,15 +33,43 @@ export function Home(props: { user: User }) {
         to: doc.data().to,
         length: doc.data().length,
         duration: doc.data().duration,
+        roundTrip: doc.data().roundTrip,
         uid: doc.data().uid,
       }));
-      setData(newData);
+      setTrips(newData);
     };
 
     fetchData();
   }, []);
 
-  const memoizedData = useMemo(() => data, [data]);
+  const getTotalKms = (): number => {
+    let kms = 0;
+    trips?.map(
+      (trip) =>
+        (kms += trip.roundTrip
+          ? parseInt(trip.length) * 2
+          : parseInt(trip.length))
+    );
+    return kms;
+  };
+
+  const getKmsPercent = (): number => {
+    const maximumKms = 3000;
+    return Math.floor((getTotalKms() / maximumKms) * 100);
+  };
+
+  const getTotalDrivingTime = () => {
+    let mins = 0;
+    trips?.map(
+      (trip) =>
+        (mins += trip.roundTrip
+          ? parseInt(trip.duration) * 2
+          : parseInt(trip.duration))
+    );
+    return mins;
+  };
+
+  const memoizedData = useMemo(() => trips, [trips]);
 
   return (
     <div className="px-5 py-16">
@@ -59,25 +82,41 @@ export function Home(props: { user: User }) {
       <div className="bg-slate-800 rounded-2xl h-max py-6 px-8 mt-6 border border-slate-600">
         <div className="flex flex-row items-center justify-between">
           <div className="flex flex-col items-center">
-            <span className="text-emerald-400 text-3xl font-bold">1440</span>
+            <span className="text-emerald-400 text-3xl font-bold">
+              {getTotalKms()}
+            </span>
             <span className="text-slate-400 text-xl">km</span>
           </div>
 
           <div className="flex flex-col items-center">
-            <span className="text-emerald-400 text-3xl font-bold">52</span>
-            <span className="text-slate-400 text-xl">trips</span>
+            <span className="text-emerald-400 text-3xl font-bold">
+              {trips?.length}
+            </span>
+            <span className="text-slate-400 text-xl">
+              trip{trips && trips.length > 1 ? "s" : ""}
+            </span>
           </div>
 
           <div className="flex flex-col items-center">
-            <span className="text-emerald-400 text-3xl font-bold">1440</span>
-            <span className="text-slate-400 text-xl">km</span>
+            <span className="text-emerald-400 text-3xl font-bold">
+              {getTotalDrivingTime() >= 60
+                ? getTotalDrivingTime() / 60
+                : getTotalDrivingTime()}
+            </span>
+            <span className="text-slate-400 text-xl">
+              {getTotalDrivingTime() >= 60 ? "hrs" : "min"}
+            </span>
           </div>
         </div>
 
         <div className="relative h-6 bg-slate-700 w-full rounded-full mt-8 overflow-hidden">
-          <div className={`h-full w-[50%] bg-emerald-400`}></div>
+          <div
+            className={`h-full w-[${getKmsPercent().toString()}%] bg-emerald-400`}
+          ></div>
         </div>
-        <span className="text-slate-400 font-semibold block mt-2">50%</span>
+        <span className="text-slate-400 font-semibold block mt-2">
+          {getKmsPercent()}%
+        </span>
       </div>
 
       <div className="flex flex-row items-center justify-between mt-8 mb-4 ">
@@ -91,7 +130,6 @@ export function Home(props: { user: User }) {
       </div>
       {memoizedData
         ? memoizedData.map((trip, index) => {
-            console.log(trip);
             while (index < 5) {
               return (
                 <TripDisplayer
@@ -99,7 +137,10 @@ export function Home(props: { user: User }) {
                   to={trip.to}
                   date={trip.date}
                   length={trip.length}
+                  roundTrip={trip.roundTrip}
                   duration={trip.duration}
+                  id={trip.id}
+                  uid={trip.uid}
                 />
               );
             }

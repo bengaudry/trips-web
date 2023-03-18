@@ -14,6 +14,7 @@ async function addTrip(content: {
   to: string;
   length: string;
   duration: string;
+  roundTrip: boolean;
   uid: string;
 }) {
   const db = getFirestore(getFirebaseApp());
@@ -26,7 +27,7 @@ async function addTrip(content: {
       alert("Error while sending to the database, please contact us");
     });
 
-  window.location.href = "/"
+  window.location.href = "/";
 }
 
 export function Add() {
@@ -40,6 +41,7 @@ export function Add() {
   const [to, setTo] = useState<string>("");
   const [length, setLength] = useState<string>("0");
   const [duration, setDuration] = useState<string>("0");
+  const [roundTrip, setRoundTrip] = useState<boolean>(false);
 
   // Functionnal states
   const [moreOptionsOpened, setMoreOptionsOpened] = useState<boolean>(false);
@@ -200,6 +202,17 @@ export function Add() {
             },
           ]}
         />
+        <div className="flex flex-row items-center gap-2 my-4">
+          <label htmlFor="round-trip">Round trip</label>
+          <input
+            type="checkbox"
+            id="round-trip"
+            onChange={(e) => {
+              setRoundTrip(e.target.checked);
+            }}
+            checked={roundTrip}
+          />
+        </div>
       </div>
       <Cta
         func="button"
@@ -216,6 +229,7 @@ export function Add() {
             to: to,
             length: length,
             duration: duration,
+            roundTrip: roundTrip,
             uid: "xqWqf8Oaf5aOTribODm3AhYi1em2",
           });
         }}

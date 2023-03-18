@@ -1,18 +1,11 @@
 import { TripDisplayer } from "../../../components/TripDisplayer";
 import { Cta } from "../../../components/Buttons/Cta";
+import { ShortTrip } from "../../../types/types";
 
 export function Trips(props: {
   className: string;
   setTripsPanelOpened: CallableFunction;
-  data?: {
-    id: string;
-    date: string;
-    from: string;
-    to: string;
-    length: string;
-    duration: string;
-    uid: string;
-  }[];
+  data?: ShortTrip[];
 }) {
   return (
     <div
@@ -34,7 +27,10 @@ export function Trips(props: {
             date={trip.date}
             length={trip.length}
             duration={trip.duration}
+            roundTrip={trip.roundTrip}
             key={index}
+            id={trip.id}
+            uid={trip.uid}
           />
         ))
       ) : (
