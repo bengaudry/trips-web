@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { signInWithEmailAndPassword } from "firebase/auth";
 import { Input } from "../../../components/Forms/Input/Inputs";
 import { getFirebaseAuth } from "../../../../server";
 
@@ -13,16 +13,16 @@ export function LoginPage(props: { setCurrentUser: CallableFunction }) {
     <>
       <div className="flex flex-col items-center py-10 px-4">
         <h2 className="text-2xl font-semibold">Login</h2>
-        <form onSubmit={(e) => e.preventDefault()}>
+        <form onSubmit={(e) => e.preventDefault()} className="w-10/12">
           <Input
             name="email"
             type="email"
-            onInput={(e: any) => setEmail(e.target?.value)}
+            onChange={(e: any) => setEmail(e.target?.value)}
           />
           <Input
             name="password"
             type="password"
-            onInput={(e: any) => setPassword(e.target?.value)}
+            onChange={(e: any) => setPassword(e.target?.value)}
           />
           <button
             type="submit"

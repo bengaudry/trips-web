@@ -55,10 +55,11 @@ export function Select(props: props) {
           } origin-top top-full left-0 pt-2 h-max w-full absolute z-20 transition-transform duration-200 overflow-x-hidden`}
         >
           <div className="bg-slate-800 border border-slate-600 py-2 rounded-lg flex flex-col gap-1 max-h-44 overflow-y-scroll">
-            {props.options.map((opt) => (
+            {props.options.map((opt, index) => (
               <div
                 className="px-4 py-1 hover:bg-slate-700 cursor-default"
                 onClick={() => setSelectedOption(opt.name)}
+                key={index}
               >
                 {opt.name}
               </div>

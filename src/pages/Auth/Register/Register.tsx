@@ -13,16 +13,16 @@ export function RegisterPage(props: { setCurrentUser: CallableFunction }) {
     <>
       <div className="flex flex-col items-center py-10 px-4">
         <h2 className="text-2xl font-semibold">Register</h2>
-        <form onSubmit={(e) => e.preventDefault()}>
+        <form onSubmit={(e) => e.preventDefault()} className="w-10/12">
           <Input
             name="email"
             type="email"
-            onInput={(e: any) => setEmail(e.target?.value)}
+            onChange={(e: any) => setEmail(e.target?.value)}
           />
           <Input
             name="password"
             type="password"
-            onInput={(e: any) => setPassword(e.target?.value)}
+            onChange={(e: any) => setPassword(e.target?.value)}
           />
           <button
             type="submit"
