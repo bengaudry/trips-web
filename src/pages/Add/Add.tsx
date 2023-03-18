@@ -228,8 +228,8 @@ export function Add() {
             weather: weather,
             from: from,
             to: to,
-            length: length,
-            duration: duration,
+            length: parseInt(length),
+            duration: parseInt(duration),
             roundTrip: roundTrip,
             uid: "xqWqf8Oaf5aOTribODm3AhYi1em2",
           });

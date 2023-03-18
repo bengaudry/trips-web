@@ -1,7 +1,7 @@
 import { ShortTrip } from "../../types/types";
 
 function capitalizeWord(str: string | undefined) {
-  if (str) return (str.charAt(0).toUpperCase() + str.slice(1)).replaceAll(" ", "-");
+  if (str) return (str.charAt(0).toUpperCase() + str.slice(1));
   else return ""
 }
 
