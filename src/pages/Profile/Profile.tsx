@@ -13,7 +13,6 @@ function Popup(props: {
   shown: boolean;
   hideFn: CallableFunction;
 }) {
-  const [oldPass, setOldPass] = useState<string>("");
   const [newPass, setNewPass] = useState<string>("");
   const [newPassConfirm, setNewPassConfirm] = useState<string>("");
 
@@ -34,13 +33,6 @@ function Popup(props: {
         <span>Back</span>
       </button>
       {props.children}
-      <input
-        type="password"
-        className="bg-slate-800 w-full rounded-lg py-3 px-4 mb-4"
-        placeholder="Old password"
-        value={oldPass}
-        onChange={(e) => setOldPass(e.target.value)}
-      />
       <input
         type="password"
         className="bg-slate-800 w-full rounded-lg py-3 px-4 mb-4"
