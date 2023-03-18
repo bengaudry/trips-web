@@ -29,7 +29,7 @@ export function Suggestions(props: {
         <span className="px-4 font-semibold mt-2">Recent</span>
         <span
           className="block px-4 py-0.5 text-slate-400 transition-colors duration-100 hover:bg-slate-700 hover:text-white"
-          onClick={() => { console.log("feurs"); props.onChange("feurs")}}
+          onClick={() => { props.onChange("feurs")}}
         >
           Feurs
         </span>

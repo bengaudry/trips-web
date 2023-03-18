@@ -16,7 +16,6 @@ async function addTrip(content: FullTrip) {
   const tripsCollection = collection(db, "/trips");
 
   await addDoc(tripsCollection, content)
-    .then((result) => console.log(result))
     .catch((err) => {
       console.log("Firebase error :", err);
       alert("Error while sending to the database, please contact us");
@@ -81,7 +80,6 @@ export function Add() {
         {/* <Suggestions
           location={from}
           onChange={(value: string) => {
-            console.log(value)
             setFrom(value);
           }}
           className={`${fromInputFocused ? "" : "hidden"}`}

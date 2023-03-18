@@ -33,7 +33,6 @@ export function Home(props: { user: User }) {
         roundTrip: doc.data().roundTrip,
       }));
       setTrips(newData);
-      console.log(newData);
     };
 
     fetchData();
@@ -49,7 +48,6 @@ export function Home(props: { user: User }) {
 
   const getKmsPercent = (): number => {
     const maximumKms = 3000;
-    console.log("percent : ", Math.floor((getTotalKms() / maximumKms) * 100));
     return Math.floor((getTotalKms() / maximumKms) * 100);
   };
 

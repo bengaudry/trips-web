@@ -13,6 +13,7 @@ function Popup(props: {
   shown: boolean;
   hideFn: CallableFunction;
 }) {
+
   const [newPass, setNewPass] = useState<string>("");
   const [newPassConfirm, setNewPassConfirm] = useState<string>("");
 
