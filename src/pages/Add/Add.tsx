@@ -25,6 +25,8 @@ async function addTrip(content: {
       console.log("Firebase error :", err);
       alert("Error while sending to the database, please contact us");
     });
+
+  window.location.href = "/"
 }
 
 export function Add() {

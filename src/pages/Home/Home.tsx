@@ -1,27 +1,52 @@
-import { UserCredential, User } from "firebase/auth";
+import { User } from "firebase/auth";
 import { TripDisplayer, Trip } from "../../components/TripDisplayer";
 import { Trips } from "./Components";
-import { useState } from "react";
+import { useEffect, useMemo, useState } from "react";
+import { getFirestore, collection, getDocs } from "firebase/firestore";
+import { getFirebaseApp } from "../../../server";
 
-const fakeTrips: Trip[] = [
-  {
-    from: "essertines en donzy",
-    to: "Feurs",
-    date: new Date(),
-    kms: 15,
-    duration: 12,
-  },
-  {
-    from: "feurs",
-    to: "saint-galmier",
-    date: new Date(),
-    kms: 25,
-    duration: 30,
-  },
-];
+async function fetchTrips() {
+  var result;
+
+  return result;
+}
 
 export function Home(props: { user: User }) {
   const [tripsPanelOpened, setTripsPanelOpened] = useState<boolean>(false);
+  const [data, setData] = useState<
+    {
+      id: string;
+      date: string;
+      from: string;
+      to: string;
+      length: string;
+      duration: string;
+      uid: string;
+    }[]
+  >();
+
+  useEffect(() => {
+    const db = getFirestore(getFirebaseApp());
+    const tripsCollection = collection(db, "/trips");
+
+    const fetchData = async () => {
+      const response = await getDocs(tripsCollection);
+      const newData = response.docs.map((doc) => ({
+        id: doc.id,
+        date: doc.data().date,
+        from: doc.data().from,
+        to: doc.data().to,
+        length: doc.data().length,
+        duration: doc.data().duration,
+        uid: doc.data().uid,
+      }));
+      setData(newData);
+    };
+
+    fetchData();
+  }, []);
+
+  const memoizedData = useMemo(() => data, [data]);
 
   return (
     <div className="px-5 py-16">
@@ -64,18 +89,26 @@ export function Home(props: { user: User }) {
           See all
         </button>
       </div>
-      {fakeTrips.map((trip) => (
-        <TripDisplayer
-          from={trip.from}
-          to={trip.to}
-          date={trip.date}
-          kms={trip.kms}
-          duration={trip.duration}
-        />
-      ))}
+      {memoizedData
+        ? memoizedData.map((trip, index) => {
+            console.log(trip);
+            while (index < 5) {
+              return (
+                <TripDisplayer
+                  from={trip.from}
+                  to={trip.to}
+                  date={trip.date}
+                  length={trip.length}
+                  duration={trip.duration}
+                />
+              );
+            }
+          })
+        : ""}
       <Trips
         className={`${tripsPanelOpened ? "" : "translate-x-full"}`}
         setTripsPanelOpened={setTripsPanelOpened}
+        data={memoizedData}
       />
     </div>
   );

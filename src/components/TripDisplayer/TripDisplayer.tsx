@@ -1,9 +1,9 @@
 export type Trip = {
   from: string;
   to: string;
-  date: Date;
-  kms: number;
-  duration: number;
+  date: string;
+  length: string;
+  duration: string;
 };
 
 function capitalizeWord(str: string) {
@@ -25,8 +25,8 @@ export function TripDisplayer(props: Trip) {
           {capitalizeWord(props.from)} → {capitalizeWord(props.to)}
         </span>
         <span className="text-slate-400">
-          {props.date.toDateString()} - {props.kms}km -{" "}
-          {convertDuration(props.duration)}min
+          {props.date} - {props.length}km -{" "}
+          {props.duration}min
         </span>
       </div>
     </div>

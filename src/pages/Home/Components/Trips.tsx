@@ -1,69 +1,18 @@
-import { Link } from "react-router-dom";
-import { TripDisplayer, Trip } from "../../../components/TripDisplayer";
+import { TripDisplayer } from "../../../components/TripDisplayer";
 import { Cta } from "../../../components/Buttons/Cta";
-
-const fakeTrips: Trip[] = [
-  //   {
-  //     from: "essertines en donzy",
-  //     to: "Feurs",
-  //     date: new Date(),
-  //     kms: 15,
-  //     duration: 12,
-  //   },
-  //   {
-  //     from: "feurs",
-  //     to: "saint-galmier",
-  //     date: new Date(),
-  //     kms: 25,
-  //     duration: 30,
-  //   },
-  //   {
-  //     from: "essertines en donzy",
-  //     to: "Feurs",
-  //     date: new Date(),
-  //     kms: 15,
-  //     duration: 12,
-  //   },
-  //   {
-  //     from: "feurs",
-  //     to: "saint-galmier",
-  //     date: new Date(),
-  //     kms: 25,
-  //     duration: 30,
-  //   },
-  //   {
-  //     from: "essertines en donzy",
-  //     to: "Feurs",
-  //     date: new Date(),
-  //     kms: 15,
-  //     duration: 12,
-  //   },
-  //   {
-  //     from: "feurs",
-  //     to: "saint-galmier",
-  //     date: new Date(),
-  //     kms: 25,
-  //     duration: 30,
-  //   },
-  //   {
-  //     from: "essertines en donzy",
-  //     to: "Feurs",
-  //     date: new Date(),
-  //     kms: 15,
-  //     duration: 12,
-  //   },
-  //   {
-  //     from: "feurs",
-  //     to: "saint-galmier",
-  //     date: new Date(),
-  //     kms: 25,
-  //     duration: 30,
-  //   },
-];
 
 export function Trips(props: {
   className: string;
   setTripsPanelOpened: CallableFunction;
+  data?: {
+    id: string;
+    date: string;
+    from: string;
+    to: string;
+    length: string;
+    duration: string;
+    uid: string;
+  }[];
 }) {
   return (
     <div
@@ -77,13 +26,13 @@ export function Trips(props: {
         <span className="block h-min -translate-y-0.5">Back</span>
       </button>
       <h1 className="text-4xl font-semibold mb-5">My trips</h1>
-      {fakeTrips.length > 0 ? (
-        fakeTrips.map((trip, index) => (
+      {props.data && props.data.length > 0 ? (
+        props.data.map((trip, index) => (
           <TripDisplayer
             from={trip.from}
             to={trip.to}
             date={trip.date}
-            kms={trip.kms}
+            length={trip.length}
             duration={trip.duration}
             key={index}
           />
@@ -93,7 +42,10 @@ export function Trips(props: {
           <p className="text-center block w-full text-2xl my-4 mt-8">
             No trips yet
           </p>
-          <img src="/empty.png" className="block m-auto w-9/12 py-8 rounded-lg overflow-hidden" />
+          <img
+            src="/empty.png"
+            className="block m-auto w-9/12 py-8 rounded-lg overflow-hidden"
+          />
           <Cta func="link" to="/add">
             Add one here
           </Cta>
