@@ -35,7 +35,7 @@ export default function App() {
           <Route
             path="profile"
             element={
-              <Profile setCurrentUser={(user: null | User) => setCurrentUser} />
+              <Profile setCurrentUser={(user: null | User) => setCurrentUser} user={currentUser} />
             }
           />
           <Route path="*" element={<NoPage />} />

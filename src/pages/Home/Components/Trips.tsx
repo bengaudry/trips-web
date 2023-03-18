@@ -9,7 +9,7 @@ export function Trips(props: {
 }) {
   return (
     <div
-      className={`px-5 py-16 pt-4 z-40 fixed top-0 left-0 w-full h-screen bg-slate-900 transition-transform duration-500 ${props.className}`}
+      className={`px-5 py-16 pt-4 z-40 fixed top-0 left-0 w-full h-screen bg-slate-900 transition-transform duration-500 ${props.className} overflow-y-scroll`}
     >
       <button
         className="text-slate-400 font-semibold text-lg mb-8 flex flex-row items-center gap-2"
@@ -29,8 +29,6 @@ export function Trips(props: {
             duration={trip.duration}
             roundTrip={trip.roundTrip}
             key={index}
-            id={trip.id}
-            uid={trip.uid}
           />
         ))
       ) : (

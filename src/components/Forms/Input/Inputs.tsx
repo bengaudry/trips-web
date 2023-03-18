@@ -10,6 +10,7 @@ interface props {
   onFocus?: CallableFunction;
   onBlur?: CallableFunction;
   value?: any;
+  required?: boolean;
 }
 
 function capitalizeString(str: string): string {
@@ -40,6 +41,7 @@ export function Input(props: props) {
             if (props.onBlur) props.onBlur(e);
           }}
           value={props.value}
+          required={props.required}
         />
       </div>
       {props.children}

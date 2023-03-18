@@ -1,14 +1,15 @@
 import { ShortTrip } from "../../types/types";
 
-function capitalizeWord(str: string) {
-  return str.charAt(0).toUpperCase() + str.slice(1);
+function capitalizeWord(str: string | undefined) {
+  if (str) return (str.charAt(0).toUpperCase() + str.slice(1)).replaceAll(" ", "-");
+  else return ""
 }
 
 function convertDuration(min: number): string {
   if (min < 60) {
     return `${min.toString()}min`;
   }
-  return `${min / 60}h ${min % 60}min`;
+  return `${Math.floor(min / 60)}h ${min % 60}min`;
 }
 
 export function TripDisplayer(props: ShortTrip) {
@@ -25,7 +26,7 @@ export function TripDisplayer(props: ShortTrip) {
           {capitalizeWord(props.to)}
         </span>
         <span className="text-slate-400">
-          {props.date} - {props.length}km - {convertDuration(parseInt(props.duration))}
+          {props.date} - {props.length}km - {convertDuration(props.duration)}
         </span>
       </div>
     </div>

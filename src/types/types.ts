@@ -1,10 +1,22 @@
 export interface ShortTrip {
-  id: string;
   date: string;
   from: string;
   to: string;
-  length: string;
-  duration: string;
+  length: number;
+  duration: number;
+  roundTrip: boolean;
+}
+
+export interface FullTrip {
+  date: string;
+  time: string;
+  roadType: string;
+  trafficDensity: string;
+  weather: string;
+  from: string;
+  to: string;
+  length: number;
+  duration: number;
   roundTrip: boolean;
   uid: string;
 }

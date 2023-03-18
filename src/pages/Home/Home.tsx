@@ -1,5 +1,5 @@
 import { User } from "firebase/auth";
-import { TripDisplayer, Trip } from "../../components/TripDisplayer";
+import { TripDisplayer } from "../../components/TripDisplayer";
 import { Trips } from "./Components";
 import { useEffect, useMemo, useState } from "react";
 import {
@@ -21,10 +21,7 @@ export function Home(props: { user: User }) {
     const tripsCollection = collection(db, "/trips");
 
     const fetchData = async () => {
-      let q = query(
-        tripsCollection,
-        where("uid", "==", "xqWqf8Oaf5aOTribODm3AhYi1em2")
-      );
+      let q = query(tripsCollection, where("uid", "==", props.user.uid));
       const response = await getDocs(q);
       const newData = response.docs.map((doc) => ({
         id: doc.id,
@@ -34,9 +31,9 @@ export function Home(props: { user: User }) {
         length: doc.data().length,
         duration: doc.data().duration,
         roundTrip: doc.data().roundTrip,
-        uid: doc.data().uid,
       }));
       setTrips(newData);
+      console.log(newData);
     };
 
     fetchData();
@@ -45,26 +42,21 @@ export function Home(props: { user: User }) {
   const getTotalKms = (): number => {
     let kms = 0;
     trips?.map(
-      (trip) =>
-        (kms += trip.roundTrip
-          ? parseInt(trip.length) * 2
-          : parseInt(trip.length))
+      (trip) => (kms += trip.roundTrip ? trip.length * 2 : trip.length)
     );
     return kms;
   };
 
   const getKmsPercent = (): number => {
     const maximumKms = 3000;
+    console.log("percent : ", Math.floor((getTotalKms() / maximumKms) * 100))
     return Math.floor((getTotalKms() / maximumKms) * 100);
   };
 
   const getTotalDrivingTime = () => {
     let mins = 0;
     trips?.map(
-      (trip) =>
-        (mins += trip.roundTrip
-          ? parseInt(trip.duration) * 2
-          : parseInt(trip.duration))
+      (trip) => (mins += trip.roundTrip ? trip.duration * 2 : trip.duration)
     );
     return mins;
   };
@@ -74,7 +66,7 @@ export function Home(props: { user: User }) {
   return (
     <div className="px-5 py-16">
       <h1 className="text-4xl font-semibold">
-        Hello {props.user.displayName} !
+        Welcome back {props.user.displayName} !
       </h1>
       <p className="text-slate-400 text-xl mt-1">
         Here is a resume of your trips
@@ -111,7 +103,7 @@ export function Home(props: { user: User }) {
 
         <div className="relative h-6 bg-slate-700 w-full rounded-full mt-8 overflow-hidden">
           <div
-            className={`h-full w-[${getKmsPercent().toString()}%] bg-emerald-400`}
+            className={`h-full w-[${getKmsPercent()}%] bg-emerald-400`}
           ></div>
         </div>
         <span className="text-slate-400 font-semibold block mt-2">
@@ -139,8 +131,6 @@ export function Home(props: { user: User }) {
                   length={trip.length}
                   roundTrip={trip.roundTrip}
                   duration={trip.duration}
-                  id={trip.id}
-                  uid={trip.uid}
                 />
               );
             }

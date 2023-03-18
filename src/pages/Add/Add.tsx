@@ -1,22 +1,17 @@
 import { useState } from "react";
 import { Input, Select, Suggestions } from "../../components/Forms";
 import { Cta } from "../../components/Buttons/Cta";
-import { getFirestore, doc, addDoc, collection } from "firebase/firestore";
+import {
+  getFirestore,
+  doc,
+  addDoc,
+  collection,
+  Timestamp,
+} from "firebase/firestore";
 import { getFirebaseApp } from "../../../server";
+import { FullTrip } from "../../types/types";
 
-async function addTrip(content: {
-  date: string;
-  time: string;
-  roadType: string;
-  trafficDensity: string;
-  weather: string;
-  from: string;
-  to: string;
-  length: string;
-  duration: string;
-  roundTrip: boolean;
-  uid: string;
-}) {
+async function addTrip(content: FullTrip) {
   const db = getFirestore(getFirebaseApp());
   const tripsCollection = collection(db, "/trips");
 
@@ -60,6 +55,7 @@ export function Add() {
           onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
             setDate(e.target.value)
           }
+          required
         />
         <Input
           name="Time"
@@ -68,6 +64,7 @@ export function Add() {
           onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
             setTime(e.target.value)
           }
+          required
         />
       </div>
       <Input
@@ -79,6 +76,7 @@ export function Add() {
         }
         onFocus={() => setFromInputFocused(true)}
         onBlur={() => setFromInputFocused(false)}
+        required
       >
         {/* <Suggestions
           location={from}
@@ -98,6 +96,7 @@ export function Add() {
         }}
         onFocus={() => setToInputFocused(true)}
         onBlur={() => setToInputFocused(false)}
+        required
       >
         {/* <Suggestions
           onLocationChange={(value: string) => {
@@ -114,6 +113,7 @@ export function Add() {
           onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
             setLength(e.target.value)
           }
+          required
         />
         <Input
           name="duration"
@@ -122,6 +122,7 @@ export function Add() {
           onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
             setDuration(e.target.value)
           }
+          required
         />
       </div>
       <button
