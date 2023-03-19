@@ -44,7 +44,7 @@ export function Add() {
   return (
     <div className="px-5 py-16 pb-44">
       <form onSubmit={(e) => e.preventDefault()}></form>
-      <h1 className="text-4xl font-semibold">Add a trip</h1>
+      <h1 className="text-4xl font-bold">Add a trip</h1>
       <div className="grid grid-flow-col-dense gap-4">
         <Input
           name="Date"

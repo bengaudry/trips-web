@@ -12,6 +12,7 @@ import {
 import { getFirebaseApp } from "../../../server";
 import { ShortTrip } from "../../types/types";
 
+
 export function Home(props: { user: User }) {
   const [tripsPanelOpened, setTripsPanelOpened] = useState<boolean>(false);
   const [trips, setTrips] = useState<ShortTrip[]>();
@@ -64,37 +65,35 @@ export function Home(props: { user: User }) {
   return (
     <>
       <div className="px-5 py-16">
-        <h1 className="text-4xl font-semibold">
-          Hi {props.user.displayName}
-        </h1>
+        <h1 className="text-4xl font-bold">Hi {props.user.displayName}</h1>
         <p className="text-neutral-400 text-xl mt-1">
           Here is a resume of your trips
         </p>
-        <div className="bg-neutral-800 rounded-2xl h-max py-6 px-8 mt-6 border border-neutral-600">
+        <div className="bg-neutral-800 rounded-xl h-max py-6 px-8 mt-6 border border-neutral-600">
           <div className="grid grid-cols-3 items-center justify-between">
             <div className="flex flex-col items-center">
-              <span className="text-blue-500 text-3xl font-bold">
+              <span className="text-blue-500 text-2xl font-bold">
                 {getTotalKms()}
               </span>
-              <span className="text-neutral-400 text-xl">km</span>
+              <span className="text-neutral-400 text-lg">km</span>
             </div>
 
             <div className="flex flex-col items-center">
-              <span className="text-blue-500 text-3xl font-bold">
+              <span className="text-blue-500 text-2xl font-bold">
                 {trips?.length}
               </span>
-              <span className="text-neutral-400 text-xl">
+              <span className="text-neutral-400 text-lg">
                 trip{trips && trips.length > 1 ? "s" : ""}
               </span>
             </div>
 
             <div className="flex flex-col items-center">
-              <span className="text-blue-500 text-3xl font-bold">
+              <span className="text-blue-500 text-2xl font-bold">
                 {getTotalDrivingTime() >= 60
                   ? getTotalDrivingTime() / 60
                   : getTotalDrivingTime()}
               </span>
-              <span className="text-neutral-400 text-xl">
+              <span className="text-neutral-400 text-lg">
                 {getTotalDrivingTime() >= 60 ? "hrs" : "min"}
               </span>
             </div>

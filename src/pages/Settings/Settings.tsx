@@ -84,9 +84,12 @@ export function Settings(props: {
       <div className="px-5 py-16">
         <h1 className="text-4xl font-bold mb-6">Settings</h1>
         <h2 className="text-3xl semibold">Account</h2>
-        <div className="flex flex-row items-center justify-between py-4 mb-8">
+
+        <div className="flex flex-row items-center justify-between py-4 mb-8" onClick={() => setChangePasswordPopupShown(true)}>
           <div className="flex flex-row items-center gap-4">
-            <div className="h-16 aspect-square rounded-full bg-neutral-800"></div>
+            <div className="h-16 aspect-square rounded-full bg-neutral-600/40 flex flex-row items-center justify-center">
+              <i className="fi fi-rr-user text-3xl text-neutral-600 translate-y-1"></i>
+            </div>
             <div className="flex flex-col">
               <p className="text-xl font-semibold">
                 {getFirebaseAuth().currentUser?.displayName}
@@ -130,9 +133,10 @@ export function Settings(props: {
 
         <h2 className="text-3xl semibold mb-4">Settings</h2>
 
-        <Setting color="orange" icon="world" name="Language" />
+        <Setting color="125, 211, 252" icon="bell" name="Notification" />
+        <Setting color="253, 186, 116" icon="world" name="Language" />
         <Setting
-          color="red"
+          color="252, 165, 165"
           icon="exit"
           name="Log out"
           onClick={() => {
@@ -140,6 +144,7 @@ export function Settings(props: {
               signOut(getFirebaseAuth());
             }
           }}
+          reduceIconSize
         />
       </div>
     </>
