@@ -7,6 +7,7 @@ import {
 import { getFirebaseAuth } from "../../../server";
 import { ReactNode, useState } from "react";
 import { Cta } from "../../components/Buttons/Cta";
+import { Setting } from "./Components/Setting";
 
 function Popup(props: {
   children: ReactNode;
@@ -94,7 +95,7 @@ export function Settings(props: {
             </div>
           </div>
           <div className="h-12 aspect-square rounded-2xl bg-neutral-800 flex flex-roww items-center justify-center">
-            <i className="fi fi-rr-angle-right text-neutral-400"></i>
+            <i className="fi fi-rr-angle-right text-neutral-400 translate-y-0.5"></i>
           </div>
         </div>
 
@@ -127,42 +128,19 @@ export function Settings(props: {
           <span className="font-semibold">Change my password</span>
         </div> */}
 
-        <h2 className="text-3xl semibold">Settings</h2>
+        <h2 className="text-3xl semibold mb-4">Settings</h2>
 
-        <div className="flex flex-row items-center justify-between py-4">
-          <div className="flex flex-row items-center gap-4">
-            <div className="h-12 aspect-square rounded-full bg-orange-300/40 flex flex-row items-center justify-center">
-              <i className="fi fi-rr-world text-2xl text-orange-300 translate-y-1"></i>
-            </div>
-            <div className="flex flex-col">
-              <p className="text-xl">Language</p>
-            </div>
-          </div>
-          <div className="h-12 aspect-square rounded-2xl bg-neutral-800 flex flex-roww items-center justify-center">
-            <i className="fi fi-rr-angle-right text-neutral-400"></i>
-          </div>
-        </div>
-
-        <div className="flex flex-row items-center justify-between py-4 mb-16">
-          <div className="flex flex-row items-center gap-4">
-            <div className="h-12 aspect-square rounded-full bg-red-300/40 flex flex-row items-center justify-center">
-              <i className="fi fi-rr-exit text-xl text-red-300 translate-y-1"></i>
-            </div>
-            <div className="flex flex-col">
-              <p className="text-xl">Log out</p>
-            </div>
-          </div>
-          <div
-            className="h-12 aspect-square rounded-2xl bg-neutral-800 flex flex-roww items-center justify-center"
-            onClick={() => {
-              if (confirm("Do you really want to be disconnected ?")) {
-                signOut(getFirebaseAuth());
-              }
-            }}
-          >
-            <i className="fi fi-rr-angle-right text-neutral-400"></i>
-          </div>
-        </div>
+        <Setting color="orange" icon="world" name="Language" />
+        <Setting
+          color="red"
+          icon="exit"
+          name="Log out"
+          onClick={() => {
+            if (confirm("Do you really want to be disconnected ?")) {
+              signOut(getFirebaseAuth());
+            }
+          }}
+        />
       </div>
     </>
   );
