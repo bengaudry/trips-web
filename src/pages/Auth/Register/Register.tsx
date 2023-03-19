@@ -66,8 +66,9 @@ export function RegisterPage() {
               .then((user) => {
                 updateProfile(user.user, {
                   displayName: `${name} ${lastName}`,
-                });
-                window.location.href = "/";
+                })
+                  .then(() => (window.location.href = "/"))
+                  .catch((err) => alert(err));
               })
               .catch((err) => alert(err));
           }}

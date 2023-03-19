@@ -6,7 +6,7 @@ export function NavBar() {
       <ul className="flex flex-row items-center justify-between px-16 h-full">
         <NavBarElement icon="apps" label="Home" to="/" />
         <NavBarElement icon="add" label="Add" to="/add" />
-        <NavBarElement icon="user" label="Profile" to="/profile" />
+        <NavBarElement icon="user" label="Settings" to="/settings" />
       </ul>
     </nav>
   );

@@ -6,7 +6,7 @@ import { useState } from "react";
 import { Layout } from "./components/Layout";
 import { Add } from "./pages/Add";
 import { Home } from "./pages/Home";
-import { Profile } from "./pages/Profile";
+import { Settings } from "./pages/Settings";
 import { NoPage } from "./pages/NoPage";
 
 // Auth pages and layout
@@ -34,9 +34,9 @@ export default function App() {
           <Route index element={<Home user={currentUser} />} />
           <Route path="add" element={<Add />} />
           <Route
-            path="profile"
+            path="settings"
             element={
-              <Profile
+              <Settings
                 setCurrentUser={setCurrentUser}
                 user={currentUser}
               />

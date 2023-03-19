@@ -13,7 +13,6 @@ function Popup(props: {
   shown: boolean;
   hideFn: CallableFunction;
 }) {
-
   const [newPass, setNewPass] = useState<string>("");
   const [newPassConfirm, setNewPassConfirm] = useState<string>("");
 
@@ -66,7 +65,7 @@ function Popup(props: {
   );
 }
 
-export function Profile(props: {
+export function Settings(props: {
   user: User;
   setCurrentUser: CallableFunction;
 }) {
@@ -82,13 +81,24 @@ export function Profile(props: {
         <h2 className="text-3xl font-semibold mb-4">Change password</h2>
       </Popup>
       <div className="px-5 py-16">
-        <h1 className="text-4xl font-semibold mb-4">
-          {getFirebaseAuth().currentUser?.displayName}'s profile
-        </h1>
-        <p>
-          Logged in as <span className="font-semibold">{props.user.email}</span>
-        </p>
-        {!props.user.emailVerified ? (
+        <h1 className="text-4xl font-bold mb-6">Settings</h1>
+        <h2 className="text-3xl semibold">Account</h2>
+        <div className="flex flex-row items-center justify-between py-4 mb-8">
+          <div className="flex flex-row items-center gap-4">
+            <div className="h-16 aspect-square rounded-full bg-neutral-800"></div>
+            <div className="flex flex-col">
+              <p className="text-xl font-semibold">
+                {getFirebaseAuth().currentUser?.displayName}
+              </p>
+              <p className="text-xl text-neutral-500">Personal info</p>
+            </div>
+          </div>
+          <div className="h-12 aspect-square rounded-2xl bg-neutral-800 flex flex-roww items-center justify-center">
+            <i className="fi fi-rr-angle-right text-neutral-400"></i>
+          </div>
+        </div>
+
+        {/* {!props.user.emailVerified ? (
           <div className="w-full flex flex-col items-center rounded-lg px-4 py-2 mt-2 bg-yellow-600">
             <p className="flex flex-row items-center gap-2">
               <i className="fi fi-rr-exclamation"></i>
@@ -115,17 +125,44 @@ export function Profile(props: {
         >
           <i className="fi fi-rr-lock text-md translate-y-0.5"></i>
           <span className="font-semibold">Change my password</span>
+        </div> */}
+
+        <h2 className="text-3xl semibold">Settings</h2>
+
+        <div className="flex flex-row items-center justify-between py-4">
+          <div className="flex flex-row items-center gap-4">
+            <div className="h-12 aspect-square rounded-full bg-orange-300/40 flex flex-row items-center justify-center">
+              <i className="fi fi-rr-world text-2xl text-orange-300 translate-y-1"></i>
+            </div>
+            <div className="flex flex-col">
+              <p className="text-xl">Language</p>
+            </div>
+          </div>
+          <div className="h-12 aspect-square rounded-2xl bg-neutral-800 flex flex-roww items-center justify-center">
+            <i className="fi fi-rr-angle-right text-neutral-400"></i>
+          </div>
         </div>
-        <button
-          onClick={() => {
-            if (confirm("Do you really want to be disconnected ?")) {
-              signOut(getFirebaseAuth());
-            }
-          }}
-          className="bg-red-600 px-4 py-1 rounded-md font-semibold transition-colors duration-200 hover:bg-red-800 mt-4"
-        >
-          Log out
-        </button>
+
+        <div className="flex flex-row items-center justify-between py-4 mb-16">
+          <div className="flex flex-row items-center gap-4">
+            <div className="h-12 aspect-square rounded-full bg-red-300/40 flex flex-row items-center justify-center">
+              <i className="fi fi-rr-exit text-xl text-red-300 translate-y-1"></i>
+            </div>
+            <div className="flex flex-col">
+              <p className="text-xl">Log out</p>
+            </div>
+          </div>
+          <div
+            className="h-12 aspect-square rounded-2xl bg-neutral-800 flex flex-roww items-center justify-center"
+            onClick={() => {
+              if (confirm("Do you really want to be disconnected ?")) {
+                signOut(getFirebaseAuth());
+              }
+            }}
+          >
+            <i className="fi fi-rr-angle-right text-neutral-400"></i>
+          </div>
+        </div>
       </div>
     </>
   );
