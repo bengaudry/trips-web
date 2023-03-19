@@ -10,12 +10,13 @@ import { Profile } from "./pages/Profile";
 import { NoPage } from "./pages/NoPage";
 
 // Auth pages and layout
-import { LoginPage } from "./pages/Auth/Login";
+import { SignInPage } from "./pages/Auth/SignIn";
+import { RegisterPage } from "./pages/Auth/Register";
+import { Welcome } from "./pages/Auth/Welcome";
 import { AuthLayout } from "./pages/Auth/Layout";
 
 // Styles
 import "/src/assets/index.css";
-import { RegisterPage } from "./pages/Auth/Register";
 import { onAuthStateChanged, User } from "firebase/auth";
 import { getFirebaseAuth } from "../server";
 
@@ -35,7 +36,10 @@ export default function App() {
           <Route
             path="profile"
             element={
-              <Profile setCurrentUser={(user: null | User) => setCurrentUser} user={currentUser} />
+              <Profile
+                setCurrentUser={setCurrentUser}
+                user={currentUser}
+              />
             }
           />
           <Route path="*" element={<NoPage />} />
@@ -46,30 +50,20 @@ export default function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<AuthLayout />}>
+          <Route index element={<Welcome />} />
           <Route
-            index
+            path="signin"
             element={
-              <LoginPage
-                setCurrentUser={(user: User) => setCurrentUser(user)}
-              />
+              <SignInPage />
             }
           />
           <Route
             path="register"
             element={
-              <RegisterPage
-                setCurrentUser={(user: User) => setCurrentUser(user)}
-              />
+              <RegisterPage />
             }
           />
-          <Route
-            path="*"
-            element={
-              <LoginPage
-                setCurrentUser={(user: User) => setCurrentUser(user)}
-              />
-            }
-          />
+          <Route path="*" element={<Welcome />} />
         </Route>
       </Routes>
     </BrowserRouter>

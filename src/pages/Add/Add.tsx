@@ -15,11 +15,10 @@ async function addTrip(content: FullTrip) {
   const db = getFirestore(getFirebaseApp());
   const tripsCollection = collection(db, "/trips");
 
-  await addDoc(tripsCollection, content)
-    .catch((err) => {
-      console.log("Firebase error :", err);
-      alert("Error while sending to the database, please contact us");
-    });
+  await addDoc(tripsCollection, content).catch((err) => {
+    console.log("Firebase error :", err);
+    alert("Error while sending to the database, please contact us");
+  });
 
   window.location.href = "/";
 }
@@ -201,22 +200,28 @@ export function Add() {
             },
           ]}
         />
-        <div className="flex flex-row items-center gap-2 my-4">
-          <label htmlFor="round-trip">Round trip</label>
-          <input
-            type="checkbox"
-            id="round-trip"
-            onChange={(e) => {
-              setRoundTrip(e.target.checked);
-            }}
-            checked={roundTrip}
-          />
+        <div className="flex flex-row items-center justify-between my-4 py-1 px-3 w-full border-2 rounded-lg border-neutral-700" onClick={() => setRoundTrip(!roundTrip)}>
+          <label htmlFor="round-trip" className={`${roundTrip ? "text-white" : "text-neutral-500"} font-semibold transition-colors duration-300`}>Round trip</label>
+          <label className="block">
+            <div className={`h-5 rounded-full w-10 transition-colors duration-300 relative ${roundTrip ? "bg-blue-600" : "bg-neutral-700"}`}>
+              <div className={`absolute h-full aspect-square bg-white rounded-full transition-transform duration-300 ${roundTrip ? "translate-x-full scale-100" : "translate-x-0 scale-75"}`}></div>
+            </div>
+            <input
+              type="checkbox"
+              id="round-trip"
+              onChange={(e) => {
+                setRoundTrip(e.target.checked);
+              }}
+              checked={roundTrip}
+              className="hidden"
+            />
+          </label>
         </div>
       </div>
       <Cta
         func="button"
         btnType="submit"
-        className="mt-4 sticky bottom-32 shadow-slate-900 shadow-2xl"
+        className="mt-4 sticky bottom-32 shadow-neutral-900 shadow-2xl"
         onClick={() => {
           addTrip({
             date: date,

@@ -12,7 +12,7 @@ interface props {
 
 export function Cta(props: props) {
   const CtaStyle =
-    "bg-emerald-500 text-white font-semibold w-full rounded-lg px-8 p-4 flex items-center justify-center gap-4 transition-colors duration-300 hover:bg-emerald-700";
+    "bg-blue-600 text-white font-semibold w-full rounded-lg px-8 p-4 flex items-center justify-center gap-4 transition-colors duration-300 hover:bg-blue-800";
 
   return props.func === "button" ? (
     <button

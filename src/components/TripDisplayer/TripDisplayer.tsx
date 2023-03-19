@@ -14,7 +14,7 @@ function convertDuration(min: number): string {
 
 export function TripDisplayer(props: ShortTrip) {
   return (
-    <div className="w-full flex flex-row items-center py-2 px-6 bg-slate-800 rounded-xl mb-3">
+    <div className="w-full flex flex-row items-center py-2 px-6 bg-neutral-800 rounded-xl mb-3">
       <div className="flex flex-col">
         <span className="font-semibold">
           {capitalizeWord(props.from)}
@@ -25,7 +25,7 @@ export function TripDisplayer(props: ShortTrip) {
           )}
           {capitalizeWord(props.to)}
         </span>
-        <span className="text-slate-400">
+        <span className="text-neutral-400">
           {props.date} - {props.length}km - {convertDuration(props.duration)}
         </span>
       </div>

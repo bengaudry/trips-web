@@ -20,14 +20,11 @@ function capitalizeString(str: string): string {
 export function Input(props: props) {
   return (
     <div className={`${props.children ? "relative" : ""} flex flex-col w-full`}>
-      <label htmlFor={props.name} className="mt-4">
-        {capitalizeString(props.name)}
-      </label>
-      <div className="w-full h-full bg-slate-800 rounded-lg">
+      <div className="w-full h-full bg-neutral-900 rounded-xl border-2 border-neutral-700 mt-4">
         <input
           type={props.type}
           id={props.name}
-          className={`bg-slate-800 w-full h-max outline-none border-2 border-transparent py-2 px-4 rounded-lg focus:border-emerald-500 ${props.className}`}
+          className={`bg-transparent w-full h-max py-3 px-6 rounded-lg outline-blue-600 placeholder:text-neutral-500 ${props.className}`}
           onClick={(e) => {
             if (props.onClick) props.onClick(e);
           }}
@@ -42,6 +39,7 @@ export function Input(props: props) {
           }}
           value={props.value}
           required={props.required}
+          placeholder={capitalizeString(props.name).replaceAll("-", " ")}
         />
       </div>
       {props.children}

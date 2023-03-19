@@ -65,48 +65,48 @@ export function Home(props: { user: User }) {
     <>
       <div className="px-5 py-16">
         <h1 className="text-4xl font-semibold">
-          Hi {props.user.displayName} !
+          Hi {props.user.displayName}
         </h1>
-        <p className="text-slate-400 text-xl mt-1">
+        <p className="text-neutral-400 text-xl mt-1">
           Here is a resume of your trips
         </p>
-        <div className="bg-slate-800 rounded-2xl h-max py-6 px-8 mt-6 border border-slate-600">
+        <div className="bg-neutral-800 rounded-2xl h-max py-6 px-8 mt-6 border border-neutral-600">
           <div className="grid grid-cols-3 items-center justify-between">
             <div className="flex flex-col items-center">
-              <span className="text-emerald-400 text-3xl font-bold">
+              <span className="text-blue-500 text-3xl font-bold">
                 {getTotalKms()}
               </span>
-              <span className="text-slate-400 text-xl">km</span>
+              <span className="text-neutral-400 text-xl">km</span>
             </div>
 
             <div className="flex flex-col items-center">
-              <span className="text-emerald-400 text-3xl font-bold">
+              <span className="text-blue-500 text-3xl font-bold">
                 {trips?.length}
               </span>
-              <span className="text-slate-400 text-xl">
+              <span className="text-neutral-400 text-xl">
                 trip{trips && trips.length > 1 ? "s" : ""}
               </span>
             </div>
 
             <div className="flex flex-col items-center">
-              <span className="text-emerald-400 text-3xl font-bold">
+              <span className="text-blue-500 text-3xl font-bold">
                 {getTotalDrivingTime() >= 60
                   ? getTotalDrivingTime() / 60
                   : getTotalDrivingTime()}
               </span>
-              <span className="text-slate-400 text-xl">
+              <span className="text-neutral-400 text-xl">
                 {getTotalDrivingTime() >= 60 ? "hrs" : "min"}
               </span>
             </div>
           </div>
 
-          <div className="relative h-6 bg-slate-700 w-full rounded-full mt-8 overflow-hidden">
+          <div className="relative h-6 bg-neutral-700 w-full rounded-full mt-8 overflow-hidden">
             <div
-              className={`h-full bg-emerald-400`}
-              style={{width: `${getKmsPercent()}%`}}
+              className={`h-full bg-blue-500`}
+              style={{ width: `${getKmsPercent()}%` }}
             ></div>
           </div>
-          <span className="text-slate-400 font-semibold block mt-2">
+          <span className="text-neutral-400 font-semibold block mt-2">
             {getKmsPercent()}%
           </span>
         </div>
@@ -114,7 +114,7 @@ export function Home(props: { user: User }) {
         <div className="flex flex-row items-center justify-between mt-8 mb-4 ">
           <h2 className="block text-3xl font-semibold">Recent trips</h2>
           <button
-            className="block h-fit text-slate-500"
+            className="block h-fit text-neutral-500"
             onClick={() => setTripsPanelOpened(!tripsPanelOpened)}
           >
             See all
@@ -122,6 +122,21 @@ export function Home(props: { user: User }) {
         </div>
         {memoizedData
           ? memoizedData.map((trip, index) => {
+              while (index < 5) {
+                return (
+                  <TripDisplayer
+                    from={trip.from}
+                    to={trip.to}
+                    date={trip.date}
+                    length={trip.length}
+                    roundTrip={trip.roundTrip}
+                    duration={trip.duration}
+                  />
+                );
+              }
+            })
+          : trips
+          ? trips.map((trip, index) => {
               while (index < 5) {
                 return (
                   <TripDisplayer

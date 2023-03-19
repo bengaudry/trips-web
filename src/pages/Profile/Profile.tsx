@@ -23,11 +23,11 @@ function Popup(props: {
         props.shown
           ? "translate-x-0 pointer-events-auto"
           : "translate-x-full pointer-events-none"
-      } transition-transform duration-500 w-screen h-screen bg-slate-900 z-40 fixed inset-0 p-8 py-16
+      } transition-transform duration-500 w-screen h-screen bg-neutral-900 z-40 fixed inset-0 p-8 py-16
       `}
     >
       <button
-        className="text-slate-400 font-semibold text-lg mb-8 flex flex-row items-center gap-2"
+        className="text-neutral-400 font-semibold text-lg mb-8 flex flex-row items-center gap-2"
         onClick={() => props.hideFn(false)}
       >
         <i className="fi fi-rr-angle-left translate-y-0.5"></i>
@@ -36,14 +36,14 @@ function Popup(props: {
       {props.children}
       <input
         type="password"
-        className="bg-slate-800 w-full rounded-lg py-3 px-4 mb-4"
+        className="bg-neutral-800 w-full rounded-lg py-3 px-4 mb-4"
         placeholder="New password"
         value={newPass}
         onChange={(e) => setNewPass(e.target.value)}
       />
       <input
         type="password"
-        className="bg-slate-800 w-full rounded-lg py-3 px-4 mb-4"
+        className="bg-neutral-800 w-full rounded-lg py-3 px-4 mb-4"
         placeholder="New password confirmation"
         value={newPassConfirm}
         onChange={(e) => setNewPassConfirm(e.target.value)}
@@ -110,7 +110,7 @@ export function Profile(props: {
           </div>
         )}
         <div
-          className="w-full flex flex-row gap-2 items-center rounded-lg px-4 py-2 mt-2 bg-slate-700"
+          className="w-full flex flex-row gap-2 items-center rounded-lg px-4 py-2 mt-2 bg-neutral-700"
           onClick={() => setChangePasswordPopupShown(true)}
         >
           <i className="fi fi-rr-lock text-md translate-y-0.5"></i>
