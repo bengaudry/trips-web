@@ -37,8 +37,8 @@ export function SignInPage() {
           btnType="submit"
           onClick={() => {
             signInWithEmailAndPassword(getFirebaseAuth(), email, password)
-              .then((user) => { window.location.href = "/" })
-              .catch((err) => alert(err));
+              .then(() => { window.location.href = "/" })
+              .catch((err) => alert(err.message));
           }}
         >
           Sign in

@@ -65,10 +65,10 @@ export function RegisterPage() {
                     displayName: name,
                   })
                     .then(() => (window.location.href = "/"))
-                    .catch((err) => alert(err));
+                    .catch((err) => alert(err.message));
                 }
               })
-              .catch((err) => alert(err));
+              .catch((err) => alert(err.message));
           }}
         >
           Register
