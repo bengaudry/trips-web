@@ -2,9 +2,9 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
-import { Input } from "../../../components/Forms/Input/Inputs";
+import { Cta } from "../../../components";
+import { Input } from "../../../components/form";
 import { getFirebaseAuth } from "../../../../server";
-import { Cta } from "../../../components/Buttons/Cta";
 
 export function RegisterPage() {
   const [email, setEmail] = useState("");

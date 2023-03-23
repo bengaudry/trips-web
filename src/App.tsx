@@ -3,7 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useState } from "react";
 
 // App pages and layout
-import { Layout } from "./components/Layout";
+import { Layout } from "./components";
 import { Add } from "./pages/Add";
 import { Home } from "./pages/Home";
 import { Settings } from "./pages/Settings";

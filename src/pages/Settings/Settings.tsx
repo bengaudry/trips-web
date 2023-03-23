@@ -6,7 +6,7 @@ import {
 } from "firebase/auth";
 import { getFirebaseAuth } from "../../../server";
 import { ReactNode, useState } from "react";
-import { Cta } from "../../components/Buttons/Cta";
+import { Cta } from "../../components";
 import { Setting } from "./Components/Setting";
 
 function Popup(props: {

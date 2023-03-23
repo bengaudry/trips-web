@@ -1,5 +1,5 @@
 import { User } from "firebase/auth";
-import { TripDisplayer } from "../../components/TripDisplayer";
+import { TripDisplayer, SlidingPage } from "../../components";
 import { Trips } from "./Components";
 import { useEffect, useMemo, useState } from "react";
 import {
@@ -11,7 +11,6 @@ import {
 } from "firebase/firestore";
 import { getFirebaseApp, getFirebaseAuth } from "../../../server";
 import { ShortTrip } from "../../types/types";
-import { SlidingPage } from "../../components/SlidingPage/SlidingPage";
 
 export function Home(props: { user: User }) {
   const [tripsPanelOpened, setTripsPanelOpened] = useState<boolean>(false);

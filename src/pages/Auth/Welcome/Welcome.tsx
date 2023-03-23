@@ -1,4 +1,4 @@
-import { Cta } from "../../../components/Buttons/Cta";
+import { Cta } from "../../../components";
 // import {
 //   AreaChart,
 //   XAxis,

@@ -1,5 +1,4 @@
-import { TripDisplayer } from "../../../components/TripDisplayer";
-import { Cta } from "../../../components/Buttons/Cta";
+import { TripDisplayer, Cta } from "../../../components";
 import { ShortTrip } from "../../../types/types";
 
 export function Trips(props: { data?: ShortTrip[] }) {

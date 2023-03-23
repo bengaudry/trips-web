@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { Input, Select, Checkbox, Suggestions } from "../../components/Forms";
-import { Cta } from "../../components/Buttons/Cta";
+import { Input, Select, Checkbox, Suggestions } from "../../components/form";
+import { Cta } from "../../components";
 import { getFirestore, addDoc, collection } from "firebase/firestore";
 import { getFirebaseAuth, getFirebaseApp } from "../../../server";
 import { FullTrip } from "../../types/types";
