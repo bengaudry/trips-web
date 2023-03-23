@@ -1,14 +1,8 @@
 import { useState } from "react";
 import { Input, Select, Suggestions } from "../../components/Forms";
 import { Cta } from "../../components/Buttons/Cta";
-import {
-  getFirestore,
-  doc,
-  addDoc,
-  collection,
-  Timestamp,
-} from "firebase/firestore";
-import { getFirebaseApp } from "../../../server";
+import { getFirestore, addDoc, collection } from "firebase/firestore";
+import { getFirebaseAuth, getFirebaseApp } from "../../../server";
 import { FullTrip } from "../../types/types";
 
 async function addTrip(content: FullTrip) {
@@ -200,11 +194,31 @@ export function Add() {
             },
           ]}
         />
-        <div className="flex flex-row items-center justify-between my-4 py-1 px-3 w-full border-2 rounded-lg border-neutral-700" onClick={() => setRoundTrip(!roundTrip)}>
-          <label htmlFor="round-trip" className={`${roundTrip ? "text-white" : "text-neutral-500"} font-semibold transition-colors duration-300`}>Round trip</label>
+        <div
+          className="flex flex-row items-center justify-between my-4 py-1 px-3 w-full border-2 rounded-lg border-neutral-700"
+          onClick={() => setRoundTrip(!roundTrip)}
+        >
+          <label
+            htmlFor="round-trip"
+            className={`${
+              roundTrip ? "text-white" : "text-neutral-500"
+            } font-semibold transition-colors duration-300`}
+          >
+            Round trip
+          </label>
           <label className="block">
-            <div className={`h-5 rounded-full w-10 transition-colors duration-300 relative ${roundTrip ? "bg-blue-600" : "bg-neutral-700"}`}>
-              <div className={`absolute h-full aspect-square bg-white rounded-full transition-transform duration-300 ${roundTrip ? "translate-x-full scale-100" : "translate-x-0 scale-75"}`}></div>
+            <div
+              className={`h-5 rounded-full w-10 transition-colors duration-300 relative ${
+                roundTrip ? "bg-blue-600" : "bg-neutral-700"
+              }`}
+            >
+              <div
+                className={`absolute h-full aspect-square bg-white rounded-full transition-transform duration-300 ${
+                  roundTrip
+                    ? "translate-x-full scale-100"
+                    : "translate-x-0 scale-75"
+                }`}
+              ></div>
             </div>
             <input
               type="checkbox"
@@ -234,7 +248,7 @@ export function Add() {
             length: parseInt(length),
             duration: parseInt(duration),
             roundTrip: roundTrip,
-            uid: "xqWqf8Oaf5aOTribODm3AhYi1em2",
+            uid: getFirebaseAuth().currentUser?.uid as string,
           });
         }}
       >
