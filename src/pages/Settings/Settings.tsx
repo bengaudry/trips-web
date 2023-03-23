@@ -83,7 +83,7 @@ export function Settings(props: {
       </Popup>
       <div className="px-5 py-16">
         <h1 className="text-4xl font-bold mb-6">Settings</h1>
-        <h2 className="text-3xl semibold">Account</h2>
+        <h2 className="text-3xl font-semibold">Account</h2>
 
         <div className="flex flex-row items-center justify-between py-4 mb-8" onClick={() => setChangePasswordPopupShown(true)}>
           <div className="flex flex-row items-center gap-4">
@@ -131,7 +131,7 @@ export function Settings(props: {
           <span className="font-semibold">Change my password</span>
         </div> */}
 
-        <h2 className="text-3xl semibold mb-4">Settings</h2>
+        <h2 className="text-3xl font-semibold mb-4">Settings</h2>
 
         <Setting color="125, 211, 252" icon="bell" name="Notification" />
         <Setting color="253, 186, 116" icon="world" name="Language" />

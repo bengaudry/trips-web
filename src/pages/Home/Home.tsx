@@ -9,8 +9,9 @@ import {
   where,
   query,
 } from "firebase/firestore";
-import { getFirebaseApp } from "../../../server";
+import { getFirebaseApp, getFirebaseAuth } from "../../../server";
 import { ShortTrip } from "../../types/types";
+import { SlidingPage } from "../../components/SlidingPage/SlidingPage";
 
 export function Home(props: { user: User }) {
   const [tripsPanelOpened, setTripsPanelOpened] = useState<boolean>(false);
@@ -66,7 +67,11 @@ export function Home(props: { user: User }) {
   return (
     <>
       <div className="px-5 py-16">
-        <h1 className="text-4xl font-bold">Hi {props.user.displayName}</h1>
+        <h1 className="text-4xl font-bold">
+          {getFirebaseAuth().currentUser?.displayName
+            ? `Hi ${getFirebaseAuth().currentUser?.displayName}`
+            : "Welcome back !"}
+        </h1>
         <p className="text-neutral-400 text-xl mt-1">
           Here is a resume of your trips
         </p>
@@ -113,7 +118,7 @@ export function Home(props: { user: User }) {
           <h2 className="block text-3xl font-semibold">Recent trips</h2>
           <button
             className="block h-fit text-neutral-500"
-            onClick={() => setTripsPanelOpened(!tripsPanelOpened)}
+            onClick={() => setTripsPanelOpened(true)}
           >
             See all
           </button>
@@ -149,11 +154,12 @@ export function Home(props: { user: User }) {
               }
             })
           : ""}
-        <Trips
-          className={`${tripsPanelOpened ? "" : "translate-x-full"}`}
-          setTripsPanelOpened={setTripsPanelOpened}
-          data={memoizedData}
-        />
+        <SlidingPage
+          setPanelOpened={setTripsPanelOpened}
+          isOpened={tripsPanelOpened}
+        >
+          <Trips data={memoizedData} />
+        </SlidingPage>
       </div>
     </>
   );

@@ -2,22 +2,9 @@ import { TripDisplayer } from "../../../components/TripDisplayer";
 import { Cta } from "../../../components/Buttons/Cta";
 import { ShortTrip } from "../../../types/types";
 
-export function Trips(props: {
-  className: string;
-  setTripsPanelOpened: CallableFunction;
-  data?: ShortTrip[];
-}) {
+export function Trips(props: { data?: ShortTrip[] }) {
   return (
-    <div
-      className={`px-5 py-16 pt-4 z-40 fixed top-0 left-0 w-full h-screen bg-neutral-900 transition-transform duration-500 ${props.className} overflow-y-scroll`}
-    >
-      <button
-        className="text-neutral-400 font-semibold text-lg mb-8 flex flex-row items-center gap-2"
-        onClick={() => props.setTripsPanelOpened(false)}
-      >
-        <i className="fi fi-rr-angle-left block text-sm"></i>
-        <span className="block h-min -translate-y-0.5">Back</span>
-      </button>
+    <>
       <h1 className="text-4xl font-semibold mb-5">My trips</h1>
       {props.data && props.data.length > 0 ? (
         props.data.map((trip, index) => (
@@ -45,6 +32,6 @@ export function Trips(props: {
           </Cta>
         </>
       )}
-    </div>
+    </>
   );
 }
