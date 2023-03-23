@@ -27,15 +27,7 @@ export default function App() {
         <Route path="/" element={<Layout />}>
           <Route index element={<Home user={currentUser} />} />
           <Route path="add" element={<Add />} />
-          <Route
-            path="settings"
-            element={
-              <Settings
-                setCurrentUser={setCurrentUser}
-                user={currentUser}
-              />
-            }
-          />
+          <Route path="settings" element={<Settings />} />
           <Route path="*" element={<NoPage />} />
         </Route>
       </Routes>
@@ -45,18 +37,8 @@ export default function App() {
       <Routes>
         <Route path="/" element={<AuthLayout />}>
           <Route index element={<Welcome />} />
-          <Route
-            path="signin"
-            element={
-              <SignInPage />
-            }
-          />
-          <Route
-            path="register"
-            element={
-              <RegisterPage />
-            }
-          />
+          <Route path="signin" element={<SignInPage />} />
+          <Route path="register" element={<RegisterPage />} />
           <Route path="*" element={<Welcome />} />
         </Route>
       </Routes>
