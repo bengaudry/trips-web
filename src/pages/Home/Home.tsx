@@ -12,7 +12,6 @@ import {
 import { getFirebaseApp } from "../../../server";
 import { ShortTrip } from "../../types/types";
 
-
 export function Home(props: { user: User }) {
   const [tripsPanelOpened, setTripsPanelOpened] = useState<boolean>(false);
   const [trips, setTrips] = useState<ShortTrip[]>();
@@ -44,20 +43,22 @@ export function Home(props: { user: User }) {
     trips?.map(
       (trip) => (kms += trip.roundTrip ? trip.length * 2 : trip.length)
     );
-    return kms;
+    return trips ? kms : 0;
   };
 
   const getKmsPercent = (): number => {
     const maximumKms = 3000;
-    return Math.floor((getTotalKms() / maximumKms) * 100);
+    return trips ? Math.floor((getTotalKms() / maximumKms) * 100) : 0;
   };
 
-  const getTotalDrivingTime = () => {
+  const getTotalDrivingTime = (): { nb: number; unit: "min" | "hrs" } => {
     let mins = 0;
     trips?.map(
       (trip) => (mins += trip.roundTrip ? trip.duration * 2 : trip.duration)
     );
-    return mins;
+    return mins >= 60
+      ? { nb: Math.floor(mins / 60), unit: "hrs" }
+      : { nb: Math.floor(mins), unit: "min" };
   };
 
   const memoizedData = useMemo(() => trips, [trips]);
@@ -89,12 +90,10 @@ export function Home(props: { user: User }) {
 
             <div className="flex flex-col items-center">
               <span className="text-blue-500 text-2xl font-bold">
-                {getTotalDrivingTime() >= 60
-                  ? getTotalDrivingTime() / 60
-                  : getTotalDrivingTime()}
+                {getTotalDrivingTime().nb}
               </span>
               <span className="text-neutral-400 text-lg">
-                {getTotalDrivingTime() >= 60 ? "hrs" : "min"}
+                {getTotalDrivingTime().unit}
               </span>
             </div>
           </div>
