@@ -47,7 +47,7 @@ export function Settings() {
         </SlidingPage>
 
         {!getFirebaseAuth().currentUser?.emailVerified ? (
-          <div className="w-full flex flex-col items-center rounded-lg px-4 py-2 mt-2 mb-8 bg-yellow-600">
+          <div className="w-full flex flex-col items-center rounded-lg px-4 py-2 mt-2 bg-yellow-600">
             <p className="flex flex-row items-center gap-2">
               <i className="fi fi-rr-exclamation"></i>
               <span className="-translate-y-0.5">
@@ -69,9 +69,9 @@ export function Settings() {
           <></>
         )}
 
-        <h3 className="text-3xl font-semibold mb-4">Settings</h3>
+        <h3 className="text-3xl font-semibold mb-4 mt-10">Settings</h3>
 
-        <Setting color="125, 211, 252" icon="bell" name="Notification" />
+        <Setting color="125, 211, 252" icon="interrogation" name="Help" />
         <Setting color="253, 186, 116" icon="world" name="Language" />
         <Setting
           color="252, 165, 165"
