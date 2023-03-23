@@ -200,7 +200,7 @@ export function Add() {
         />
       </div>
       <Cta
-        func="button"
+        type="button"
         btnType="submit"
         className="mt-4 sticky bottom-32 shadow-neutral-900 shadow-2xl"
         onClick={() => {

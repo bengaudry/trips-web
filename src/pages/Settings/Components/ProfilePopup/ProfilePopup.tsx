@@ -1,4 +1,4 @@
-import { updatePassword, User } from "firebase/auth";
+import { deleteUser, updatePassword, User } from "firebase/auth";
 import { useState } from "react";
 import { getFirebaseAuth } from "../../../../../server";
 import { Cta } from "../../../../components";
@@ -25,7 +25,7 @@ export function ProfilePopup() {
         onChange={(e) => setNewPassConfirm(e.target.value)}
       />
       <Cta
-        func="button"
+        type="button"
         btnType="submit"
         className="mt-6"
         onClick={() => {
@@ -38,6 +38,21 @@ export function ProfilePopup() {
         }}
       >
         Change password
+      </Cta>
+
+      <Cta
+        type="button"
+        color="danger"
+        className="mt-48"
+        onClick={() => {
+          if (confirm("Voulez vous vraiment supprimer votre compte ?")) {
+            if (getFirebaseAuth().currentUser) {
+              deleteUser(getFirebaseAuth().currentUser as User);
+            }
+          }
+        }}
+      >
+        Delete my account
       </Cta>
     </>
   );

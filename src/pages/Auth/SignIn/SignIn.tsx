@@ -33,7 +33,7 @@ export function SignInPage() {
           .
         </p>
         <Cta
-          func="button"
+          type="button"
           btnType="submit"
           onClick={() => {
             signInWithEmailAndPassword(getFirebaseAuth(), email, password)

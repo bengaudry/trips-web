@@ -78,7 +78,7 @@ export function Welcome() {
         Sign in to add a trip or
         <br /> to see your previous ones
       </p>
-      <Cta func="link" className="mt-6" to="/signin">
+      <Cta type="link" className="mt-6" to="/signin">
         Let's get started
       </Cta>
     </div>

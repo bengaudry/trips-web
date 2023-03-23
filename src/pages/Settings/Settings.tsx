@@ -1,4 +1,9 @@
-import { User, sendEmailVerification, signOut } from "firebase/auth";
+import {
+  User,
+  sendEmailVerification,
+  signOut,
+  updateProfile,
+} from "firebase/auth";
 import { getFirebaseAuth } from "../../../server";
 import { useState } from "react";
 import { SlidingPage } from "../../components";
@@ -14,6 +19,16 @@ export function Settings() {
       <div className="px-5 py-16">
         <h2 className="text-4xl font-bold mb-6">Settings</h2>
         <h3 className="text-3xl font-semibold">Account</h3>
+
+        {/* <input
+          type="text"
+          className="bg-neutral-800"
+          onChange={(e) => {
+            updateProfile(getFirebaseAuth().currentUser as User, {
+              displayName: e.target.value,
+            });
+          }}
+        /> */}
 
         <Setting
           color="82, 82, 82"

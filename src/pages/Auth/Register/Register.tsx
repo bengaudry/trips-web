@@ -1,7 +1,12 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
 
-import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import {
+  User,
+  createUserWithEmailAndPassword,
+  sendEmailVerification,
+  updateProfile,
+} from "firebase/auth";
 import { Cta } from "../../../components";
 import { Input } from "../../../components/form";
 import { getFirebaseAuth } from "../../../../server";
@@ -10,7 +15,6 @@ export function RegisterPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
-  const [lastName, setLastName] = useState("");
 
   return (
     <div className="p-8 pb-16 absolute bottom-0 w-full">
@@ -42,15 +46,6 @@ export function RegisterPage() {
           }}
           required
         />
-        <Input
-          name="last-name"
-          type="text"
-          value={lastName}
-          onChange={(e: any) => {
-            setLastName(e.target?.value);
-          }}
-          required
-        />
         <p className="block text-neutral-500 w-full text-center text-md mb-4 mt-20">
           Already have an account ?{" "}
           <Link to="/signin" className="text-white">
@@ -59,16 +54,19 @@ export function RegisterPage() {
           .
         </p>
         <Cta
-          func="button"
+          type="button"
           btnType="submit"
           onClick={() => {
             createUserWithEmailAndPassword(getFirebaseAuth(), email, password)
-              .then((user) => {
-                updateProfile(user.user, {
-                  displayName: `${name} ${lastName}`,
-                })
-                  .then(() => (window.location.href = "/"))
-                  .catch((err) => alert(err));
+              .then(() => {
+                if (getFirebaseAuth().currentUser) {
+                  sendEmailVerification(getFirebaseAuth().currentUser as User);
+                  updateProfile(getFirebaseAuth().currentUser as User, {
+                    displayName: name,
+                  })
+                    .then(() => (window.location.href = "/"))
+                    .catch((err) => alert(err));
+                }
               })
               .catch((err) => alert(err));
           }}

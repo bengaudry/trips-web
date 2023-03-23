@@ -26,7 +26,7 @@ export function Trips(props: { data?: ShortTrip[] }) {
             src="/empty.png"
             className="block m-auto w-9/12 py-8 rounded-lg overflow-hidden"
           />
-          <Cta func="link" to="/add">
+          <Cta type="link" to="/add">
             Add one here
           </Cta>
         </>
