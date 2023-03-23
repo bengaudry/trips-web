@@ -4,16 +4,10 @@ import { useState } from "react";
 
 // App pages and layout
 import { Layout } from "./components";
-import { Add } from "./pages/Add";
-import { Home } from "./pages/Home";
-import { Settings } from "./pages/Settings";
-import { NoPage } from "./pages/NoPage";
+import { Add, Home, Settings, NoPage } from "./pages";
 
 // Auth pages and layout
-import { SignInPage } from "./pages/Auth/SignIn";
-import { RegisterPage } from "./pages/Auth/Register";
-import { Welcome } from "./pages/Auth/Welcome";
-import { AuthLayout } from "./pages/Auth/Layout";
+import { AuthLayout, Welcome, RegisterPage, SignInPage } from "./pages/auth";
 
 // Styles
 import "/src/assets/index.css";
