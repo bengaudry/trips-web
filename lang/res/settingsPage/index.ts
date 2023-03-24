@@ -1,3 +1,5 @@
+import { chooseLang } from "./popups/chooseLang";
+
 export const settingsPage = {
   en: {
     title: "Settings",
@@ -11,6 +13,9 @@ export const settingsPage = {
       lang: "Language",
       logout: "Logout",
     },
+    popups: {
+      chooseLang: chooseLang.en,
+    }
   },
   fr: {
     title: "Paramètres",
@@ -24,5 +29,8 @@ export const settingsPage = {
       lang: "Langue",
       logout: "Se déconnecter",
     },
+    popups: {
+      chooseLang: chooseLang.fr,
+    }
   },
 };

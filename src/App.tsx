@@ -16,12 +16,29 @@ import { getFirebaseAuth } from "../server";
 
 // Translations
 import { resources } from "../lang";
-import i18n, { changeLanguage } from "i18next";
+import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
 
+// Change the language of the app when it starts
+var lang = "en";
+const savedLang = localStorage.getItem("app-lang") as string;
+// If a language is prefered by the user, do nothing
+if (savedLang === undefined || savedLang === null || savedLang === "") {
+  if (navigator.language.includes("fr")) {
+    lang = "fr";
+  } else {
+    lang = "en";
+  }
+} else {
+  // Sets the language to the saved one
+  lang = savedLang;
+}
+
+console.log(`Switching lang to ${lang}`)
+// Init translation with the language chosen
 i18n.use(initReactI18next).init({
   resources,
-  lng: "fr",
+  lng: lang,
   interpolation: {
     escapeValue: false,
   },
@@ -33,19 +50,6 @@ export default function App() {
   // Show the app if connected, if not, show the login page
   onAuthStateChanged(getFirebaseAuth(), (user) => {
     setCurrentUser(user);
-  });
-
-  // Change the language of the app when it starts
-  useEffect(() => {
-    const savedLang = localStorage.getItem("app-lang");
-    // If a language is prefered by the user, do nothing
-    if (savedLang === undefined || savedLang === null) {
-      if (navigator.language.includes("fr")) {
-        changeLanguage("fr");
-      } else {
-        changeLanguage("en");
-      }
-    }
   });
 
   return currentUser ? (
