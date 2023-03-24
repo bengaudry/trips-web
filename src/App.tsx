@@ -1,6 +1,6 @@
 // React routing
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 // App pages and layout
 import { Layout } from "./components";
@@ -16,7 +16,7 @@ import { getFirebaseAuth } from "../server";
 
 // Translations
 import { resources } from "../lang";
-import i18n from "i18next";
+import i18n, { changeLanguage } from "i18next";
 import { initReactI18next } from "react-i18next";
 
 i18n.use(initReactI18next).init({
@@ -30,8 +30,22 @@ i18n.use(initReactI18next).init({
 export default function App() {
   const [currentUser, setCurrentUser] = useState<null | User>(null);
 
+  // Show the app if connected, if not, show the login page
   onAuthStateChanged(getFirebaseAuth(), (user) => {
     setCurrentUser(user);
+  });
+
+  // Change the language of the app when it starts
+  useEffect(() => {
+    const savedLang = localStorage.getItem("app-lang");
+    // If a language is prefered by the user, do nothing
+    if (savedLang === undefined || savedLang === null) {
+      if (navigator.language.includes("fr")) {
+        changeLanguage("fr");
+      } else {
+        changeLanguage("en");
+      }
+    }
   });
 
   return currentUser ? (

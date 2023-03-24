@@ -3,6 +3,7 @@ import i18n from "i18next";
 export function LangPopup() {
   function handleChangeLanguage(lang: "fr" | "en") {
     i18n.changeLanguage(lang);
+    localStorage.setItem("app-lang", lang);
   }
 
   return (

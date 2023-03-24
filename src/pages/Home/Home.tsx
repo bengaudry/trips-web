@@ -75,6 +75,7 @@ export function Home(props: { user: User }) {
               })
             : t("homepage.header.noUserGreeting")}
         </h1>
+        <button onClick={() => alert(navigator.language)}>Test</button>
         <p className="text-neutral-400 text-xl mt-1">
           {t("homepage.header.subtitle")}
         </p>
