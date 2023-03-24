@@ -14,6 +14,19 @@ import "/src/assets/index.css";
 import { onAuthStateChanged, User } from "firebase/auth";
 import { getFirebaseAuth } from "../server";
 
+// Translations
+import { resources } from "../lang";
+import i18n from "i18next";
+import { initReactI18next } from "react-i18next";
+
+i18n.use(initReactI18next).init({
+  resources,
+  lng: "fr",
+  interpolation: {
+    escapeValue: false,
+  },
+});
+
 export default function App() {
   const [currentUser, setCurrentUser] = useState<null | User>(null);
 

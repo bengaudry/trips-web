@@ -11,10 +11,12 @@ import {
 } from "firebase/firestore";
 import { getFirebaseApp, getFirebaseAuth } from "../../../server";
 import { ShortTrip } from "../../types/types";
+import { useTranslation } from "react-i18next";
 
 export function Home(props: { user: User }) {
   const [tripsPanelOpened, setTripsPanelOpened] = useState<boolean>(false);
   const [trips, setTrips] = useState<ShortTrip[]>();
+  const { t } = useTranslation();
 
   useEffect(() => {
     const db = getFirestore(getFirebaseApp());
@@ -68,11 +70,13 @@ export function Home(props: { user: User }) {
       <div className="px-5 py-16">
         <h1 className="text-4xl font-bold">
           {getFirebaseAuth().currentUser?.displayName
-            ? `Hi ${getFirebaseAuth().currentUser?.displayName}`
-            : "Welcome back !"}
+            ? t("homepage.header.greeting", {
+                name: getFirebaseAuth().currentUser?.displayName,
+              })
+            : t("homepage.header.noUserGreeting")}
         </h1>
         <p className="text-neutral-400 text-xl mt-1">
-          Here is a resume of your trips
+          {t("homepage.header.subtitle")}
         </p>
         <div className="bg-neutral-800 rounded-xl h-max py-6 px-8 mt-6 border border-neutral-600">
           <div className="grid grid-cols-3 items-center justify-between">
@@ -88,7 +92,7 @@ export function Home(props: { user: User }) {
                 {trips?.length}
               </span>
               <span className="text-neutral-400 text-lg">
-                trip{trips && trips.length > 1 ? "s" : ""}
+                {t(trips && trips.length > 1 ? "common.trips" : "common.trip")}
               </span>
             </div>
 
@@ -114,12 +118,12 @@ export function Home(props: { user: User }) {
         </div>
 
         <div className="flex flex-row items-center justify-between mt-8 mb-4 ">
-          <h2 className="block text-3xl font-semibold">Recent trips</h2>
+          <h2 className="block text-3xl font-semibold">{t("homepage.recent.title")}</h2>
           <button
             className="block h-fit text-neutral-500"
             onClick={() => setTripsPanelOpened(true)}
           >
-            See all
+            {t("common.seeAll")}
           </button>
         </div>
         {memoizedData
