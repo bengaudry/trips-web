@@ -8,16 +8,18 @@
       rel="stylesheet"
       href="/node_modules/@flaticon/flaticon-uicons/css/regular/rounded.css"
     />
-    <link rel="manifest" href="./app/manifest.webmanifest" />
+    <link rel="manifest" href="/manifest.webmanifest" />
     <link rel="icon" href="/icons/icon-svg.svg" type="image/svg" />
-    <script defer>
-      if ("serviceWorker" in navigator) {
-        navigator.serviceWorker.register("/sw.js");
-      }
-    </script>
+    <!-- <script defer>
+      window.addEventListener("DOMContentLoaded", () => {
+        if ("serviceWorker" in navigator) {
+          navigator.serviceWorker.register("/sw.js");
+        }
+      });
+    </script> -->
     <title>Trips</title>
   </head>
-  <body class="bg-neutral-900">
+  <body class="bg-neutral-900 text-white">
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>

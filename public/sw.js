@@ -25,7 +25,7 @@ self.addEventListener("fetch", (event) => {
 
           return await fetch(event.request);
         } catch (e) {
-          return new Response("Heyy");
+          return new Response("\n\n\n\n\nHeyy");
         }
       })()
     );

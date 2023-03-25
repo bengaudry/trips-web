@@ -1,25 +1,24 @@
 {
   "name": "Trips",
   "theme_color": "#171717",
-  "background_color": "#171717",
+  "background_color": "#fff",
   "display": "standalone",
-  "Scope": "/",
+  "scope": "/",
   "orientation": "portrait",
   "start_url": "/",
-  "id": "/",
   "icons": [
     {
-      "src": "/icons/png/icon-128.png",
+      "src": "./icons/png/icon-128.png",
       "sizes": "128x128",
       "type": "image/png"
     },
     {
-      "src": "/icons/png/icon-256.png",
+      "src": "./icons/png/icon-256.png",
       "sizes": "256x256",
       "type": "image/png"
     },
     {
-      "src": "/icons/png/icon-512.png",
+      "src": "./icons/png/icon-512.png",
       "sizes": "512x512",
       "type": "image/png"
     }
