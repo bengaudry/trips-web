@@ -6,7 +6,7 @@ export function Trips(props: { data?: ShortTrip[] }) {
     <>
       <h1 className="text-4xl font-semibold mb-5">My trips</h1>
       {props.data && props.data.length > 0 ? (
-        props.data.map((trip, index) => (
+        props.data.map((trip) => (
           <TripDisplayer
             from={trip.from}
             to={trip.to}
@@ -14,7 +14,7 @@ export function Trips(props: { data?: ShortTrip[] }) {
             length={trip.length}
             duration={trip.duration}
             roundTrip={trip.roundTrip}
-            key={index}
+            key={trip.key}
           />
         ))
       ) : (

@@ -1,4 +1,5 @@
 import { ShortTrip } from "../../types/types";
+import { Modal } from "../../components";
 
 function capitalizeWord(str: string | undefined) {
   if (str) return (str.charAt(0).toUpperCase() + str.slice(1));

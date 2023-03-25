@@ -5,6 +5,8 @@ export interface ShortTrip {
   length: number;
   duration: number;
   roundTrip: boolean;
+  key: string;
+  onClick?: CallableFunction;
 }
 
 export interface FullTrip {

@@ -33,6 +33,7 @@ export function Home(props: { user: User }) {
         length: doc.data().length,
         duration: doc.data().duration,
         roundTrip: doc.data().roundTrip,
+        key: doc.data().id,
       }));
       setTrips(newData);
     };
@@ -138,6 +139,7 @@ export function Home(props: { user: User }) {
               length={trip.length}
               roundTrip={trip.roundTrip}
               duration={trip.duration}
+              key={trip.key}
             />
           );
         })}
