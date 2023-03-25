@@ -25,6 +25,12 @@ export function SignInPage() {
           type="password"
           onChange={(e: any) => setPassword(e.target?.value)}
         />
+        <Link
+          className="text-right mt-2 text-neutral-500 block w-full"
+          to="/reset"
+        >
+          Forgot password ?
+        </Link>
         <p className="block text-neutral-500 w-full text-center text-md mb-4 mt-20">
           Don't have an account ?{" "}
           <Link to="/register" className="text-white">
@@ -37,8 +43,32 @@ export function SignInPage() {
           btnType="submit"
           onClick={() => {
             signInWithEmailAndPassword(getFirebaseAuth(), email, password)
-              .then(() => { window.location.href = "/" })
-              .catch((err) => alert(err.message));
+              .then(() => {
+                window.location.href = "/";
+              })
+              .catch((err) => {
+                var error: string;
+                switch (err.code) {
+                  case "auth/wrong-password":
+                    error = "Wrong password";
+                    break;
+
+                  case "auth/user-not-found":
+                    error = "This email is not registered";
+                    break;
+
+                  case "auth/invalid-email":
+                    error = "Email format is invalid";
+                    break;
+
+                  default:
+                    error = err.code
+                      .replaceAll("auth/", "")
+                      .replaceAll("-", " ");
+                    break;
+                }
+                alert(error);
+              });
           }}
         >
           Sign in

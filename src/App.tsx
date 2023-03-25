@@ -7,7 +7,7 @@ import { Layout } from "./components";
 import { Add, Home, Settings, NoPage } from "./pages";
 
 // Auth pages and layout
-import { AuthLayout, Welcome, RegisterPage, SignInPage } from "./pages/auth";
+import { AuthLayout, Welcome, RegisterPage, SignInPage, ResetPassword } from "./pages/auth";
 
 // Styles
 import "/src/assets/index.css";
@@ -70,6 +70,7 @@ export default function App() {
           <Route index element={<Welcome />} />
           <Route path="signin" element={<SignInPage />} />
           <Route path="register" element={<RegisterPage />} />
+          <Route path="reset" element={<ResetPassword />} />
           <Route path="*" element={<Welcome />} />
         </Route>
       </Routes>

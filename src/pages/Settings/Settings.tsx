@@ -5,7 +5,7 @@ import {
   updateProfile,
 } from "firebase/auth";
 import { getFirebaseAuth } from "../../../server";
-import { ReactNode, useState } from "react";
+import { useState } from "react";
 import { SlidingPage } from "../../components";
 import { Setting } from "./Components/Setting";
 import { ProfilePopup } from "./Components/ProfilePopup/ProfilePopup";
