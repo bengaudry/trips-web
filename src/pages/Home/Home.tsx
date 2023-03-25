@@ -64,6 +64,7 @@ export function Home(props: { user: User }) {
   };
 
   const memoizedData = useMemo(() => trips, [trips]);
+  const allTrips = memoizedData ? memoizedData : trips ? trips : [];
 
   return (
     <>
@@ -118,7 +119,9 @@ export function Home(props: { user: User }) {
         </div>
 
         <div className="flex flex-row items-center justify-between mt-8 mb-4 ">
-          <h2 className="block text-3xl font-semibold">{t("homepage.recent.title")}</h2>
+          <h2 className="block text-3xl font-semibold">
+            {t("homepage.recent.title")}
+          </h2>
           <button
             className="block h-fit text-neutral-400"
             onClick={() => setTripsPanelOpened(true)}
@@ -126,37 +129,18 @@ export function Home(props: { user: User }) {
             {t("common.seeAll")}
           </button>
         </div>
-        {memoizedData
-          ? memoizedData.map((trip, index) => {
-              while (index < 5) {
-                return (
-                  <TripDisplayer
-                    from={trip.from}
-                    to={trip.to}
-                    date={trip.date}
-                    length={trip.length}
-                    roundTrip={trip.roundTrip}
-                    duration={trip.duration}
-                  />
-                );
-              }
-            })
-          : trips
-          ? trips.map((trip, index) => {
-              while (index < 5) {
-                return (
-                  <TripDisplayer
-                    from={trip.from}
-                    to={trip.to}
-                    date={trip.date}
-                    length={trip.length}
-                    roundTrip={trip.roundTrip}
-                    duration={trip.duration}
-                  />
-                );
-              }
-            })
-          : ""}
+        {allTrips.slice(0, 5).map((trip) => {
+          return (
+            <TripDisplayer
+              from={trip.from}
+              to={trip.to}
+              date={trip.date}
+              length={trip.length}
+              roundTrip={trip.roundTrip}
+              duration={trip.duration}
+            />
+          );
+        })}
         <SlidingPage
           setPanelOpened={setTripsPanelOpened}
           isOpened={tripsPanelOpened}

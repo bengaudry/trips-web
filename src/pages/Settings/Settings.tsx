@@ -5,31 +5,22 @@ import {
   updateProfile,
 } from "firebase/auth";
 import { getFirebaseAuth } from "../../../server";
-import { useState } from "react";
+import { ReactNode, useState } from "react";
 import { SlidingPage } from "../../components";
 import { Setting } from "./Components/Setting";
 import { ProfilePopup } from "./Components/ProfilePopup/ProfilePopup";
 import { useTranslation } from "react-i18next";
 import { LangPopup } from "./Components/LangPopup/LangPopup";
 import { ReactMarkdown } from "react-markdown/lib/react-markdown";
+import { legal } from "../../../public/texts/legal";
 
 export function Settings() {
+  const { t } = useTranslation();
+
   const [changePasswordPopupShown, setChangePasswordPopupShown] =
     useState(false);
   const [langPopupShown, setLangPopupShown] = useState(false);
   const [helpPopupShown, setHelpPopupShown] = useState(false);
-
-  const { t } = useTranslation();
-
-  const [legalMd, setLegalMd] = useState<any>();
-  fetch("https://tripsapp.web.app/legal.md", {
-      headers: {
-        'Access-Control-Allow-Origin':'*'
-      }
-    }).then((val) => {
-    console.log(val);
-    setLegalMd(val.body);
-  });
 
   return (
     <>
@@ -101,8 +92,12 @@ export function Settings() {
         <SlidingPage
           setPanelOpened={(val: boolean) => setHelpPopupShown(val)}
           isOpened={helpPopupShown}
+          className="prose"
         >
-          <ReactMarkdown>{legalMd}</ReactMarkdown>
+          <ReactMarkdown
+          >
+            {legal}
+          </ReactMarkdown>
         </SlidingPage>
         <Setting
           color="253, 186, 116"
@@ -131,3 +126,13 @@ export function Settings() {
     </>
   );
 }
+
+interface MyHeadingProps {
+  level: number;
+  children: React.ReactNode;
+}
+
+const MyHeading = ({ level, children }: MyHeadingProps): JSX.Element => {
+  const Tag = `h${level}` as keyof JSX.IntrinsicElements;
+  return <Tag className="text-2xl font-bold">{children}</Tag>;
+};
