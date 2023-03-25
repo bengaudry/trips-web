@@ -2,25 +2,28 @@ import { deleteUser, updatePassword, User } from "firebase/auth";
 import { useState } from "react";
 import { getFirebaseAuth } from "../../../../../server";
 import { Cta } from "../../../../components";
+import { useTranslation } from "react-i18next";
 
 export function ProfilePopup() {
+  const { t } = useTranslation();
+
   const [newPass, setNewPass] = useState<string>("");
   const [newPassConfirm, setNewPassConfirm] = useState<string>("");
 
   return (
     <>
-      <h2 className="text-3xl font-semibold mb-4">Change password</h2>
+      <h2 className="text-3xl font-semibold mb-4">{t("settingsPage.popups.profile.title")}</h2>
       <input
         type="password"
         className="bg-neutral-800 w-full rounded-lg py-3 px-4 mb-4"
-        placeholder="New password"
+        placeholder={t("settingsPage.popups.profile.placeholders.newPass") as string}
         value={newPass}
         onChange={(e) => setNewPass(e.target.value)}
       />
       <input
         type="password"
         className="bg-neutral-800 w-full rounded-lg py-3 px-4 mb-4"
-        placeholder="New password confirmation"
+        placeholder={t("settingsPage.popups.profile.placeholders.newPassConfirm") as string}
         value={newPassConfirm}
         onChange={(e) => setNewPassConfirm(e.target.value)}
       />
@@ -37,7 +40,7 @@ export function ProfilePopup() {
           }
         }}
       >
-        Change password
+        {t("settingsPage.popups.profile.buttons.changePass")}
       </Cta>
 
       <Cta
@@ -52,7 +55,7 @@ export function ProfilePopup() {
           }
         }}
       >
-        Delete my account
+        {t("settingsPage.popups.profile.buttons.deleteAccount")}
       </Cta>
     </>
   );

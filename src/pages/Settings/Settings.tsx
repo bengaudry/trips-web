@@ -11,13 +11,25 @@ import { Setting } from "./Components/Setting";
 import { ProfilePopup } from "./Components/ProfilePopup/ProfilePopup";
 import { useTranslation } from "react-i18next";
 import { LangPopup } from "./Components/LangPopup/LangPopup";
+import { ReactMarkdown } from "react-markdown/lib/react-markdown";
 
 export function Settings() {
   const [changePasswordPopupShown, setChangePasswordPopupShown] =
     useState(false);
   const [langPopupShown, setLangPopupShown] = useState(false);
+  const [helpPopupShown, setHelpPopupShown] = useState(false);
 
   const { t } = useTranslation();
+
+  const [legalMd, setLegalMd] = useState<any>();
+  fetch("https://tripsapp.web.app/legal.md", {
+      headers: {
+        'Access-Control-Allow-Origin':'*'
+      }
+    }).then((val) => {
+    console.log(val);
+    setLegalMd(val.body);
+  });
 
   return (
     <>
@@ -84,7 +96,14 @@ export function Settings() {
           color="125, 211, 252"
           icon="interrogation"
           name={t("settingsPage.buttons.help")}
+          onClick={() => setHelpPopupShown(true)}
         />
+        <SlidingPage
+          setPanelOpened={(val: boolean) => setHelpPopupShown(val)}
+          isOpened={helpPopupShown}
+        >
+          <ReactMarkdown>{legalMd}</ReactMarkdown>
+        </SlidingPage>
         <Setting
           color="253, 186, 116"
           icon="world"

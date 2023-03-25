@@ -1,4 +1,5 @@
 import { chooseLang } from "./popups/chooseLang";
+import { profile } from "./popups/profile";
 
 export const settingsPage = {
   en: {
@@ -15,7 +16,8 @@ export const settingsPage = {
     },
     popups: {
       chooseLang: chooseLang.en,
-    }
+      profile: profile.en,
+    },
   },
   fr: {
     title: "Paramètres",
@@ -31,6 +33,7 @@ export const settingsPage = {
     },
     popups: {
       chooseLang: chooseLang.fr,
-    }
+      profile: profile.fr,
+    },
   },
 };

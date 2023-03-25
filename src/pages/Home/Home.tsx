@@ -120,7 +120,7 @@ export function Home(props: { user: User }) {
         <div className="flex flex-row items-center justify-between mt-8 mb-4 ">
           <h2 className="block text-3xl font-semibold">{t("homepage.recent.title")}</h2>
           <button
-            className="block h-fit text-neutral-500"
+            className="block h-fit text-neutral-400"
             onClick={() => setTripsPanelOpened(true)}
           >
             {t("common.seeAll")}
