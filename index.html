@@ -3,10 +3,18 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="/src/assets/index.css">
-    <link rel="stylesheet" href="/node_modules/@flaticon/flaticon-uicons/css/regular/rounded.css">
-    <link rel="manifest" href="./app/manifest.webmanifest">
-    <link rel="icon" href="/icons/icon-svg.svg" type="image/svg">
+    <link rel="stylesheet" href="/src/assets/index.css" />
+    <link
+      rel="stylesheet"
+      href="/node_modules/@flaticon/flaticon-uicons/css/regular/rounded.css"
+    />
+    <link rel="manifest" href="./app/manifest.webmanifest" />
+    <link rel="icon" href="/icons/icon-svg.svg" type="image/svg" />
+    <script defer>
+      if ("serviceWorker" in navigator) {
+        navigator.serviceWorker.register("/sw.js");
+      }
+    </script>
     <title>Trips</title>
   </head>
   <body class="bg-neutral-900">
