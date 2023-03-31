@@ -1,7 +1,7 @@
 import { TripDisplayer, Cta } from "../../../components";
-import { ShortTrip } from "../../../types/types";
+import { Trip } from "../../../types/types";
 
-export function Trips(props: { data?: ShortTrip[] }) {
+export function Trips(props: { data?: Trip[] }) {
   return (
     <>
       <h1 className="text-4xl font-semibold mb-5">My trips</h1>
@@ -15,6 +15,9 @@ export function Trips(props: { data?: ShortTrip[] }) {
             duration={trip.duration}
             roundTrip={trip.roundTrip}
             key={trip.key}
+            id={trip.id}
+            data={props.data}
+            showMoreOptBtn
           />
         ))
       ) : (

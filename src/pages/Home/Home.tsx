@@ -1,5 +1,5 @@
 import { User } from "firebase/auth";
-import { TripDisplayer, SlidingPage } from "../../components";
+import { TripDisplayer, SlidingPage, PrettyProgress } from "../../components";
 import { Trips } from "./Components";
 import { useEffect, useMemo, useState } from "react";
 import {
@@ -10,12 +10,12 @@ import {
   query,
 } from "firebase/firestore";
 import { getFirebaseApp, getFirebaseAuth } from "../../../server";
-import { ShortTrip } from "../../types/types";
+import { Trip } from "../../types/types";
 import { useTranslation } from "react-i18next";
 
 export function Home(props: { user: User }) {
   const [tripsPanelOpened, setTripsPanelOpened] = useState<boolean>(false);
-  const [trips, setTrips] = useState<ShortTrip[]>();
+  const [trips, setTrips] = useState<Trip[]>();
   const { t } = useTranslation();
 
   useEffect(() => {
@@ -25,15 +25,19 @@ export function Home(props: { user: User }) {
     const fetchData = async () => {
       let q = query(tripsCollection, where("uid", "==", props.user.uid));
       const response = await getDocs(q);
-      const newData = response.docs.map((doc) => ({
-        id: doc.id,
+      const newData = response.docs.map((doc, index) => ({
         date: doc.data().date,
-        from: doc.data().from,
-        to: doc.data().to,
-        length: doc.data().length,
         duration: doc.data().duration,
+        from: doc.data().from,
+        id: doc.id,
+        key: index,
+        length: doc.data().length,
+        roadType: doc.data().roadType,
         roundTrip: doc.data().roundTrip,
-        key: doc.data().id,
+        time: doc.data().time,
+        to: doc.data().to,
+        trafficDensity: doc.data().trafficDensity,
+        weather: doc.data().weather,
       }));
       setTrips(newData);
     };
@@ -57,7 +61,8 @@ export function Home(props: { user: User }) {
   const getTotalDrivingTime = (): { nb: number; unit: "min" | "hrs" } => {
     let mins = 0;
     trips?.map(
-      (trip) => (mins += trip.roundTrip ? trip.duration * 2 : trip.duration)
+      (trip: Trip) =>
+        (mins += trip.roundTrip ? trip.duration * 2 : trip.duration)
     );
     return mins >= 60
       ? { nb: Math.floor(mins / 60), unit: "hrs" }
@@ -80,17 +85,18 @@ export function Home(props: { user: User }) {
         <p className="text-neutral-400 text-xl mt-1">
           {t("homepage.header.subtitle")}
         </p>
+        <button onClick={() => console.log(trips)}>Test</button>
         <div className="bg-neutral-800 rounded-xl h-max py-6 px-8 mt-6 border border-neutral-600">
           <div className="grid grid-cols-3 items-center justify-between">
             <div className="flex flex-col items-center">
-              <span className="text-blue-500 text-2xl font-bold">
+              <span className="text-violet-500 text-3xl font-bold">
                 {getTotalKms()}
               </span>
               <span className="text-neutral-400 text-lg">km</span>
             </div>
 
             <div className="flex flex-col items-center">
-              <span className="text-blue-500 text-2xl font-bold">
+              <span className="text-violet-500 text-3xl font-bold">
                 {trips?.length}
               </span>
               <span className="text-neutral-400 text-lg">
@@ -99,7 +105,7 @@ export function Home(props: { user: User }) {
             </div>
 
             <div className="flex flex-col items-center">
-              <span className="text-blue-500 text-2xl font-bold">
+              <span className="text-violet-500 text-3xl font-bold">
                 {getTotalDrivingTime().nb}
               </span>
               <span className="text-neutral-400 text-lg">
@@ -108,15 +114,16 @@ export function Home(props: { user: User }) {
             </div>
           </div>
 
-          <div className="relative h-6 bg-neutral-700 w-full rounded-full mt-8 overflow-hidden">
+          {/* <div className="relative h-6 bg-neutral-700 w-full rounded-full mt-8 overflow-hidden">
             <div
-              className={`h-full bg-blue-500`}
+              className={`h-full bg-violet-500`}
               style={{ width: `${getKmsPercent()}%` }}
             ></div>
-          </div>
-          <span className="text-neutral-400 font-semibold block mt-2">
+          </div> */}
+          {/* <span className="text-neutral-400 font-semibold block mt-2">
             {getKmsPercent()}%
-          </span>
+          </span> */}
+          <PrettyProgress percent={getKmsPercent()} />
         </div>
 
         <div className="flex flex-row items-center justify-between mt-8 mb-4 ">
@@ -143,12 +150,15 @@ export function Home(props: { user: User }) {
             />
           );
         })}
-        <SlidingPage
-          setPanelOpened={setTripsPanelOpened}
-          isOpened={tripsPanelOpened}
-        >
-          <Trips data={memoizedData} />
-        </SlidingPage>
+        <div className="relative">
+          <SlidingPage
+            setPanelOpened={setTripsPanelOpened}
+            isOpened={tripsPanelOpened}
+            className="absolute"
+          >
+            <Trips data={memoizedData} />
+          </SlidingPage>
+        </div>
       </div>
     </>
   );

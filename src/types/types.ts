@@ -1,24 +1,15 @@
-export interface ShortTrip {
-  date: string;
-  from: string;
-  to: string;
-  length: number;
+export interface Trip {
+  date?: string;
   duration: number;
-  roundTrip: boolean;
-  key: string;
-  onClick?: CallableFunction;
-}
-
-export interface FullTrip {
-  date: string;
-  time: string;
-  roadType: string;
-  trafficDensity: string;
-  weather: string;
-  from: string;
-  to: string;
+  from?: string;
+  id?: string;
+  key?: number;
   length: number;
-  duration: number;
-  roundTrip: boolean;
-  uid: string;
+  roadType?: string;
+  roundTrip?: boolean;
+  time?: string;
+  to?: string;
+  trafficDensity?: string;
+  weather?: string;
+  uid?: string;
 }

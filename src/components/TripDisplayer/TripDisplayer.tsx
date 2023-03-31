@@ -1,21 +1,34 @@
-import { ShortTrip } from "../../types/types";
-import { Modal } from "../../components";
+import { Trip } from "../../types/types";
+import { Cta, Modal } from "../../components";
+import { useState } from "react";
+import { deleteDoc, getFirestore, collection, doc } from "firebase/firestore";
+import { getFirebaseApp } from "../../../server";
 
 function capitalizeWord(str: string | undefined) {
-  if (str) return (str.charAt(0).toUpperCase() + str.slice(1));
-  else return ""
+  if (str) return str.charAt(0).toUpperCase() + str.slice(1);
+  else return "";
 }
 
-function convertDuration(min: number): string {
+function convertDuration(min: number | undefined): string {
+  if (min === undefined) {
+    return "0";
+  }
   if (min < 60) {
     return `${min.toString()}min`;
   }
   return `${Math.floor(min / 60)}h ${min % 60}min`;
 }
 
-export function TripDisplayer(props: ShortTrip) {
+interface TripDisplayerProps extends Trip {
+  showMoreOptBtn?: boolean;
+  data?: Array<any>;
+}
+
+export function TripDisplayer(props: TripDisplayerProps) {
+  const [modalOpened, setModalOpened] = useState(false);
+
   return (
-    <div className="w-full flex flex-row items-center py-2 px-6 bg-neutral-800 rounded-xl mb-3">
+    <div className="w-full flex flex-row items-center justify-between py-2 px-6 bg-neutral-800 rounded-xl mb-3">
       <div className="flex flex-col">
         <span className="font-semibold">
           {capitalizeWord(props.from)}
@@ -30,6 +43,75 @@ export function TripDisplayer(props: ShortTrip) {
           {props.date} - {props.length}km - {convertDuration(props.duration)}
         </span>
       </div>
+      <button
+        className={`${
+          props.showMoreOptBtn ? "" : "hidden"
+        } text-neutral-500 block py-2 w-8 text-right`}
+        onClick={() => setModalOpened(true)}
+      >
+        <i className="fi fi-rr-menu-dots-vertical"></i>
+      </button>
+      <Modal showFn={setModalOpened} isShown={modalOpened}>
+        {/* <ul>
+          <li>
+            <span>Date : </span>
+            {props.date}
+          </li>
+          <li>
+            <span>Duration : </span>
+            {props.duration}
+          </li>
+          <li>
+            <span>From : </span>
+            {props.from}
+          </li>
+          <li>
+            <span>To : </span>
+            {props.to}
+          </li>
+          <li>
+            <span>Length : </span>
+            {props.length}
+          </li>
+          <li>
+            <span>Road type : </span>
+            {props.roadType}
+          </li>
+          <li>
+            <span>Round trip : </span>
+            {props.roundTrip}
+          </li>
+          <li>
+            <span>Time : </span>
+            {props.time}
+          </li>
+          <li>
+            <span>Traffic density : </span>
+            {props.trafficDensity}
+          </li>
+          <li>
+            <span>Weather : </span>
+            {props.weather}
+          </li>
+        </ul> */}
+        <Cta
+          type="button"
+          color="danger"
+          onClick={async () => {
+            if (confirm("Do you really want to delete this trip ?")) {
+              const db = getFirestore(getFirebaseApp());
+              console.log(props, props.id);
+              await deleteDoc(doc(db, "/trips", props.id as string))
+                .then(() => (document.location.href = "/"))
+                .catch((err) => {
+                  alert(err);
+                });
+            }
+          }}
+        >
+          Delete trip
+        </Cta>
+      </Modal>
     </div>
   );
 }

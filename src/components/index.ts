@@ -6,3 +6,4 @@ export { Layout } from "./Layout/Layout";
 export { Cta } from "./Buttons/Cta";
 export { BackButton } from "./BackButton/BackButton";
 export { Modal } from "./Modal/Modal";
+export { PrettyProgress } from "./PrettyProgress/PrettyProgress";

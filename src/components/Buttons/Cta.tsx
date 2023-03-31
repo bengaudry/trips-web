@@ -17,7 +17,7 @@ export function Cta(props: props) {
       ? "bg-red-600 hover:bg-red-800"
       : props.color === "warning"
       ? "bg-orange-600 hover:bg-orange-800"
-      : "bg-blue-600 hover:bg-blue-800"
+      : "bg-violet-600 hover:bg-violet-800"
   } text-white font-semibold w-full rounded-lg px-8 p-4 flex items-center justify-center gap-4 transition-colors duration-300`;
 
   return props.type === "button" ? (
