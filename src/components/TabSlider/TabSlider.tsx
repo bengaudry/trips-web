@@ -13,10 +13,10 @@ export function TabSlider(props: {
       style={{ gridTemplateColumns: `repeat(${props.tabs.length}, 1fr)` }}
     >
       <div
-        className={`absolute bg-grayblue-700 h-full rounded-lg transition-[left] duration-300`}
+        className={`absolute bg-grayblue-700 h-full rounded-lg transition-transform duration-300 origin-left`}
         style={{
           width: `calc(100% / ${props.tabs.length})`,
-          left: `${(selectedTab / props.tabs.length) * 100}%`,
+          transform: `translateX(${selectedTab * 100}%)`,
         }}
       ></div>
       {props.tabs.map((tab, index) => (

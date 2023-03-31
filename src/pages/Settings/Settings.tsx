@@ -14,7 +14,7 @@ import { LangPopup } from "./Components/LangPopup/LangPopup";
 import { ReactMarkdown } from "react-markdown/lib/react-markdown";
 import { legal } from "../../../public/texts/legal";
 
-export function Settings() {
+export function Settings () {
   const { t } = useTranslation();
 
   const [changePasswordPopupShown, setChangePasswordPopupShown] =

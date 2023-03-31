@@ -19,7 +19,6 @@ import { Trip } from "../../types/types";
 import { useTranslation } from "react-i18next";
 
 export function Home(props: { user: User }) {
-  const [tripsPanelOpened, setTripsPanelOpened] = useState<boolean>(false);
   const [trips, setTrips] = useState<Trip[]>();
   const { t } = useTranslation();
   const [currentPanel, setCurrentPanel] = useState<0 | 1>(0);
