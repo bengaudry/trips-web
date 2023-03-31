@@ -85,7 +85,6 @@ export function Home(props: { user: User }) {
         <p className="text-neutral-400 text-xl mt-1">
           {t("homepage.header.subtitle")}
         </p>
-        <button onClick={() => console.log(trips)}>Test</button>
         <div className="bg-neutral-800 rounded-xl h-max py-6 px-8 mt-6 border border-neutral-600">
           <div className="grid grid-cols-3 items-center justify-between">
             <div className="flex flex-col items-center">
