@@ -32,7 +32,7 @@ export function Settings() {
 
         {/* <input
           type="text"
-          className="bg-neutral-800"
+          className="bg-grayblue-800"
           onChange={(e) => {
             updateProfile(getFirebaseAuth().currentUser as User, {
               displayName: e.target.value,

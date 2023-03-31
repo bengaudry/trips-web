@@ -35,11 +35,11 @@ export function Setting(props: {
         </div>
         <div className="flex flex-col">
           <p className="text-xl cursor-default">{props.name}</p>
-          <p className="text-xl text-neutral-500">{props.subTitle}</p>
+          <p className="text-xl text-grayblue-500">{props.subTitle}</p>
         </div>
       </div>
-      <div className="h-12 aspect-square rounded-2xl bg-neutral-800 flex flex-roww items-center justify-center">
-        <i className="fi fi-rr-angle-right text-neutral-400 translate-y-0.5"></i>
+      <div className="h-12 aspect-square rounded-2xl bg-grayblue-800 flex flex-roww items-center justify-center">
+        <i className="fi fi-rr-angle-right text-grayblue-400 translate-y-0.5"></i>
       </div>
     </div>
   );

@@ -35,7 +35,7 @@ export function Select(props: props) {
       <div
         id={props.name}
         className={`${
-          isOpened ? "bg-neutral-700" : "bg-neutral-800"
+          isOpened ? "bg-grayblue-700" : "bg-grayblue-800"
         } outline-none border-2 border-transparent py-3 px-6 flex flex-row items-center justify-between rounded-xl relative transition-colors duration-300 ${
           props.className
         }`}
@@ -54,10 +54,10 @@ export function Select(props: props) {
             isOpened ? "scale-y-100" : "scale-y-0"
           } origin-top top-full left-0 pt-2 h-max w-full absolute z-20 transition-transform duration-200 overflow-x-hidden`}
         >
-          <div className="bg-neutral-800 border border-neutral-600 py-2 rounded-lg flex flex-col gap-1 max-h-44 overflow-y-scroll">
+          <div className="bg-grayblue-800 border border-grayblue-600 py-2 rounded-lg flex flex-col gap-1 max-h-44 overflow-y-scroll">
             {props.options.map((opt, index) => (
               <div
-                className="px-4 py-1 hover:bg-neutral-700 cursor-default"
+                className="px-4 py-1 hover:bg-grayblue-700 cursor-default"
                 onClick={() => setSelectedOption(opt.name)}
                 key={index}
               >

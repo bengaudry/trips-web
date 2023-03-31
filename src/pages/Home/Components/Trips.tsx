@@ -4,7 +4,6 @@ import { Trip } from "../../../types/types";
 export function Trips(props: { data?: Trip[] }) {
   return (
     <>
-      <h1 className="text-4xl font-semibold mb-5">My trips</h1>
       {props.data && props.data.length > 0 ? (
         props.data.map((trip) => (
           <TripDisplayer

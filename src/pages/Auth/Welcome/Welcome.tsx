@@ -56,7 +56,7 @@ export function Welcome() {
   // ];
 
   return (
-    <div className="p-8 pb-16 absolute bottom-0 bg-neutral-800 rounded-t-3xl w-full">
+    <div className="p-8 pb-16 absolute bottom-0 bg-grayblue-800 rounded-t-3xl w-full">
       {/* <AreaChart
         width={400}
         height={300}
@@ -74,7 +74,7 @@ export function Welcome() {
         <Area type="monotone" dataKey="uv" stroke="#8884d8" fill="#8884d8" />
       </AreaChart> */}
       <h1 className="text-4xl font-semibold text-center ">Trips</h1>
-      <p className="text-lg text-center text-neutral-500 mt-4">
+      <p className="text-lg text-center text-grayblue-500 mt-4">
         Sign in to add a trip or
         <br /> to see your previous ones
       </p>

@@ -28,7 +28,7 @@ export function TripDisplayer(props: TripDisplayerProps) {
   const [modalOpened, setModalOpened] = useState(false);
 
   return (
-    <div className="w-full flex flex-row items-center justify-between py-2 px-6 bg-neutral-800 rounded-xl mb-3">
+    <div className="w-full flex flex-row items-center justify-between py-2 px-6 bg-grayblue-800 rounded-xl mb-3">
       <div className="flex flex-col">
         <span className="font-semibold">
           {capitalizeWord(props.from)}
@@ -39,14 +39,14 @@ export function TripDisplayer(props: TripDisplayerProps) {
           )}
           {capitalizeWord(props.to)}
         </span>
-        <span className="text-neutral-400">
+        <span className="text-grayblue-400">
           {props.date} - {props.length}km - {convertDuration(props.duration)}
         </span>
       </div>
       <button
         className={`${
           props.showMoreOptBtn ? "" : "hidden"
-        } text-neutral-500 block py-2 w-8 text-right`}
+        } text-grayblue-500 block py-2 w-8 text-right`}
         onClick={() => setModalOpened(true)}
       >
         <i className="fi fi-rr-menu-dots-vertical"></i>

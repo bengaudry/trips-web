@@ -19,7 +19,7 @@ export function RegisterPage() {
   return (
     <div className="p-8 pb-16 absolute bottom-0 w-full">
       <h2 className="text-3xl font-semibold">Let's register you</h2>
-      <p className="text-neutral-500">Welcome to Trips !</p>
+      <p className="text-grayblue-500">Welcome to Trips !</p>
       <form onSubmit={(e) => e.preventDefault()}>
         <Input
           name="email"
@@ -46,7 +46,7 @@ export function RegisterPage() {
           }}
           required
         />
-        <p className="block text-neutral-500 w-full text-center text-md mb-4 mt-20">
+        <p className="block text-grayblue-500 w-full text-center text-md mb-4 mt-20">
           Already have an account ?{" "}
           <Link to="/signin" className="text-white">
             Sign In

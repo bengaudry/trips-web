@@ -15,14 +15,14 @@ export function ProfilePopup() {
       <h2 className="text-3xl font-semibold mb-4">{t("settingsPage.popups.profile.title")}</h2>
       <input
         type="password"
-        className="bg-neutral-800 w-full rounded-lg py-3 px-4 mb-4"
+        className="bg-grayblue-800 w-full rounded-lg py-3 px-4 mb-4"
         placeholder={t("settingsPage.popups.profile.placeholders.newPass") as string}
         value={newPass}
         onChange={(e) => setNewPass(e.target.value)}
       />
       <input
         type="password"
-        className="bg-neutral-800 w-full rounded-lg py-3 px-4 mb-4"
+        className="bg-grayblue-800 w-full rounded-lg py-3 px-4 mb-4"
         placeholder={t("settingsPage.popups.profile.placeholders.newPassConfirm") as string}
         value={newPassConfirm}
         onChange={(e) => setNewPassConfirm(e.target.value)}

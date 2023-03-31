@@ -20,13 +20,13 @@ function LangBtn(props: {
       className={`${
         props.lang === "auto"
           ? localStorage.getItem("app-lang") === undefined
-            ? "bg-neutral-800"
+            ? "bg-grayblue-800"
             : "bg-transparent"
           :
           i18n.language === props.lang
-            ? "bg-neutral-800"
+            ? "bg-grayblue-800"
             : "bg-transparent"
-      } w-full flex gap-3 text-left rounded-lg px-4 py-2 font-semibold border-neutral-800 border-2 transition-colors duration-300`}
+      } w-full flex gap-3 text-left rounded-lg px-4 py-2 font-semibold border-grayblue-800 border-2 transition-colors duration-300`}
     >
       <span>{props.flag}</span>
       <span>{props.children}</span>

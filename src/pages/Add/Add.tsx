@@ -202,7 +202,7 @@ export function Add() {
       <Cta
         type="button"
         btnType="submit"
-        className="mt-4 sticky bottom-32 shadow-neutral-900 shadow-2xl"
+        className="mt-4 sticky bottom-32 shadow-grayblue-900 shadow-2xl"
         onClick={() => {
           addTrip({
             date: date,

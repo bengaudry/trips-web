@@ -1,5 +1,10 @@
 import { User } from "firebase/auth";
-import { TripDisplayer, SlidingPage, PrettyProgress } from "../../components";
+import {
+  TripDisplayer,
+  SlidingPage,
+  PrettyProgress,
+  TabSlider,
+} from "../../components";
 import { Trips } from "./Components";
 import { useEffect, useMemo, useState } from "react";
 import {
@@ -17,6 +22,7 @@ export function Home(props: { user: User }) {
   const [tripsPanelOpened, setTripsPanelOpened] = useState<boolean>(false);
   const [trips, setTrips] = useState<Trip[]>();
   const { t } = useTranslation();
+  const [currentPanel, setCurrentPanel] = useState<0 | 1>(0);
 
   useEffect(() => {
     const db = getFirestore(getFirebaseApp());
@@ -75,89 +81,81 @@ export function Home(props: { user: User }) {
   return (
     <>
       <div className="px-5 py-16">
-        <h1 className="text-4xl font-bold">
-          {getFirebaseAuth().currentUser?.displayName
-            ? t("homepage.header.greeting", {
-                name: getFirebaseAuth().currentUser?.displayName,
-              })
-            : t("homepage.header.noUserGreeting")}
-        </h1>
-        <p className="text-neutral-400 text-xl mt-1">
+        <p className="text-grayblue-400 text-xl mt-1">
           {t("homepage.header.subtitle")}
         </p>
-        <div className="bg-neutral-800 rounded-xl h-max py-6 px-8 mt-6 border border-neutral-600">
-          <div className="grid grid-cols-3 items-center justify-between">
-            <div className="flex flex-col items-center">
-              <span className="text-violet-500 text-3xl font-bold">
-                {getTotalKms()}
-              </span>
-              <span className="text-neutral-400 text-lg">km</span>
+        <h1 className="text-4xl font-bold mb-6">
+          {getFirebaseAuth().currentUser?.displayName
+            ? `${getFirebaseAuth().currentUser?.displayName} 👋`
+            : ""}
+        </h1>
+
+        <TabSlider
+          tabs={["Stats", "Trips"]}
+          onChange={(val: 0 | 1) => setCurrentPanel(val)}
+          className="mb-6"
+        />
+
+        {currentPanel === 0 ? (
+          <>
+            <h2 className="block text-3xl font-semibold">
+              {t("homepage.header.statsTitle")}
+            </h2>
+            <div className="bg-grayblue-800 rounded-xl h-max py-6 px-8 mt-2 border border-grayblue-600">
+              <div className="grid grid-cols-3 items-center justify-between">
+                <div className="flex flex-col items-center">
+                  <span className="text-violet-500 text-3xl font-bold">
+                    {getTotalKms()}
+                  </span>
+                  <span className="text-grayblue-400 text-lg">km</span>
+                </div>
+
+                <div className="flex flex-col items-center">
+                  <span className="text-violet-500 text-3xl font-bold">
+                    {trips?.length}
+                  </span>
+                  <span className="text-grayblue-400 text-lg">
+                    {t(
+                      trips && trips.length > 1 ? "common.trips" : "common.trip"
+                    )}
+                  </span>
+                </div>
+
+                <div className="flex flex-col items-center">
+                  <span className="text-violet-500 text-3xl font-bold">
+                    {getTotalDrivingTime().nb}
+                  </span>
+                  <span className="text-grayblue-400 text-lg">
+                    {getTotalDrivingTime().unit}
+                  </span>
+                </div>
+              </div>
+
+              <PrettyProgress percent={getKmsPercent()} />
             </div>
 
-            <div className="flex flex-col items-center">
-              <span className="text-violet-500 text-3xl font-bold">
-                {trips?.length}
-              </span>
-              <span className="text-neutral-400 text-lg">
-                {t(trips && trips.length > 1 ? "common.trips" : "common.trip")}
-              </span>
+            <div className="flex flex-row items-center justify-between mt-8 mb-4 ">
+              <h2 className="block text-3xl font-semibold">
+                {t("homepage.recent.title")}
+              </h2>
             </div>
-
-            <div className="flex flex-col items-center">
-              <span className="text-violet-500 text-3xl font-bold">
-                {getTotalDrivingTime().nb}
-              </span>
-              <span className="text-neutral-400 text-lg">
-                {getTotalDrivingTime().unit}
-              </span>
-            </div>
-          </div>
-
-          {/* <div className="relative h-6 bg-neutral-700 w-full rounded-full mt-8 overflow-hidden">
-            <div
-              className={`h-full bg-violet-500`}
-              style={{ width: `${getKmsPercent()}%` }}
-            ></div>
-          </div> */}
-          {/* <span className="text-neutral-400 font-semibold block mt-2">
-            {getKmsPercent()}%
-          </span> */}
-          <PrettyProgress percent={getKmsPercent()} />
-        </div>
-
-        <div className="flex flex-row items-center justify-between mt-8 mb-4 ">
-          <h2 className="block text-3xl font-semibold">
-            {t("homepage.recent.title")}
-          </h2>
-          <button
-            className="block h-fit text-neutral-400"
-            onClick={() => setTripsPanelOpened(true)}
-          >
-            {t("common.seeAll")}
-          </button>
-        </div>
-        {allTrips.slice(0, 5).map((trip) => {
-          return (
-            <TripDisplayer
-              from={trip.from}
-              to={trip.to}
-              date={trip.date}
-              length={trip.length}
-              roundTrip={trip.roundTrip}
-              duration={trip.duration}
-              key={trip.key}
-            />
-          );
-        })}
-        <div className="relative">
-          <SlidingPage
-            setPanelOpened={setTripsPanelOpened}
-            isOpened={tripsPanelOpened}
-            className="absolute"
-          >
-            <Trips data={memoizedData} />
-          </SlidingPage>
-        </div>
+            {allTrips.slice(0, 5).map((trip) => {
+              return (
+                <TripDisplayer
+                  from={trip.from}
+                  to={trip.to}
+                  date={trip.date}
+                  length={trip.length}
+                  roundTrip={trip.roundTrip}
+                  duration={trip.duration}
+                  key={trip.key}
+                />
+              );
+            })}
+          </>
+        ) : (
+          <Trips data={memoizedData} />
+        )}
       </div>
     </>
   );

@@ -1,9 +1,8 @@
 export const homepage = {
   en: {
     header: {
-      greeting: "Hi {{name}}",
-      noUserGreeting: "Welcome back",
-      subtitle: "Here is a resume of your progression",
+      subtitle: "Good to see you back",
+      statsTitle: "Stats"
     },
     recent: {
       title: "Recent trips"
@@ -11,9 +10,8 @@ export const homepage = {
   },
   fr: {
     header: {
-      greeting: "Bonjour {{name}}",
-      noUserGreeting: "Bienvenue",
-      subtitle: "Voici un résumé de votre progression",
+      subtitle: "Heureux de vous revoir",
+      statsTitle: "Statistiques"
     },
     recent: {
       title: "Trajets récents"

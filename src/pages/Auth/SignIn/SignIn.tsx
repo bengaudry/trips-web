@@ -13,7 +13,7 @@ export function SignInPage() {
   return (
     <div className="p-8 pb-16 absolute bottom-0 w-full">
       <h2 className="text-3xl font-semibold">Let's sign you in</h2>
-      <p className="text-neutral-500">Welcome back !</p>
+      <p className="text-grayblue-500">Welcome back !</p>
       <form onSubmit={(e) => e.preventDefault()}>
         <Input
           name="email"
@@ -26,12 +26,12 @@ export function SignInPage() {
           onChange={(e: any) => setPassword(e.target?.value)}
         />
         <Link
-          className="text-right mt-2 text-neutral-500 block w-full"
+          className="text-right mt-2 text-grayblue-500 block w-full"
           to="/reset"
         >
           Forgot password ?
         </Link>
-        <p className="block text-neutral-500 w-full text-center text-md mb-4 mt-20">
+        <p className="block text-grayblue-500 w-full text-center text-md mb-4 mt-20">
           Don't have an account ?{" "}
           <Link to="/register" className="text-white">
             Register

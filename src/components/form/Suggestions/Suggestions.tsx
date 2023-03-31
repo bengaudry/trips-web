@@ -6,7 +6,7 @@ function Location(props: {
 }) {
   return (
     <span
-      className="block px-4 py-0.5 text-neutral-400 transition-colors duration-100 hover:bg-neutral-700 hover:text-white"
+      className="block px-4 py-0.5 text-grayblue-400 transition-colors duration-100 hover:bg-grayblue-700 hover:text-white"
       onClick={() => props.setSelectedLocation(props.value)}
     >
       {props.value}
@@ -24,11 +24,11 @@ export function Suggestions(props: {
     <div
       className={`${props.className} absolute z-30 top-full left-0 w-full h-max pt-2`}
     >
-      <div className="bg-neutral-800 border border-neutral-600 rounded-lg py-2 flex flex-col max-h-44 overflow-y-scroll">
+      <div className="bg-grayblue-800 border border-grayblue-600 rounded-lg py-2 flex flex-col max-h-44 overflow-y-scroll">
         <span className="px-4 font-semibold">Nearby</span>
         <span className="px-4 font-semibold mt-2">Recent</span>
         <span
-          className="block px-4 py-0.5 text-neutral-400 transition-colors duration-100 hover:bg-neutral-700 hover:text-white"
+          className="block px-4 py-0.5 text-grayblue-400 transition-colors duration-100 hover:bg-grayblue-700 hover:text-white"
           onClick={() => { props.onChange("feurs")}}
         >
           Feurs

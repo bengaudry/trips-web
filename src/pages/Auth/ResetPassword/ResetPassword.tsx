@@ -14,7 +14,7 @@ export function ResetPassword() {
         <BackButton onClick={function () {}} />
       </Link>
       <h2 className="text-3xl font-semibold">Forgot your password ?</h2>
-      <p className="text-neutral-500">Let's send you an email to reset it</p>
+      <p className="text-grayblue-500">Let's send you an email to reset it</p>
       <form onSubmit={(e) => e.preventDefault()}>
         <Input
           name="email"
