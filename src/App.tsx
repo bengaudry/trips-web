@@ -7,7 +7,13 @@ import { Layout } from "./components";
 import { Add, Home, Settings, NoPage } from "./pages";
 
 // Auth pages and layout
-import { AuthLayout, Welcome, RegisterPage, SignInPage, ResetPassword } from "./pages/auth";
+import {
+  AuthLayout,
+  Welcome,
+  RegisterPage,
+  SignInPage,
+  ResetPassword,
+} from "./pages/auth";
 
 // Styles
 import "/src/assets/index.css";
@@ -34,7 +40,7 @@ if (savedLang === undefined || savedLang === null || savedLang === "") {
   lang = savedLang;
 }
 
-console.log(`Switching lang to ${lang}`)
+console.log(`Switching lang to ${lang}`);
 // Init translation with the language chosen
 i18n.use(initReactI18next).init({
   resources,
@@ -45,18 +51,24 @@ i18n.use(initReactI18next).init({
 });
 
 export default function App() {
-  const [currentUser, setCurrentUser] = useState<null | User>(null);
+  const [userLoggedIn, setUserLoggedIn] = useState(false);
 
   // Show the app if connected, if not, show the login page
-  onAuthStateChanged(getFirebaseAuth(), (user) => {
-    setCurrentUser(user);
-  });
+  useEffect(() => {
+    onAuthStateChanged(getFirebaseAuth(), (user) => {
+      if (user !== null) {
+        setUserLoggedIn(true);
+      } else {
+        setUserLoggedIn(false);
+      }
+    });
+  }, [userLoggedIn]);
 
-  return currentUser ? (
+  return userLoggedIn ? (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Layout />}>
-          <Route index element={<Home user={currentUser} />} />
+          <Route index element={<Home />} />
           <Route path="add" element={<Add />} />
           <Route path="settings" element={<Settings />} />
           <Route path="*" element={<NoPage />} />

@@ -64,7 +64,10 @@ export function RegisterPage() {
                   updateProfile(getFirebaseAuth().currentUser as User, {
                     displayName: name,
                   })
-                    .then(() => (window.location.href = "/"))
+                    .then(() => {
+                      localStorage.setItem("connected", "true");
+                      window.location.href = "/";
+                    })
                     .catch((err) => alert(err.message));
                 }
               })

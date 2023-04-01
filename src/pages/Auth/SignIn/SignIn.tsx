@@ -44,6 +44,7 @@ export function SignInPage() {
           onClick={() => {
             signInWithEmailAndPassword(getFirebaseAuth(), email, password)
               .then(() => {
+                localStorage.setItem("connected", "true");
                 window.location.href = "/";
               })
               .catch((err) => {

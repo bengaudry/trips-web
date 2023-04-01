@@ -19,7 +19,7 @@ import { Trip } from "../../types/types";
 import { useTranslation } from "react-i18next";
 import { Stats } from "./Components/Stats";
 
-export function Home(props: { user: User }) {
+export function Home() {
   const [trips, setTrips] = useState<Trip[]>();
   const { t } = useTranslation();
   const [currentPanel, setCurrentPanel] = useState<0 | 1>(0);
@@ -29,7 +29,7 @@ export function Home(props: { user: User }) {
     const tripsCollection = collection(db, "/trips");
 
     const fetchData = async () => {
-      let q = query(tripsCollection, where("uid", "==", props.user.uid));
+      let q = query(tripsCollection, where("uid", "==", getFirebaseAuth().currentUser?.uid));
       const response = await getDocs(q);
       const newData = response.docs.map((doc, index) => ({
         date: doc.data().date,

@@ -14,7 +14,7 @@ import { LangPopup } from "./Components/LangPopup/LangPopup";
 import { ReactMarkdown } from "react-markdown/lib/react-markdown";
 import { legal } from "../../../public/texts/legal";
 
-export function Settings () {
+export function Settings() {
   const { t } = useTranslation();
 
   const [changePasswordPopupShown, setChangePasswordPopupShown] =
@@ -94,10 +94,7 @@ export function Settings () {
           isOpened={helpPopupShown}
           className="prose"
         >
-          <ReactMarkdown
-          >
-            {legal}
-          </ReactMarkdown>
+          <ReactMarkdown>{legal}</ReactMarkdown>
         </SlidingPage>
         <Setting
           color="253, 186, 116"
@@ -117,6 +114,7 @@ export function Settings () {
           name={t("settingsPage.buttons.logout")}
           onClick={() => {
             if (confirm(t("common.messages.logoutConfirm") as string)) {
+              localStorage.setItem("connected", "false");
               signOut(getFirebaseAuth());
             }
           }}

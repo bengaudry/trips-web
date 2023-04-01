@@ -119,6 +119,7 @@ export function ProfilePopup() {
             onClick={() => {
               if (confirm("Confirmez la suppression")) {
                 if (getFirebaseAuth().currentUser) {
+                  localStorage.setItem("connected", "false");
                   deleteUser(getFirebaseAuth().currentUser as User);
                 }
               }
@@ -141,7 +142,7 @@ export function Button(props: {
   return (
     <button
       className={`w-full text-left text-grayblue-500 hover:text-white transition-colors duration-300 px-4 py-2 ${
-        !props.noborder ? "border-b border-grayblue-700" : ""
+        !props.noborder ? "border-b border-grayblue-900" : ""
       }`}
       onClick={() => {
         if (props.onClick) props.onClick();
