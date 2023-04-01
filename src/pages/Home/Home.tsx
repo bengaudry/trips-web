@@ -91,6 +91,7 @@ export function Home(props: { user: User }) {
 
         <TabSlider
           tabs={["Stats", "Trips"]}
+          current={currentPanel}
           onChange={(val: 0 | 1) => setCurrentPanel(val)}
           className="mb-6"
         />
@@ -137,6 +138,12 @@ export function Home(props: { user: User }) {
               <h2 className="block text-3xl font-semibold">
                 {t("homepage.recent.title")}
               </h2>
+              <button
+                className="block h-fit text-neutral-400"
+                onClick={() => setCurrentPanel(1)}
+              >
+                {t("common.seeAll")}
+              </button>
             </div>
             {allTrips.slice(0, 5).map((trip) => {
               return (

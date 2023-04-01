@@ -2,31 +2,28 @@ import { useEffect, useState } from "react";
 
 export function TabSlider(props: {
   tabs: string[];
-  onChange?: CallableFunction;
+  onChange: CallableFunction;
+  current: number;
   className?: string;
 }) {
-  const [selectedTab, setSelectedTab] = useState(0);
-
+  
   return (
     <div
-      className={`grid relative p-1 bg-grayblue-800 rounded-lg overflow-hidden ${props.className}`}
+      className={`grid relative p-1 py-1.5 bg-grayblue-800 rounded-lg overflow-hidden ${props.className}`}
       style={{ gridTemplateColumns: `repeat(${props.tabs.length}, 1fr)` }}
     >
       <div
-        className={`absolute bg-grayblue-700 h-full rounded-lg transition-transform duration-300 origin-left`}
+        className={`absolute left-1 top-1 bg-grayblue-700 h-[calc(100%-0.5rem)] rounded-md transition-transform duration-300 origin-left`}
         style={{
-          width: `calc(100% / ${props.tabs.length})`,
-          transform: `translateX(${selectedTab * 100}%)`,
+          width: `calc(100% / ${props.tabs.length} - 0.25rem)`,
+          transform: `translateX(${props.current * 100}%)`,
         }}
       ></div>
       {props.tabs.map((tab, index) => (
         <div
-          className=" text-center w-full z-20"
+          className={`text-center w-full z-20`}
           onClick={() => {
-            setSelectedTab(index);
-            if (props.onChange) {
-              props.onChange(index);
-            }
+            props.onChange(index);
           }}
           key={index}
         >
