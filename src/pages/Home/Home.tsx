@@ -104,14 +104,14 @@ export function Home(props: { user: User }) {
             <div className="bg-grayblue-800 rounded-xl h-max py-6 px-8 mt-2 border border-grayblue-600">
               <div className="grid grid-cols-3 items-center justify-between">
                 <div className="flex flex-col items-center">
-                  <span className="text-violet-500 text-3xl font-bold">
+                  <span className="text-brand-500 text-3xl font-bold">
                     {getTotalKms()}
                   </span>
                   <span className="text-grayblue-400 text-lg">km</span>
                 </div>
 
                 <div className="flex flex-col items-center">
-                  <span className="text-violet-500 text-3xl font-bold">
+                  <span className="text-brand-500 text-3xl font-bold">
                     {trips?.length}
                   </span>
                   <span className="text-grayblue-400 text-lg">
@@ -122,7 +122,7 @@ export function Home(props: { user: User }) {
                 </div>
 
                 <div className="flex flex-col items-center">
-                  <span className="text-violet-500 text-3xl font-bold">
+                  <span className="text-brand-500 text-3xl font-bold">
                     {getTotalDrivingTime().nb}
                   </span>
                   <span className="text-grayblue-400 text-lg">

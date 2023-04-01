@@ -18,7 +18,7 @@ export function Checkbox(props: {
       <label className="block pointer-events-none">
         <div
           className={`h-6 rounded-full w-12 transition-colors duration-300 relative ${
-            props.checked ? "bg-violet-600" : "bg-grayblue-700"
+            props.checked ? "bg-brand-600" : "bg-grayblue-700"
           }`}
         >
           <div
