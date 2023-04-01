@@ -32,7 +32,9 @@ export function TripDisplayer(props: TripDisplayerProps) {
       <div className="flex flex-col">
         <span
           className="relative w-full font-semibold overflow-hidden whitespace-nowrap after:absolute after:w-10 after:h-6 after:right-0 after:bg-gradient-to-r after:from-grayblue-800/0 after:to-grayblue-800"
-          title={`From ${capitalizeWord(props.from)} to ${capitalizeWord(props.to)}`}
+          title={`From ${capitalizeWord(props.from)} to ${capitalizeWord(
+            props.to
+          )}`}
         >
           {capitalizeWord(props.from)}
           {props.roundTrip ? (
@@ -97,6 +99,17 @@ export function TripDisplayer(props: TripDisplayerProps) {
             {props.weather}
           </li>
         </ul> */}
+        <h2
+          className="text-xl mb-4 font-semibold"
+        >
+          {capitalizeWord(props.from)}
+          {props.roundTrip ? (
+            <i className="fi fi-rr-exchange inline-block mx-3 translate-y-0.5"></i>
+          ) : (
+            <i className="fi fi-rr-arrow-right inline-block mx-3 translate-y-0.5"></i>
+          )}
+          {capitalizeWord(props.to)}
+        </h2>
         <Cta
           type="button"
           color="danger"

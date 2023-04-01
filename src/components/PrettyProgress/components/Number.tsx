@@ -5,7 +5,8 @@ export function Number(props: {
 }) {
   return (
     <span
-      className={`${
+      className={`
+      ${
         props.active
           ? "bg-brand-500 border-brand-500 text-grayblue-900"
           : props.isActivating
