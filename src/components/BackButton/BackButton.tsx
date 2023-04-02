@@ -9,7 +9,7 @@ export function BackButton(props: { onClick: CallableFunction }) {
       onClick={(e) => props.onClick(e)}
     >
       <i className="fi fi-rr-angle-left block text-sm"></i>
-      <span className="block h-min -translate-y-0.5">{t("common.back")}</span>
+      <span className="block h-min -translate-y-0.5">{t("common.back", "Back")}</span>
     </button>
   );
 }

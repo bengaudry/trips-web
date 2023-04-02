@@ -51,10 +51,17 @@ i18n.use(initReactI18next).init({
 });
 
 export default function App() {
+  const [isLoading, setLoading] = useState(true);
   const [userLoggedIn, setUserLoggedIn] = useState(false);
 
   // Show the app if connected, if not, show the login page
   useEffect(() => {
+    window.addEventListener("DOMContentLoaded", () => {
+      window.setTimeout(() => {
+        setLoading(false);
+      }, 2000);
+    });
+
     onAuthStateChanged(getFirebaseAuth(), (user) => {
       if (user !== null) {
         setUserLoggedIn(true);
@@ -62,30 +69,35 @@ export default function App() {
         setUserLoggedIn(false);
       }
     });
-  }, [userLoggedIn]);
+  }, [userLoggedIn, isLoading]);
 
-  return userLoggedIn ? (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Layout />}>
-          <Route index element={<Home />} />
-          <Route path="add" element={<Add />} />
-          <Route path="settings" element={<Settings />} />
-          <Route path="*" element={<NoPage />} />
-        </Route>
-      </Routes>
-    </BrowserRouter>
-  ) : (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<AuthLayout />}>
-          <Route index element={<Welcome />} />
-          <Route path="signin" element={<SignInPage />} />
-          <Route path="register" element={<RegisterPage />} />
-          <Route path="reset" element={<ResetPassword />} />
-          <Route path="*" element={<Welcome />} />
-        </Route>
-      </Routes>
-    </BrowserRouter>
+  return (
+    <>
+      
+      {userLoggedIn ? (
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Layout />}>
+              <Route index element={<Home />} />
+              <Route path="add" element={<Add />} />
+              <Route path="settings" element={<Settings />} />
+              <Route path="*" element={<NoPage />} />
+            </Route>
+          </Routes>
+        </BrowserRouter>
+      ) : (
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<AuthLayout />}>
+              <Route index element={<Welcome />} />
+              <Route path="signin" element={<SignInPage />} />
+              <Route path="register" element={<RegisterPage />} />
+              <Route path="reset" element={<ResetPassword />} />
+              <Route path="*" element={<Welcome />} />
+            </Route>
+          </Routes>
+        </BrowserRouter>
+      )}
+    </>
   );
 }

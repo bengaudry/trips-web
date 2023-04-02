@@ -1,7 +1,7 @@
 import { ReactNode } from "react";
 import { Link } from "react-router-dom";
 
-interface props {
+export type CtaProps = {
   children: string | ReactNode;
   className?: string;
   type: "button" | "link";
@@ -11,7 +11,7 @@ interface props {
   btnType?: "button" | "reset" | "submit";
 }
 
-export function Cta(props: props) {
+export function Cta(props: CtaProps) {
   const CtaStyle = `${
     props.color === "danger"
       ? "bg-red-600 hover:bg-red-800"
