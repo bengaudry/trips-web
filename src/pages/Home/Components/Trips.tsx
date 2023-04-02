@@ -1,24 +1,62 @@
-import { TripDisplayer, Cta } from "../../../components";
+import { useState } from "react";
+import { TripDisplayer, Cta, Modal } from "../../../components";
 import { Trip } from "../../../types/types";
+import { getFirestore, deleteDoc, doc } from "firebase/firestore";
+import { getFirebaseApp } from "../../../../server";
 
 export function Trips(props: { data?: Trip[] }) {
+  const [modalOpened, setModalOpened] = useState(false);
+  const [modalContent, setModalContent] = useState<Trip>();
+
   return (
     <>
       {props.data && props.data.length > 0 ? (
-        props.data.map((trip) => (
-          <TripDisplayer
-            from={trip.from}
-            to={trip.to}
-            date={trip.date}
-            length={trip.length}
-            duration={trip.duration}
-            roundTrip={trip.roundTrip}
-            key={trip.key}
-            id={trip.id}
-            data={props.data}
-            showMoreOptBtn
-          />
-        ))
+        <>
+          {props.data.map((trip) => (
+            <TripDisplayer
+              from={trip.from}
+              to={trip.to}
+              date={trip.date}
+              length={trip.length}
+              duration={trip.duration}
+              roundTrip={trip.roundTrip}
+              key={trip.key}
+              id={trip.id}
+              showMoreOptBtn
+              setModalOpened={(val: boolean) => {
+                setModalOpened(val);
+                setModalContent(trip);
+              }}
+            />
+          ))}
+          <Modal showFn={setModalOpened} isShown={modalOpened}>
+            <h2 className="text-xl mb-4 font-semibold">
+              <span className="capitalize">{modalContent?.from}</span>
+              {modalContent?.roundTrip ? (
+                <i className="fi fi-rr-exchange inline-block mx-3 translate-y-0.5"></i>
+              ) : (
+                <i className="fi fi-rr-arrow-right inline-block mx-3 translate-y-0.5"></i>
+              )}
+              <span className="capitalize">{modalContent?.to}</span>
+            </h2>
+            <Cta
+              type="button"
+              color="danger"
+              onClick={async () => {
+                if (confirm("Do you really want to delete this trip ?")) {
+                  const db = getFirestore(getFirebaseApp());
+                  await deleteDoc(doc(db, "/trips", modalContent?.id as string))
+                    .then(() => (document.location.href = "/"))
+                    .catch((err) => {
+                      alert(err);
+                    });
+                }
+              }}
+            >
+              Delete trip
+            </Cta>
+          </Modal>
+        </>
       ) : (
         <>
           <p className="text-center block w-full text-2xl my-4 mt-8">

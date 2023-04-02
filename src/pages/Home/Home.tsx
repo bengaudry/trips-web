@@ -29,7 +29,10 @@ export function Home() {
     const tripsCollection = collection(db, "/trips");
 
     const fetchData = async () => {
-      let q = query(tripsCollection, where("uid", "==", getFirebaseAuth().currentUser?.uid));
+      let q = query(
+        tripsCollection,
+        where("uid", "==", getFirebaseAuth().currentUser?.uid)
+      );
       const response = await getDocs(q);
       const newData = response.docs.map((doc, index) => ({
         date: doc.data().date,
