@@ -5,7 +5,7 @@ import {
   updateProfile,
 } from "firebase/auth";
 import { getFirebaseAuth } from "../../../server";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { SlidingPage } from "../../components";
 import { Setting } from "./Components/Setting";
 import { ProfilePopup } from "./Components/ProfilePopup/ProfilePopup";
@@ -21,6 +21,14 @@ export function Settings() {
     useState(false);
   const [langPopupShown, setLangPopupShown] = useState(false);
   const [helpPopupShown, setHelpPopupShown] = useState(false);
+
+  useEffect(() => {
+    if (helpPopupShown || langPopupShown || changePasswordPopupShown) {
+      document.body.style.overflow = "hidden"
+    } else {
+      document.body.style.overflow = "scroll"
+    }
+  }, [helpPopupShown, langPopupShown, changePasswordPopupShown])
 
   return (
     <div className="px-5 pt-16">
