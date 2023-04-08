@@ -23,7 +23,7 @@ export function Settings() {
   const [helpPopupShown, setHelpPopupShown] = useState(false);
 
   return (
-    <div className="px-5 t-16">
+    <div className="px-5 pt-16">
       <h2 className="text-4xl font-bold mb-6">{t("settingsPage.title")}</h2>
       <h3 className="text-3xl font-semibold">
         {t("settingsPage.subtitles.account")}

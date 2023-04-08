@@ -14,6 +14,7 @@ export function ProfilePopup() {
   const [changePasswordModalShown, setChangePasswordModalShown] =
     useState(false);
   const [deleteAccountModalShown, setDeleteAccountModalShown] = useState(false);
+  const [accountInfoModalShown, setAccountInfoModalShown] = useState(false);
 
   return (
     <>
@@ -39,21 +40,24 @@ export function ProfilePopup() {
 
       <div className="rounded-lg w-full bg-grayblue-800">
         <Button icon="user">Account information</Button>
-        <Button
-          icon="lock"
-          onClick={() => {
-            setChangePasswordModalShown(true);
-          }}
-        >
+
+        <Button icon="lock" onClick={() => setChangePasswordModalShown(true)}>
           Change your password
         </Button>
-        <Button icon="download">Download my data</Button>
+        <Button icon="download" onClick={() => setAccountInfoModalShown(true)}>
+          Download my data
+        </Button>
+        <Modal
+          isShown={accountInfoModalShown}
+          showFn={setAccountInfoModalShown}
+          title="My account info"
+        >
+          <Cta type="button">Download my data</Cta>
+        </Modal>
         <Button
           icon="trash"
           noborder
-          onClick={() => {
-            setDeleteAccountModalShown(true);
-          }}
+          onClick={() => setDeleteAccountModalShown(true)}
         >
           Deactivate my account
         </Button>
@@ -62,6 +66,7 @@ export function ProfilePopup() {
       <Modal
         isShown={changePasswordModalShown}
         showFn={setChangePasswordModalShown}
+        title="Change password"
       >
         <Input
           type="password"
@@ -105,11 +110,9 @@ export function ProfilePopup() {
       <Modal
         isShown={deleteAccountModalShown}
         showFn={setDeleteAccountModalShown}
+        title="Do you really want to delete your account ?"
       >
         <>
-          <h2 className="text-2xl font-semibold">
-            Do you really want to delete your account ?
-          </h2>
           <p className="text-lg text-grayblue-500 mb-4">
             This action is definitive
           </p>

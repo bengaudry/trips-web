@@ -1,10 +1,4 @@
-import { User } from "firebase/auth";
-import {
-  TripDisplayer,
-  SlidingPage,
-  PrettyProgress,
-  TabSlider,
-} from "../../components";
+import { TabSlider } from "../../components";
 import { Trips } from "./Components/Trips";
 import { useEffect, useMemo, useState } from "react";
 import {
