@@ -57,18 +57,19 @@ export function Home() {
         <p className="text-grayblue-400 text-xl mt-1">
           {t("homepage.header.subtitle")}
         </p>
-        <h1 className="text-4xl font-bold mb-6">
+        <h1 className="text-4xl font-bold">
           {getFirebaseAuth().currentUser?.displayName
             ? `${getFirebaseAuth().currentUser?.displayName} 👋`
             : ""}
         </h1>
 
-        <TabSlider
-          tabs={["Statistiques", "Trajets"]}
-          current={currentPanel}
-          onChange={(val: 0 | 1) => setCurrentPanel(val)}
-          className="mb-6"
-        />
+        <div className="bg-grayblue-900/90 backdrop-blur-lg sticky z-30 top-0 py-3">
+          <TabSlider
+            tabs={["Statistiques", "Trajets"]}
+            current={currentPanel}
+            onChange={(val: 0 | 1) => setCurrentPanel(val)}
+          />
+        </div>
 
         {currentPanel === 0 ? (
           <Stats allTrips={allTrips} setPanelFn={setCurrentPanel} />
