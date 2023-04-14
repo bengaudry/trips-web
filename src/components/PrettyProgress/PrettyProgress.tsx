@@ -5,9 +5,9 @@ export function PrettyProgress(props: { percent: number; className?: string }) {
     <div className="mt-8 relative w-full h-8">
       <div className="relative inset-0 grid grid-cols-3 gap-8 w-ful h-8">
         <div className="px-8 w-full absolute top-1/2">
-          <div className="h-0.5 bg-grayblue-700 rounded-full overflow-hidden grid">
+          <div className="h-0.5 bg-grayblue-800 rounded-full overflow-hidden grid">
             <div
-              className={`h-full bg-brand-500 transition-[width] duration-1000 ease-out`}
+              className={`h-full bg-white transition-[width] duration-1000 ease-out`}
               style={{ width: `${props.percent}%` }}
             ></div>
           </div>

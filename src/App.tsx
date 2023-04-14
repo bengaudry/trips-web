@@ -9,7 +9,7 @@ import { Add, Home, Settings, NoPage } from "./pages";
 // Auth pages and layout
 import {
   AuthLayout,
-  Welcome,
+  Landing,
   RegisterPage,
   SignInPage,
   ResetPassword,
@@ -88,11 +88,11 @@ export default function App() {
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<AuthLayout />}>
-              <Route index element={<Welcome />} />
+              <Route index element={<Landing />} />
               <Route path="signin" element={<SignInPage />} />
               <Route path="register" element={<RegisterPage />} />
               <Route path="reset" element={<ResetPassword />} />
-              <Route path="*" element={<Welcome />} />
+              <Route path="*" element={<Landing />} />
             </Route>
           </Routes>
         </BrowserRouter>

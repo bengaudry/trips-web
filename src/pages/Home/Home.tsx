@@ -64,7 +64,7 @@ export function Home() {
         </h1>
 
         <TabSlider
-          tabs={["Stats", "Trips"]}
+          tabs={["Statistiques", "Trajets"]}
           current={currentPanel}
           onChange={(val: 0 | 1) => setCurrentPanel(val)}
           className="mb-6"

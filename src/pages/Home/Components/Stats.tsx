@@ -36,20 +36,20 @@ export function Stats(props: {
       <h2 className="block text-3xl font-semibold">
         {t("homepage.header.statsTitle")}
       </h2>
-      <div className="bg-grayblue-800 rounded-xl h-max py-6 px-8 mt-2 border border-grayblue-600">
+      <div className="rounded-xl h-max py-6 px-8 mt-2 bg-gradient-to-tr from-sky-600 to-indigo-600">
         <div className="grid grid-cols-3 items-center justify-between">
           <div className="flex flex-col items-center">
-            <span className="text-brand-500 text-3xl font-bold">
+            <span className="text-3xl font-bold">
               {getTotalKms()}
             </span>
-            <span className="text-grayblue-400 text-lg">km</span>
+            <span className="text-grayblue-200 text-lg">km</span>
           </div>
 
           <div className="flex flex-col items-center">
-            <span className="text-brand-500 text-3xl font-bold">
+            <span className="text-3xl font-bold">
               {props.allTrips?.length}
             </span>
-            <span className="text-grayblue-400 text-lg">
+            <span className="text-grayblue-200 text-lg">
               {t(
                 props.allTrips && props.allTrips.length > 1
                   ? "common.trips"
@@ -59,10 +59,10 @@ export function Stats(props: {
           </div>
 
           <div className="flex flex-col items-center">
-            <span className="text-brand-500 text-3xl font-bold">
+            <span className="text-3xl font-bold">
               {getTotalDrivingTime().nb}
             </span>
-            <span className="text-grayblue-400 text-lg">
+            <span className="text-grayblue-200 text-lg">
               {getTotalDrivingTime().unit}
             </span>
           </div>

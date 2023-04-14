@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { TripDisplayer, Cta, Modal } from "../../../components";
 import { Trip } from "../../../types/types";
 import { getFirestore, deleteDoc, doc } from "firebase/firestore";
@@ -7,6 +7,14 @@ import { getFirebaseApp } from "../../../../server";
 export function Trips(props: { data?: Trip[] }) {
   const [modalOpened, setModalOpened] = useState(false);
   const [modalContent, setModalContent] = useState<Trip>();
+
+  useEffect(() => {
+    if (modalOpened) {
+      document.body.style.overflow = "hidden"
+    } else {
+      document.body.style.overflow = "scroll"
+    }
+  }, [modalOpened])
 
   return (
     <>
