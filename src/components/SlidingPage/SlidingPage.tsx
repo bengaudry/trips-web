@@ -11,13 +11,15 @@ export function SlidingPage(props: {
   return (
     <div
       className={`${
-        props.isOpened ? "-translate-x-1/2" : "translate-x-[100vw]"
-      } px-5 py-16 z-40 fixed left-1/2 inset-0 w-full max-w-screen-sm h-screen bg-grayblue-900 transition-transform duration-500 overflow-y-scroll ${
+        props.isOpened ? "translate-x-0" : "translate-x-[100vw]"
+      } z-40 fixed right-0 top-0 w-[calc(100vw-18rem)] h-screen bg-grayblue-900 transition-transform duration-500 overflow-y-scroll ${
         props.outerClassName
       }`}
     >
-      <BackButton onClick={() => props.setPanelOpened(false)} />
-      {props.children}
+      <main className="px-5 py-16 max-w-screen-sm w-full mx-auto h-full">
+        <BackButton onClick={() => props.setPanelOpened(false)} />
+        {props.children}
+      </main>
     </div>
   );
 }

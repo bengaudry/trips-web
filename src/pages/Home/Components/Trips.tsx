@@ -17,7 +17,7 @@ export function Trips(props: { data?: Trip[] }) {
   }, [modalOpened])
 
   return (
-    <>
+    <div className="pt-3">
       {props.data && props.data.length > 0 ? (
         <>
           {props.data.map((trip) => (
@@ -79,6 +79,6 @@ export function Trips(props: { data?: Trip[] }) {
           </Cta>
         </>
       )}
-    </>
+    </div>
   );
 }

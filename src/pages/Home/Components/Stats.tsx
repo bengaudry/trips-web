@@ -33,7 +33,7 @@ export function Stats(props: {
   };
   return (
     <>
-      <h2 className="block text-3xl font-semibold">
+      <h2 className="pt-3 block text-3xl font-semibold">
         {t("homepage.header.statsTitle")}
       </h2>
       <div className="rounded-xl h-max py-6 px-8 mt-2 bg-gradient-to-tr from-sky-600 to-indigo-600">

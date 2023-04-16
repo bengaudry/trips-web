@@ -63,7 +63,7 @@ export function Home() {
             : ""}
         </h1>
 
-        <div className="bg-grayblue-900/90 backdrop-blur-lg sticky z-30 top-0 py-3">
+        <div className="bg-grayblue-900/90 backdrop-blur-lg sticky z-20 top-0 py-3">
           <TabSlider
             tabs={["Statistiques", "Trajets"]}
             current={currentPanel}
