@@ -1,4 +1,4 @@
-import { TabSlider } from "../../components";
+import { NotVerifiedEmailPopup, TabSlider } from "../../components";
 import { Trips } from "./Components/Trips";
 import { useEffect, useMemo, useState } from "react";
 import {
@@ -54,6 +54,7 @@ export function Home() {
   return (
     <>
       <div className="px-5 py-16">
+        <NotVerifiedEmailPopup className="mb-4"/>
         <p className="text-grayblue-400 text-xl mt-1">
           {t("homepage.header.subtitle")}
         </p>

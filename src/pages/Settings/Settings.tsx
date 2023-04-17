@@ -6,7 +6,7 @@ import {
 } from "firebase/auth";
 import { getFirebaseAuth } from "../../../server";
 import { useEffect, useState } from "react";
-import { SlidingPage } from "../../components";
+import { NotVerifiedEmailPopup, SlidingPage } from "../../components";
 import { Setting } from "./Components/Setting";
 import { ProfilePopup } from "./Components/ProfilePopup/ProfilePopup";
 import { useTranslation } from "react-i18next";
@@ -63,28 +63,7 @@ export function Settings() {
         <ProfilePopup />
       </SlidingPage>
 
-      {!getFirebaseAuth().currentUser?.emailVerified ? (
-        <div className="w-full flex flex-col items-center rounded-lg px-4 py-2 mt-2 bg-yellow-600">
-          <p className="flex flex-row items-center gap-2">
-            <i className="fi fi-rr-exclamation"></i>
-            <span className="-translate-y-0.5">
-              Your email is not verified !
-            </span>
-          </p>
-          <button
-            onClick={() => {
-              if (getFirebaseAuth().currentUser !== null) {
-                sendEmailVerification(getFirebaseAuth().currentUser as User);
-              }
-            }}
-            className="underline font-semibold"
-          >
-            Send me an email
-          </button>
-        </div>
-      ) : (
-        <></>
-      )}
+      <NotVerifiedEmailPopup />
 
       <h3 className="text-3xl font-semibold mb-4 mt-10">
         {t("settingsPage.subtitles.settings")}

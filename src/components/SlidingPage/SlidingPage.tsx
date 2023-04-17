@@ -12,7 +12,7 @@ export function SlidingPage(props: {
     <div
       className={`${
         props.isOpened ? "translate-x-0" : "translate-x-[100vw]"
-      } z-40 fixed right-0 top-0 w-full lg:giw-[calc(100vw-18rem)] h-screen bg-grayblue-900 transition-transform duration-500 overflow-y-scroll ${
+      } z-40 fixed right-0 top-0 w-full lg:w-[calc(100vw-18rem)] h-screen bg-grayblue-900 transition-transform duration-500 overflow-y-scroll ${
         props.outerClassName
       }`}
     >

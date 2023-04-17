@@ -1,39 +1,43 @@
 import { useState } from "react";
 import { Input, Select, Checkbox, Suggestions } from "../../components/form";
 import { Cta } from "../../components";
-import { getFirestore, addDoc, collection } from "firebase/firestore";
-import { getFirebaseAuth, getFirebaseApp } from "../../../server";
-import { Trip } from "../../types/types";
-
-async function addTrip(content: Trip) {
-  const db = getFirestore(getFirebaseApp());
-  const tripsCollection = collection(db, "/trips");
-
-  await addDoc(tripsCollection, content).catch((err) => {
-    console.log("Firebase error :", err);
-    alert("Error while sending to the database, please contact us");
-  });
-
-  window.location.href = "/";
-}
+import { getFirebaseAuth } from "../../../server";
+import { addTrip } from "../../lib/functions";
 
 export function Add() {
   // Fields values
-  const [date, setDate] = useState<string>("");
-  const [time, setTime] = useState<string>("");
-  const [roadType, setRoadType] = useState<string>("");
-  const [trafficDensity, setTrafficDensity] = useState<string>("");
-  const [weather, setWeather] = useState<string>("");
-  const [from, setFrom] = useState<string>("");
-  const [to, setTo] = useState<string>("");
-  const [length, setLength] = useState<string>("0");
-  const [duration, setDuration] = useState<string>("0");
-  const [roundTrip, setRoundTrip] = useState<boolean>(false);
+  const [date, setDate] = useState("");
+  const [time, setTime] = useState("");
+  const [roadType, setRoadType] = useState("");
+  const [trafficDensity, setTrafficDensity] = useState("");
+  const [weather, setWeather] = useState("");
+  const [from, setFrom] = useState("");
+  const [to, setTo] = useState("");
+  const [length, setLength] = useState("");
+  const [duration, setDuration] = useState("");
+  const [roundTrip, setRoundTrip] = useState(false);
 
   // Functionnal states
-  const [moreOptionsOpened, setMoreOptionsOpened] = useState<boolean>(false);
-  const [fromInputFocused, setFromInputFocused] = useState<boolean>(false);
-  const [toInputFocused, setToInputFocused] = useState<boolean>(false);
+  const [moreOptionsOpened, setMoreOptionsOpened] = useState(false);
+  const [fromInputFocused, setFromInputFocused] = useState(false);
+  const [toInputFocused, setToInputFocused] = useState(false);
+
+  const handleSubmit = () => {
+    alert(Date.parse(date));
+    addTrip({
+      date: date,
+      time: time,
+      roadType: roadType,
+      trafficDensity: trafficDensity,
+      weather: weather,
+      from: from,
+      to: to,
+      length: parseInt(length),
+      duration: parseInt(duration),
+      roundTrip: roundTrip,
+      uid: getFirebaseAuth().currentUser?.uid as string,
+    });
+  };
 
   return (
     <div className="px-5 py-16 pb-44">
@@ -63,6 +67,7 @@ export function Add() {
         name="from"
         type="text"
         value={from}
+        placeholder="A city, an adress, a district, a place..."
         onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
           setFrom(e.target.value)
         }
@@ -82,6 +87,7 @@ export function Add() {
         name="to"
         type="text"
         value={to}
+        placeholder="A city, an adress, a district, a place..."
         onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
           setTo(event.target.value);
         }}
@@ -101,6 +107,7 @@ export function Add() {
           name="length"
           type="number"
           value={length}
+          placeholder="Length in kms"
           onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
             setLength(e.target.value)
           }
@@ -110,6 +117,7 @@ export function Add() {
           name="duration"
           type="number"
           value={duration}
+          placeholder="Duration in minutes"
           onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
             setDuration(e.target.value)
           }
@@ -178,19 +186,19 @@ export function Add() {
               name: "Sunny",
             },
             {
-              name: "Rainy",
+              name: "Cloudy",
             },
             {
-              name: "Windy",
+              name: "Rainy",
             },
             {
               name: "Foggy",
             },
             {
-              name: "Snowy",
+              name: "Windy",
             },
             {
-              name: "Cloudy",
+              name: "Snowy",
             },
           ]}
         />
@@ -203,21 +211,7 @@ export function Add() {
         type="button"
         btnType="submit"
         className="mt-4 sticky bottom-32 shadow-grayblue-900 shadow-2xl lg:bottom-8"
-        onClick={() => {
-          addTrip({
-            date: date,
-            time: time,
-            roadType: roadType,
-            trafficDensity: trafficDensity,
-            weather: weather,
-            from: from,
-            to: to,
-            length: parseInt(length),
-            duration: parseInt(duration),
-            roundTrip: roundTrip,
-            uid: getFirebaseAuth().currentUser?.uid as string,
-          });
-        }}
+        onClick={handleSubmit}
       >
         Add trip
       </Cta>

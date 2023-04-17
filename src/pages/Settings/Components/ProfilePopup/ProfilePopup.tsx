@@ -87,7 +87,7 @@ export function ProfilePopup() {
           <>
             <Input
               type="password"
-              className="bg-grayblue-800 w-full rounded-lg py-3 px-4 mb-4"
+              className="bg-grayblue-800"
               name={
                 t("settingsPage.popups.profile.placeholders.newPass") as string
               }
@@ -98,7 +98,7 @@ export function ProfilePopup() {
             />
             <Input
               type="password"
-              className="bg-grayblue-800 w-full rounded-lg py-3 px-4 mb-4"
+              className="bg-grayblue-800"
               name={
                 t(
                   "settingsPage.popups.profile.placeholders.newPassConfirm"

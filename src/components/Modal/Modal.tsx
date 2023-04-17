@@ -14,7 +14,7 @@ export function Modal(props: ModalProps) {
         props.isShown
           ? "bg-black/80 pointer-events-auto"
           : "bg-transparent pointer-events-none"
-      } fixed flex flex-row items-end justify-start inset-0 transition-colors duration-500 z-50 lg:items-center`}
+      } fixed  flex flex-row items-end justify-start inset-0 transition-colors duration-500 z-50 lg:items-center`}
     >
       <button
         className="absolute z-40 w-full h-screen"
