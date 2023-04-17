@@ -1,5 +1,5 @@
 export interface Trip {
-  date?: string;
+  date?: string | { seconds: number; nanoseconds: number };
   duration: number;
   from?: string;
   id?: string;

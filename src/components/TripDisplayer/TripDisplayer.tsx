@@ -25,6 +25,19 @@ interface TripDisplayerProps extends Trip {
 }
 
 export function TripDisplayer(props: TripDisplayerProps) {
+  const getFormattedDate = (): string => {
+    if (props.date) {
+      if (typeof props.date === "string") {
+        const f = new Date(props.date).toLocaleDateString("fr-FR");
+        return f;
+      } else {
+        const f = new Date(props.date.seconds / 1e6).toLocaleDateString("fr-FR");
+        return f;
+      }
+    }
+    return "";
+  };
+
   return (
     <div className="w-full grid grid-cols-[calc(100%-2rem)_2rem] py-2 px-6 bg-grayblue-800 rounded-xl mb-3">
       <div className="flex flex-col">
@@ -43,7 +56,8 @@ export function TripDisplayer(props: TripDisplayerProps) {
           {capitalizeWord(props.to)}
         </span>
         <span className="text-grayblue-400">
-          {props.date} - {props.length}km - {convertDuration(props.duration)}
+          {getFormattedDate()} - {props.length}km -{" "}
+          {convertDuration(props.duration)}
         </span>
       </div>
       <button

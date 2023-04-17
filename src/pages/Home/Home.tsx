@@ -7,6 +7,7 @@ import {
   getDocs,
   where,
   query,
+  orderBy,
 } from "firebase/firestore";
 import { getFirebaseApp, getFirebaseAuth } from "../../../server";
 import { Trip } from "../../types/types";
@@ -25,24 +26,29 @@ export function Home() {
     const fetchData = async () => {
       let q = query(
         tripsCollection,
-        where("uid", "==", getFirebaseAuth().currentUser?.uid)
+        where("uid", "==", getFirebaseAuth().currentUser?.uid),
+        orderBy("date", "desc")
       );
-      const response = await getDocs(q);
-      const newData = response.docs.map((doc, index) => ({
-        date: doc.data().date,
-        duration: doc.data().duration,
-        from: doc.data().from,
-        id: doc.id,
-        key: index,
-        length: doc.data().length,
-        roadType: doc.data().roadType,
-        roundTrip: doc.data().roundTrip,
-        time: doc.data().time,
-        to: doc.data().to,
-        trafficDensity: doc.data().trafficDensity,
-        weather: doc.data().weather,
-      }));
-      setTrips(newData);
+      await getDocs(q)
+        .then((val) => {
+          setTrips(
+            val.docs.map((doc, index) => ({
+              date: doc.data().date,
+              duration: doc.data().duration,
+              from: doc.data().from,
+              id: doc.id,
+              key: index,
+              length: doc.data().length,
+              roadType: doc.data().roadType,
+              roundTrip: doc.data().roundTrip,
+              time: doc.data().time,
+              to: doc.data().to,
+              trafficDensity: doc.data().trafficDensity,
+              weather: doc.data().weather,
+            }))
+          );
+        })
+        .catch((err) => console.error(`Error while fetching data : ${err}`));
     };
 
     fetchData();
@@ -54,7 +60,7 @@ export function Home() {
   return (
     <>
       <div className="px-5 py-16">
-        <NotVerifiedEmailPopup className="mb-4"/>
+        <NotVerifiedEmailPopup className="mb-4" />
         <p className="text-grayblue-400 text-xl mt-1">
           {t("homepage.header.subtitle")}
         </p>

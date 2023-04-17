@@ -37,6 +37,15 @@ export function Settings() {
         {t("settingsPage.subtitles.account")}
       </h3>
 
+      
+      <button onClick={() => {
+          const dateStr = "14/11/2022";
+          const [day, month, year] = dateStr.split('/');
+          const newDateStr = `${year}-${month}-${day}`;
+          // const newDateStr = "2023-11-12"
+          console.log(newDateStr, '=>', Date.parse(newDateStr));
+        }}>test</button>
+
       {/* <input
           type="text"
           className="bg-grayblue-800"

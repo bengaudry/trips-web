@@ -23,7 +23,6 @@ export function Add() {
   const [toInputFocused, setToInputFocused] = useState(false);
 
   const handleSubmit = () => {
-    alert(Date.parse(date));
     addTrip({
       date: date,
       time: time,
