@@ -27,13 +27,8 @@ interface TripDisplayerProps extends Trip {
 export function TripDisplayer(props: TripDisplayerProps) {
   const getFormattedDate = (): string => {
     if (props.date) {
-      if (typeof props.date === "string") {
-        const f = new Date(props.date).toLocaleDateString("fr-FR");
-        return f;
-      } else {
-        const f = new Date(props.date.seconds / 1e6).toLocaleDateString("fr-FR");
-        return f;
-      }
+      const f = new Date(props.date).toLocaleDateString("fr-FR");
+      return f;
     }
     return "";
   };

@@ -22,10 +22,10 @@ pnpm dev
 
 ### Build
 ```sh
-pnpm build
+pnpm run build
 ```
 
 ### Deploy
 ```sh
-pnpm deploy
+pnpm run deploy
 ```

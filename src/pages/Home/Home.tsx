@@ -10,7 +10,7 @@ import {
   orderBy,
 } from "firebase/firestore";
 import { getFirebaseApp, getFirebaseAuth } from "../../../server";
-import { Trip } from "../../types/types";
+import { StatsData, Trip } from "../../types/types";
 import { useTranslation } from "react-i18next";
 import { Stats } from "./Components/Stats";
 
@@ -18,6 +18,58 @@ export function Home() {
   const [trips, setTrips] = useState<Trip[]>();
   const { t } = useTranslation();
   const [currentPanel, setCurrentPanel] = useState<0 | 1>(0);
+
+  const calculateDataForStats = (): StatsData => {
+    // Define a basic object to return
+    let r: StatsData = {
+      totalKms: 0,
+      totalDrivingTime: {
+        nb: 0,
+        unit: "hrs",
+      },
+      tripsByRoadType: {
+        countryside: 0,
+        expressway: 0,
+        highway: 0,
+        city: 0,
+      },
+    };
+
+    // Initialize a default duration of 0 minutes
+    // that will be increased in the map()
+    let mins = 0;
+
+    // Map the object trips only once
+    trips?.map((trip) => {
+      // Calculate the nb of kilometers of this trip
+      // and add it to the default value
+      r.totalKms += trip.roundTrip ? trip.length * 2 : trip.length;
+
+      // Calculate the duration of this trip
+      // and add it to the default value
+      mins += trip.roundTrip ? trip.duration * 2 : trip.duration;
+
+      // Increase the number of trips by category
+      if (trip.roadType === "Countryroad") {
+        r.tripsByRoadType.countryside++;
+      } else if (trip.roadType === "Expressway") {
+        r.tripsByRoadType.expressway++;
+      } else if (trip.roadType === "Highway") {
+        r.tripsByRoadType.highway++;
+      } else if (trip.roadType === "City") {
+        r.tripsByRoadType.city++;
+      }
+    });
+
+    // Convert minutes to hours if necessary
+    if (mins >= 60) {
+      r.totalDrivingTime = { nb: Math.floor(mins / 60), unit: "hrs" };
+    } else {
+      r.totalDrivingTime = { nb: Math.floor(mins), unit: "min" };
+    }
+
+    return r;
+  };
 
   useEffect(() => {
     const db = getFirestore(getFirebaseApp());
@@ -79,7 +131,11 @@ export function Home() {
         </div>
 
         {currentPanel === 0 ? (
-          <Stats allTrips={allTrips} setPanelFn={setCurrentPanel} />
+          <Stats
+            allTrips={allTrips}
+            setPanelFn={setCurrentPanel}
+            data={calculateDataForStats()}
+          />
         ) : (
           <Trips data={memoizedData} />
         )}

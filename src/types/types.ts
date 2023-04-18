@@ -1,5 +1,5 @@
 export interface Trip {
-  date?: string | { seconds: number; nanoseconds: number };
+  date?: string;
   duration: number;
   from?: string;
   id?: string;
@@ -13,3 +13,14 @@ export interface Trip {
   weather?: string;
   uid?: string;
 }
+
+export type StatsData = {
+  totalKms: number;
+  totalDrivingTime: { nb: number; unit: "hrs" | "min" };
+  tripsByRoadType: {
+    countryside: number;
+    expressway: number;
+    highway: number;
+    city: number;
+  };
+};

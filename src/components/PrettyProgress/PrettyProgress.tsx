@@ -3,8 +3,8 @@ import { Number } from "./components/Number";
 export function PrettyProgress(props: { percent: number; className?: string }) {
   return (
     <div className="mt-8 relative w-full h-8">
-      <div className="relative inset-0 grid grid-cols-3 gap-8 w-ful h-8">
-        <div className="px-8 w-full absolute top-1/2">
+      <div className="relative inset-0 grid grid-cols-3 gap-8 w-full h-8">
+        <div className="pl-5 pr-12 w-full absolute top-1/2 -translate-y-1">
           <div className="h-0.5 bg-grayblue-800 rounded-full overflow-hidden grid">
             <div
               className={`h-full bg-white transition-[width] duration-1000 ease-out`}
@@ -13,14 +13,14 @@ export function PrettyProgress(props: { percent: number; className?: string }) {
           </div>
         </div>
         <div className="w-full flex flex-row justify-between absolute">
-          <Number active>1</Number>
+          <Number active desc="Préalable" nb={0} />
           <Number
             isActivating={props.percent >= 50 && props.percent < 100}
             active={props.percent === 100}
-          >
-            2
-          </Number>
-          <Number isActivating={props.percent === 100}>3</Number>
+            desc="1er rdv"
+            nb={1500}
+          />
+          <Number isActivating={props.percent === 100} desc="Permis" nb={3000} />
         </div>
       </div>
       <div
