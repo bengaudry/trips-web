@@ -29,7 +29,7 @@ export function Input(props: props) {
     >
       <span
         className={`font-semibold mb-1 transition-colors duration-300 ${
-          inputFocused ? "text-white" : "text-grayblue-500"
+          inputFocused ? "text-brand-400 dark:text-white" : "text-neutral-500 dark:text-grayblue-500"
         }`}
       >
         {capitalizeString(props.name)}
@@ -37,7 +37,7 @@ export function Input(props: props) {
       <input
         type={props.type}
         id={props.name}
-        className={`bg-transparent w-full py-3 px-6 rounded-lg outline-none border-2 border-grayblue-700 shadow-sm shadow-transparent focus:shadow-blue-600/20 focus:border-blue-600 focus:shadow-2xl transition-colors placeholder:text-grayblue-500`}
+        className={`bg-transparent w-full py-3 px-6 rounded-lg outline-none border-2 border-neutral-300 dark:border-grayblue-700 shadow-sm shadow-transparent focus:shadow-blue-600/20 focus:border-blue-600 focus:shadow-2xl transition-colors dark:placeholder:text-grayblue-500`}
         onClick={(e) => {
           if (props.onClick) props.onClick(e);
         }}

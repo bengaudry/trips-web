@@ -113,7 +113,7 @@ export function Home() {
     <>
       <div className="px-5 py-16">
         <NotVerifiedEmailPopup className="mb-4" />
-        <p className="text-grayblue-400 text-xl mt-1">
+        <p className="text-neutral-500 dark:text-grayblue-400 text-xl mt-1">
           {t("homepage.header.subtitle")}
         </p>
         <h1 className="text-4xl font-bold">
@@ -122,7 +122,7 @@ export function Home() {
             : ""}
         </h1>
 
-        <div className="bg-grayblue-900/90 backdrop-blur-lg sticky z-20 top-0 py-3">
+        <div className="dark:bg-grayblue-900/90 backdrop-blur-lg sticky z-20 top-0 py-3">
           <TabSlider
             tabs={["Statistiques", "Trajets"]}
             current={currentPanel}

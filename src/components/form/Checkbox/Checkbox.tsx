@@ -4,21 +4,21 @@ export function Checkbox(props: {
 }) {
   return (
     <div
-      className="flex flex-row items-center justify-between my-4 py-1 px-3 w-full border-2 rounded-lg border-grayblue-700"
+      className="flex flex-row items-center justify-between my-4 py-1 px-3 w-full border-2 rounded-lg dark:border-grayblue-700"
       onClick={() => props.setChecked(!props.checked)}
     >
       <label
         htmlFor="round-trip"
         className={`${
-          props.checked ? "text-white" : "text-grayblue-500"
-        } font-semibold transition-colors duration-300 pointer-events-none`}
+          props.checked ? "dark:text-white" : "text-neutral-400 dark:text-grayblue-500"
+        } transition-colors duration-300 pointer-events-none font-semibold`}
       >
         Round trip
       </label>
       <label className="block pointer-events-none">
         <div
           className={`h-6 rounded-full w-12 transition-colors duration-300 relative ${
-            props.checked ? "bg-brand-600" : "bg-grayblue-700"
+            props.checked ? "bg-brand-400 dark:bg-brand-600" : "bg-neutral-300 dark:bg-grayblue-700"
           }`}
         >
           <div

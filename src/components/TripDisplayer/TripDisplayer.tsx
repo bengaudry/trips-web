@@ -34,10 +34,10 @@ export function TripDisplayer(props: TripDisplayerProps) {
   };
 
   return (
-    <div className="w-full grid grid-cols-[calc(100%-2rem)_2rem] py-2 px-6 bg-grayblue-800 rounded-xl mb-3">
+    <div className="w-full grid grid-cols-[calc(100%-2rem)_2rem] py-2 px-6 bg-neutral-200 dark:bg-grayblue-800 rounded-xl mb-3">
       <div className="flex flex-col">
         <span
-          className="relative w-full font-semibold overflow-hidden whitespace-nowrap after:absolute after:w-10 after:h-6 after:right-0 after:bg-gradient-to-r after:from-grayblue-800/0 after:to-grayblue-800"
+          className="relative w-full font-semibold overflow-hidden whitespace-nowrap after:absolute after:w-10 after:h-6 after:right-0 after:bg-gradient-to-r from-neutral-200/0 to-neutral-200 dark:after:from-grayblue-800/0 dark:after:to-grayblue-800"
           title={`From ${capitalizeWord(props.from)} to ${capitalizeWord(
             props.to
           )}`}

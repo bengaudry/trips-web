@@ -5,7 +5,7 @@ export function BackButton(props: { onClick: CallableFunction }) {
 
   return (
     <button
-      className="text-grayblue-400 font-semibold text-lg mb-8 flex flex-row items-center gap-2"
+      className="text-neutral-400 dark:text-grayblue-400 font-semibold text-lg mb-8 flex flex-row items-center gap-2"
       onClick={(e) => props.onClick(e)}
     >
       <i className="fi fi-rr-angle-left block text-sm"></i>

@@ -1,7 +1,5 @@
 {
   "name": "Trips",
-  "theme_color": "#0d1124",
-  "background_color": "#0d1124",
   "display": "standalone",
   "scope": "/",
   "orientation": "portrait",

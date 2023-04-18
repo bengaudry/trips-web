@@ -16,11 +16,7 @@ export function Stats(props: {
 
   return (
     <>
-      <h2 className="pt-3 block text-3xl font-semibold">
-        {t("homepage.header.statsTitle")}
-      </h2>
-
-      <div className="rounded-xl h-max py-6 pb-16 px-8 mt-2 bg-gradient-to-tr from-sky-600 to-indigo-600">
+      <div className="rounded-xl h-max py-6 pb-16 px-8 mt-2 text-white bg-gradient-to-tr from-sky-600 to-indigo-600">
         <div className="grid grid-cols-3 items-center justify-between">
           <div className="flex flex-col items-center">
             <span className="text-3xl font-bold">{props.data.totalKms}</span>
