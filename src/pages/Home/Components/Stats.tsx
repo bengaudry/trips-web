@@ -17,7 +17,7 @@ export function Stats(props: {
 
   return (
     <>
-      <div className="rounded-xl h-max py-6 pb-16 px-8 mt-2 text-white bg-gradient-to-tr from-sky-600 to-indigo-600">
+      <section className="rounded-xl h-max py-6 px-8 mt-2 text-white bg-gradient-to-tr from-sky-600 to-indigo-600">
         <div className="grid grid-cols-3 items-center justify-between">
           <div className="flex flex-col items-center">
             <span className="text-3xl font-bold">{props.data.totalKms}</span>
@@ -44,11 +44,9 @@ export function Stats(props: {
             </span>
           </div>
         </div>
+      </section>
 
-        <PrettyProgress percent={getKmsPercent()} />
-      </div>
-
-      <div className="grid grid-cols-2 gap-4 mt-4">
+      <section className="grid grid-cols-2 gap-4 mt-4">
         <StatPill
           label={t("common.roadTypes.countryroad")}
           nb={props.data.tripsByRoadType.countryside}
@@ -65,7 +63,51 @@ export function Stats(props: {
           label={t("common.roadTypes.city")}
           nb={props.data.tripsByRoadType.city}
         />
-      </div>
+      </section>
+
+      <section className="bg-neutral-200 dark:bg-grayblue-800 flex flex-row justify-between items-start rounded-lg p-4 mt-4 h-44">
+        <div className="flex flex-row h-full gap-3">
+          <div className="w-1 rounded-full h-full bg-grayblue-600 overflow-hidden">
+            <div
+              className="w-full h-full bg-brand-300 rounded-full transition-transform origin-top"
+              style={{ transform: `scaleY(${getKmsPercent()}%)` }}
+            ></div>
+          </div>
+          <main className="flex flex-col justify-between h-full">
+            <div className="flex flex-row items-center gap-3">
+              <span className="inline-block w-16 text-center font-semibold text-xl bg-white rounded-full text-grayblue-900">
+                0
+              </span>
+              <span className="font-semibold text-lg">Rdv préalable</span>
+            </div>
+            <div className="flex flex-row items-center gap-3">
+              <span className="inline-block w-16 text-center font-semibold text-xl bg-white rounded-full text-grayblue-900">
+                1500
+              </span>
+              <span className="font-semibold text-lg">1er rdv</span>
+            </div>
+            <div className="flex flex-row items-center gap-3">
+              <span className="inline-block w-16 text-center font-semibold text-xl bg-white rounded-full text-grayblue-900">
+                3000
+              </span>
+              <span className="font-semibold text-lg">Permis</span>
+            </div>
+          </main>
+        </div>
+
+        <div className="h-full w-fit rounded-lg p-6 bg-grayblue-600">
+          <p className="font-semibold text-lg text-neutral-400">
+            Next appointment
+          </p>
+          <p className="block text-3xl font-bold max-w-[200px] break-words">
+            {true
+              ? "Rendez-vous préalable"
+              : getKmsPercent() <= 50
+              ? "1er rendez-vous"
+              : "Permis"}
+          </p>
+        </div>
+      </section>
 
       <div className="flex flex-row items-center justify-between mt-8 mb-4 ">
         <h2 className="block text-3xl font-semibold">

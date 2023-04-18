@@ -233,24 +233,31 @@ export function Add() {
           options={[
             {
               name: "Sun",
+              icon: "sun",
             },
             {
               name: "Clouds",
+              icon: "clouds"
             },
             {
               name: "Rain",
+              icon: "cloud-rain"
             },
             {
               name: "Fog",
+              icon: "smog"
             },
             {
               name: "Wind",
+              icon: "wind"
             },
             {
               name: "Snow",
+              icon: "snowflake"
             },
             {
               name: "Drizzle",
+              icon: "cloud-drizzle"
             },
           ]}
         />

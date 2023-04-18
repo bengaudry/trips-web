@@ -4,6 +4,7 @@ import { capitalizeString } from "../../../lib/functions";
 interface Option {
   name: string;
   value?: string;
+  icon?: string;
 }
 
 interface SelectProps {
@@ -62,6 +63,7 @@ export function Select(props: SelectProps) {
                 }
                 key={index}
               >
+                {opt.icon ? <i className={`fi fi-rr-${opt.icon} inline-block translate-y-0.5 mr-2`}></i> : null}
                 {opt.name}
               </div>
             ))}
