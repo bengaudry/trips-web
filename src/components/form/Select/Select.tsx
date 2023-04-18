@@ -63,7 +63,11 @@ export function Select(props: SelectProps) {
                 }
                 key={index}
               >
-                {opt.icon ? <i className={`fi fi-rr-${opt.icon} inline-block translate-y-0.5 mr-2`}></i> : null}
+                {opt.icon ? (
+                  <i
+                    className={`fi fi-rr-${opt.icon} inline-block translate-y-0.5 mr-2`}
+                  ></i>
+                ) : null}
                 {opt.name}
               </div>
             ))}

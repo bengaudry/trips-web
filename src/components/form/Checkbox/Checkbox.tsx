@@ -11,7 +11,9 @@ export function Checkbox(props: {
       <label
         htmlFor="round-trip"
         className={`${
-          props.checked ? "dark:text-white" : "text-neutral-400 dark:text-grayblue-500"
+          props.checked
+            ? "dark:text-white"
+            : "text-neutral-400 dark:text-grayblue-500"
         } transition-colors duration-300 pointer-events-none font-semibold`}
       >
         {props.name}
@@ -19,7 +21,9 @@ export function Checkbox(props: {
       <label className="block pointer-events-none">
         <div
           className={`h-6 rounded-full w-12 transition-colors duration-300 relative ${
-            props.checked ? "bg-brand-400 dark:bg-brand-600" : "bg-neutral-300 dark:bg-grayblue-700"
+            props.checked
+              ? "bg-brand-400 dark:bg-brand-600"
+              : "bg-neutral-300 dark:bg-grayblue-700"
           }`}
         >
           <div

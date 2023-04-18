@@ -20,7 +20,11 @@ export function PrettyProgress(props: { percent: number; className?: string }) {
             desc="1er rdv"
             nb={1500}
           />
-          <Number isActivating={props.percent === 100} desc="Permis" nb={3000} />
+          <Number
+            isActivating={props.percent === 100}
+            desc="Permis"
+            nb={3000}
+          />
         </div>
       </div>
       <div

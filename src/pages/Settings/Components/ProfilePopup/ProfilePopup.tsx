@@ -35,8 +35,9 @@ export function ProfilePopup() {
   const [newPassConfirm, setNewPassConfirm] = useState("");
 
   const [modalShown, setModalShown] = useState(false);
-  const [currentModal, setCurrentModal] =
-    useState<"changePass" | "deleteAccount" | "downloadData">("changePass");
+  const [currentModal, setCurrentModal] = useState<
+    "changePass" | "deleteAccount" | "downloadData"
+  >("changePass");
   const [modalTitle, setModalTitle] = useState("");
 
   const showModal = (

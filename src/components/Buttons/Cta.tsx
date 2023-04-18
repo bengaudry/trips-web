@@ -9,7 +9,7 @@ export type CtaProps = {
   to?: string;
   onClick?: CallableFunction;
   btnType?: "button" | "reset" | "submit";
-}
+};
 
 export function Cta(props: CtaProps) {
   const CtaStyle = `${

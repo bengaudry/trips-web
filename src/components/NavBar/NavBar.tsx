@@ -3,7 +3,7 @@ import { NavBarElement } from "./components/NavLink";
 
 export function NavBar() {
   const { t } = useTranslation();
-  
+
   return (
     <nav className="fixed bottom-0 z-30 w-screen bg-neutral-200/60 dark:bg-grayblue-800/60 backdrop-blur-md py-3 pb-10 border-t border-neutral-300 dark:border-grayblue-600 lg:w-72 lg:fixed lg:h-screen lg:top-0 lg:left-0">
       <div className="hidden lg:flex lg:items-center lg:gap-4 px-4 py-6">

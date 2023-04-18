@@ -10,5 +10,9 @@ export default {
 } as ComponentMeta<typeof Cta>;
 
 export const NORMAL = (args: CtaProps) => {
-  return <Cta type={args.type} color="normal">{args.children}</Cta>
+  return (
+    <Cta type={args.type} color="normal">
+      {args.children}
+    </Cta>
+  );
 };

@@ -69,10 +69,10 @@ export function Settings() {
             `https://api.openweathermap.org/data/2.5/weather?q=Feurs&appid=a2e5136e11a3fcade3163e0626675146`
           )
             .then((value) => {
-              return value.json()
+              return value.json();
             })
             .then((json) => {
-              console.log(json)
+              console.log(json);
             })
             .catch((err) => {
               console.error(`[api weather] : ${err}`);

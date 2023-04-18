@@ -6,23 +6,23 @@ import { anyTruish } from "../checkings/checkings";
 
 export async function addTrip(content: Trip) {
   // if (checkTripBeforeSending(content)) {
-    const db = getFirestore(getFirebaseApp());
-    const tripsCollection = collection(db, "/trips");
+  const db = getFirestore(getFirebaseApp());
+  const tripsCollection = collection(db, "/trips");
 
-    await addDoc(tripsCollection, content)
-      .then(() => {
-        window.location.href = "/";
-      })
-      .catch((err) => {
-        console.log("Firebase error :", err);
-        alert("Error while sending to the database, please contact us");
-        return false;
-      });
+  await addDoc(tripsCollection, content)
+    .then(() => {
+      window.location.href = "/";
+    })
+    .catch((err) => {
+      console.log("Firebase error :", err);
+      alert("Error while sending to the database, please contact us");
+      return false;
+    });
 
-    return true;
+  return true;
   // }
 
-  console.warn("The test failed")
+  console.warn("The test failed");
 
   return false;
 }

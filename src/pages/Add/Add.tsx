@@ -237,27 +237,27 @@ export function Add() {
             },
             {
               name: "Clouds",
-              icon: "clouds"
+              icon: "clouds",
             },
             {
               name: "Rain",
-              icon: "cloud-rain"
+              icon: "cloud-rain",
             },
             {
               name: "Fog",
-              icon: "smog"
+              icon: "smog",
             },
             {
               name: "Wind",
-              icon: "wind"
+              icon: "wind",
             },
             {
               name: "Snow",
-              icon: "snowflake"
+              icon: "snowflake",
             },
             {
               name: "Drizzle",
-              icon: "cloud-drizzle"
+              icon: "cloud-drizzle",
             },
           ]}
         />

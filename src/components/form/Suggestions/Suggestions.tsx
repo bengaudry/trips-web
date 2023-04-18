@@ -19,7 +19,6 @@ export function Suggestions(props: {
   onChange: CallableFunction;
   className?: string;
 }) {
-
   return (
     <div
       className={`${props.className} absolute z-30 top-full left-0 w-full h-max pt-2`}
@@ -29,7 +28,9 @@ export function Suggestions(props: {
         <span className="px-4 font-semibold mt-2">Recent</span>
         <span
           className="block px-4 py-0.5 text-grayblue-400 transition-colors duration-100 hover:bg-grayblue-700 hover:text-white"
-          onClick={() => { props.onChange("feurs")}}
+          onClick={() => {
+            props.onChange("feurs");
+          }}
         >
           Feurs
         </span>

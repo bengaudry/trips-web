@@ -10,7 +10,8 @@
     "preview": "vite preview",
     "deploy": "pnpm run build && firebase deploy --only hosting:tripsapp",
     "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "build-storybook": "build-storybook",
+    "format": "prettier --write ./src"
   },
   "dependencies": {
     "@flaticon/flaticon-uicons": "^2.0.1",

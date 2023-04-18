@@ -26,7 +26,9 @@ export function Input(props: props) {
     >
       <span
         className={`font-semibold mb-1 transition-colors duration-300 ${
-          inputFocused ? "text-brand-400 dark:text-white" : "text-neutral-500 dark:text-grayblue-500"
+          inputFocused
+            ? "text-brand-400 dark:text-white"
+            : "text-neutral-500 dark:text-grayblue-500"
         }`}
       >
         {capitalizeString(props.name)}

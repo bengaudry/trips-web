@@ -22,10 +22,9 @@ function LangBtn(props: {
           ? localStorage.getItem("app-lang") === undefined
             ? "bg-grayblue-800"
             : "bg-transparent"
-          :
-          i18n.language === props.lang
-            ? "bg-grayblue-800"
-            : "bg-transparent"
+          : i18n.language === props.lang
+          ? "bg-grayblue-800"
+          : "bg-transparent"
       } w-full flex gap-3 text-left rounded-lg px-4 py-2 font-semibold border-grayblue-800 border-2 transition-colors duration-300`}
     >
       <span>{props.flag}</span>
@@ -38,7 +37,9 @@ export function LangPopup() {
   const { t } = useTranslation();
   return (
     <>
-      <h2 className="text-3xl font-semibold mb-4">{t("settingsPage.popups.chooseLang.title")}</h2>
+      <h2 className="text-3xl font-semibold mb-4">
+        {t("settingsPage.popups.chooseLang.title")}
+      </h2>
       <div className="flex flex-col w-full gap-2">
         {/* <LangBtn lang="auto" flag="🇫🇷">
           Auto
