@@ -100,7 +100,7 @@ export function Stats(props: {
             Next appointment
           </p>
           <p className="block text-3xl font-bold max-w-[200px] break-words">
-            {true
+            {getKmsPercent() === 0
               ? "Rendez-vous préalable"
               : getKmsPercent() <= 50
               ? "1er rendez-vous"
