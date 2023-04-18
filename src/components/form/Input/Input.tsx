@@ -1,4 +1,5 @@
 import { ReactNode, useState } from "react";
+import { capitalizeString } from "../../../lib/functions";
 
 interface props {
   name: string;
@@ -12,10 +13,6 @@ interface props {
   onBlur?: CallableFunction;
   value?: any;
   required?: boolean;
-}
-
-function capitalizeString(str: string): string {
-  return str.charAt(0).toUpperCase() + str.slice(1);
 }
 
 export function Input(props: props) {

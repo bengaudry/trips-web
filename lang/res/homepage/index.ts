@@ -2,7 +2,10 @@ export const homepage = {
   en: {
     header: {
       subtitle: "Good to see you back",
-      statsTitle: "Stats"
+    },
+    slider: {
+      stats: "Statistics",
+      trips: "Trips"
     },
     recent: {
       title: "Recent trips"
@@ -11,7 +14,10 @@ export const homepage = {
   fr: {
     header: {
       subtitle: "Heureux de vous revoir",
-      statsTitle: "Statistiques"
+    },
+    slider: {
+      stats: "Statistiques",
+      trips: "Trajets"
     },
     recent: {
       title: "Trajets récents"

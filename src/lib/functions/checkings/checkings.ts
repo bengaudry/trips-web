@@ -6,7 +6,7 @@ export function strTruish(value: string | null | undefined) {
 }
 
 export function anyTruish(value: any) {
-  if (value === null || value === undefined || value.isNaN()) {
+  if (value === null || value === undefined || isNaN(value)) {
     return false;
   }
   return true;

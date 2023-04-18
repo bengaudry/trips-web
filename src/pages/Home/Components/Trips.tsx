@@ -3,6 +3,7 @@ import { TripDisplayer, Cta, Modal } from "../../../components";
 import { Trip } from "../../../types/types";
 import { getFirestore, deleteDoc, doc } from "firebase/firestore";
 import { getFirebaseApp } from "../../../../server";
+import { capitalizeString } from "../../../lib/functions";
 
 export function Trips(props: { data?: Trip[] }) {
   const [modalOpened, setModalOpened] = useState(false);
@@ -10,11 +11,11 @@ export function Trips(props: { data?: Trip[] }) {
 
   useEffect(() => {
     if (modalOpened) {
-      document.body.style.overflow = "hidden"
+      document.body.style.overflow = "hidden";
     } else {
-      document.body.style.overflow = "scroll"
+      document.body.style.overflow = "scroll";
     }
-  }, [modalOpened])
+  }, [modalOpened]);
 
   return (
     <div className="pt-3">
@@ -39,13 +40,13 @@ export function Trips(props: { data?: Trip[] }) {
           ))}
           <Modal showFn={setModalOpened} isShown={modalOpened}>
             <h2 className="text-xl mb-4 font-semibold">
-              <span className="capitalize">{modalContent?.from}</span>
+              <span>{capitalizeString(modalContent?.from)}</span>
               {modalContent?.roundTrip ? (
                 <i className="fi fi-rr-exchange inline-block mx-3 translate-y-0.5"></i>
               ) : (
                 <i className="fi fi-rr-arrow-right inline-block mx-3 translate-y-0.5"></i>
               )}
-              <span className="capitalize">{modalContent?.to}</span>
+              <span>{capitalizeString(modalContent?.to)}</span>
             </h2>
             <Cta
               type="button"

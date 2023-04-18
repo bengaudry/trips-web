@@ -1,47 +1,46 @@
-import { ReactNode, useEffect, useState } from "react";
+import { useState } from "react";
+import { capitalizeString } from "../../../lib/functions";
 
 interface Option {
   name: string;
+  value?: string;
 }
 
-interface props {
+interface SelectProps {
   name: string;
   className?: string;
-  onChange?: CallableFunction;
+  selectedOption: string;
+  setSelectedOption: (opt: string) => void;
   options: Option[];
 }
 
-function capitalizeString(str: string): string {
-  return str.charAt(0).toUpperCase() + str.slice(1);
-}
-
-export function Select(props: props) {
+export function Select(props: SelectProps) {
   const [isOpened, setOpened] = useState(false);
-  const [selectedOption, setSelectedOption] = useState<string>(
-    props.options[0].name
-  );
 
-  useEffect(() => {
-    if (props.onChange) {
-      props.onChange(selectedOption);
-    }
-  });
+  const labelToId = (label: string) => {
+    return label.toLowerCase().replaceAll(" ", "-");
+  };
 
   return (
     <div className="flex flex-col">
-      <label htmlFor={props.name} className="mt-4 font-semibold text-neutral-500 dark:text-grayblue-500">
+      <label
+        htmlFor={labelToId(props.name)}
+        className="mt-4 font-semibold text-neutral-500 dark:text-grayblue-500"
+      >
         {capitalizeString(props.name).replaceAll("-", " ")}
       </label>
       <div
-        id={props.name}
+        id={labelToId(props.name)}
         className={`${
-          isOpened ? "bg-neutral-300 dark:bg-grayblue-700" : "bg-neutral-200 dark:bg-grayblue-800"
+          isOpened
+            ? "bg-neutral-300 dark:bg-grayblue-700"
+            : "bg-neutral-200 dark:bg-grayblue-800"
         } outline-none border-2 border-transparent py-3 px-6 flex flex-row items-center justify-between rounded-xl relative transition-colors duration-300 ${
           props.className
         }`}
         onClick={() => setOpened(!isOpened)}
       >
-        <span>{selectedOption}</span>
+        <span>{props.selectedOption}</span>
         <span>
           <i
             className={`fi fi-rr-angle-small-down inline-block transition-transform duration-300 origin-center ${
@@ -58,7 +57,9 @@ export function Select(props: props) {
             {props.options.map((opt, index) => (
               <div
                 className="px-4 py-1 hover:bg-neutral-200 dark:hover:bg-grayblue-700 cursor-default"
-                onClick={() => setSelectedOption(opt.name)}
+                onClick={() =>
+                  props.setSelectedOption(opt.value ? opt.value : opt.name)
+                }
                 key={index}
               >
                 {opt.name}

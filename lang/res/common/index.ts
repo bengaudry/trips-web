@@ -7,6 +7,12 @@ export const common = {
     messages: {
       logoutConfirm: "Do you really want to be disconnected ?",
     },
+    roadTypes: {
+      countryroad: "Countryroad",
+      expressway: "Expressway",
+      highway: "Highway",
+      city: "City"
+    }
   },
   fr: {
     trip: "trip",
@@ -16,5 +22,11 @@ export const common = {
     messages: {
       logoutConfirm: "Voulez-vous vraiment être déconnecté ?",
     },
+    roadTypes: {
+      countryroad: "Campagne",
+      expressway: "Voie rapide",
+      highway: "Autoroute",
+      city: "Ville"
+    }
   },
 };

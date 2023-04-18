@@ -124,7 +124,7 @@ export function Home() {
 
         <div className="dark:bg-grayblue-900/90 backdrop-blur-lg sticky z-20 top-0 py-3">
           <TabSlider
-            tabs={["Statistiques", "Trajets"]}
+            tabs={[t("homepage.slider.stats"), t("homepage.slider.trips")]}
             current={currentPanel}
             onChange={(val: 0 | 1) => setCurrentPanel(val)}
           />

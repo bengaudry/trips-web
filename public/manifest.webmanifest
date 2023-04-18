@@ -1,6 +1,7 @@
 {
   "name": "Trips",
   "display": "standalone",
+  "background_color": "#0d1124",
   "scope": "/",
   "orientation": "portrait",
   "start_url": "/",

@@ -24,11 +24,11 @@ export function Settings() {
 
   useEffect(() => {
     if (helpPopupShown || langPopupShown || changePasswordPopupShown) {
-      document.body.style.overflow = "hidden"
+      document.body.style.overflow = "hidden";
     } else {
-      document.body.style.overflow = "scroll"
+      document.body.style.overflow = "scroll";
     }
-  }, [helpPopupShown, langPopupShown, changePasswordPopupShown])
+  }, [helpPopupShown, langPopupShown, changePasswordPopupShown]);
 
   return (
     <div className="px-5 pt-16">
@@ -36,6 +36,51 @@ export function Settings() {
       <h3 className="text-3xl font-semibold">
         {t("settingsPage.subtitles.account")}
       </h3>
+
+      <button
+        onClick={() => {
+          const cityName = "feurs";
+          const stateCode = "";
+          const countryCode = "";
+          const limit = 1;
+          const APIKey = "a2e5136e11a3fcade3163e0626675146";
+          fetch(
+            `http://api.openweathermap.org/geo/1.0/direct?q=${cityName}&limit=${limit}&appid=${APIKey}`
+          )
+            .then((value) => {
+              value.json();
+            })
+            .then((json) => {
+              console.log(`[api coor] : ${json}`);
+            })
+            .catch((err) => {
+              console.error(`[api coor] : ${err}`);
+            });
+        }}
+      >
+        Test coordinates
+      </button>
+
+      <br />
+
+      <button
+        onClick={() => {
+          fetch(
+            `https://api.openweathermap.org/data/2.5/weather?q=Feurs&appid=a2e5136e11a3fcade3163e0626675146`
+          )
+            .then((value) => {
+              return value.json()
+            })
+            .then((json) => {
+              console.log(json)
+            })
+            .catch((err) => {
+              console.error(`[api weather] : ${err}`);
+            });
+        }}
+      >
+        Test weather
+      </button>
 
       {/* <input
           type="text"

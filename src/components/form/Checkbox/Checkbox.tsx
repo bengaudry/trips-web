@@ -1,6 +1,7 @@
 export function Checkbox(props: {
   checked: boolean;
   setChecked: CallableFunction;
+  name: string;
 }) {
   return (
     <div
@@ -13,7 +14,7 @@ export function Checkbox(props: {
           props.checked ? "dark:text-white" : "text-neutral-400 dark:text-grayblue-500"
         } transition-colors duration-300 pointer-events-none font-semibold`}
       >
-        Round trip
+        {props.name}
       </label>
       <label className="block pointer-events-none">
         <div

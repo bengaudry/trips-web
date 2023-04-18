@@ -1,13 +1,5 @@
 import { Trip } from "../../types/types";
-import { Cta, Modal } from "../../components";
-import { useState } from "react";
-import { deleteDoc, getFirestore, collection, doc } from "firebase/firestore";
-import { getFirebaseApp } from "../../../server";
-
-function capitalizeWord(str: string | undefined) {
-  if (str) return str.charAt(0).toUpperCase() + str.slice(1);
-  else return "";
-}
+import { capitalizeString } from "../../lib/functions";
 
 function convertDuration(min: number | undefined): string {
   if (min === undefined) {
@@ -38,17 +30,17 @@ export function TripDisplayer(props: TripDisplayerProps) {
       <div className="flex flex-col">
         <span
           className="relative w-full font-semibold overflow-hidden whitespace-nowrap after:absolute after:w-10 after:h-6 after:right-0 after:bg-gradient-to-r from-neutral-200/0 to-neutral-200 dark:after:from-grayblue-800/0 dark:after:to-grayblue-800"
-          title={`From ${capitalizeWord(props.from)} to ${capitalizeWord(
+          title={`From ${capitalizeString(props.from)} to ${capitalizeString(
             props.to
           )}`}
         >
-          {capitalizeWord(props.from)}
+          {capitalizeString(props.from)}
           {props.roundTrip ? (
             <i className="fi fi-rr-exchange inline-block mx-3 translate-y-0.5"></i>
           ) : (
             <i className="fi fi-rr-arrow-right inline-block mx-3 translate-y-0.5"></i>
           )}
-          {capitalizeWord(props.to)}
+          {capitalizeString(props.to)}
         </span>
         <span className="text-grayblue-400">
           {getFormattedDate()} - {props.length}km -{" "}
