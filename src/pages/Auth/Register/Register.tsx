@@ -24,16 +24,16 @@ export function RegisterPage() {
         <Input
           name="email"
           type="email"
-          onChange={(e: any) => {
-            setEmail(e.target?.value);
+          onChange={(event) => {
+            setEmail(event.target?.value);
           }}
           required
         />
         <Input
           name="password"
           type="password"
-          onChange={(e: any) => {
-            setPassword(e.target?.value);
+          onChange={(event) => {
+            setPassword(event.target?.value);
           }}
           required
         />
@@ -41,8 +41,8 @@ export function RegisterPage() {
           name="name"
           type="text"
           value={name}
-          onChange={(e: any) => {
-            setName(e.target?.value);
+          onChange={(event) => {
+            setName(event.target?.value);
           }}
           required
         />

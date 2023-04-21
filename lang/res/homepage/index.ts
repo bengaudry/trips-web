@@ -5,11 +5,11 @@ export const homepage = {
     },
     slider: {
       stats: "Statistics",
-      trips: "Trips"
+      trips: "Trips",
     },
     recent: {
-      title: "Recent trips"
-    }
+      title: "Recent trips",
+    },
   },
   fr: {
     header: {
@@ -17,10 +17,10 @@ export const homepage = {
     },
     slider: {
       stats: "Statistiques",
-      trips: "Trajets"
+      trips: "Trajets",
     },
     recent: {
-      title: "Trajets récents"
-    }
-  }
-}
+      title: "Trajets récents",
+    },
+  },
+};

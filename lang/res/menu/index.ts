@@ -2,11 +2,11 @@ export const menu = {
   en: {
     home: "Home",
     add: "Add",
-    settings: "Settings"
+    settings: "Settings",
   },
   fr: {
     home: "Accueil",
     add: "Ajouter",
-    settings: "Paramètres"
-  }
-}
+    settings: "Paramètres",
+  },
+};

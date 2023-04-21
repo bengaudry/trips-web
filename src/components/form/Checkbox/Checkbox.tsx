@@ -1,6 +1,6 @@
 export function Checkbox(props: {
   checked: boolean;
-  setChecked: CallableFunction;
+  setChecked: (val: boolean) => void;
   name: string;
 }) {
   return (

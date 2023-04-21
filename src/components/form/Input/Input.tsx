@@ -7,10 +7,9 @@ interface props {
   className?: string;
   children?: ReactNode;
   type: "email" | "text" | "password" | "number" | "hidden" | "date" | "time";
-  onClick?: CallableFunction;
-  onChange?: CallableFunction;
-  onFocus?: CallableFunction;
-  onBlur?: CallableFunction;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onFocus?: (e: React.FocusEvent<HTMLInputElement>) => void;
+  onBlur?: (e: React.FocusEvent<HTMLInputElement>) => void;
   value?: any;
   required?: boolean;
 }
@@ -37,9 +36,6 @@ export function Input(props: props) {
         type={props.type}
         id={props.name}
         className={`bg-transparent w-full py-3 px-6 rounded-lg outline-none border-2 border-neutral-300 dark:border-grayblue-700 shadow-sm shadow-transparent focus:shadow-blue-600/20 focus:border-blue-600 focus:shadow-2xl transition-colors dark:placeholder:text-grayblue-500`}
-        onClick={(e) => {
-          if (props.onClick) props.onClick(e);
-        }}
         onChange={(e) => {
           if (props.onChange) props.onChange(e);
         }}

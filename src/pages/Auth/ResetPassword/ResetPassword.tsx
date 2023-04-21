@@ -20,7 +20,7 @@ export function ResetPassword() {
           name="email"
           type="email"
           value={email}
-          onChange={(e: any) => setEmail(e.target?.value)}
+          onChange={(event) => setEmail(event.target?.value)}
         />
         <Cta
           type="button"

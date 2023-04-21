@@ -93,9 +93,7 @@ export function ProfilePopup() {
                 t("settingsPage.popups.profile.placeholders.newPass") as string
               }
               value={newPass}
-              onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                setNewPass(e.target.value)
-              }
+              onChange={(event) => setNewPass(event.target.value)}
             />
             <Input
               type="password"
@@ -106,9 +104,7 @@ export function ProfilePopup() {
                 ) as string
               }
               value={newPassConfirm}
-              onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                setNewPassConfirm(e.target.value)
-              }
+              onChange={(event) => setNewPassConfirm(event.target.value)}
             />
             <Cta
               type="button"

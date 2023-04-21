@@ -2,7 +2,7 @@ import { common } from "./res/common";
 import { homepage } from "./res/homepage";
 import { menu } from "./res/menu";
 import { settingsPage } from "./res/settingsPage";
-import { addpage } from "./res/addpage"
+import { addpage } from "./res/addpage";
 
 export const resources = {
   en: {

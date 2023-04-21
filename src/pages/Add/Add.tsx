@@ -44,59 +44,58 @@ export function Add() {
   };
 
   const fetchWeather = (city: string) => {
-    fetch(
-      `https://api.openweathermap.org/data/2.5/weather?q=${city
-        .toLowerCase()
-        .replaceAll(" ", "-")}&appid=a2e5136e11a3fcade3163e0626675146`
-    )
-      .then((value) => {
-        return value.json();
-      })
-      .then((json) => {
-        console.log(json);
-        if ("weather" in json) {
-          const w = json.weather[0].main;
-          if (
-            w === "Clouds" ||
-            w === "Rain" ||
-            w === "Sun" ||
-            w === "Fog" ||
-            w === "Drizzle" ||
-            w === "Wind" ||
-            w === "Snow"
-          ) {
-            setWeather(json.weather[0].main);
+    if (city.length > 1) {
+      fetch(
+        `https://api.openweathermap.org/data/2.5/weather?q=${city
+          .toLowerCase()
+          .replaceAll(" ", "-")}&appid=a2e5136e11a3fcade3163e0626675146`
+      )
+        .then((value) => {
+          return value.json();
+        })
+        .then((json) => {
+          console.log(json);
+          if ("weather" in json) {
+            const w = json.weather[0].main;
+            if (
+              w === "Clouds" ||
+              w === "Rain" ||
+              w === "Sun" ||
+              w === "Fog" ||
+              w === "Drizzle" ||
+              w === "Wind" ||
+              w === "Snow"
+            ) {
+              setWeather(json.weather[0].main);
+            } else if (w === "Clear") {
+              setWeather("Sun");
+            }
+          } else {
+            throw new Error("The city has not been found");
           }
-        } else {
-          throw new Error("The city has not been found");
-        }
-      })
-      .catch((err) => {
-        console.error(`[api weather] : ${err}`);
-      });
+        })
+        .catch((err) => {
+          console.error(`[api weather] : ${err}`);
+        });
+    }
   };
 
   return (
     <div className="px-5 py-16 pb-44">
-      <form onSubmit={(e) => e.preventDefault()}></form>
       <h1 className="text-4xl font-bold">{t("addpage.title")}</h1>
       <div className="grid grid-flow-col-dense gap-4">
         <Input
           name={t("addpage.inputs.labels.date")}
           type="date"
           value={date}
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-            setDate(e.target.value)
-          }
+          onChange={(event) => setDate(event.target.value)}
           required
         />
         <Input
           name={t("addpage.inputs.labels.time")}
           type="time"
           value={time}
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-            setTime(e.target.value)
-          }
+          onChange={(event) => setTime(event.target.value)}
           required
         />
       </div>
@@ -105,9 +104,7 @@ export function Add() {
         type="text"
         value={from}
         placeholder={t("addpage.inputs.placeholders.from") satisfies string}
-        onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-          setFrom(e.target.value)
-        }
+        onChange={(event) => setFrom(event.target.value)}
         onFocus={() => setFromInputFocused(true)}
         onBlur={() => setFromInputFocused(false)}
         required
@@ -125,13 +122,13 @@ export function Add() {
         type="text"
         value={to}
         placeholder={t("addpage.inputs.placeholders.to") satisfies string}
-        onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+        onChange={(event) => {
           setTo(event.target.value);
         }}
-        onFocus={(event: React.ChangeEvent<HTMLInputElement>) => {
+        onFocus={() => {
           setToInputFocused(true);
         }}
-        onBlur={(event: React.ChangeEvent<HTMLInputElement>) => {
+        onBlur={(event) => {
           setToInputFocused(false);
           console.log(fetchWeather(event.target.value));
         }}
@@ -150,9 +147,7 @@ export function Add() {
           type="number"
           value={length}
           placeholder={t("addpage.inputs.placeholders.length") satisfies string}
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-            setLength(e.target.value)
-          }
+          onChange={(event) => setLength(event.target.value)}
           required
         />
         <Input
@@ -162,9 +157,7 @@ export function Add() {
           placeholder={
             t("addpage.inputs.placeholders.duration") satisfies string
           }
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-            setDuration(e.target.value)
-          }
+          onChange={(event) => setDuration(event.target.value)}
           required
         />
       </div>
@@ -264,7 +257,7 @@ export function Add() {
         <Checkbox
           name={t("addpage.inputs.labels.roundtrip")}
           checked={roundTrip}
-          setChecked={(val: boolean) => setRoundTrip(val)}
+          setChecked={(val) => setRoundTrip(val)}
         />
       </div>
       <Cta

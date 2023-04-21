@@ -14,7 +14,7 @@ export const addpage = {
         roadtype: "Road type",
         traffic: "Traffic density",
         weather: "Weather",
-        roundtrip: "Round trip"
+        roundtrip: "Round trip",
       },
       placeholders: {
         from: "A city, an adress, a place...",
@@ -22,8 +22,8 @@ export const addpage = {
         length: "Length in kms",
         duration: "Duration in minutes",
       },
-      cta: "Add trip"
-    }
+      cta: "Add trip",
+    },
   },
   fr: {
     title: "Ajouter un trajet",
@@ -40,7 +40,7 @@ export const addpage = {
         roadtype: "Type de voie",
         traffic: "Densité de circulation",
         weather: "Météo",
-        roundtrip: "Aller-retour"
+        roundtrip: "Aller-retour",
       },
       placeholders: {
         from: "Une ville, une adresse, un lieu dit...",
@@ -48,7 +48,7 @@ export const addpage = {
         length: "Longueur en kilomètres",
         duration: "Durée en minutes",
       },
-      cta: "Ajouter un trajet"
-    }
-  }
-}
+      cta: "Ajouter un trajet",
+    },
+  },
+};

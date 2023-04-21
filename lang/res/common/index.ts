@@ -11,8 +11,8 @@ export const common = {
       countryroad: "Countryroad",
       expressway: "Expressway",
       highway: "Highway",
-      city: "City"
-    }
+      city: "City",
+    },
   },
   fr: {
     trip: "trip",
@@ -26,7 +26,7 @@ export const common = {
       countryroad: "Campagne",
       expressway: "Voie rapide",
       highway: "Autoroute",
-      city: "Ville"
-    }
+      city: "Ville",
+    },
   },
 };

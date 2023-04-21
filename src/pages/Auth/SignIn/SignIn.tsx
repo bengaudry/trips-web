@@ -18,12 +18,12 @@ export function SignInPage() {
         <Input
           name="email"
           type="email"
-          onChange={(e: any) => setEmail(e.target?.value)}
+          onChange={(event) => setEmail(event.target?.value)}
         />
         <Input
           name="password"
           type="password"
-          onChange={(e: any) => setPassword(e.target?.value)}
+          onChange={(event) => setPassword(event.target?.value)}
         />
         <Link
           className="text-right mt-2 text-grayblue-500 block w-full"

@@ -3,22 +3,22 @@ export const profile = {
     title: "Profile",
     placeholders: {
       newPass: "New password",
-      newPassConfirm: "New password confirmation"
+      newPassConfirm: "New password confirmation",
     },
     buttons: {
       changePass: "Change password",
-      deleteAccount: "Delete my account"
-    }
+      deleteAccount: "Delete my account",
+    },
   },
   fr: {
     title: "Profil",
     placeholders: {
       newPass: "Nouveau mot de passe",
-      newPassConfirm: "Confirmer le nouveau mot de passe"
+      newPassConfirm: "Confirmer le nouveau mot de passe",
     },
     buttons: {
       changePass: "Modifier le mot de passe",
-      deleteAccount: "Supprimer mon compte"
-    }
-  }
-}
+      deleteAccount: "Supprimer mon compte",
+    },
+  },
+};
