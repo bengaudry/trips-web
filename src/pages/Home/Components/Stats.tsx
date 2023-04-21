@@ -66,7 +66,7 @@ export function Stats(props: {
       </section>
 
       <section className="bg-neutral-200 dark:bg-grayblue-800 flex flex-row justify-between items-start rounded-lg p-4 mt-4 h-44">
-        <div className="flex flex-row h-full gap-3">
+        <div className="flex flex-row h-full gap-1.5">
           <div className="w-1 rounded-full h-full bg-grayblue-600 overflow-hidden">
             <div
               className="w-full h-full bg-brand-300 rounded-full transition-transform origin-top"
@@ -74,32 +74,34 @@ export function Stats(props: {
             ></div>
           </div>
           <main className="flex flex-col justify-between h-full">
-            <div className="flex flex-row items-center gap-3">
-              <span className="inline-block w-16 text-center font-semibold text-xl bg-white rounded-full text-grayblue-900">
+            <div className="flex flex-row items-center gap-2">
+              <span className="inline-block w-14 sm:w-16 text-center font-semibold text-lg sm:text-xl bg-white rounded-full text-grayblue-900">
                 0
               </span>
-              <span className="font-semibold text-lg">Rdv préalable</span>
+              <span className="font-semibold text-md sm:text-lg">
+                Rdv préalable
+              </span>
             </div>
-            <div className="flex flex-row items-center gap-3">
-              <span className="inline-block w-16 text-center font-semibold text-xl bg-white rounded-full text-grayblue-900">
+            <div className="flex flex-row items-center gap-2">
+              <span className="inline-block w-14 sm:w-16 text-center font-semibold text-lg sm:text-xl bg-white rounded-full text-grayblue-900">
                 1500
               </span>
-              <span className="font-semibold text-lg">1er rdv</span>
+              <span className="font-semibold text-md sm:text-lg">1er rdv</span>
             </div>
-            <div className="flex flex-row items-center gap-3">
-              <span className="inline-block w-16 text-center font-semibold text-xl bg-white rounded-full text-grayblue-900">
+            <div className="flex flex-row items-center gap-2">
+              <span className="inline-block w-14 sm:w-16 text-center font-semibold text-lg sm:text-xl bg-white rounded-full text-grayblue-900">
                 3000
               </span>
-              <span className="font-semibold text-lg">Permis</span>
+              <span className="font-semibold text-md sm:text-lg">Permis</span>
             </div>
           </main>
         </div>
 
-        <div className="h-full w-fit rounded-lg p-6 bg-grayblue-600">
-          <p className="font-semibold text-lg text-neutral-400">
+        <div className="h-full w-fit rounded-lg p-4 md:p-6 bg-grayblue-600">
+          <p className="font-semibold text-md sm:text-lg text-neutral-400">
             Next appointment
           </p>
-          <p className="block text-3xl font-bold max-w-[200px] break-words">
+          <p className="text-3xl font-bold break-words">
             {getKmsPercent() === 0
               ? "Rendez-vous préalable"
               : getKmsPercent() <= 50
