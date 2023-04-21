@@ -26,29 +26,28 @@ export function Add() {
   const [toInputFocused, setToInputFocused] = useState(false);
 
   const handleSubmit = () => {
-    console.log(
-      addTrip({
-        date: date,
-        time: time,
-        roadType: roadType,
-        trafficDensity: trafficDensity,
-        weather: weather,
-        from: from,
-        to: to,
-        length: parseInt(length),
-        duration: parseInt(duration),
-        roundTrip: roundTrip,
-        uid: getFirebaseAuth().currentUser?.uid as string,
-      })
-    );
+    addTrip({
+      date: date,
+      time: time,
+      roadType: roadType,
+      trafficDensity: trafficDensity,
+      weather: weather,
+      from: from,
+      to: to,
+      length: parseInt(length),
+      duration: parseInt(duration),
+      roundTrip: roundTrip,
+      uid: getFirebaseAuth().currentUser?.uid as string,
+    });
   };
 
   const fetchWeather = (city: string) => {
     if (city.length > 1) {
+      const OPW_API_KEY = import.meta.env.VITE_OPENWEATHER_API_KEY;
       fetch(
         `https://api.openweathermap.org/data/2.5/weather?q=${city
           .toLowerCase()
-          .replaceAll(" ", "-")}&appid=a2e5136e11a3fcade3163e0626675146`
+          .replaceAll(" ", "-")}&appid=${OPW_API_KEY}`
       )
         .then((value) => {
           return value.json();

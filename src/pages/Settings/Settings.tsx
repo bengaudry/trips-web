@@ -37,61 +37,6 @@ export function Settings() {
         {t("settingsPage.subtitles.account")}
       </h3>
 
-      <button
-        onClick={() => {
-          const cityName = "feurs";
-          const stateCode = "";
-          const countryCode = "";
-          const limit = 1;
-          const APIKey = "a2e5136e11a3fcade3163e0626675146";
-          fetch(
-            `http://api.openweathermap.org/geo/1.0/direct?q=${cityName}&limit=${limit}&appid=${APIKey}`
-          )
-            .then((value) => {
-              value.json();
-            })
-            .then((json) => {
-              console.log(`[api coor] : ${json}`);
-            })
-            .catch((err) => {
-              console.error(`[api coor] : ${err}`);
-            });
-        }}
-      >
-        Test coordinates
-      </button>
-
-      <br />
-
-      <button
-        onClick={() => {
-          fetch(
-            `https://api.openweathermap.org/data/2.5/weather?q=Feurs&appid=a2e5136e11a3fcade3163e0626675146`
-          )
-            .then((value) => {
-              return value.json();
-            })
-            .then((json) => {
-              console.log(json);
-            })
-            .catch((err) => {
-              console.error(`[api weather] : ${err}`);
-            });
-        }}
-      >
-        Test weather
-      </button>
-
-      {/* <input
-          type="text"
-          className="bg-grayblue-800"
-          onChange={(e) => {
-            updateProfile(getFirebaseAuth().currentUser as User, {
-              displayName: e.target.value,
-            });
-          }}
-        /> */}
-
       <Setting
         color="82, 82, 82"
         icon="user"

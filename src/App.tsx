@@ -26,7 +26,7 @@ import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
 
 // Change the language of the app when it starts
-var lang = "en";
+var lang = "fr";
 const savedLang = localStorage.getItem("app-lang") as string;
 // If a language is prefered by the user, do nothing
 if (savedLang === undefined || savedLang === null || savedLang === "") {
