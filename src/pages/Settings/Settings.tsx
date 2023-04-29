@@ -13,6 +13,7 @@ import { useTranslation } from "react-i18next";
 import { LangPopup } from "./Components/LangPopup/LangPopup";
 import { ReactMarkdown } from "react-markdown/lib/react-markdown";
 import { legal } from "../../../public/texts/legal";
+import { MultiSelect } from "../../components/form";
 
 export function Settings() {
   const { t } = useTranslation();
@@ -21,6 +22,8 @@ export function Settings() {
     useState(false);
   const [langPopupShown, setLangPopupShown] = useState(false);
   const [helpPopupShown, setHelpPopupShown] = useState(false);
+
+  const [selectedTest, setSelectedTest] = useState<number[]>([]);
 
   useEffect(() => {
     if (helpPopupShown || langPopupShown || changePasswordPopupShown) {
@@ -36,6 +39,23 @@ export function Settings() {
       <h3 className="text-3xl font-semibold">
         {t("settingsPage.subtitles.account")}
       </h3>
+
+      <MultiSelect
+        name="test-multi"
+        selectedOptions={selectedTest}
+        setSelectedOptions={(val: number[]) => setSelectedTest(val)}
+        options={[
+          {
+            name: "opt 1",
+          },
+          {
+            name: "opt 2",
+          },
+          {
+            name: "opt 3",
+          },
+        ]}
+      />
 
       <Setting
         color="82, 82, 82"

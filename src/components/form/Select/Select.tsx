@@ -1,19 +1,13 @@
 import { useState } from "react";
 import { capitalizeString } from "../../../lib/functions";
-
-interface Option {
-  name: string;
-  value?: string;
-  icon?: string;
-}
+import { SelectOption } from "../types";
 
 interface SelectProps {
   name: string;
   className?: string;
   selectedOption: string;
   setSelectedOption: (opt: string) => void;
-  options: Option[];
-  multiple?: boolean;
+  options: SelectOption[];
 }
 
 export function Select(props: SelectProps) {
