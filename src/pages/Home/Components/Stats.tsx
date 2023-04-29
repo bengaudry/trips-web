@@ -1,5 +1,6 @@
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { PrettyProgress, TripDisplayer } from "../../../components";
+import { CenteredPopup, TripDisplayer } from "../../../components";
 import { StatsData, Trip } from "../../../types/types";
 import { StatPill } from "./StatPill";
 
@@ -8,6 +9,12 @@ export function Stats(props: {
   setPanelFn: CallableFunction;
   data: StatsData;
 }) {
+  const [congratsPopupVisible, setCongratsPopupVisible] = useState(false);
+
+  useEffect(() => {
+    setCongratsPopupVisible(props.data.totalKms >= 3000);
+  }, [props.data]);
+
   const getKmsPercent = (): number => {
     const maximumKms = 3000;
     return Math.floor((props.data.totalKms / maximumKms) * 100);
@@ -17,6 +24,22 @@ export function Stats(props: {
 
   return (
     <>
+      <CenteredPopup
+        visible={congratsPopupVisible}
+        setVisible={setCongratsPopupVisible}
+      >
+        <span className="text-5xl block mb-2">🎉</span>
+        <h2 className="text-2xl font-bold mb-2">Congratulations !</h2>
+        <p className="text-grayblue-500 text-lg">
+          You reached 3000 kilometers with us ! You are now ready to pass your
+          license !
+        </p>
+        <h2 className="text-2xl font-bold mb-2 mt-6">Tips</h2>
+        <p className="text-grayblue-500 text-lg">
+          We have prepared a few advices for you so you will be more than ready
+          to succed.
+        </p>
+      </CenteredPopup>
       <section className="rounded-xl h-max py-6 px-8 mt-2 text-white bg-gradient-to-tr from-sky-600 to-indigo-600">
         <div className="grid grid-cols-3 items-center justify-between">
           <div className="flex flex-col items-center">

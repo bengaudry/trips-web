@@ -10,3 +10,4 @@ export { PrettyProgress } from "./PrettyProgress/PrettyProgress";
 export { TabSlider } from "./TabSlider/TabSlider";
 export { NotVerifiedEmailPopup } from "./NotVerifiedEmail/NotVerifiedEmail";
 export { AuthError } from "./AuthError/AuthError";
+export { CenteredPopup } from "./CenteredPopup/CenteredPopup"
