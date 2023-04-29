@@ -24,10 +24,10 @@ export function CenteredPopup(props: CenteredPopupProps) {
         onClick={() => props.setVisible(false)}
       ></button>
       <div
-        className={`absolute z-50 bg-grayblue-800 border border-grayblue-600 p-6 w-[calc(100vw-4rem)] rounded-xl max-h-[calc(100vh-8rem)] overflow-scroll transition-transform duration-500 ${
+        className={`absolute z-50 bg-grayblue-800 border border-grayblue-600 p-6 w-[calc(100vw-4rem)] rounded-xl max-h-[calc(100vh-8rem)] overflow-scroll transition-all duration-500 ${
           props.visible
-            ? "scale-1 pointer-events-auto"
-            : "scale-0 pointer-events-none"
+            ? "scale-1 opacity-100 pointer-events-auto"
+            : "scale-0 opacity-0 pointer-events-none"
         }`}
       >
         <main className={`w-full text-left overflow-y-scroll`}>
