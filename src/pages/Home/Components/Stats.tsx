@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 import { CenteredPopup, TripDisplayer } from "../../../components";
 import { StatsData, Trip } from "../../../types/types";
 import { StatPill } from "./StatPill";
+import { MAX_KMS_BEFORE_LICENSE } from "../../../lib/constants";
 
 export function Stats(props: {
   allTrips?: Trip[];
@@ -12,12 +13,11 @@ export function Stats(props: {
   const [congratsPopupVisible, setCongratsPopupVisible] = useState(false);
 
   useEffect(() => {
-    setCongratsPopupVisible(props.data.totalKms >= 3000);
+    setCongratsPopupVisible(props.data.totalKms >= MAX_KMS_BEFORE_LICENSE);
   }, [props.data]);
 
   const getKmsPercent = (): number => {
-    const maximumKms = 3000;
-    return Math.floor((props.data.totalKms / maximumKms) * 100);
+    return Math.floor((props.data.totalKms / MAX_KMS_BEFORE_LICENSE) * 100);
   };
 
   const { t } = useTranslation();
@@ -29,23 +29,27 @@ export function Stats(props: {
         setVisible={setCongratsPopupVisible}
       >
         <span className="text-5xl block mb-2">🎉</span>
-        <h2 className="text-2xl font-bold mb-2">{t("homepage.stats.congratsPopup.title")}</h2>
+        <h2 className="text-2xl font-bold mb-2">
+          {t("homepage.stats.congratsPopup.title")}
+        </h2>
         <p className="text-grayblue-500 text-lg">
           {t("homepage.stats.congratsPopup.subtitle")}
         </p>
-        <h2 className="text-2xl font-bold mb-2 mt-6">{t("homepage.stats.congratsPopup.tipsTitle")}</h2>
+        <h2 className="text-2xl font-bold mb-2 mt-6">
+          {t("homepage.stats.congratsPopup.tipsTitle")}
+        </h2>
         <p className="text-grayblue-500 text-lg">
-        {t("homepage.stats.congratsPopup.tipsParagraph")}
+          {t("homepage.stats.congratsPopup.tipsParagraph")}
         </p>
       </CenteredPopup>
       <section className="rounded-xl h-max py-6 px-8 mt-2 text-white bg-gradient-to-tr from-sky-600 to-indigo-600">
         <div className="grid grid-cols-3 items-center justify-between">
           <div className="flex flex-col items-center">
             <span className="text-3xl font-bold">
-              {props.data.totalKms > 3000
-                ? "3000+"
-                : props.data.totalKms === 3000
-                ? "3000"
+              {props.data.totalKms > MAX_KMS_BEFORE_LICENSE
+                ? `${MAX_KMS_BEFORE_LICENSE}+`
+                : props.data.totalKms === MAX_KMS_BEFORE_LICENSE
+                ? MAX_KMS_BEFORE_LICENSE
                 : props.data.totalKms}
             </span>
             <span className="text-grayblue-200 text-lg">km</span>
@@ -111,13 +115,13 @@ export function Stats(props: {
             </div>
             <div className="flex flex-row items-center gap-2">
               <span className="inline-block w-12 sm:w-16 text-center font-semibold text-md sm:text-xl bg-white rounded-full text-grayblue-900">
-                1500
+                {MAX_KMS_BEFORE_LICENSE / 2}
               </span>
               <span className="font-semibold text-md sm:text-lg">1er rdv</span>
             </div>
             <div className="flex flex-row items-center gap-2">
               <span className="inline-block w-12 sm:w-16 text-center font-semibold text-md sm:text-xl bg-white rounded-full text-grayblue-900">
-                3000
+                {MAX_KMS_BEFORE_LICENSE}
               </span>
               <span className="font-semibold text-md sm:text-lg">Permis</span>
             </div>

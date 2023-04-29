@@ -43,11 +43,15 @@ export function Home() {
     trips?.map((trip) => {
       // Calculate the nb of kilometers of this trip
       // and add it to the default value
-      r.totalKms += trip.roundTrip ? trip.length * 2 : trip.length;
+      if (!isNaN(trip.length)) {
+        r.totalKms += trip.roundTrip ? trip.length * 2 : trip.length;
+      }
 
       // Calculate the duration of this trip
       // and add it to the default value
-      mins += trip.roundTrip ? trip.duration * 2 : trip.duration;
+      if (!isNaN(trip.duration)) {
+        mins += trip.roundTrip ? trip.duration * 2 : trip.duration;
+      }
 
       // Increase the number of trips by category
       if (trip.roadType === "Countryroad") {

@@ -13,6 +13,7 @@ interface SelectProps {
   selectedOption: string;
   setSelectedOption: (opt: string) => void;
   options: Option[];
+  multiple?: boolean;
 }
 
 export function Select(props: SelectProps) {

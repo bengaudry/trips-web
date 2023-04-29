@@ -1,3 +1,4 @@
+import { MAX_KMS_BEFORE_LICENSE } from "../../lib/constants";
 import { Number } from "./components/Number";
 
 export function PrettyProgress(props: { percent: number; className?: string }) {
@@ -18,12 +19,12 @@ export function PrettyProgress(props: { percent: number; className?: string }) {
             isActivating={props.percent >= 50 && props.percent < 100}
             active={props.percent === 100}
             desc="1er rdv"
-            nb={1500}
+            nb={(MAX_KMS_BEFORE_LICENSE / 2) as 1500}
           />
           <Number
             isActivating={props.percent === 100}
             desc="Permis"
-            nb={3000}
+            nb={MAX_KMS_BEFORE_LICENSE}
           />
         </div>
       </div>
