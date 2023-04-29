@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { Cta } from "../../../components";
+import { AuthError, Cta } from "../../../components";
 import { Input } from "../../../components/form";
 import { getFirebaseAuth } from "../../../../server";
 
@@ -10,8 +10,17 @@ export function SignInPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  // Error popup state
+  const [errorVisible, setErrorVisible] = useState(false);
+  const [errorContent, setErrorContent] = useState("");
+
   return (
     <div className="p-8 pb-16 absolute bottom-0 w-full">
+      <AuthError
+        visible={errorVisible}
+        setVisible={setErrorVisible}
+        content={errorContent}
+      />
       <h2 className="text-3xl font-semibold">Let's sign you in</h2>
       <p className="text-grayblue-500">Welcome back !</p>
       <form onSubmit={(e) => e.preventDefault()}>
@@ -68,7 +77,8 @@ export function SignInPage() {
                       .replaceAll("-", " ");
                     break;
                 }
-                alert(error);
+                setErrorContent(error);
+                setErrorVisible(true);
               });
           }}
         >

@@ -20,7 +20,13 @@ export function Stats(props: {
       <section className="rounded-xl h-max py-6 px-8 mt-2 text-white bg-gradient-to-tr from-sky-600 to-indigo-600">
         <div className="grid grid-cols-3 items-center justify-between">
           <div className="flex flex-col items-center">
-            <span className="text-3xl font-bold">{props.data.totalKms}</span>
+            <span className="text-3xl font-bold">
+              {props.data.totalKms > 3000
+                ? "3000+"
+                : props.data.totalKms === 3000
+                ? "3000"
+                : props.data.totalKms}
+            </span>
             <span className="text-grayblue-200 text-lg">km</span>
           </div>
 
@@ -75,7 +81,7 @@ export function Stats(props: {
           </div>
           <main className="flex flex-col justify-between h-full">
             <div className="flex flex-row items-center gap-2">
-              <span className="inline-block w-14 sm:w-16 text-center font-semibold text-lg sm:text-xl bg-white rounded-full text-grayblue-900">
+              <span className="inline-block w-12 sm:w-16 text-center font-semibold text-md sm:text-xl bg-white rounded-full text-grayblue-900">
                 0
               </span>
               <span className="font-semibold text-md sm:text-lg">
@@ -83,13 +89,13 @@ export function Stats(props: {
               </span>
             </div>
             <div className="flex flex-row items-center gap-2">
-              <span className="inline-block w-14 sm:w-16 text-center font-semibold text-lg sm:text-xl bg-white rounded-full text-grayblue-900">
+              <span className="inline-block w-12 sm:w-16 text-center font-semibold text-md sm:text-xl bg-white rounded-full text-grayblue-900">
                 1500
               </span>
               <span className="font-semibold text-md sm:text-lg">1er rdv</span>
             </div>
             <div className="flex flex-row items-center gap-2">
-              <span className="inline-block w-14 sm:w-16 text-center font-semibold text-lg sm:text-xl bg-white rounded-full text-grayblue-900">
+              <span className="inline-block w-12 sm:w-16 text-center font-semibold text-md sm:text-xl bg-white rounded-full text-grayblue-900">
                 3000
               </span>
               <span className="font-semibold text-md sm:text-lg">Permis</span>
@@ -97,9 +103,9 @@ export function Stats(props: {
           </main>
         </div>
 
-        <div className="h-full w-fit rounded-lg p-4 md:p-6 bg-grayblue-600">
+        <div className="h-full w-fit rounded-lg p-5 md:p-6 bg-grayblue-600">
           <p className="font-semibold text-md sm:text-lg text-neutral-400">
-            Next appointment
+            Prochain rdv
           </p>
           <p className="text-3xl font-bold break-words">
             {getKmsPercent() === 0

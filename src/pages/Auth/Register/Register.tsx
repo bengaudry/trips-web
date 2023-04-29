@@ -7,7 +7,7 @@ import {
   sendEmailVerification,
   updateProfile,
 } from "firebase/auth";
-import { Cta } from "../../../components";
+import { AuthError, Cta } from "../../../components";
 import { Input } from "../../../components/form";
 import { getFirebaseAuth } from "../../../../server";
 
@@ -16,8 +16,17 @@ export function RegisterPage() {
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
 
+  // Error popup states
+  const [errorVisible, setErrorVisible] = useState(false);
+  const [errorContent, setErrorContent] = useState("");
+
   return (
     <div className="p-8 pb-16 absolute bottom-0 w-full">
+      <AuthError
+        visible={errorVisible}
+        setVisible={setErrorVisible}
+        content={errorContent}
+      />
       <h2 className="text-3xl font-semibold">Let's register you</h2>
       <p className="text-grayblue-500">Welcome to Trips !</p>
       <form onSubmit={(e) => e.preventDefault()}>
@@ -68,10 +77,16 @@ export function RegisterPage() {
                       localStorage.setItem("connected", "true");
                       window.location.href = "/";
                     })
-                    .catch((err) => alert(err.message));
+                    .catch((err) => {
+                      setErrorContent(err.code);
+                      setErrorVisible(true);
+                    });
                 }
               })
-              .catch((err) => alert(err.message));
+              .catch((err) => {
+                setErrorContent(err.code);
+                setErrorVisible(true);
+              });
           }}
         >
           Register
