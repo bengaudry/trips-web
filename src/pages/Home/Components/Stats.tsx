@@ -29,15 +29,13 @@ export function Stats(props: {
         setVisible={setCongratsPopupVisible}
       >
         <span className="text-5xl block mb-2">🎉</span>
-        <h2 className="text-2xl font-bold mb-2">Congratulations !</h2>
+        <h2 className="text-2xl font-bold mb-2">{t("homepage.stats.congratsPopup.title")}</h2>
         <p className="text-grayblue-500 text-lg">
-          You reached 3000 kilometers with us ! You are now ready to pass your
-          license !
+          {t("homepage.stats.congratsPopup.subtitle")}
         </p>
-        <h2 className="text-2xl font-bold mb-2 mt-6">Tips</h2>
+        <h2 className="text-2xl font-bold mb-2 mt-6">{t("homepage.stats.congratsPopup.tipsTitle")}</h2>
         <p className="text-grayblue-500 text-lg">
-          We have prepared a few advices for you so you will be more than ready
-          to succed.
+        {t("homepage.stats.congratsPopup.tipsParagraph")}
         </p>
       </CenteredPopup>
       <section className="rounded-xl h-max py-6 px-8 mt-2 text-white bg-gradient-to-tr from-sky-600 to-indigo-600">

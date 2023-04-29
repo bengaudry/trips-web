@@ -4,6 +4,7 @@ export const common = {
     trips: "trips",
     seeAll: "See all",
     back: "Back",
+    close: "Close",
     messages: {
       logoutConfirm: "Do you really want to be disconnected ?",
     },
@@ -19,6 +20,7 @@ export const common = {
     trips: "trajets",
     seeAll: "Voir plus",
     back: "Retour",
+    close: "Fermer",
     messages: {
       logoutConfirm: "Voulez-vous vraiment être déconnecté ?",
     },

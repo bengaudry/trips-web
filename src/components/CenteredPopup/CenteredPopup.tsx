@@ -1,5 +1,6 @@
 import { ReactNode } from "react";
 import { Cta } from "../Buttons/Cta";
+import { useTranslation } from "react-i18next";
 
 interface CenteredPopupProps {
   children: ReactNode;
@@ -8,6 +9,8 @@ interface CenteredPopupProps {
 }
 
 export function CenteredPopup(props: CenteredPopupProps) {
+  const { t } = useTranslation()
+
   return (
     <div
       className={`${
@@ -35,7 +38,7 @@ export function CenteredPopup(props: CenteredPopupProps) {
           className="mt-6 sticky bottom-0 shadow-2xl shadow-grayblue-900"
           onClick={() => props.setVisible(false)}
         >
-          Close
+          {t("common.close")}
         </Cta>
       </div>
     </div>
