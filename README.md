@@ -11,21 +11,21 @@ Elle se trouve sur [cette url](https://tripsapp.web.app).
 ```sh
 git clone https://github.com/bengaudry/trips.git
 cd trips
-pnpm i  
+yarn install 
 ```
 
 ### Run
 
 ```sh
-pnpm dev
+yarn dev
 ```
 
 ### Build
 ```sh
-pnpm run build
+yarn run build
 ```
 
 ### Deploy
 ```sh
-pnpm run deploy
+yarn run deploy
 ```

@@ -14,7 +14,7 @@ export function Checkbox(props: {
           props.checked
             ? "dark:text-white"
             : "text-neutral-400 dark:text-grayblue-500"
-        } transition-colors duration-300 pointer-events-none font-semibold`}
+        } transition-colors duration-300 pointer-events-none font-medium`}
       >
         {props.name}
       </label>

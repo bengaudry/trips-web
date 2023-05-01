@@ -57,7 +57,7 @@ export function RegisterPage() {
         />
         <p className="block text-grayblue-500 w-full text-center text-md mb-4 mt-20">
           Already have an account ?{" "}
-          <Link to="/signin" className="text-white">
+          <Link to="/signin" className="text-brand-400 dark:text-white">
             Sign In
           </Link>
           .

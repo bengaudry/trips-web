@@ -29,7 +29,7 @@ export function TabSlider(props: {
               props.current === index
                 ? "dark:text-white"
                 : "text-neutral-500 dark:text-grayblue-400"
-            } transition-colors duration-500`}
+            } transition-colors font-medium duration-500`}
           >
             {tab}
           </span>

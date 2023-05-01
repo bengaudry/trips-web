@@ -1,4 +1,4 @@
-import { ReactNode, useState } from "react";
+import { useState, useEffect } from "react";
 import { SelectOption } from "../types";
 import { capitalizeString } from "../../../lib/functions";
 
@@ -22,7 +22,7 @@ export function MultiSelect(props: MultiSelectProps) {
       <div className="flex flex-col">
         <label
           htmlFor={labelToId(props.name)}
-          className="mt-4 font-semibold text-neutral-500 dark:text-grayblue-500"
+          className="mt-4 font-medium text-neutral-500 dark:text-grayblue-500"
         >
           {capitalizeString(props.name).replaceAll("-", " ")}
         </label>
@@ -38,8 +38,8 @@ export function MultiSelect(props: MultiSelectProps) {
           onClick={() => setOpened(!isOpened)}
         >
           <span>
-            {props.selectedOptions.map((option, index) => {
-              if (index in props.selectedOptions) {
+            {[...props.selectedOptions].map((option, index) => {
+              if (props.selectedOptions.includes(index)) {
                 return index + 1 < props.selectedOptions.length
                   ? `${props.options[index].name}, `
                   : props.options[index].name;
@@ -64,12 +64,14 @@ export function MultiSelect(props: MultiSelectProps) {
                   className={`px-4 py-1 flex flex-row items-center justify-between hover:bg-neutral-200 dark:hover:bg-grayblue-700 cursor-default`}
                   onClick={() => {
                     if (props.selectedOptions.includes(index)) {
+                      // Remove an element from selected list
                       let arr: number[] = [...props.selectedOptions];
-                      let newArr = arr.filter((value) => {
-                        return index !== value;
+                      let newArr = arr.filter((value, id) => {
+                        return index !== id;
                       });
                       props.setSelectedOptions(newArr);
                     } else {
+                      // Add an element to selected list
                       let arr: number[] = [...props.selectedOptions];
                       arr.push(index);
                       props.setSelectedOptions(arr);

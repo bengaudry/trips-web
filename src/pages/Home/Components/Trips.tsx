@@ -23,14 +23,7 @@ export function Trips(props: { data?: Trip[] }) {
         <>
           {props.data.map((trip) => (
             <TripDisplayer
-              from={trip.from}
-              to={trip.to}
-              date={trip.date}
-              length={trip.length}
-              duration={trip.duration}
-              roundTrip={trip.roundTrip}
-              key={trip.key}
-              id={trip.id}
+              {...trip}
               showMoreOptBtn
               setModalOpened={(val: boolean) => {
                 setModalOpened(val);

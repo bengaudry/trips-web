@@ -1,6 +1,11 @@
 module.exports = {
   content: ["./src/**/*.{html,js,ts,jsx,tsx}"],
   theme: {
+    fontFamily: {
+      sans: [
+        "Poppins, sans-serif"
+      ]
+    },
     extend: {
       colors: {
         grayblue: {

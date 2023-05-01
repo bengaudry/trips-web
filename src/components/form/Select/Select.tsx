@@ -21,7 +21,7 @@ export function Select(props: SelectProps) {
     <div className="flex flex-col">
       <label
         htmlFor={labelToId(props.name)}
-        className="mt-4 font-semibold text-neutral-500 dark:text-grayblue-500"
+        className="mt-4 font-medium text-neutral-500 dark:text-grayblue-500"
       >
         {capitalizeString(props.name).replaceAll("-", " ")}
       </label>

@@ -24,7 +24,7 @@ export function Input(props: props) {
       } flex flex-col w-full mt-4 ${props.className}`}
     >
       <span
-        className={`font-semibold mb-1 transition-colors duration-300 ${
+        className={`font-medium mb-1 transition-colors duration-300 ${
           inputFocused
             ? "text-brand-400 dark:text-white"
             : "text-neutral-500 dark:text-grayblue-500"

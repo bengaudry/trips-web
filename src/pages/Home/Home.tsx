@@ -89,18 +89,8 @@ export function Home() {
         .then((val) => {
           setTrips(
             val.docs.map((doc, index) => ({
-              date: doc.data().date,
-              duration: doc.data().duration,
-              from: doc.data().from,
-              id: doc.id,
+              ...(doc.data() as Trip),
               key: index,
-              length: doc.data().length,
-              roadType: doc.data().roadType,
-              roundTrip: doc.data().roundTrip,
-              time: doc.data().time,
-              to: doc.data().to,
-              trafficDensity: doc.data().trafficDensity,
-              weather: doc.data().weather,
             }))
           );
         })

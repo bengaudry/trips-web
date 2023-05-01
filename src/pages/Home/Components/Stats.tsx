@@ -10,17 +10,33 @@ export function Stats(props: {
   setPanelFn: CallableFunction;
   data: StatsData;
 }) {
-  const [congratsPopupVisible, setCongratsPopupVisible] = useState(false);
+  const [congratsPopupVisible, setCongratsPopupVisible] = useState(true);
 
-  useEffect(() => {
-    setCongratsPopupVisible(props.data.totalKms >= MAX_KMS_BEFORE_LICENSE);
-  }, [props.data]);
+  // useEffect(() => {
+  //   setCongratsPopupVisible(props.data.totalKms >= MAX_KMS_BEFORE_LICENSE);
+  // }, [props.data]);
 
   const getKmsPercent = (): number => {
     return Math.floor((props.data.totalKms / MAX_KMS_BEFORE_LICENSE) * 100);
   };
 
   const { t } = useTranslation();
+
+  const getLeastPracticedTypeOfRoad = () => {
+    const trips = props.data.tripsByRoadType;
+    const total =
+      trips.city + trips.countryside + trips.expressway + trips.highway;
+    const arr = [
+      trips.city,
+      trips.countryside,
+      trips.expressway,
+      trips.highway,
+    ].sort();
+
+    return;
+  };
+
+  console.log(getLeastPracticedTypeOfRoad());
 
   return (
     <>
@@ -41,7 +57,11 @@ export function Stats(props: {
         <p className="text-grayblue-500 text-lg">
           {t("homepage.stats.congratsPopup.tipsParagraph")}
         </p>
+        {/* <p>
+          {(props.data.tripsByRoadType.city)}
+        </p> */}
       </CenteredPopup>
+
       <section className="rounded-xl h-max py-6 px-8 mt-2 text-white bg-gradient-to-tr from-sky-600 to-indigo-600">
         <div className="grid grid-cols-3 items-center justify-between">
           <div className="flex flex-col items-center">
@@ -52,12 +72,12 @@ export function Stats(props: {
                 ? MAX_KMS_BEFORE_LICENSE
                 : props.data.totalKms}
             </span>
-            <span className="text-grayblue-200 text-lg">km</span>
+            <span className="text-grayblue-200 text-lg font-medium">km</span>
           </div>
 
           <div className="flex flex-col items-center">
             <span className="text-3xl font-bold">{props.allTrips?.length}</span>
-            <span className="text-grayblue-200 text-lg">
+            <span className="text-grayblue-200 text-lg font-medium">
               {t(
                 props.allTrips && props.allTrips.length > 1
                   ? "common.trips"
@@ -70,7 +90,7 @@ export function Stats(props: {
             <span className="text-3xl font-bold">
               {props.data.totalDrivingTime.nb}
             </span>
-            <span className="text-grayblue-200 text-lg">
+            <span className="text-grayblue-200 text-lg font-medium">
               {props.data.totalDrivingTime.unit}
             </span>
           </div>
@@ -106,30 +126,30 @@ export function Stats(props: {
           </div>
           <main className="flex flex-col justify-between h-full">
             <div className="flex flex-row items-center gap-2">
-              <span className="inline-block w-12 sm:w-16 text-center font-semibold text-md sm:text-xl bg-white rounded-full text-grayblue-900">
+              <span className="inline-block w-12 sm:w-16 text-center font-medium text-md sm:text-xl bg-white rounded-full text-grayblue-900">
                 0
               </span>
-              <span className="font-semibold text-md sm:text-lg">
+              <span className="font-medium text-md sm:text-lg">
                 Rdv préalable
               </span>
             </div>
             <div className="flex flex-row items-center gap-2">
-              <span className="inline-block w-12 sm:w-16 text-center font-semibold text-md sm:text-xl bg-white rounded-full text-grayblue-900">
+              <span className="inline-block w-12 sm:w-16 text-center font-medium text-md sm:text-xl bg-white rounded-full text-grayblue-900">
                 {MAX_KMS_BEFORE_LICENSE / 2}
               </span>
-              <span className="font-semibold text-md sm:text-lg">1er rdv</span>
+              <span className="font-medium text-md sm:text-lg">1er rdv</span>
             </div>
             <div className="flex flex-row items-center gap-2">
-              <span className="inline-block w-12 sm:w-16 text-center font-semibold text-md sm:text-xl bg-white rounded-full text-grayblue-900">
+              <span className="inline-block w-12 sm:w-16 text-center font-medium text-md sm:text-xl bg-white rounded-full text-grayblue-900">
                 {MAX_KMS_BEFORE_LICENSE}
               </span>
-              <span className="font-semibold text-md sm:text-lg">Permis</span>
+              <span className="font-medium text-md sm:text-lg">Permis</span>
             </div>
           </main>
         </div>
 
-        <div className="h-full w-fit rounded-lg p-5 md:p-6 bg-grayblue-600">
-          <p className="font-semibold text-md sm:text-lg text-neutral-400">
+        <div className="h-full w-fit rounded-lg p-5 md:p-6 bg-white dark:bg-grayblue-600">
+          <p className="font-medium text-md sm:text-lg text-neutral-400">
             Prochain rdv
           </p>
           <p className="text-3xl font-bold break-words">

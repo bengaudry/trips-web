@@ -1,5 +1,11 @@
 import { useState } from "react";
-import { Input, Select, Checkbox, Suggestions, MultiSelect } from "../../components/form";
+import {
+  Input,
+  Select,
+  Checkbox,
+  Suggestions,
+  MultiSelect,
+} from "../../components/form";
 import { AuthError, Cta } from "../../components";
 import { getFirebaseAuth } from "../../../server";
 import { addTrip } from "../../lib/functions";
@@ -19,6 +25,8 @@ export function Add() {
   const [trafficDensity, setTrafficDensity] = useState("Average");
   const [weather, setWeather] = useState("Sun");
   const [roundTrip, setRoundTrip] = useState(false);
+
+  const [roadTypes, setRoadTypes] = useState<number[]>([]);
 
   // Functionnal states
   const [moreOptionsOpened, setMoreOptionsOpened] = useState(false);
@@ -205,8 +213,26 @@ export function Add() {
             moreOptionsOpened ? "scale-y-full h-full" : "scale-y-0 h-0"
           } transition-all origin-top duration-300`}
         >
-          
-          <Select
+          <MultiSelect
+            name={t("addpage.inputs.labels.roadtype")}
+            selectedOptions={roadTypes}
+            setSelectedOptions={(val) => setRoadTypes(val)}
+            options={[
+              {
+                name: "Countryside",
+              },
+              {
+                name: "Expressway",
+              },
+              {
+                name: "Highway",
+              },
+              {
+                name: "City",
+              },
+            ]}
+          />
+          {/* <Select
             name={t("addpage.inputs.labels.roadtype")}
             selectedOption={roadType}
             setSelectedOption={setRoadType}
@@ -224,7 +250,7 @@ export function Add() {
                 name: "City",
               },
             ]}
-          />
+          /> */}
           <Select
             name={t("addpage.inputs.labels.traffic")}
             selectedOption={trafficDensity}

@@ -13,8 +13,8 @@ export function Button(props: {
 }) {
   return (
     <button
-      className={`w-full text-left text-grayblue-500 hover:text-white transition-colors duration-300 px-4 py-2 ${
-        !props.noborder ? "border-b border-grayblue-900" : ""
+      className={`w-full text-left text-neutral-500 hover:text-black dark:text-grayblue-500 dark:hover:text-white transition-colors duration-300 px-4 py-2 ${
+        !props.noborder ? "border-b border-white dark:border-grayblue-900" : ""
       }`}
       onClick={() => {
         if (props.onClick) props.onClick();
@@ -69,7 +69,7 @@ export function ProfilePopup() {
         {t("settingsPage.popups.profile.title")}
       </h2>
 
-      <div className="rounded-lg w-full bg-grayblue-800">
+      <div className="rounded-lg w-full bg-neutral-200 dark:bg-grayblue-800">
         <Button icon="user">Account information</Button>
 
         <Button icon="lock" onClick={() => showModal("changePass")}>
@@ -78,7 +78,11 @@ export function ProfilePopup() {
         <Button icon="download" onClick={() => showModal("downloadData")}>
           Download my data
         </Button>
-        <Button icon="trash" onClick={() => showModal("deleteAccount")}>
+        <Button
+          icon="trash"
+          onClick={() => showModal("deleteAccount")}
+          noborder
+        >
           Deactivate your account
         </Button>
       </div>
@@ -88,7 +92,7 @@ export function ProfilePopup() {
           <>
             <Input
               type="password"
-              className="bg-grayblue-800"
+              className="dark:bg-grayblue-800"
               name={
                 t("settingsPage.popups.profile.placeholders.newPass") as string
               }
@@ -97,7 +101,7 @@ export function ProfilePopup() {
             />
             <Input
               type="password"
-              className="bg-grayblue-800"
+              className="dark:bg-grayblue-800"
               name={
                 t(
                   "settingsPage.popups.profile.placeholders.newPassConfirm"

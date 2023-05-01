@@ -18,7 +18,7 @@ export const homepage = {
         subtitle: `You have reached ${MAX_KMS_BEFORE_LICENSE} kilometers with us ! You are now ready to take your license !`,
         tipsTitle: "Tips",
         tipsParagraph:
-          "We have prepared a few advices for you so you will be more than ready to succeed on D-Day...",
+          "We have analyzed the way you drive and came up with a few advices for you so you will be more than ready to succeed on D-Day...",
       },
     },
   },
@@ -39,7 +39,7 @@ export const homepage = {
         subtitle: `Vous avez atteint ${MAX_KMS_BEFORE_LICENSE} kilomètres avec nous ! Vous êtes maintenant prêt à passer votre permis !`,
         tipsTitle: "Conseils",
         tipsParagraph:
-          "Nous avons préparé quelques conseils pour vous perfectionner et pour être plus que prêt le jour J...",
+          "Nous avons analysé votre conduite et nous en avons déduit quelques conseils pour vous perfectionner et être plus que prêt le jour J...",
       },
     },
   },

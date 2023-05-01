@@ -42,7 +42,7 @@ export function SignInPage() {
         </Link>
         <p className="block text-grayblue-500 w-full text-center text-md mb-4 mt-20">
           Don't have an account ?{" "}
-          <Link to="/register" className="text-white">
+          <Link to="/register" className="text-brand-400 dark:text-white">
             Register
           </Link>
           .

@@ -40,23 +40,6 @@ export function Settings() {
         {t("settingsPage.subtitles.account")}
       </h3>
 
-      <MultiSelect
-        name="test-multi"
-        selectedOptions={selectedTest}
-        setSelectedOptions={(val: number[]) => setSelectedTest(val)}
-        options={[
-          {
-            name: "opt 1",
-          },
-          {
-            name: "opt 2",
-          },
-          {
-            name: "opt 3",
-          },
-        ]}
-      />
-
       <Setting
         color="82, 82, 82"
         icon="user"
@@ -110,7 +93,7 @@ export function Settings() {
         name={t("settingsPage.buttons.logout")}
         onClick={() => {
           if (confirm(t("common.messages.logoutConfirm") as string)) {
-            localStorage.setItem("connected", "false");
+            localStorage.removeItem("connected");
             signOut(getFirebaseAuth());
           }
         }}

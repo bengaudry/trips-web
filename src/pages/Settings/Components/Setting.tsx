@@ -18,7 +18,7 @@ export function Setting(props: {
             props.bigIcon ? "h-16" : "h-12"
           } aspect-square rounded-full flex flex-row items-center justify-center`}
           style={{
-            backgroundColor: `rgba(${props.color}, 0.4)`,
+            backgroundColor: `rgba(${props.color}, 0.3)`,
           }}
         >
           <i
@@ -38,8 +38,8 @@ export function Setting(props: {
           <p className="text-xl text-grayblue-500">{props.subTitle}</p>
         </div>
       </div>
-      <div className="h-12 aspect-square rounded-2xl bg-grayblue-800 flex flex-roww items-center justify-center">
-        <i className="fi fi-rr-angle-right text-grayblue-400 translate-y-0.5"></i>
+      <div className="h-12 aspect-square rounded-2xl bg-neutral-200 dark:bg-grayblue-800 flex flex-roww items-center justify-center">
+        <i className="fi fi-rr-angle-right text-black dark:text-grayblue-400 translate-y-0.5"></i>
       </div>
     </div>
   );
