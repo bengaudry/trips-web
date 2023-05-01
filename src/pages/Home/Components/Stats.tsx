@@ -10,11 +10,11 @@ export function Stats(props: {
   setPanelFn: CallableFunction;
   data: StatsData;
 }) {
-  const [congratsPopupVisible, setCongratsPopupVisible] = useState(true);
+  const [congratsPopupVisible, setCongratsPopupVisible] = useState(false);
 
-  // useEffect(() => {
-  //   setCongratsPopupVisible(props.data.totalKms >= MAX_KMS_BEFORE_LICENSE);
-  // }, [props.data]);
+  useEffect(() => {
+    setCongratsPopupVisible(props.data.totalKms >= MAX_KMS_BEFORE_LICENSE);
+  }, [props.data]);
 
   const getKmsPercent = (): number => {
     return Math.floor((props.data.totalKms / MAX_KMS_BEFORE_LICENSE) * 100);
@@ -35,8 +35,6 @@ export function Stats(props: {
 
     return;
   };
-
-  console.log(getLeastPracticedTypeOfRoad());
 
   return (
     <>

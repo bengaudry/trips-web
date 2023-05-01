@@ -51,28 +51,37 @@ i18n.use(initReactI18next).init({
 });
 
 export default function App() {
-  const [isLoading, setLoading] = useState(true);
   const [userLoggedIn, setUserLoggedIn] = useState(false);
+  const [loaderVisible, setLoaderVisible] = useState(true);
 
   // Show the app if connected, if not, show the login page
   useEffect(() => {
-    window.addEventListener("DOMContentLoaded", () => {
-      window.setTimeout(() => {
-        setLoading(false);
-      }, 2000);
-    });
+    // Set loader visible if a previous connexion is detected
+    const previouslyConnected = localStorage.getItem("connected");
+    if (previouslyConnected && previouslyConnected === "true") {
+      setLoaderVisible(true);
+    }
 
     onAuthStateChanged(getFirebaseAuth(), (user) => {
-      if (user !== null) {
+      if (user) {
+        setLoaderVisible(false);
         setUserLoggedIn(true);
       } else {
+        setLoaderVisible(false);
         setUserLoggedIn(false);
       }
     });
-  }, [userLoggedIn, isLoading]);
+  }, [userLoggedIn, loaderVisible]);
 
   return (
     <>
+      {loaderVisible ? (
+        <div className="fixed inset-0 w-screen h-screen bg-neutral-200 dark:bg-black z-[70] grid place-content-center">
+          Loading app...
+        </div>
+      ) : (
+        <></>
+      )}
       {userLoggedIn ? (
         <BrowserRouter>
           <Routes>
