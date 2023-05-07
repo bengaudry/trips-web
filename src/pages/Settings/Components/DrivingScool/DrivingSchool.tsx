@@ -9,6 +9,7 @@ import {
   getDocs,
   deleteDoc,
   doc,
+  getDoc,
 } from "firebase/firestore";
 import { getFirebaseApp } from "../../../../../server";
 import { Notification } from "../../../../components";
@@ -27,15 +28,16 @@ export function DrivingSchool() {
   const [notificationVisible, setNotificationVisible] = useState(false);
 
   const db = getFirestore(getFirebaseApp());
-  const tripsCollection = collection(db, "/schoolsCodes");
+  const schoolsCodesCollection = collection(db, "/schoolsCodes");
+  const [schoolName, setSchoolName] = useState("");
 
   // Fetches in firestore where the codes equals to the code in the input
   const fetchData = async () => {
-    let q = query(tripsCollection, where("value", "==", code));
+    let q = query(schoolsCodesCollection, where("value", "==", code));
     await getDocs(q)
       .then((val) => {
         // fetched data
-        const fetchedDoc = val.docs[0]
+        const fetchedDoc = val.docs[0];
         const data = fetchedDoc.data();
         const id = fetchedDoc.id;
 
@@ -43,16 +45,23 @@ export function DrivingSchool() {
           // Delete the code after it has been used
           deleteDoc(doc(db, "/schoolsCodes", id))
             .then(() => {
+              fetchSchoolWithId(data.schoolId);
               setNotificationContent({
-                content: "Vous avez rejoint l'auto-école",
+                content: `Vous avez rejoint l'auto-école ${schoolName}`,
                 type: "success",
               });
               setNotificationVisible(true);
             })
             .catch((err) => {
-              alert(err);
+              setNotificationContent({
+                content: `Erreur. Veuillez contacter le développeur.`,
+                type: "error",
+              });
             });
         } else {
+          console.log("fetched doc :", fetchedDoc);
+          console.log("data.value :", data.value);
+
           setNotificationContent({
             content: "Le code ne semble pas être valide",
             type: "error",
@@ -60,13 +69,23 @@ export function DrivingSchool() {
           setNotificationVisible(true);
         }
       })
-      .catch(() => {
+      .catch((err) => {
         setNotificationContent({
-          content: "Le code ne semble pas être valide",
+          content: `Le code ne semble pas être valide. Erreur : ${err}`,
           type: "error",
         });
         setNotificationVisible(true);
       });
+  };
+
+  const fetchSchoolWithId = (id: string) => {
+    const schoolsDoc = doc(db, "schools", id);
+
+    getDoc(schoolsDoc).then((val) => {
+      console.log(val.data());
+      setSchoolName(val.data()?.name);
+    });
+    return schoolName;
   };
 
   return (
