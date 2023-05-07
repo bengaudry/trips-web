@@ -6,7 +6,7 @@ import {
   Suggestions,
   MultiSelect,
 } from "../../components/form";
-import { AuthError, Cta } from "../../components";
+import { Notification, Cta } from "../../components";
 import { getFirebaseAuth } from "../../../server";
 import { addTrip } from "../../lib/functions";
 import { useTranslation } from "react-i18next";
@@ -106,9 +106,10 @@ export function Add() {
 
   return (
     <div className="px-5 py-16 pb-44">
-      <AuthError
+      <Notification
         visible={errorVisible}
         setVisible={setErrorVisible}
+        type="error"
         content="Veuillez remplir tous les champs"
       />
       <h1 className="text-4xl font-bold">{t("addpage.title")}</h1>

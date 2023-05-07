@@ -1,7 +1,7 @@
 import { ReactNode, useState } from "react";
 import { capitalizeString } from "../../../lib/functions";
 
-interface props {
+type InputProps = {
   name: string;
   placeholder?: string;
   className?: string;
@@ -14,7 +14,7 @@ interface props {
   required?: boolean;
 }
 
-export function Input(props: props) {
+export function Input(props: InputProps) {
   const [inputFocused, setInputFocused] = useState(false);
 
   return (

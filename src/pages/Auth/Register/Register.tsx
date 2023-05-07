@@ -7,7 +7,7 @@ import {
   sendEmailVerification,
   updateProfile,
 } from "firebase/auth";
-import { AuthError, Cta } from "../../../components";
+import { Notification, Cta } from "../../../components";
 import { Input } from "../../../components/form";
 import { getFirebaseAuth } from "../../../../server";
 
@@ -22,9 +22,10 @@ export function RegisterPage() {
 
   return (
     <div className="p-8 pb-16 absolute bottom-0 w-full">
-      <AuthError
+      <Notification
         visible={errorVisible}
         setVisible={setErrorVisible}
+        type="error"
         content={errorContent}
       />
       <h2 className="text-3xl font-semibold">Let's register you</h2>

@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 export type CtaProps = {
   children: string | ReactNode;
   className?: string;
+  disabled?: boolean,
   type: "button" | "link";
   color?: "normal" | "warning" | "danger";
   to?: string;
@@ -18,12 +19,13 @@ export function Cta(props: CtaProps) {
       : props.color === "warning"
       ? "bg-orange-600 hover:bg-orange-800"
       : "bg-brand-600 hover:bg-brand-800"
-  } text-white font-semibold w-full rounded-lg px-8 p-4 flex items-center justify-center gap-4 transition-colors duration-300`;
+  } text-white font-semibold w-full rounded-lg px-8 p-4 flex items-center justify-center gap-4 transition-colors transition-opacity duration-300 disabled:bg-grayblue-500 disabled:opacity-50`;
 
   return props.type === "button" ? (
     <button
       className={`${CtaStyle} ${props.className}`}
       type={props.btnType ? props.btnType : "button"}
+      disabled={props.disabled}
       onClick={(e) => {
         if (props.onClick) props.onClick(e);
       }}

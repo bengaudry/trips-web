@@ -3,7 +3,7 @@ import { BackButton } from "../../components";
 
 export function SlidingPage(props: {
   children: ReactNode;
-  setPanelOpened: CallableFunction;
+  setPanelOpened: (val: boolean) => void;
   isOpened: boolean;
   className?: string;
   outerClassName?: string;
