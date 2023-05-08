@@ -17,7 +17,7 @@ export function CenteredPopup(props: CenteredPopupProps) {
         props.visible
           ? "bg-black/80 pointer-events-auto"
           : "bg-transparent pointer-events-none"
-      } fixed  flex flex-row items-center justify-center inset-0 transition-colors duration-500 z-50 lg:items-center`}
+      } fixed flex flex-row items-center justify-center inset-0 transition-colors duration-500 z-50 lg:items-center`}
     >
       <button
         className="absolute z-40 w-full h-screen cursor-default"
@@ -30,11 +30,11 @@ export function CenteredPopup(props: CenteredPopupProps) {
             : "scale-0 opacity-0 pointer-events-none"
         }`}
       >
-        <main className={`w-full text-left pb-16`}>
+        <main className={`w-full text-left pb-16 relative`}>
           {props.children}
           <Cta
             type="button"
-            className="mt-6 absolute w-[calc(100%-2rem)] bottom-4 left-4 right-4 shadow-2xl dark:shadow-grayblue-900"
+            className="mx-auto absolute w-full inset-0 top-auto shadow-2xl dark:shadow-grayblue-900"
             onClick={() => props.setVisible(false)}
           >
             {t("common.close")}

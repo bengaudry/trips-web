@@ -19,6 +19,14 @@ export function Stats(props: {
     }
   }, [props.data]);
 
+  useEffect(() => {
+    if (congratsPopupVisible) {
+      document.body.style.overflowY = "hidden";
+    } else {
+      document.body.style.overflowY = "auto";
+    }
+  }, [congratsPopupVisible])
+
   const getKmsPercent = (): number => {
     return Math.floor((props.data.totalKms / MAX_KMS_BEFORE_LICENSE) * 100);
   };

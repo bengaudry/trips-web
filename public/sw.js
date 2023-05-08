@@ -1,33 +1,42 @@
-const VERSION = "v3";
+importScripts(
+  "https://storage.googleapis.com/workbox-cdn/releases/6.4.1/workbox-sw.js"
+);
 
-self.addEventListener("install", () => {
-  self.skipWaiting();
-  console.log(`[${VERSION}] installing`);
-});
+workbox.routing.registerRoute(
+  ({ request }) => request.destination === "image",
+  new workbox.strategies.NetworkFirst()
+);
 
-self.addEventListener("activate", () => {
-  clients.claim();
-  console.log(`[${VERSION}] active`);
-});
+// const VERSION = "v3";
 
-self.addEventListener("fetch", (event) => {
-  console.log(`[${VERSION}] Fetching ${event.request.url}`);
-  console.log(`[${VERSION}] Mode ${event.request.mode}`);
+// self.addEventListener("install", () => {
+//   self.skipWaiting();
+//   console.log(`[${VERSION}] installing`);
+// });
 
-  if (event.request.mode === "navigate") {
-    event.respondWith(
-      (async () => {
-        try {
-          const preloadResponse = await event.preloadResponse;
-          if (preloadResponse) {
-            return preloadResponse;
-          }
+// self.addEventListener("activate", () => {
+//   clients.claim();
+//   console.log(`[${VERSION}] active`);
+// });
 
-          return await fetch(event.request);
-        } catch (e) {
-          return new Response("\n\n\n\n\nHeyy");
-        }
-      })()
-    );
-  }
-});
+// self.addEventListener("fetch", (event) => {
+//   console.log(`[${VERSION}] Fetching ${event.request.url}`);
+//   console.log(`[${VERSION}] Mode ${event.request.mode}`);
+
+//   if (event.request.mode === "navigate") {
+//     event.respondWith(
+//       (async () => {
+//         try {
+//           const preloadResponse = await event.preloadResponse;
+//           if (preloadResponse) {
+//             return preloadResponse;
+//           }
+
+//           return await fetch(event.request);
+//         } catch (err) {
+//           return new Response("\n\n\n\nError while loading :", err);
+//         }
+//       })()
+//     );
+//   }
+// });

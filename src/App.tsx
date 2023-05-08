@@ -61,17 +61,17 @@ export default function App() {
     if (previouslyConnected && previouslyConnected === "true") {
       setLoaderVisible(true);
     }
+  }, [userLoggedIn]);
 
-    onAuthStateChanged(getFirebaseAuth(), (user) => {
-      if (user) {
-        setLoaderVisible(false);
-        setUserLoggedIn(true);
-      } else {
-        setLoaderVisible(false);
-        setUserLoggedIn(false);
-      }
-    });
-  }, [userLoggedIn, loaderVisible]);
+  onAuthStateChanged(getFirebaseAuth(), (user) => {
+    if (user) {
+      setLoaderVisible(false);
+      setUserLoggedIn(true);
+    } else {
+      setLoaderVisible(false);
+      setUserLoggedIn(false);
+    }
+  });
 
   return (
     <>
