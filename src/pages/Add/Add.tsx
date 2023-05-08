@@ -62,7 +62,7 @@ export function Add() {
     if (to === "" || !to) return false;
     if (parseInt(length) <= 0 || length === "" || !length) return false;
     if (parseInt(duration) <= 0 || duration === "" || !duration) return false;
-    if (typeof roundTrip !== "boolean" || !roundTrip) return false;
+    if (typeof roundTrip !== "boolean") return false;
     return true;
   };
 
@@ -104,8 +104,21 @@ export function Add() {
     }
   };
 
+  const isMaxKmsReached = () => {
+    const stored = localStorage.getItem("max_kms_reached");
+    if (stored && JSON.parse(stored)) {
+      return true;
+    }
+    return false;
+  }
+
   return (
     <div className="px-5 py-16 pb-44">
+
+      { isMaxKmsReached() ? <div className="fixed inset-0 bg-black/80 w-full h-screen z-20 flex flex-row items-center justify-center mx-auto lg:w-[calc(100%-18rem)] lg:right-0 lg:left-auto">
+        <span className="text-xl font-semibold max-w-screen-sm p-6">It seems that you have reached 3000 kilometers ! You can't add more trips for now. If this is an error, try refreshing the app</span>
+      </div> : <></>}
+
       <Notification
         visible={errorVisible}
         setVisible={setErrorVisible}

@@ -20,11 +20,6 @@ export async function addTrip(content: Trip) {
     });
 
   return true;
-  // }
-
-  console.warn("The test failed");
-
-  return false;
 }
 
 export function checkTripBeforeSending(content: Trip) {

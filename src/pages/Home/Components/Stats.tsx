@@ -13,7 +13,10 @@ export function Stats(props: {
   const [congratsPopupVisible, setCongratsPopupVisible] = useState(false);
 
   useEffect(() => {
-    setCongratsPopupVisible(props.data.totalKms >= MAX_KMS_BEFORE_LICENSE);
+    if (props.data.totalKms >= MAX_KMS_BEFORE_LICENSE) {
+      setCongratsPopupVisible(true);
+      localStorage.setItem("max_kms_reached", JSON.stringify(true));
+    }
   }, [props.data]);
 
   const getKmsPercent = (): number => {

@@ -30,11 +30,11 @@ export function CenteredPopup(props: CenteredPopupProps) {
             : "scale-0 opacity-0 pointer-events-none"
         }`}
       >
-        <main className={`w-full text-left`}>
+        <main className={`w-full text-left pb-16`}>
           {props.children}
           <Cta
             type="button"
-            className="mt-6 sticky bottom-0 shadow-2xl dark:shadow-grayblue-900"
+            className="mt-6 absolute w-[calc(100%-2rem)] bottom-4 left-4 right-4 shadow-2xl dark:shadow-grayblue-900"
             onClick={() => props.setVisible(false)}
           >
             {t("common.close")}

@@ -13,7 +13,7 @@ export function Trips(props: { data?: Trip[] }) {
     if (modalOpened) {
       document.body.style.overflow = "hidden";
     } else {
-      document.body.style.overflow = "scroll";
+      document.body.style.overflow = "auto";
     }
   }, [modalOpened]);
 
@@ -44,14 +44,19 @@ export function Trips(props: { data?: Trip[] }) {
             <Cta
               type="button"
               color="danger"
-              onClick={async () => {
+              onClick={() => {
                 if (confirm("Do you really want to delete this trip ?")) {
                   const db = getFirestore(getFirebaseApp());
-                  await deleteDoc(doc(db, "/trips", modalContent?.id as string))
-                    .then(() => (document.location.href = "/"))
+                  console.log("[db] :", db)
+                  if (modalContent?.id) {
+                    deleteDoc(doc(db, "/trips", modalContent?.id as string))
+                    .then(() => { window.location.href = "/" })
                     .catch((err) => {
                       alert(err);
                     });
+                  } else {
+                    console.error("Error: id is undefined")
+                  }
                 }
               }}
             >

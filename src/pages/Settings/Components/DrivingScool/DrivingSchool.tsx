@@ -71,7 +71,7 @@ export function DrivingSchool() {
       })
       .catch((err) => {
         setNotificationContent({
-          content: `Le code ne semble pas être valide. Erreur : ${err}`,
+          content: `Le code ne semble pas être valide.`,
           type: "error",
         });
         setNotificationVisible(true);

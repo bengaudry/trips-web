@@ -90,6 +90,7 @@ export function Home() {
           setTrips(
             val.docs.map((doc, index) => ({
               ...(doc.data() as Trip),
+              id: doc.id,
               key: index,
             }))
           );
