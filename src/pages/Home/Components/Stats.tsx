@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { CenteredPopup, TripDisplayer } from "../../../components";
+import { CenteredPopup, Cta, TripDisplayer } from "../../../components";
 import { StatsData, Trip } from "../../../types/types";
 import { StatPill } from "./StatPill";
 import { MAX_KMS_BEFORE_LICENSE } from "../../../lib/constants";
@@ -23,7 +23,7 @@ export function Stats(props: {
     if (congratsPopupVisible) {
       document.body.style.overflowY = "hidden";
     } else {
-      document.body.style.overflowY = "auto";
+      document.body.style.overflowY = "scroll";
     }
   }, [congratsPopupVisible])
 
@@ -70,6 +70,16 @@ export function Stats(props: {
           {(props.data.tripsByRoadType.city)}
         </p> */}
       </CenteredPopup>
+
+
+      <section className="p-6 my-4 bg-grayblue-800 rounded-lg">
+
+        <h2 className="font-bold text-2xl mb-3">Félicitations</h2>
+        <p className="text-slate-500 text-lg mb-6">Vous avez atteint 3000 kilomètres et vous êtes maintenant en capacité de passer votre permis ! Téléchargez votre certificat officiel de conduite accompagnée :</p>
+        <Cta type="link" to="certificate">Obtenir mon certificat</Cta>
+
+      </section>
+
 
       <section className="rounded-xl h-max py-6 px-8 mt-2 text-white bg-gradient-to-tr from-sky-600 to-indigo-600">
         <div className="grid grid-cols-3 items-center justify-between">

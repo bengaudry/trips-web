@@ -6,7 +6,7 @@ export function NavBarElement(props: {
   to: string;
 }) {
   return (
-    <li>
+    <li className="w-full">
       <NavLink
         to={props.to}
         className={({ isActive }) =>

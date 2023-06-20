@@ -11,3 +11,4 @@ export { TabSlider } from "./TabSlider/TabSlider";
 export { NotVerifiedEmailPopup } from "./NotVerifiedEmail/NotVerifiedEmail";
 export { Notification } from "./Notification/Notification";
 export { CenteredPopup } from "./CenteredPopup/CenteredPopup";
+export { NotStandaloneAlert } from "./NotStandaloneAlert/NotStandaloneAlert";

@@ -4,7 +4,14 @@ import { useEffect, useState } from "react";
 
 // App pages and layout
 import { Layout } from "./components";
-import { Add, Home, Settings, NoPage } from "./pages";
+import {
+  Add,
+  Home,
+  Settings,
+  Certificate,
+  ShowCertificate,
+  NoPage,
+} from "./pages";
 
 // Auth pages and layout
 import {
@@ -24,6 +31,7 @@ import { getFirebaseAuth } from "../server";
 import { resources } from "../lang";
 import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
+import { Install as InstallPage } from "./pages";
 
 // Change the language of the app when it starts
 var lang = "fr";
@@ -54,6 +62,7 @@ export default function App() {
   const [userLoggedIn, setUserLoggedIn] = useState(false);
   const [loaderVisible, setLoaderVisible] = useState(true);
 
+
   // Show the app if connected, if not, show the login page
   useEffect(() => {
     // Set loader visible if a previous connexion is detected
@@ -73,6 +82,8 @@ export default function App() {
     }
   });
 
+
+
   return (
     <>
       {loaderVisible ? (
@@ -82,6 +93,7 @@ export default function App() {
       ) : (
         <></>
       )}
+      
       {userLoggedIn ? (
         <BrowserRouter>
           <Routes>
@@ -89,8 +101,11 @@ export default function App() {
               <Route index element={<Home />} />
               <Route path="add" element={<Add />} />
               <Route path="settings" element={<Settings />} />
+              <Route path="certificate" element={<Certificate />} />
+              <Route path="install" element={<InstallPage />} />
               <Route path="*" element={<NoPage />} />
             </Route>
+            <Route path="show-certificate" element={<ShowCertificate />} />
           </Routes>
         </BrowserRouter>
       ) : (

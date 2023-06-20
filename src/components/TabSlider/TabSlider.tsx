@@ -1,6 +1,6 @@
 export function TabSlider(props: {
   tabs: string[];
-  onChange: CallableFunction;
+  onChange: (val: number) => void;
   current: number;
   className?: string;
 }) {
