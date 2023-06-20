@@ -75,7 +75,7 @@ export function Stats(props: {
       <section className="p-6 my-4 bg-grayblue-800 rounded-lg">
 
         <h2 className="font-bold text-2xl mb-3">Félicitations</h2>
-        <p className="text-slate-500 text-lg mb-6">Vous avez atteint 3000 kilomètres et vous êtes maintenant en capacité de passer votre permis ! Téléchargez votre certificat officiel de conduite accompagnée :</p>
+        <p className="text-slate-500 text-lg mb-6">Téléchargez votre certificat officiel de fin de conduite accompagnée pour passer votre permis</p>
         <Cta type="link" to="certificate">Obtenir mon certificat</Cta>
 
       </section>

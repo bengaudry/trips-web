@@ -19,6 +19,13 @@ export function Home() {
   const { t } = useTranslation();
   const [currentPanel, setCurrentPanel] = useState<0 | 1>(0);
 
+  const changePanel = (val: number) => {
+    if (val === 0 || val === 1) {
+      setCurrentPanel(val)
+    }
+    return
+  }
+
   const calculateDataForStats = (): StatsData => {
     // Define a basic object to return
     let r: StatsData = {
@@ -121,7 +128,7 @@ export function Home() {
           <TabSlider
             tabs={[t("homepage.slider.stats"), t("homepage.slider.trips")]}
             current={currentPanel}
-            onChange={(val: 0 | 1) => setCurrentPanel(val)}
+            onChange={(val) => changePanel(val)}
           />
         </div>
 
