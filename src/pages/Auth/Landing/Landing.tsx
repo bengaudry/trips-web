@@ -1,6 +1,12 @@
 import { NavLink } from "react-router-dom";
 import { Cta } from "../../../components";
-import { useEffect, useRef } from "react";
+import {
+  MutableRefObject,
+  ReactNode,
+  forwardRef,
+  useEffect,
+  useRef,
+} from "react";
 
 export function Landing() {
   const cardOne = useRef(null);
@@ -15,7 +21,7 @@ export function Landing() {
       });
     },
     {
-      threshold: 1,
+      threshold: 0.86,
     }
   );
 
@@ -45,6 +51,23 @@ export function Landing() {
     );
   }
 
+  const LandingCard = forwardRef<
+    HTMLDivElement,
+    {
+      title: ReactNode | string;
+      content: ReactNode | string;
+    }
+  >((props, ref) => {
+    return (
+      <article ref={ref} className="transition-[opacity] duration-1000">
+        <h4 className="text-2xl font-medium mb-3">{props.title}</h4>
+        <p className="text-lg sm:text-4xl font-medium max-w-3xl">
+          {props.content}
+        </p>
+      </article>
+    );
+  });
+
   return (
     <main>
       <header className="backdrop-blur-md bg-[#ffffff20] fixed top-0 w-screen left-0 right-0 border-b border-b-[#ffffff50]">
@@ -63,51 +86,63 @@ export function Landing() {
         </div>
       </header>
 
-      <section className="bg-gradient-to-r from-[#0284C7] to-[#4F46E5] min-h-[90vh] grid place-content-center pb-12">
-        <h1 className="text-5xl font-bold block max-w-3xl mb-8">
+      <section className="bg-gradient-to-r from-[#0284C7] to-[#4F46E5] min-h-[90vh] grid place-content-center pb-12 px-10">
+        <h1 className="text-3xl sm:text-5xl font-bold block max-w-3xl mb-4 sm:mb-8">
           L'application qui rend la conduite accompagnée agréable
         </h1>
-        <p className="text-xl max-w-3xl">
+        <p className="text-md sm:text-xl max-w-3xl">
           Trips est une application web permettant de compter en toute
           simplicité le nombre de kilomètres réalisés durant la conduite
           accompagnée
         </p>
       </section>
 
-      <section className="flex flex-col gap-60 py-64 px-20">
-        <article ref={cardOne} className="transition-[opacity] duration-1000">
-          <h4 className="text-2xl font-medium mb-3">Plus intuitive</h4>
-          <p className="text-4xl font-medium max-w-3xl">
-            Trips à été créée pour&nbsp;
-            <span className="text-brand-300">faire face à un problème</span> :
-            Le manque d’applications facile à utiliser et bien designée pour
-            compter ses kilomètres de conduite accoompagnée
-          </p>
-        </article>
+      <section className="flex flex-col gap-32 sm:gap-60 py-64 px-12 sm:px-20">
+        <LandingCard
+          ref={cardOne}
+          title="Plus intuitive"
+          content={
+            <>
+              Trips à été créée pour&nbsp;
+              <span className="text-brand-300">faire face à un problème</span> :
+              Le manque d’applications facile à utiliser et bien designée pour
+              compter ses kilomètres de conduite accoompagnée
+            </>
+          }
+        />
 
-        <article ref={cardTwo} className="transition-[opacity] duration-1000">
-          <h4 className="text-2xl font-medium mb-3">Plus intelligente</h4>
-          <p className="text-4xl font-medium max-w-3xl">
-            Trips facilite la saisie des trajets en&nbsp;
-            <span className="text-brand-300">
-              autocomplétant certains éléments
-            </span>
-            &nbsp; comme la météo, la longueur du trajet, la durée du trajet ...
-          </p>
-        </article>
+        <LandingCard
+          ref={cardTwo}
+          title="Plus intelligente"
+          content={
+            <>
+              Trips facilite la saisie des trajets en&nbsp;
+              <span className="text-brand-300">
+                autocomplétant certains éléments
+              </span>
+              &nbsp; comme la météo, la longueur du trajet, la durée du trajet
+              ...
+            </>
+          }
+        />
 
-        <article ref={cardThree} className="transition-[opacity] duration-1000">
-          <h4 className="text-2xl font-medium mb-3">
-            Faite pour <u className="text-underline">vous</u>
-          </h4>
-          <p className="text-4xl font-medium max-w-3xl">
-            Lorsque vous atteindrez les 3000 kilomètres requis pour passer votre
-            permis, Trips saura vous donner un&nbsp;
-            <span className="text-brand-300">compte-rendu précis</span>&nbsp;de
-            votre conduite et en&nbsp;
-            <span className="text-brand-300">déduire des conseils.</span>
-          </p>
-        </article>
+        <LandingCard
+          ref={cardThree}
+          title={
+            <>
+              Faite pour <u className="text-underline">vous</u>
+            </>
+          }
+          content={
+            <>
+              Lorsque vous atteindrez les 3000 kilomètres requis pour passer
+              votre permis, Trips saura vous donner un&nbsp;
+              <span className="text-brand-300">compte-rendu précis</span>
+              &nbsp;de votre conduite et en&nbsp;
+              <span className="text-brand-300">déduire des conseils.</span>
+            </>
+          }
+        />
       </section>
 
       <section>
