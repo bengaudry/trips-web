@@ -3,7 +3,13 @@ import { NavBar, NotStandaloneAlert } from "../../components";
 import { useState, useEffect } from "react";
 
 function isMobile(): boolean {
-  return navigator.platform === "ios" || navigator.platform === "android";
+  const isPlatform = (plat: string) => navigator.platform === plat;
+
+  return (
+    isPlatform("iPhone") ||
+    isPlatform("android") ||
+    isPlatform("ios" || isPlatform("iPad"))
+  );
 }
 
 export function Layout() {

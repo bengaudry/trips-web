@@ -81,22 +81,18 @@ export function Settings() {
         reduceIconSize
       />
 
-      <div className="relative p-6">
-        <h3 className="text-3xl font-semibold mb-4 mt-10">Mon auto-école</h3>
-        <p className="text-lg text-neutral-500 dark:text-grayblue-500">
-          Vous n'avez pas rejoint d'auto école. Si votre auto-école utilise
-          Trips, demandez leur un code pour rejoindre leur organisation.
-        </p>
-        <DrivingSchool />
-
-        {window.location.toString() === "http://localhost:5173/settings" ? (
-          <></>
-        ) : (
-          <p className="absolute w-full h-full backdrop-blur-md inset-0 flex flex-row items-center justify-center text-xl">
-            Shht, this is secret for now 🤫
+      {window.location.toString() === "http://localhost:5173/settings" ? (
+        <div className="relative p-6">
+          <h3 className="text-3xl font-semibold mb-4 mt-10">Mon auto-école</h3>
+          <p className="text-lg text-neutral-500 dark:text-grayblue-500">
+            Vous n'avez pas rejoint d'auto école. Si votre auto-école utilise
+            Trips, demandez leur un code pour rejoindre leur organisation.
           </p>
-        )}
-      </div>
+          <DrivingSchool />
+        </div>
+      ) : (
+        <></>
+      )}
 
       <SlidingPage
         isOpened={slidingPageVisible}
