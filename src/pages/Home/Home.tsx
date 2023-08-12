@@ -108,6 +108,11 @@ export function Home() {
     fetchData();
   }, []);
 
+  // Scroll to top when panel changes
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [currentPanel]);
+
   const memoizedData = useMemo(() => trips, [trips]);
   const allTrips = memoizedData ? memoizedData : trips ? trips : [];
 

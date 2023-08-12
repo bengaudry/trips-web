@@ -12,11 +12,11 @@ export function NotStandaloneAlert(props: NotStandaloneAlertProps) {
   return (
     <div
       className={`${
-        props.shown ? "grid-rows-[1fr] p-6" : "grid-rows-[0fr] p-0"
+        props.shown ? "grid-rows-[1fr] py-6" : "grid-rows-[0fr] py-0"
       } grid w-full transition-[grid-template-rows,padding] duration-500 bg-neutral-200 dark:bg-grayblue-800 overflow-hidden rounded-b-3xl`}
     >
       <main
-        className={`overflow-hidden grid-rows-[1/span2]`}
+        className={`overflow-hidden grid-rows-[1/span2] px-6`}
         style={{ gridRow: "1 / span 2" }}
       >
         <div className="flex flex-row items-center justify-between">

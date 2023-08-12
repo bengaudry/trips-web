@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { CenteredPopup, Cta, TripDisplayer } from "../../../components";
+import { Cta, TripDisplayer } from "../../../components";
 import { StatsData, Trip } from "../../../types/types";
 import { StatPill } from "./StatPill";
 import { MAX_KMS_BEFORE_LICENSE } from "../../../lib/constants";
@@ -19,14 +19,6 @@ export function Stats(props: {
     }
   }, [props.data]);
 
-  // useEffect(() => {
-  //   if (congratsPopupVisible) {
-  //     document.body.style.overflowY = "hidden";
-  //   } else {
-  //     document.body.style.overflowY = "scroll";
-  //   }
-  // }, [congratsPopupVisible])
-
   const getKmsPercent = (): number => {
     return Math.floor((props.data.totalKms / MAX_KMS_BEFORE_LICENSE) * 100);
   };
@@ -35,28 +27,6 @@ export function Stats(props: {
 
   return (
     <>
-      {/* <CenteredPopup
-        visible={congratsPopupVisible}
-        setVisible={setCongratsPopupVisible}
-      >
-        <span className="text-5xl block mb-2">🎉</span>
-        <h2 className="text-2xl font-bold mb-2">
-          {t("homepage.stats.congratsPopup.title")}
-        </h2>
-        <p className="text-grayblue-500 text-lg">
-          {t("homepage.stats.congratsPopup.subtitle")}
-        </p>
-        <h2 className="text-2xl font-bold mb-2 mt-6">
-          {t("homepage.stats.congratsPopup.tipsTitle")}
-        </h2>
-        <p className="text-grayblue-500 text-lg">
-          {t("homepage.stats.congratsPopup.tipsParagraph")}
-        </p>
-        <p>
-          {(props.data.tripsByRoadType.city)}
-        </p>
-      </CenteredPopup> */}
-
       <section className="p-6 my-4 bg-grayblue-800 rounded-lg">
         <h2 className="font-bold text-2xl mb-3">
           {t("homepage.stats.congratsPopup.title")}
