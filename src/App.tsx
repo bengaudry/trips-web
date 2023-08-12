@@ -62,7 +62,6 @@ export default function App() {
   const [userLoggedIn, setUserLoggedIn] = useState(false);
   const [loaderVisible, setLoaderVisible] = useState(true);
 
-
   // Show the app if connected, if not, show the login page
   useEffect(() => {
     // Set loader visible if a previous connexion is detected
@@ -82,8 +81,6 @@ export default function App() {
     }
   });
 
-
-
   return (
     <>
       {loaderVisible ? (
@@ -93,7 +90,7 @@ export default function App() {
       ) : (
         <></>
       )}
-      
+
       {userLoggedIn ? (
         <BrowserRouter>
           <Routes>

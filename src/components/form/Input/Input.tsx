@@ -12,7 +12,7 @@ type InputProps = {
   onBlur?: (e: React.FocusEvent<HTMLInputElement>) => void;
   value?: any;
   required?: boolean;
-}
+};
 
 export function Input(props: InputProps) {
   const [inputFocused, setInputFocused] = useState(false);

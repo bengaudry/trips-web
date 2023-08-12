@@ -47,15 +47,17 @@ export function Trips(props: { data?: Trip[] }) {
               onClick={() => {
                 if (confirm("Do you really want to delete this trip ?")) {
                   const db = getFirestore(getFirebaseApp());
-                  console.log("[db] :", db)
+                  console.log("[db] :", db);
                   if (modalContent?.id) {
                     deleteDoc(doc(db, "/trips", modalContent?.id as string))
-                    .then(() => { window.location.href = "/" })
-                    .catch((err) => {
-                      alert(err);
-                    });
+                      .then(() => {
+                        window.location.href = "/";
+                      })
+                      .catch((err) => {
+                        alert(err);
+                      });
                   } else {
-                    console.error("Error: id is undefined")
+                    console.error("Error: id is undefined");
                   }
                 }
               }}

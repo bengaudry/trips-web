@@ -13,7 +13,7 @@
     "only-deploy": "firebase deploy --only hosting:tripsapp --project trips-5bb9a",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
-    "format": "prettier --write ./src ./lang"
+    "format": "prettier --write ./lang ./public ./server ./src"
   },
   "dependencies": {
     "@flaticon/flaticon-uicons": "^2.1.0",

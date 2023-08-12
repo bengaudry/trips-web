@@ -25,6 +25,7 @@ dist-ssr
 
 # Useless
 .firebase
+**.prproj
 
 # Confidential
 server/firebase/config.ts

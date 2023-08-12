@@ -2,6 +2,10 @@ import { Outlet } from "react-router-dom";
 import { NavBar, NotStandaloneAlert } from "../../components";
 import { useState, useEffect } from "react";
 
+function isMobile(): boolean {
+  return navigator.platform === "ios" || navigator.platform === "android";
+}
+
 export function Layout() {
   const [runningInBrowser, setRunningInBrowser] = useState(false);
 
@@ -17,7 +21,10 @@ export function Layout() {
     <div className="App dark:text-white dark:bg-grayblue-900 mb-16 m-auto lg:pl-72">
       <NavBar />
       <div className="max-w-screen-md mx-auto">
-        <NotStandaloneAlert shown={runningInBrowser} setShown={setRunningInBrowser} />
+        <NotStandaloneAlert
+          shown={runningInBrowser && isMobile()}
+          setShown={setRunningInBrowser}
+        />
         <Outlet />
       </div>
     </div>

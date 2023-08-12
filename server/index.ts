@@ -3,6 +3,6 @@ export {
   getFirebaseAnalytics,
   getFirebaseConfig,
   getFirebaseAuth,
-  getFirebaseStorage
+  getFirebaseStorage,
 } from "./firebase/init";
 export type { FirebaseConfig } from "./firebase/types";

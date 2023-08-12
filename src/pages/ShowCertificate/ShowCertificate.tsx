@@ -34,7 +34,11 @@ const styles = StyleSheet.create({
     gap: 10,
   },
   name: { width: "100%", fontWeight: "extrabold", fontSize: 30 },
-  qrcodeContainer: {aspectRatio: "1 / 1", width: "40%", marginHorizontal: "auto"},
+  qrcodeContainer: {
+    aspectRatio: "1 / 1",
+    width: "40%",
+    marginHorizontal: "auto",
+  },
 });
 
 type Certificate = { code: string; uid: string; userName: string };

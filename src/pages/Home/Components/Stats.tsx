@@ -19,13 +19,13 @@ export function Stats(props: {
     }
   }, [props.data]);
 
-  useEffect(() => {
-    if (congratsPopupVisible) {
-      document.body.style.overflowY = "hidden";
-    } else {
-      document.body.style.overflowY = "scroll";
-    }
-  }, [congratsPopupVisible])
+  // useEffect(() => {
+  //   if (congratsPopupVisible) {
+  //     document.body.style.overflowY = "hidden";
+  //   } else {
+  //     document.body.style.overflowY = "scroll";
+  //   }
+  // }, [congratsPopupVisible])
 
   const getKmsPercent = (): number => {
     return Math.floor((props.data.totalKms / MAX_KMS_BEFORE_LICENSE) * 100);
@@ -33,23 +33,9 @@ export function Stats(props: {
 
   const { t } = useTranslation();
 
-  const getLeastPracticedTypeOfRoad = () => {
-    const trips = props.data.tripsByRoadType;
-    const total =
-      trips.city + trips.countryside + trips.expressway + trips.highway;
-    const arr = [
-      trips.city,
-      trips.countryside,
-      trips.expressway,
-      trips.highway,
-    ].sort();
-
-    return;
-  };
-
   return (
     <>
-      <CenteredPopup
+      {/* <CenteredPopup
         visible={congratsPopupVisible}
         setVisible={setCongratsPopupVisible}
       >
@@ -66,20 +52,23 @@ export function Stats(props: {
         <p className="text-grayblue-500 text-lg">
           {t("homepage.stats.congratsPopup.tipsParagraph")}
         </p>
-        {/* <p>
+        <p>
           {(props.data.tripsByRoadType.city)}
-        </p> */}
-      </CenteredPopup>
-
+        </p>
+      </CenteredPopup> */}
 
       <section className="p-6 my-4 bg-grayblue-800 rounded-lg">
-
-        <h2 className="font-bold text-2xl mb-3">Félicitations</h2>
-        <p className="text-slate-500 text-lg mb-6">Téléchargez votre certificat officiel de fin de conduite accompagnée pour passer votre permis</p>
-        <Cta type="link" to="certificate">Obtenir mon certificat</Cta>
-
+        <h2 className="font-bold text-2xl mb-3">
+          {t("homepage.stats.congratsPopup.title")}
+          {" 🎉"}
+        </h2>
+        <p className="text-slate-500 text-lg mb-6">
+          {t("homepage.stats.congratsPopup.subtitle")}
+        </p>
+        <Cta type="link" to="certificate" color="gradient">
+          {t("homepage.stats.congratsPopup.buttonContent")}
+        </Cta>
       </section>
-
 
       <section className="rounded-xl h-max py-6 px-8 mt-2 text-white bg-gradient-to-tr from-sky-600 to-indigo-600">
         <div className="grid grid-cols-3 items-center justify-between">
@@ -165,19 +154,6 @@ export function Stats(props: {
               <span className="font-medium text-md sm:text-lg">Permis</span>
             </div>
           </main>
-        </div>
-
-        <div className="h-full w-fit rounded-lg p-5 md:p-6 bg-white dark:bg-grayblue-600">
-          <p className="font-medium text-md sm:text-lg text-neutral-400">
-            Prochain rdv
-          </p>
-          <p className="text-3xl font-bold break-words">
-            {getKmsPercent() === 0
-              ? "Rendez-vous préalable"
-              : getKmsPercent() <= 50
-              ? "1er rendez-vous"
-              : "Permis"}
-          </p>
         </div>
       </section>
 

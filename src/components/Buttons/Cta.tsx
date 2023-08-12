@@ -4,9 +4,9 @@ import { Link } from "react-router-dom";
 export type CtaProps = {
   children: string | ReactNode;
   className?: string;
-  disabled?: boolean,
+  disabled?: boolean;
   type: "button" | "link";
-  color?: "normal" | "warning" | "danger";
+  color?: "normal" | "warning" | "danger" | "gradient";
   to?: string;
   onClick?: CallableFunction;
   btnType?: "button" | "reset" | "submit";
@@ -18,8 +18,10 @@ export function Cta(props: CtaProps) {
       ? "bg-red-600 hover:bg-red-800"
       : props.color === "warning"
       ? "bg-orange-600 hover:bg-orange-800"
+      : props.color === "gradient"
+      ? "bg-gradient-to-r from-[#DA22FF] to-[#9733EE]"
       : "bg-brand-600 hover:bg-brand-800"
-  } text-white font-semibold w-full rounded-lg px-8 p-4 flex items-center justify-center gap-4 transition-colors transition-opacity duration-300 disabled:bg-grayblue-500 disabled:opacity-50`;
+  } text-white font-semibold w-full rounded-xl px-8 p-4 flex items-center justify-center gap-4 transition-colors transition-opacity duration-300 disabled:bg-grayblue-500 disabled:opacity-50`;
 
   return props.type === "button" ? (
     <button

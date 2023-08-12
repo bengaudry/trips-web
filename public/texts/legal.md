@@ -4,14 +4,14 @@
 
 **Adresse e-mail :** bengaudry@outlook.fr
 
-**Adresse postale :** *Rue de l'Egalerie, 42100 Saint-Étienne*
+**Adresse postale :** _Rue de l'Egalerie, 42100 Saint-Étienne_
 
 **Hébergement de l'application** : L'application est hébergée sur la plateforme Firebase de Google, dont le siège social est situé à l'adresse suivante :
 
-*Google LLC
+_Google LLC
 1600 Amphitheatre Parkway
 Mountain View, CA 94043
-USA*
+USA_
 
 ## Données personnelles
 

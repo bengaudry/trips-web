@@ -106,7 +106,6 @@ export function Add() {
 
   return (
     <div className="px-5 py-16 pb-44">
-
       <Notification
         visible={errorVisible}
         setVisible={setErrorVisible}

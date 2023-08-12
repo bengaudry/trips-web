@@ -31,4 +31,4 @@ L'application propose un mode freemium, qui vous permet d'utiliser gratuitement 
 ## Droit applicable
 
 L'application est soumise au droit français.
-`
+`;

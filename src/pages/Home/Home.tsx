@@ -21,10 +21,10 @@ export function Home() {
 
   const changePanel = (val: number) => {
     if (val === 0 || val === 1) {
-      setCurrentPanel(val)
+      setCurrentPanel(val);
     }
-    return
-  }
+    return;
+  };
 
   const calculateDataForStats = (): StatsData => {
     // Define a basic object to return

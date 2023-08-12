@@ -19,12 +19,12 @@ export function Install() {
         current={platform}
         className="my-4"
       />
-      {platform === 0 ? (
+      {platforms[platform] === "Ios" ? (
         <div>
           <img
             src="/ios-install.gif"
             alt=""
-            className="h-calc(100vh-12rem) aspect-[828/1792] mx-auto"
+            className="h-calc(100vh-20rem) aspect-[828/1792] mx-auto"
           />
           <ol className="py-4 flex flex-col gap-3">
             <li className="bg-grayblue-800 py-2 px-4 rounded-xl">

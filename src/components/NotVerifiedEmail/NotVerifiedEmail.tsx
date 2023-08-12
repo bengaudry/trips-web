@@ -27,7 +27,13 @@ export function NotVerifiedEmailPopup(props: { className?: string }) {
         })
         .catch((err) => {
           // Error while sending email
-          showNotif(`Error while sending ${err.replaceAll("FirebaseError: Firebase: Error", "")}`, "error");
+          showNotif(
+            `Error while sending ${err.replaceAll(
+              "FirebaseError: Firebase: Error",
+              ""
+            )}`,
+            "error"
+          );
         });
     } else {
       showNotif(
