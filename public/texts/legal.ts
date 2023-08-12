@@ -3,7 +3,7 @@ export const legal = `
 
 **Editeur de l'application :** Ben Gaudry
 
-**Adresse e-mail :** bengaudry@outlook.fr
+**Adresse e-mail :** trips.clients@gmail.com
 
 **Adresse postale :** *Rue de l'Egalerie, 42100 Saint-Étienne*
 

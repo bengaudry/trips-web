@@ -1,15 +1,17 @@
-import { deleteUser, updatePassword, User } from "firebase/auth";
-import { ChangeEvent, useState, ReactNode } from "react";
-import { getFirebaseAuth } from "../../../../../server";
-import { Cta, Modal } from "../../../../components";
+import { useState, ReactNode } from "react";
+import { Modal } from "../../../../components";
 import { useTranslation } from "react-i18next";
-import { Input } from "../../../../components/form";
+import {
+  ChangePass as ChangePassModal,
+  DeleteAccount as DeleteAccountModal,
+  RequestData as RequestDataModal,
+} from "./components";
 
 export function Button(props: {
   children: ReactNode;
   icon: string;
   noborder?: boolean;
-  onClick?: CallableFunction;
+  onClick?: () => void;
 }) {
   return (
     <button
@@ -28,39 +30,23 @@ export function Button(props: {
   );
 }
 
+type Modals = "ChangePass" | "DeleteAccount" | "RequestData";
+
 export function ProfilePopup() {
   const { t } = useTranslation();
 
-  const [newPass, setNewPass] = useState("");
-  const [newPassConfirm, setNewPassConfirm] = useState("");
-
+  const [currModal, setCurrModal] = useState<Modals>("ChangePass");
   const [modalShown, setModalShown] = useState(false);
-  const [currentModal, setCurrentModal] = useState<
-    "changePass" | "deleteAccount" | "downloadData"
-  >("changePass");
-  const [modalTitle, setModalTitle] = useState("");
 
-  const showModal = (
-    modal: "changePass" | "deleteAccount" | "downloadData"
-  ) => {
-    let modalTitle: string;
-    switch (modal) {
-      case "changePass":
-        modalTitle = "Change password";
-        break;
+  const currentModalView = {
+    ChangePass: <ChangePassModal />,
+    DeleteAccount: <DeleteAccountModal />,
+    RequestData: <RequestDataModal />,
+  }[currModal];
 
-      case "deleteAccount":
-        modalTitle = "Delete your account";
-        break;
-
-      case "downloadData":
-        modalTitle = "Download your data";
-        break;
-    }
-    setModalTitle(modalTitle);
-
+  const showModal = (modal: Modals) => {
+    setCurrModal(modal);
     setModalShown(true);
-    setCurrentModal(modal);
   };
 
   return (
@@ -72,83 +58,33 @@ export function ProfilePopup() {
       <div className="rounded-lg w-full bg-neutral-200 dark:bg-grayblue-800">
         <Button icon="user">Account information</Button>
 
-        <Button icon="lock" onClick={() => showModal("changePass")}>
+        <Button icon="lock" onClick={() => showModal("ChangePass")}>
           Change your password
         </Button>
-        <Button icon="download" onClick={() => showModal("downloadData")}>
-          Download my data
+        <Button icon="download" onClick={() => showModal("RequestData")}>
+          Request my data
         </Button>
         <Button
           icon="trash"
-          onClick={() => showModal("deleteAccount")}
+          onClick={() => showModal("DeleteAccount")}
           noborder
         >
           Deactivate your account
         </Button>
       </div>
 
-      <Modal showFn={setModalShown} isShown={modalShown} title={modalTitle}>
-        {currentModal === "changePass" ? (
-          <>
-            <Input
-              type="password"
-              className="dark:bg-grayblue-800"
-              name={
-                t("settingsPage.popups.profile.placeholders.newPass") as string
-              }
-              value={newPass}
-              onChange={(event) => setNewPass(event.target.value)}
-            />
-            <Input
-              type="password"
-              className="dark:bg-grayblue-800"
-              name={
-                t(
-                  "settingsPage.popups.profile.placeholders.newPassConfirm"
-                ) as string
-              }
-              value={newPassConfirm}
-              onChange={(event) => setNewPassConfirm(event.target.value)}
-            />
-            <Cta
-              type="button"
-              btnType="submit"
-              className="mt-6"
-              onClick={() => {
-                if (newPass === newPassConfirm) {
-                  updatePassword(
-                    getFirebaseAuth().currentUser as User,
-                    newPass
-                  ).catch((err) => alert(err));
-                }
-              }}
-            >
-              {t("settingsPage.popups.profile.buttons.changePass")}
-            </Cta>
-          </>
-        ) : currentModal === "downloadData" ? (
-          <Cta type="button">Download my data</Cta>
-        ) : (
-          <>
-            <p className="text-lg text-grayblue-500 mb-4">
-              This action is definitive
-            </p>
-            <Cta
-              type="button"
-              color="danger"
-              onClick={() => {
-                if (confirm("Confirmez la suppression")) {
-                  if (getFirebaseAuth().currentUser) {
-                    localStorage.setItem("connected", "false");
-                    deleteUser(getFirebaseAuth().currentUser as User);
-                  }
-                }
-              }}
-            >
-              Delete account
-            </Cta>
-          </>
-        )}
+      <Modal
+        showFn={setModalShown}
+        isShown={modalShown}
+        title={
+          currModal === "ChangePass"
+            ? "Change password"
+            : currModal === "DeleteAccount"
+            ? "Deactivate my account"
+            : "Request my data"
+        }
+      >
+        {currentModalView}
       </Modal>
     </>
   );
