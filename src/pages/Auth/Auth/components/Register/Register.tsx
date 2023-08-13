@@ -59,6 +59,7 @@ export function RegisterPage(props: { onSignInClick: () => void }) {
         <p className="block text-grayblue-500 w-full text-center text-md mb-4 mt-20">
           Already have an account ?{" "}
           <button
+            type="button"
             className="text-brand-400 dark:text-white"
             onClick={props.onSignInClick}
           >
