@@ -14,13 +14,7 @@ import {
 } from "./pages";
 
 // Auth pages and layout
-import {
-  AuthLayout,
-  Landing,
-  RegisterPage,
-  SignInPage,
-  ResetPassword,
-} from "./pages/auth";
+import { AuthLayout, Landing, Auth } from "./pages/auth";
 
 // Styles
 import "/src/assets/index.css";
@@ -110,9 +104,7 @@ export default function App() {
           <Routes>
             <Route path="/" element={<AuthLayout />}>
               <Route index element={<Landing />} />
-              <Route path="signin" element={<SignInPage />} />
-              <Route path="register" element={<RegisterPage />} />
-              <Route path="reset" element={<ResetPassword />} />
+              <Route path="auth" element={<Auth />} />
               <Route path="*" element={<Landing />} />
             </Route>
           </Routes>

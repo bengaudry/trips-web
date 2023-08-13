@@ -1,25 +1,25 @@
 import { sendPasswordResetEmail } from "firebase/auth";
-import { Input } from "../../../components/form";
-import { getFirebaseAuth } from "../../../../server";
-import { BackButton, Cta } from "../../../components";
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Input } from "../../../../../components/form";
+import { getFirebaseAuth } from "../../../../../../server";
+import { Cta } from "../../../../../components";
+import { useEffect, useState } from "react";
 
-export function ResetPassword() {
-  const [email, setEmail] = useState("");
+export function ResetPassword(props: { email?: string }) {
+  const [email, setEmail] = useState(props.email ?? "");
+
+  useEffect(() => {
+    setEmail((prevEmail) => props.email ?? email);
+  }, [props.email]);
 
   return (
-    <div className="p-8 pb-16 absolute bottom-0 w-full">
-      <Link to="/signin">
-        <BackButton onClick={function () {}} />
-      </Link>
-      <h2 className="text-3xl font-semibold">Forgot your password ?</h2>
+    <div>
       <p className="text-grayblue-500">Let's send you an email to reset it</p>
       <form onSubmit={(e) => e.preventDefault()}>
         <Input
           name="email"
           type="email"
           value={email}
+          placeholder="youremail@example.com"
           onChange={(event) => setEmail(event.target?.value)}
         />
         <Cta

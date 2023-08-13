@@ -7,11 +7,11 @@ import {
   sendEmailVerification,
   updateProfile,
 } from "firebase/auth";
-import { Notification, Cta } from "../../../components";
-import { Input } from "../../../components/form";
-import { getFirebaseAuth } from "../../../../server";
+import { Notification, Cta } from "../../../../../components";
+import { Input } from "../../../../../components/form";
+import { getFirebaseAuth } from "../../../../../../server";
 
-export function RegisterPage() {
+export function RegisterPage(props: { onSignInClick: () => void }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
@@ -21,7 +21,7 @@ export function RegisterPage() {
   const [errorContent, setErrorContent] = useState("");
 
   return (
-    <div className="p-8 pb-16 absolute bottom-0 w-full">
+    <div className="p-8 pb-16 absolute md:static md:grid place-content-center bottom-0 w-full">
       <Notification
         visible={errorVisible}
         setVisible={setErrorVisible}
@@ -58,9 +58,12 @@ export function RegisterPage() {
         />
         <p className="block text-grayblue-500 w-full text-center text-md mb-4 mt-20">
           Already have an account ?{" "}
-          <Link to="/signin" className="text-brand-400 dark:text-white">
+          <button
+            className="text-brand-400 dark:text-white"
+            onClick={props.onSignInClick}
+          >
             Sign In
-          </Link>
+          </button>
           .
         </p>
         <Cta

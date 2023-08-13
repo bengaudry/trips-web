@@ -13,26 +13,26 @@ export function Landing() {
   const cardTwo = useRef(null);
   const cardThree = useRef(null);
 
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        entry.target.classList.toggle(`opacity-0`, !entry.isIntersecting);
-        if (entry.isIntersecting) observer.unobserve(entry.target);
-      });
-    },
-    {
-      threshold: 0.86,
-    }
-  );
+  // const observer = new IntersectionObserver(
+  //   (entries) => {
+  //     entries.forEach((entry) => {
+  //       entry.target.classList.toggle(`opacity-0`, !entry.isIntersecting);
+  //       if (entry.isIntersecting) observer.unobserve(entry.target);
+  //     });
+  //   },
+  //   {
+  //     threshold: 0.45,
+  //   }
+  // );
 
-  useEffect(() => {
-    const cards = [cardOne.current, cardTwo.current, cardThree.current];
+  // useEffect(() => {
+  //   const cards = [cardOne.current, cardTwo.current, cardThree.current];
 
-    cards.forEach((card) => {
-      if (!card) return;
-      observer.observe(card);
-    });
-  });
+  //   cards.forEach((card) => {
+  //     if (!card) return;
+  //     observer.observe(card);
+  //   });
+  // });
 
   if (window.location.toString().includes("https://tripsapp.web.app/")) {
     return (
@@ -44,7 +44,7 @@ export function Landing() {
           Sign in to add a trip or
           <br /> to see your previous ones
         </p>
-        <Cta type="link" className="mt-6" to="/signin">
+        <Cta type="link" className="mt-6" to="/auth">
           Let's get started
         </Cta>
       </div>
@@ -59,8 +59,22 @@ export function Landing() {
     }
   >((props, ref) => {
     return (
-      <article ref={ref} className="transition-[opacity] duration-1000">
-        <h4 className="text-2xl font-medium mb-3">{props.title}</h4>
+      <article
+        ref={ref}
+        className="sticky top-0 grid grid-rows-2 lg:grid-rows-1 lg:grid-cols-2 items-center gap-10 transition-opacity duration-1000 h-screen border-b bg-grayblue-900"
+        style={{
+          scrollSnapAlign: "center",
+          boxShadow: "0 -10px 20px 2px #00000050",
+        }}
+      >
+        <div
+          style={{
+            background: 'url("/phones.png")',
+            backgroundPosition: "50% 50%",
+          }}
+          className="h-full bg-no-repeat bg-contain bg-center"
+        />
+        {/* <h4 className="text-2xl font-medium mb-3">{props.title}</h4> */}
         <p className="text-lg sm:text-4xl font-medium max-w-3xl">
           {props.content}
         </p>
@@ -70,7 +84,7 @@ export function Landing() {
 
   return (
     <main>
-      <header className="backdrop-blur-md bg-[#ffffff20] fixed top-0 w-screen left-0 right-0 border-b border-b-[#ffffff50]">
+      <header className="backdrop-blur-md bg-[#ffffff20] fixed z-40 top-0 w-screen left-0 right-0 border-b border-b-[#ffffff50]">
         <div className="max-w- flex flex-row justify-between items-center px-10 py-2">
           <div>
             <img
@@ -79,7 +93,7 @@ export function Landing() {
               className="aspect-square w-12"
             />
           </div>
-          <NavLink to="/signin">
+          <NavLink to="/auth">
             <span>Go to the app</span>
             <i className="fi fi-rr-arrow-right" />
           </NavLink>
@@ -97,7 +111,14 @@ export function Landing() {
         </p>
       </section>
 
-      <section className="flex flex-col gap-32 sm:gap-60 py-64 px-12 sm:px-20">
+      <section
+      // style={{
+      //   scrollSnapType: "y mandatory",
+      //   scrollSnapStop: "always",
+      //   scrollSnapAlign: "top",
+      //   scrollSnapPointsY: "repeat(3, 100vh)",
+      // }}
+      >
         <LandingCard
           ref={cardOne}
           title="Plus intuitive"
@@ -148,7 +169,7 @@ export function Landing() {
       <section>
         <h2>Commencez à utiliser Trips gratuitement</h2>
         <div>
-          <NavLink to="/signin">Accéder à l'app</NavLink>
+          <NavLink to="/auth">Accéder à l'app</NavLink>
           <a href="https://github.com/bengaudry/trips-web">
             Soutenir le projet
           </a>

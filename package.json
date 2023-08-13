@@ -13,6 +13,7 @@
     "only-deploy": "firebase deploy --only hosting:tripsapp --project trips-5bb9a",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
+    "pregit": "yarn run format && git add . && cls && echo Commit now",
     "format": "prettier --write ./lang ./public ./server ./src"
   },
   "dependencies": {
