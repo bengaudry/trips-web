@@ -1,14 +1,23 @@
+// firebase
 import { signOut } from "firebase/auth";
 import { getFirebaseAuth } from "../../../server";
+
+// react
 import { useEffect, useState } from "react";
+
+// components
 import { NotVerifiedEmailPopup, SlidingPage } from "../../components";
 import { Setting } from "./Components/Setting";
 import { ProfilePopup } from "./Components/ProfilePopup/ProfilePopup";
-import { useTranslation } from "react-i18next";
 import { LangPopup } from "./Components/LangPopup/LangPopup";
-import { ReactMarkdown } from "react-markdown/lib/react-markdown";
-import { legal } from "../../../public/texts/legal";
 import { DrivingSchool } from "./Components/DrivingScool/DrivingSchool";
+
+// libs
+import { useTranslation } from "react-i18next";
+import { ReactMarkdown } from "react-markdown/lib/react-markdown";
+
+import { legal } from "../../../public/texts/legal";
+import { APP_VERSION } from "../../lib/constants/appVersion";
 
 type SlidingPages = "profile" | "help" | "language";
 
@@ -19,6 +28,7 @@ export function Settings() {
   const [slidingPageContent, setSlidingPageContent] =
     useState<SlidingPages>("profile");
 
+  // Disable scroll on body when opening popup
   useEffect(() => {
     if (slidingPageVisible) {
       document.body.style.overflow = "hidden";
@@ -93,6 +103,10 @@ export function Settings() {
       ) : (
         <></>
       )}
+
+      <p className="w-full text-center text-neutral-500">
+        App version : {APP_VERSION}
+      </p>
 
       <SlidingPage
         isOpened={slidingPageVisible}

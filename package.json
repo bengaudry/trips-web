@@ -14,7 +14,7 @@
     "only-deploy": "firebase deploy --only hosting:tripsapp --project trips-5bb9a",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
-    "pregit": "node ./updateAppVersion.mjs && yarn run format && git add . && cls && echo Commit now",
+    "pregit": "yarn run format && git add . && cls && node ./updateAppVersion.mjs && echo Commit now",
     "format": "prettier --write ./lang ./public ./server ./src"
   },
   "dependencies": {
