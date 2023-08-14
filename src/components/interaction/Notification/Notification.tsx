@@ -1,4 +1,4 @@
-import { capitalizeString } from "../../lib/functions";
+import { capitalizeString } from "../../../lib/functions";
 
 export function Notification(props: {
   visible: boolean;

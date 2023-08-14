@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import { Cta } from "../Buttons/Cta";
+import { Cta } from "../../Buttons/Cta";
 import { useTranslation } from "react-i18next";
 
 interface CenteredPopupProps {

@@ -1,5 +1,5 @@
 import { sendEmailVerification, User } from "firebase/auth";
-import { getFirebaseAuth } from "../../../server";
+import { getFirebaseAuth } from "../../../../server";
 import { useState } from "react";
 import { Notification } from "../Notification/Notification";
 
