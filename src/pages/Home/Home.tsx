@@ -13,6 +13,7 @@ import { getFirebaseApp, getFirebaseAuth } from "../../../server";
 import { StatsData, Trip } from "../../types/types";
 import { useTranslation } from "react-i18next";
 import { Stats } from "./Components/Stats";
+import { calculateDataForStats } from "../../lib/functions";
 
 export function Home() {
   const [trips, setTrips] = useState<Trip[]>();
@@ -23,69 +24,6 @@ export function Home() {
     if (val === 0 || val === 1) {
       setCurrentPanel(val);
     }
-    return;
-  };
-
-  const calculateDataForStats = (): StatsData => {
-    // Define a basic object to return
-    let r: StatsData = {
-      totalKms: 0,
-      totalDrivingTime: {
-        nb: 0,
-        unit: "hrs",
-      },
-      tripsByRoadType: {
-        countryside: 0,
-        expressway: 0,
-        highway: 0,
-        city: 0,
-      },
-    };
-
-    // Initialize a default duration of 0 minutes
-    // that will be increased in the map()
-    let mins = 0;
-
-    // Map the object trips only once
-    trips?.map((trip) => {
-      // Calculate the nb of kilometers of this trip
-      // and add it to the default value
-      if (!isNaN(trip.length)) {
-        r.totalKms += trip.roundTrip ? trip.length * 2 : trip.length;
-      }
-
-      // Calculate the duration of this trip
-      // and add it to the default value
-      if (!isNaN(trip.duration)) {
-        mins += trip.roundTrip ? trip.duration * 2 : trip.duration;
-      }
-
-      // Increase the number of trips by category
-      if (trip.roadType?.includes("[")) {
-        let roadType: number[] = JSON.parse(trip.roadType as string);
-        if (roadType.includes(0)) {
-          r.tripsByRoadType.countryside++;
-        }
-        if (roadType.includes(1)) {
-          r.tripsByRoadType.expressway++;
-        }
-        if (roadType.includes(2)) {
-          r.tripsByRoadType.highway++;
-        }
-        if (roadType.includes(3)) {
-          r.tripsByRoadType.city++;
-        }
-      }
-    });
-
-    // Convert minutes to hours if necessary
-    if (mins >= 60) {
-      r.totalDrivingTime = { nb: Math.floor(mins / 60), unit: "hrs" };
-    } else {
-      r.totalDrivingTime = { nb: Math.floor(mins), unit: "min" };
-    }
-
-    return r;
   };
 
   useEffect(() => {
@@ -126,6 +64,7 @@ export function Home() {
     <>
       <div className="px-5 py-16">
         <NotVerifiedEmailPopup className="mb-4" />
+
         <p className="text-neutral-500 dark:text-grayblue-400 text-xl mt-1">
           {t("homepage.header.subtitle")}
         </p>
@@ -147,7 +86,7 @@ export function Home() {
           <Stats
             allTrips={allTrips}
             setPanelFn={setCurrentPanel}
-            data={calculateDataForStats()}
+            data={calculateDataForStats(trips)}
           />
         ) : (
           <Trips data={memoizedData} />
