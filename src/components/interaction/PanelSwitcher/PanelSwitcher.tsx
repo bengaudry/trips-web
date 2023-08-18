@@ -1,4 +1,4 @@
-export function TabSlider(props: {
+export function PanelSwitcher(props: {
   tabs: string[];
   onChange: (val: number) => void;
   current: number;
@@ -15,9 +15,10 @@ export function TabSlider(props: {
           width: `calc(100% / ${props.tabs.length} - 0.25rem)`,
           transform: `translateX(${props.current * 100}%)`,
         }}
-      ></div>
+      />
+
       {props.tabs.map((tab, index) => (
-        <div
+        <button
           className={`text-center w-full z-20`}
           onClick={() => {
             props.onChange(index);
@@ -33,7 +34,7 @@ export function TabSlider(props: {
           >
             {tab}
           </span>
-        </div>
+        </button>
       ))}
     </div>
   );

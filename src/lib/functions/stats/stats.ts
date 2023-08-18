@@ -62,10 +62,8 @@ export function calculateDataForStats(trips?: Trip[]): StatsData {
 
   if (r.totalKms >= MAX_KMS_BEFORE_LICENSE) {
     localStorage.setItem("max_kms_reached", "true");
-    console.log("adding");
   } else {
     localStorage.removeItem("max_kms_reached");
-    console.log("removing");
   }
   return r;
 }

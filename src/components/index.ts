@@ -8,7 +8,7 @@ export { Cta } from "./Buttons/Cta";
 export { BackButton } from "./Buttons/BackButton/BackButton";
 export { Modal } from "./interaction/Modal/Modal";
 export { PrettyProgress } from "./PrettyProgress/PrettyProgress";
-export { TabSlider } from "./interaction/TabSlider/TabSlider";
+export { PanelSwitcher } from "./interaction/PanelSwitcher/PanelSwitcher";
 export { NotVerifiedEmailPopup } from "./interaction/NotVerifiedEmail/NotVerifiedEmail";
 export { Notification } from "./interaction/Notification/Notification";
 export { CenteredPopup } from "./interaction/CenteredPopup/CenteredPopup";

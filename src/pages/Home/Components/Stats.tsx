@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Cta, TripDisplayer } from "../../../components";
+import { TripDisplayer } from "../../../components";
 import { StatsData, Trip } from "../../../types/types";
 import { StatPill } from "./StatPill";
 import { MAX_KMS_BEFORE_LICENSE } from "../../../lib/constants";
 import { ReachedMaxAlert } from "./ReachedMaxAlert";
+import { NavLink } from "react-router-dom";
 
 export function Stats(props: {
   allTrips?: Trip[];
@@ -27,7 +28,7 @@ export function Stats(props: {
   const { t } = useTranslation();
 
   return (
-    <>
+    <div>
       <ReachedMaxAlert />
 
       <section className="rounded-xl h-max py-6 px-8 mt-2 text-white bg-gradient-to-tr from-sky-600 to-indigo-600">
@@ -128,19 +129,37 @@ export function Stats(props: {
           {t("common.seeAll")}
         </button>
       </div>
-      {props.allTrips?.slice(0, 5).map((trip) => {
-        return (
-          <TripDisplayer
-            from={trip.from}
-            to={trip.to}
-            date={trip.date}
-            length={trip.length}
-            roundTrip={trip.roundTrip}
-            duration={trip.duration}
-            key={trip.key}
+      {props.allTrips && props.allTrips.length > 0 ? (
+        props.allTrips?.slice(0, 5).map((trip) => {
+          return (
+            <TripDisplayer
+              from={trip.from}
+              to={trip.to}
+              date={trip.date}
+              length={trip.length}
+              roundTrip={trip.roundTrip}
+              duration={trip.duration}
+              key={trip.key}
+            />
+          );
+        })
+      ) : (
+        <div className="text-center">
+          <img
+            src="/illustrations/empty-list.png"
+            alt="An illustration of an empty place..."
+            width={300}
+            className="block mx-auto"
           />
-        );
-      })}
-    </>
+          <p>What are you waiting for ?</p>
+          <NavLink
+            to="/add"
+            className="text-brand-400 underline underline-offset-2"
+          >
+            Add your first trip
+          </NavLink>
+        </div>
+      )}
+    </div>
   );
 }

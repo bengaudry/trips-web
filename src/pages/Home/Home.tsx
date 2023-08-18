@@ -14,7 +14,11 @@ import { getFirebaseApp, getFirebaseAuth } from "../../../server";
 import { Trip } from "../../types/types";
 import { calculateDataForStats } from "../../lib/functions";
 
-import { NotVerifiedEmailPopup, PageLayout, TabSlider } from "../../components";
+import {
+  NotVerifiedEmailPopup,
+  PageLayout,
+  PanelSwitcher,
+} from "../../components";
 import { Trips } from "./Components/Trips";
 import { Stats } from "./Components/Stats";
 
@@ -63,10 +67,10 @@ export function Home() {
   const allTrips = memoizedData ? memoizedData : trips ? trips : [];
 
   return (
-    <PageLayout>
-      <NotVerifiedEmailPopup className="mb-4" />
+    <>
+      <PageLayout className="overflow-y-scroll">
+        <NotVerifiedEmailPopup className="mb-4" />
 
-      <header>
         <p className="text-neutral-400 dark:text-grayblue-400 text-xl mt-1">
           {t("homepage.header.subtitle")}
         </p>
@@ -78,23 +82,23 @@ export function Home() {
         </h1>
 
         <div className="dark:bg-grayblue-900/90 backdrop-blur-lg sticky z-20 top-0 py-3">
-          <TabSlider
+          <PanelSwitcher
             tabs={[t("homepage.slider.stats"), t("homepage.slider.trips")]}
             current={currentPanel}
             onChange={(val) => changePanel(val)}
           />
         </div>
-      </header>
 
-      {currentPanel === 0 ? (
-        <Stats
-          allTrips={allTrips}
-          setPanelFn={setCurrentPanel}
-          data={calculateDataForStats(trips)}
-        />
-      ) : (
-        <Trips data={memoizedData} />
-      )}
-    </PageLayout>
+        {currentPanel === 0 ? (
+          <Stats
+            allTrips={allTrips}
+            setPanelFn={setCurrentPanel}
+            data={calculateDataForStats(trips)}
+          />
+        ) : (
+          <Trips data={memoizedData} />
+        )}
+      </PageLayout>
+    </>
   );
 }

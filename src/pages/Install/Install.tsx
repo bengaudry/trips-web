@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { TabSlider } from "../../components";
+import { PanelSwitcher } from "../../components";
 
 export function Install() {
   const platforms = ["Ios", "Android"];
@@ -13,7 +13,7 @@ export function Install() {
         stores de votre appareil. L'installation de l'app reste très simple, il
         vous suffit de suivre ces étapes :
       </p>
-      <TabSlider
+      <PanelSwitcher
         onChange={setPlatform}
         tabs={platforms}
         current={platform}
