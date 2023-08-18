@@ -15,7 +15,9 @@ export async function addTrip(content: Trip) {
     })
     .catch((err) => {
       console.log("Firebase error :", err);
-      alert("Error while sending to the database, please contact us");
+      alert(
+        `Error while sending to the database, please contact us. (Error: ${err})`
+      );
       return false;
     });
 

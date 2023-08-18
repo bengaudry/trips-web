@@ -61,14 +61,20 @@ export function Home() {
       }
 
       // Increase the number of trips by category
-      if (trip.roadType === "Countryroad") {
-        r.tripsByRoadType.countryside++;
-      } else if (trip.roadType === "Expressway") {
-        r.tripsByRoadType.expressway++;
-      } else if (trip.roadType === "Highway") {
-        r.tripsByRoadType.highway++;
-      } else if (trip.roadType === "City") {
-        r.tripsByRoadType.city++;
+      if (trip.roadType?.includes("[")) {
+        let roadType: number[] = JSON.parse(trip.roadType as string);
+        if (roadType.includes(0)) {
+          r.tripsByRoadType.countryside++;
+        }
+        if (roadType.includes(1)) {
+          r.tripsByRoadType.expressway++;
+        }
+        if (roadType.includes(2)) {
+          r.tripsByRoadType.highway++;
+        }
+        if (roadType.includes(3)) {
+          r.tripsByRoadType.city++;
+        }
       }
     });
 

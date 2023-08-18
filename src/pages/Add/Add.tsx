@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Input } from "../../components/form";
 import { Notification, Cta } from "../../components";
 import { getFirebaseAuth } from "../../../server";
@@ -80,6 +80,13 @@ export function Add() {
     if (typeof otherOptState.roundTrip !== "boolean") return false;
     return true;
   };
+
+  // Tries to estimate the duration of a trip with the length
+  useEffect(() => {
+    if (duration === "" && length !== "") {
+      setDuration(length);
+    }
+  }, [length]);
 
   const fetchWeather = (city: string) => {
     if (city.length > 1) {
