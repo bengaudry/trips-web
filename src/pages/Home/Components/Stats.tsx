@@ -84,7 +84,7 @@ export function Stats(props: {
         />
       </section>
 
-      <section className="bg-neutral-200 dark:bg-grayblue-800 flex flex-row justify-between items-start rounded-lg p-4 mt-4 h-44">
+      <section className="bg-neutral-100 dark:bg-grayblue-800 flex flex-row justify-between items-start rounded-lg p-4 mt-4 h-44">
         <div className="flex flex-row h-full gap-1.5">
           <div className="w-1 rounded-full h-full bg-grayblue-600 overflow-hidden">
             <div

@@ -5,7 +5,7 @@ import { hasUserReachedMaxKms } from "../../../lib/functions";
 export function ReachedMaxAlert() {
   if (hasUserReachedMaxKms()) {
     return (
-      <section className="p-6 my-4 bg-neutral-200 dark:bg-grayblue-800 rounded-lg">
+      <section className="p-6 my-4 bg-neutral-100 dark:bg-grayblue-800 rounded-lg">
         <h2 className="font-bold text-2xl mb-3">
           {t("homepage.stats.congratsPopup.title")}
           {" 🎉"}

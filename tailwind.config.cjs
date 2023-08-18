@@ -3,9 +3,7 @@ module.exports = {
   content: ["./src/**/*.{html,js,ts,jsx,tsx}"],
   theme: {
     fontFamily: {
-      sans: [
-        "Poppins, sans-serif"
-      ]
+      sans: ["Poppins, sans-serif"],
     },
     extend: {
       colors: {
@@ -32,6 +30,17 @@ module.exports = {
           800: "#102865",
           900: "#0B1C47",
           950: "#07153A",
+        },
+        neutral: {
+          100: "#EFEFEF",
+          200: "#CECECE",
+          300: "#A7A7A7",
+          400: "#838383",
+          500: "#575757",
+          600: "#3A3A3A",
+          700: "#242424",
+          800: "#151515",
+          900: "#0F0F0F",
         },
       },
     },

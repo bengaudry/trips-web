@@ -35,7 +35,7 @@ export function Modal(props: ModalProps) {
             ""
           )}
           <button onClick={() => props.showFn(false)}>
-            <i className="hidden lg:block fi fi-rr-cross text-neutral-500 -translate-y-2 hover:text-black dark:hover:text-white transition-colors" />
+            <i className="hidden lg:block fi fi-rr-cross text-neutral-400 -translate-y-2 hover:text-black dark:hover:text-white transition-colors" />
           </button>
         </div>
         <>{props.children}</>

@@ -1,6 +1,6 @@
-import { NotVerifiedEmailPopup, TabSlider } from "../../components";
-import { Trips } from "./Components/Trips";
 import { useEffect, useMemo, useState } from "react";
+import { t } from "i18next";
+
 import {
   getFirestore,
   collection,
@@ -10,14 +10,16 @@ import {
   orderBy,
 } from "firebase/firestore";
 import { getFirebaseApp, getFirebaseAuth } from "../../../server";
-import { StatsData, Trip } from "../../types/types";
-import { useTranslation } from "react-i18next";
-import { Stats } from "./Components/Stats";
+
+import { Trip } from "../../types/types";
 import { calculateDataForStats } from "../../lib/functions";
+
+import { NotVerifiedEmailPopup, PageLayout, TabSlider } from "../../components";
+import { Trips } from "./Components/Trips";
+import { Stats } from "./Components/Stats";
 
 export function Home() {
   const [trips, setTrips] = useState<Trip[]>();
-  const { t } = useTranslation();
   const [currentPanel, setCurrentPanel] = useState<0 | 1>(0);
 
   const changePanel = (val: number) => {
@@ -61,13 +63,14 @@ export function Home() {
   const allTrips = memoizedData ? memoizedData : trips ? trips : [];
 
   return (
-    <>
-      <div className="px-5 py-16">
-        <NotVerifiedEmailPopup className="mb-4" />
+    <PageLayout>
+      <NotVerifiedEmailPopup className="mb-4" />
 
-        <p className="text-neutral-500 dark:text-grayblue-400 text-xl mt-1">
+      <header>
+        <p className="text-neutral-400 dark:text-grayblue-400 text-xl mt-1">
           {t("homepage.header.subtitle")}
         </p>
+
         <h1 className="text-4xl font-bold">
           {getFirebaseAuth().currentUser?.displayName
             ? `${getFirebaseAuth().currentUser?.displayName} 👋`
@@ -81,17 +84,17 @@ export function Home() {
             onChange={(val) => changePanel(val)}
           />
         </div>
+      </header>
 
-        {currentPanel === 0 ? (
-          <Stats
-            allTrips={allTrips}
-            setPanelFn={setCurrentPanel}
-            data={calculateDataForStats(trips)}
-          />
-        ) : (
-          <Trips data={memoizedData} />
-        )}
-      </div>
-    </>
+      {currentPanel === 0 ? (
+        <Stats
+          allTrips={allTrips}
+          setPanelFn={setCurrentPanel}
+          data={calculateDataForStats(trips)}
+        />
+      ) : (
+        <Trips data={memoizedData} />
+      )}
+    </PageLayout>
   );
 }

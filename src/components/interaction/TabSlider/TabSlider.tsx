@@ -6,7 +6,7 @@ export function TabSlider(props: {
 }) {
   return (
     <div
-      className={`grid relative p-1 py-1.5 bg-neutral-200 dark:bg-grayblue-800 rounded-lg overflow-hidden ${props.className}`}
+      className={`grid relative p-1 py-1.5 bg-neutral-100 dark:bg-grayblue-800 rounded-lg overflow-hidden ${props.className}`}
       style={{ gridTemplateColumns: `repeat(${props.tabs.length}, 1fr)` }}
     >
       <div
@@ -28,7 +28,7 @@ export function TabSlider(props: {
             className={`${
               props.current === index
                 ? "dark:text-white"
-                : "text-neutral-500 dark:text-grayblue-400"
+                : "text-neutral-400 dark:text-grayblue-400"
             } transition-colors font-medium duration-500`}
           >
             {tab}

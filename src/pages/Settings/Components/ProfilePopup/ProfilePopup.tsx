@@ -15,7 +15,7 @@ export function Button(props: {
 }) {
   return (
     <button
-      className={`w-full text-left text-neutral-500 hover:text-black dark:text-grayblue-500 dark:hover:text-white transition-colors duration-300 px-4 py-2 ${
+      className={`w-full text-left text-neutral-400 hover:text-black dark:text-grayblue-500 dark:hover:text-white transition-colors duration-300 px-4 py-2 ${
         !props.noborder ? "border-b border-white dark:border-grayblue-900" : ""
       }`}
       onClick={() => {
@@ -55,7 +55,7 @@ export function ProfilePopup() {
         {t("settingsPage.popups.profile.title")}
       </h2>
 
-      <div className="rounded-lg w-full bg-neutral-200 dark:bg-grayblue-800">
+      <div className="rounded-lg w-full bg-neutral-100 dark:bg-grayblue-800">
         <Button icon="user">Account information</Button>
 
         <Button icon="lock" onClick={() => showModal("ChangePass")}>

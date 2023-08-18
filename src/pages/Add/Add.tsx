@@ -1,12 +1,15 @@
 import { useEffect, useState } from "react";
+import { t } from "i18next";
+
 import { Input } from "../../components/form";
-import { Notification, Cta } from "../../components";
-import { getFirebaseAuth } from "../../../server";
-import { addTrip } from "../../lib/functions";
-import { useTranslation } from "react-i18next";
+import { Notification, Cta, PageLayout } from "../../components";
 import { OtherOptions } from "./components";
 import type { OtherOptionsT } from "./components";
+
+import { getFirebaseAuth } from "../../../server";
+import { addTrip } from "../../lib/functions";
 import { Weather } from "../../types";
+import { MoreOptBtn } from "./components/MoreOptBtn/MoreOptBtn";
 
 const getCurrentTime = (): string => {
   const now = new Date();
@@ -20,8 +23,6 @@ const getCurrentDate = (): string => {
 };
 
 export function Add() {
-  const { t } = useTranslation();
-
   // Fields values
   const [date, setDate] = useState(getCurrentDate());
   const [time, setTime] = useState(getCurrentTime());
@@ -81,13 +82,6 @@ export function Add() {
     return true;
   };
 
-  // Tries to estimate the duration of a trip with the length
-  useEffect(() => {
-    if (duration === "" && length !== "") {
-      setDuration(length);
-    }
-  }, [length]);
-
   const fetchWeather = (city: string) => {
     if (city.length > 1) {
       const OPW_API_KEY = import.meta.env.VITE_OPENWEATHER_API_KEY;
@@ -127,16 +121,18 @@ export function Add() {
   };
 
   return (
-    <div className="px-5 py-16 pb-44">
+    <PageLayout title={t("addpage.title")}>
       <Notification
         visible={errorVisible}
         setVisible={setErrorVisible}
         type="error"
         content="Veuillez remplir tous les champs"
       />
-      <h1 className="text-4xl font-bold">{t("addpage.title")}</h1>
+
       <form onSubmit={(e) => e.preventDefault()}>
-        <div className="grid grid-flow-col-dense gap-4">
+        {/* Date and time inputs */}
+
+        <section className="grid grid-flow-col-dense gap-4">
           <Input
             name={t("addpage.inputs.labels.date")}
             type="date"
@@ -151,50 +147,58 @@ export function Add() {
             onChange={(event) => setTime(event.target.value)}
             required
           />
-        </div>
-        <Input
-          name={t("addpage.inputs.labels.from")}
-          type="text"
-          value={from}
-          placeholder={t("addpage.inputs.placeholders.from") satisfies string}
-          onChange={(event) => setFrom(event.target.value)}
-          onFocus={() => setFromInputFocused(true)}
-          onBlur={() => setFromInputFocused(false)}
-          required
-        >
-          {/* <Suggestions
+        </section>
+
+        {/* From and destination inputs */}
+
+        <section>
+          <Input
+            name={t("addpage.inputs.labels.from")}
+            type="text"
+            value={from}
+            placeholder={t("addpage.inputs.placeholders.from") satisfies string}
+            onChange={(event) => setFrom(event.target.value)}
+            onFocus={() => setFromInputFocused(true)}
+            onBlur={() => setFromInputFocused(false)}
+            required
+          >
+            {/* <Suggestions
           location={from}
           onChange={(value: string) => {
             setFrom(value);
           }}
           className={`${fromInputFocused ? "" : "hidden"}`}
         /> */}
-        </Input>
-        <Input
-          name={t("addpage.inputs.labels.to")}
-          type="text"
-          value={to}
-          placeholder={t("addpage.inputs.placeholders.to") satisfies string}
-          onChange={(event) => {
-            setTo(event.target.value);
-          }}
-          onFocus={() => {
-            setToInputFocused(true);
-          }}
-          onBlur={(event) => {
-            setToInputFocused(false);
-            console.log(fetchWeather(event.target.value));
-          }}
-          required
-        >
-          {/* <Suggestions
+          </Input>
+          <Input
+            name={t("addpage.inputs.labels.to")}
+            type="text"
+            value={to}
+            placeholder={t("addpage.inputs.placeholders.to") satisfies string}
+            onChange={(event) => {
+              setTo(event.target.value);
+            }}
+            onFocus={() => {
+              setToInputFocused(true);
+            }}
+            onBlur={(event) => {
+              setToInputFocused(false);
+              console.log(fetchWeather(event.target.value));
+            }}
+            required
+          >
+            {/* <Suggestions
           onLocationChange={(value: string) => {
             setTo(value);
           }}
           className={`${toInputFocused ? "" : "hidden"}`}
         /> */}
-        </Input>
-        <div className="grid grid-cols-2 gap-4">
+          </Input>
+        </section>
+
+        {/* Length and duration inputs */}
+
+        <section className="grid grid-cols-2 gap-4">
           <Input
             name={t("addpage.inputs.labels.length")}
             type="number"
@@ -215,22 +219,12 @@ export function Add() {
             onChange={(event) => setDuration(event.target.value)}
             required
           />
-        </div>
-        <button
-          onClick={() => setMoreOptionsOpened(!moreOptionsOpened)}
-          className="block font-semibold my-4 mx-auto"
-        >
-          <span>
-            {moreOptionsOpened
-              ? t("addpage.lessoptbtn")
-              : t("addpage.moreoptbtn")}
-            <i
-              className={`fi fi-rr-angle-small-down inline-block ml-2 transition-transform origin-center duration-300 ${
-                moreOptionsOpened ? "rotate-180" : "rotate-0"
-              }`}
-            ></i>
-          </span>
-        </button>
+        </section>
+
+        <MoreOptBtn
+          isOpened={moreOptionsOpened}
+          setOpened={(val) => setMoreOptionsOpened(val)}
+        />
 
         <OtherOptions
           isOpened={moreOptionsOpened}
@@ -254,6 +248,6 @@ export function Add() {
           Add trip
         </Cta>
       </form>
-    </div>
+    </PageLayout>
   );
 }

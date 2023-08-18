@@ -21,7 +21,7 @@ export function Select(props: SelectProps) {
     <div className="flex flex-col">
       <label
         htmlFor={labelToId(props.name)}
-        className="mt-4 font-medium text-neutral-500 dark:text-grayblue-500"
+        className="mt-4 font-medium text-neutral-400 dark:text-grayblue-500"
       >
         {capitalizeString(props.name).replaceAll("-", " ")}
       </label>
@@ -30,7 +30,7 @@ export function Select(props: SelectProps) {
         className={`${
           isOpened
             ? "bg-neutral-300 dark:bg-grayblue-700"
-            : "bg-neutral-200 dark:bg-grayblue-800"
+            : "bg-neutral-100 dark:bg-grayblue-800"
         } outline-none border-2 border-transparent py-3 px-6 flex flex-row items-center justify-between rounded-xl relative transition-colors duration-300 ${
           props.className
         }`}
@@ -49,10 +49,10 @@ export function Select(props: SelectProps) {
             isOpened ? "scale-y-100" : "scale-y-0"
           } origin-top top-full left-0 pt-2 h-max w-full absolute z-20 transition-transform duration-200 overflow-x-hidden`}
         >
-          <div className="bg-white dark:bg-grayblue-800 border border-neutral-300 dark:border-grayblue-600 py-2 rounded-lg flex flex-col gap-1 max-h-44 overflow-y-scroll">
+          <div className="bg-white dark:bg-grayblue-800 border border-neutral-200 dark:border-grayblue-600 py-2 rounded-lg flex flex-col gap-1 max-h-44 overflow-y-scroll">
             {props.options.map((opt, index) => (
               <div
-                className="px-4 py-1 hover:bg-neutral-200 dark:hover:bg-grayblue-700 cursor-default"
+                className="px-4 py-1 hover:bg-neutral-100 dark:hover:bg-grayblue-700 cursor-default"
                 onClick={() =>
                   props.setSelectedOption(opt.value ? opt.value : opt.name)
                 }

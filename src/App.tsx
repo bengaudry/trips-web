@@ -78,7 +78,7 @@ export default function App() {
   return (
     <>
       {loaderVisible ? (
-        <div className="fixed inset-0 w-screen h-screen bg-neutral-200 dark:bg-black z-[70] grid place-content-center">
+        <div className="fixed inset-0 w-screen h-screen bg-neutral-100 dark:bg-black z-[70] grid place-content-center">
           Loading app...
         </div>
       ) : (

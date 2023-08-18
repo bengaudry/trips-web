@@ -3,6 +3,7 @@ export { SlidingPage } from "./SlidingPage/SlidingPage";
 export { NavBar } from "./NavBar/NavBar";
 export { Loader } from "./Loader/Loader";
 export { Layout } from "./Layout/Layout";
+export { PageLayout } from "./Layout/PageLayout";
 export { Cta } from "./Buttons/Cta";
 export { BackButton } from "./Buttons/BackButton/BackButton";
 export { Modal } from "./interaction/Modal/Modal";
