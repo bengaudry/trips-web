@@ -10,11 +10,11 @@
     "build": "tsc && vite build",
     "preview": "vite preview",
     "test": "vitest",
-    "deploy": "yarn run build && firebase deploy --only hosting:tripsapp --project trips-5bb9a",
+    "deploy": " node ./updateAppVersion.mjs && yarn run build && firebase deploy --only hosting:tripsapp --project trips-5bb9a",
     "only-deploy": "firebase deploy --only hosting:tripsapp --project trips-5bb9a",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
-    "pregit": "yarn run format && git add . && cls && node ./updateAppVersion.mjs && echo Commit now",
+    "pregit": "yarn run format && git add . && cls && echo Commit now",
     "format": "prettier --write ./lang ./public ./server ./src"
   },
   "dependencies": {

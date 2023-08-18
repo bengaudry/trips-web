@@ -27,7 +27,7 @@ export function Stats(props: {
 
   return (
     <>
-      <section className="p-6 my-4 bg-grayblue-800 rounded-lg">
+      <section className="p-6 my-4 bg-neutral-200 dark:bg-grayblue-800 rounded-lg">
         <h2 className="font-bold text-2xl mb-3">
           {t("homepage.stats.congratsPopup.title")}
           {" 🎉"}

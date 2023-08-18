@@ -31,4 +31,4 @@ const newVersion = generateNewVersion(APP_VERSION);
 const content = `export const APP_VERSION = "${newVersion}";\n`;
 
 writeFileSync(versionFilePath, content, "utf-8");
-console.log(`Version updated to ${newVersion} in ${versionFilePath}`);
+console.log(`Version updated to ${newVersion} !`);

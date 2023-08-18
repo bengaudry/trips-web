@@ -1,32 +1,36 @@
-import { useEffect, useState } from "react";
-import {
-  Input,
-  Select,
-  Checkbox,
-  Suggestions,
-  MultiSelect,
-} from "../../components/form";
+import { useState } from "react";
+import { Input } from "../../components/form";
 import { Notification, Cta } from "../../components";
 import { getFirebaseAuth } from "../../../server";
 import { addTrip } from "../../lib/functions";
 import { useTranslation } from "react-i18next";
+import { OtherOptions } from "./components";
+import type { OtherOptionsT } from "./components";
+import { Weather } from "../../types";
+
+const getCurrentTime = (): string => {
+  const now = new Date();
+  const hours = String(now.getHours()).padStart(2, "0");
+  const minutes = String(now.getMinutes()).padStart(2, "0");
+  return `${hours}:${minutes}`;
+};
+
+const getCurrentDate = (): string => {
+  return new Date().toISOString().substr(0, 10);
+};
 
 export function Add() {
   const { t } = useTranslation();
 
   // Fields values
-  const [date, setDate] = useState("");
-  const [time, setTime] = useState("");
+  const [date, setDate] = useState(getCurrentDate());
+  const [time, setTime] = useState(getCurrentTime());
+
   const [from, setFrom] = useState("");
   const [to, setTo] = useState("");
+
   const [length, setLength] = useState("");
   const [duration, setDuration] = useState("");
-  const [roadType, setRoadType] = useState("Countryside");
-  const [trafficDensity, setTrafficDensity] = useState("Average");
-  const [weather, setWeather] = useState("Sun");
-  const [roundTrip, setRoundTrip] = useState(false);
-
-  const [roadTypes, setRoadTypes] = useState<number[]>([]);
 
   // Functionnal states
   const [moreOptionsOpened, setMoreOptionsOpened] = useState(false);
@@ -36,18 +40,32 @@ export function Add() {
   // Error states
   const [errorVisible, setErrorVisible] = useState(false);
 
+  const defaultOtherOptions: OtherOptionsT = {
+    roadTypes: [],
+    trafficDensities: [],
+    weatherTypes: [],
+    roundTrip: false,
+  };
+
+  const [otherOptState, setOtherOptState] = useState(defaultOtherOptions);
+
   const handleSubmit = () => {
+    if (!getFirebaseAuth().currentUser?.emailVerified) {
+      alert("Please verify your email before adding a trip");
+      return;
+    }
+
     addTrip({
       date: date,
       time: time,
-      roadType: roadType,
-      trafficDensity: trafficDensity,
-      weather: weather,
+      roadType: JSON.stringify(otherOptState.roadTypes),
+      trafficDensity: JSON.stringify(otherOptState.trafficDensities),
+      weather: JSON.stringify(otherOptState.weatherTypes),
       from: from,
       to: to,
       length: parseInt(length),
       duration: parseInt(duration),
-      roundTrip: roundTrip,
+      roundTrip: otherOptState.roundTrip,
       uid: getFirebaseAuth().currentUser?.uid as string,
     });
   };
@@ -55,44 +73,41 @@ export function Add() {
   const allFieldsFilled = (): boolean => {
     if (date === "" || !date) return false;
     if (time === "" || !time) return false;
-    if (roadType === "" || !roadType) return false;
-    if (trafficDensity === "" || !trafficDensity) return false;
-    if (weather === "" || !weather) return false;
     if (from === "" || !from) return false;
     if (to === "" || !to) return false;
     if (parseInt(length) <= 0 || length === "" || !length) return false;
     if (parseInt(duration) <= 0 || duration === "" || !duration) return false;
-    if (typeof roundTrip !== "boolean") return false;
+    if (typeof otherOptState.roundTrip !== "boolean") return false;
     return true;
   };
 
   const fetchWeather = (city: string) => {
     if (city.length > 1) {
       const OPW_API_KEY = import.meta.env.VITE_OPENWEATHER_API_KEY;
+
       fetch(
         `https://api.openweathermap.org/data/2.5/weather?q=${city
           .toLowerCase()
           .replaceAll(" ", "-")}&appid=${OPW_API_KEY}`
       )
-        .then((value) => {
-          return value.json();
-        })
+        .then((value) => value.json())
         .then((json) => {
           console.log(json);
+
           if ("weather" in json) {
             const w = json.weather[0].main;
-            if (
-              w === "Clouds" ||
-              w === "Rain" ||
-              w === "Sun" ||
-              w === "Fog" ||
-              w === "Drizzle" ||
-              w === "Wind" ||
-              w === "Snow"
-            ) {
-              setWeather(json.weather[0].main);
+
+            if (Weather.includes(w)) {
+              console.log(Weather.findIndex((elem) => elem === w));
+              setOtherOptState((prevState) => ({
+                ...prevState,
+                weatherTypes: [0],
+              }));
             } else if (w === "Clear") {
-              setWeather("Sun");
+              setOtherOptState((prevState) => ({
+                ...prevState,
+                weatherTypes: [2],
+              }));
             }
           } else {
             throw new Error("The city has not been found");
@@ -196,7 +211,7 @@ export function Add() {
         </div>
         <button
           onClick={() => setMoreOptionsOpened(!moreOptionsOpened)}
-          className="block font-semibold mt-4 mx-auto"
+          className="block font-semibold my-4 mx-auto"
         >
           <span>
             {moreOptionsOpened
@@ -209,109 +224,13 @@ export function Add() {
             ></i>
           </span>
         </button>
-        <div
-          className={`${
-            moreOptionsOpened ? "scale-y-full h-full" : "scale-y-0 h-0"
-          } transition-all origin-top duration-300`}
-        >
-          <MultiSelect
-            name={t("addpage.inputs.labels.roadtype")}
-            selectedOptions={roadTypes}
-            setSelectedOptions={(val) => setRoadTypes(val)}
-            options={[
-              {
-                name: "Countryside",
-              },
-              {
-                name: "Expressway",
-              },
-              {
-                name: "Highway",
-              },
-              {
-                name: "City",
-              },
-            ]}
-          />
-          {/* <Select
-            name={t("addpage.inputs.labels.roadtype")}
-            selectedOption={roadType}
-            setSelectedOption={setRoadType}
-            options={[
-              {
-                name: "Countryside",
-              },
-              {
-                name: "Expressway",
-              },
-              {
-                name: "Highway",
-              },
-              {
-                name: "City",
-              },
-            ]}
-          /> */}
-          <Select
-            name={t("addpage.inputs.labels.traffic")}
-            selectedOption={trafficDensity}
-            setSelectedOption={setTrafficDensity}
-            options={[
-              {
-                name: "Low",
-              },
-              {
-                name: "Average",
-              },
-              {
-                name: "High",
-              },
-              {
-                name: "Heavy",
-              },
-            ]}
-          />
-          <Select
-            name={t("addpage.inputs.labels.weather")}
-            selectedOption={weather}
-            setSelectedOption={setWeather}
-            options={[
-              {
-                name: "Sun",
-                icon: "sun",
-              },
-              {
-                name: "Clouds",
-                icon: "clouds",
-              },
-              {
-                name: "Rain",
-                icon: "cloud-rain",
-              },
-              {
-                name: "Fog",
-                icon: "smog",
-              },
-              {
-                name: "Wind",
-                icon: "wind",
-              },
-              {
-                name: "Snow",
-                icon: "snowflake",
-              },
-              {
-                name: "Drizzle",
-                icon: "cloud-drizzle",
-              },
-            ]}
-          />
-          <Checkbox
-            name={t("addpage.inputs.labels.roundtrip")}
-            checked={roundTrip}
-            setChecked={(val) => setRoundTrip(val)}
-          />
-        </div>
+
+        <OtherOptions
+          isOpened={moreOptionsOpened}
+          otherOptState={otherOptState}
+          setOtherOptState={setOtherOptState}
+        />
+
         <Cta
           type="button"
           btnType="submit"
