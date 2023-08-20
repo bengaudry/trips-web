@@ -1,12 +1,18 @@
-import { NavLink } from "react-router-dom";
-import { Cta } from "../../../components";
 import {
   MutableRefObject,
   ReactNode,
   forwardRef,
   useEffect,
   useRef,
+  useState,
 } from "react";
+import { NavLink } from "react-router-dom";
+
+import { Input } from "../../../components/form";
+import { Cta } from "../../../components";
+import { getFirestore, collection, addDoc } from "firebase/firestore";
+import { getFirebaseApp } from "../../../../server";
+import { getFormattedDate } from "../../../lib/functions";
 
 export function Landing() {
   const cardOne = useRef(null);
@@ -82,8 +88,112 @@ export function Landing() {
     );
   });
 
+  const [joinBetaPopupShown, setJoinBetaPopupShown] = useState(false);
+  const [betaEmailInputFocused, setBetaEmailInputFocused] = useState(false);
+  const [betaEmail, setBetaEmail] = useState("");
+  const [emailValid, setEmailValid] = useState<boolean | undefined>(false);
+
+  function isValidEmail(email: string): boolean {
+    const pattern: RegExp = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    return pattern.test(email);
+  }
+
+  useEffect(() => {
+    if (betaEmail === "") {
+      setEmailValid(undefined);
+      return;
+    }
+    setEmailValid(isValidEmail(betaEmail));
+  }, [betaEmail]);
+
+  const getUserDevice = () => {
+    return navigator.platform;
+  };
+
+  const handleNewBetaTester = async () => {
+    if (!betaEmail || betaEmail === "" || !isValidEmail(betaEmail)) return;
+
+    const db = getFirestore(getFirebaseApp());
+    const betaTestersCollection = collection(db, "/betaTesters");
+
+    await addDoc(betaTestersCollection, {
+      email: betaEmail,
+      creationDate: getFormattedDate(),
+      device: getUserDevice(),
+    })
+      .then(() => {
+        setBetaEmail("");
+        setJoinBetaPopupShown(false);
+      })
+      .catch((err) => {
+        console.log("Firebase error :", err);
+        alert(
+          `Error while sending to the database, please contact us. (Error: ${err})`
+        );
+        return false;
+      });
+
+    return true;
+  };
+
   return (
-    <main>
+    <main className="relative">
+      <div
+        className={`${
+          joinBetaPopupShown
+            ? "pointer-events-all opacity-100 backdrop-blur-lg"
+            : "pointer-events-none opacity-0 backdrop-blur-none"
+        } transition-all duration-500 ease-out join-beta-popup fixed grid gap-4 place-content-center w-full h-screen bg-[#00000060] z-50`}
+      >
+        <button
+          onClick={() => setJoinBetaPopupShown(false)}
+          className="absolute z-40 w-full h-screen"
+        />
+
+        <div
+          className={`${
+            joinBetaPopupShown
+              ? "translate-y-0 opacity-100"
+              : "translate-y-10 opacity-0"
+          } flex flex-col z-50 gap-4 max-w-sm lg:max-w-none transition-all duration-500 delay-300`}
+        >
+          <h2 className="text-3xl lg:text-5xl font-semibold">
+            Become a beta tester
+          </h2>
+          <div
+            className={`relative bg-[#00000040] rounded-2xl overflow-hidden  transition-all duration-300 border-2 ${
+              emailValid
+                ? "border-green-400"
+                : emailValid !== undefined
+                ? "border-red-400"
+                : "border-transparent"
+            } ${
+              betaEmailInputFocused
+                ? "shadow-2xl scale-110"
+                : "border-transparent"
+            }`}
+          >
+            <input
+              type="email"
+              placeholder="Your email"
+              className="w-full bg-transparent  px-6 py-3  outline-none"
+              onChange={(e) => setBetaEmail(e.target.value)}
+              onFocus={() => setBetaEmailInputFocused(true)}
+              onBlur={() => setBetaEmailInputFocused(false)}
+            />
+            <button
+              className="absolute grid place-content-center right-0 top-0 text-xl h-full aspect-square disabled:text-neutral-400 transition-colors"
+              disabled={
+                !betaEmail || betaEmail === "" || !isValidEmail(betaEmail)
+              }
+              onClick={() => handleNewBetaTester()}
+            >
+              <i className="fi fi-rr-angle-circle-right translate-y-0.5" />
+            </button>
+          </div>
+        </div>
+      </div>
+
       <header className="backdrop-blur-md bg-[#ffffff20] fixed z-40 top-0 w-screen left-0 right-0 border-b border-b-[#ffffff50]">
         <div className="max-w- flex flex-row justify-between items-center px-10 py-2">
           <div>
@@ -109,9 +219,10 @@ export function Landing() {
           simplicité le nombre de kilomètres réalisés durant la conduite
           accompagnée
         </p>
+        <button onClick={() => setJoinBetaPopupShown(true)}>Join beta</button>
       </section>
 
-      <section
+      {/* <section
       // style={{
       //   scrollSnapType: "y mandatory",
       //   scrollSnapStop: "always",
@@ -164,9 +275,9 @@ export function Landing() {
             </>
           }
         />
-      </section>
+      </section> */}
 
-      <section>
+      {/* <section>
         <h2>Commencez à utiliser Trips gratuitement</h2>
         <div>
           <NavLink to="/auth">Accéder à l'app</NavLink>
@@ -174,9 +285,11 @@ export function Landing() {
             Soutenir le projet
           </a>
         </div>
-      </section>
+      </section> */}
 
-      <footer>© 2022 TRIPS. TOUS DROITS RÉSERVÉS</footer>
+      <footer className="h-[10vh] grid place-content-center">
+        © 2022 TRIPS. TOUS DROITS RÉSERVÉS
+      </footer>
     </main>
   );
 }

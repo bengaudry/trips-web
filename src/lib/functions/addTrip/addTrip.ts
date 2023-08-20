@@ -5,7 +5,6 @@ import { strTruish } from "../../functions";
 import { anyTruish } from "../checkings/checkings";
 
 export async function addTrip(content: Trip) {
-  // if (checkTripBeforeSending(content)) {
   const db = getFirestore(getFirebaseApp());
   const tripsCollection = collection(db, "/trips");
 

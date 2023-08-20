@@ -19,7 +19,7 @@ export function Modal(props: ModalProps) {
       <button
         className="absolute z-40 w-full h-screen"
         onClick={() => props.showFn(false)}
-      ></button>
+      />
       <div
         className={`${
           props.isShown
