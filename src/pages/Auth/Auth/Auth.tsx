@@ -19,8 +19,9 @@ export function Auth() {
           currentPage === 1 ? "grid" : "hidden"
         } h-screen md:grid place-content-center`}
       >
-        <RegisterPage onSignInClick={() => setCurrentPage(0)} />
+        {/* <RegisterPage onSignInClick={() => setCurrentPage(0)} /> */}
       </div>
+
       <div
         className={`${
           currentPage === 0 ? "grid" : "hidden"

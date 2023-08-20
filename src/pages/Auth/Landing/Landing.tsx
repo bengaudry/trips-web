@@ -40,22 +40,22 @@ export function Landing() {
   //   });
   // });
 
-  if (window.location.toString().includes("https://tripsapp.web.app/")) {
-    return (
-      <div className="p-8 pb-16 absolute bottom-0 dark:bg-grayblue-800 rounded-t-3xl w-full">
-        <h1 className="text-4xl font-semibold text-center dark:text-white">
-          Trips
-        </h1>
-        <p className="text-lg text-center text-grayblue-500 mt-4">
-          Sign in to add a trip or
-          <br /> to see your previous ones
-        </p>
-        <Cta type="link" className="mt-6" to="/auth">
-          Let's get started
-        </Cta>
-      </div>
-    );
-  }
+  // if (window.location.toString().includes("https://tripsapp.web.app/")) {
+  //   return (
+  //     <div className="p-8 pb-16 absolute bottom-0 dark:bg-grayblue-800 rounded-t-3xl w-full">
+  //       <h1 className="text-4xl font-semibold text-center dark:text-white">
+  //         Trips
+  //       </h1>
+  //       <p className="text-lg text-center text-grayblue-500 mt-4">
+  //         Sign in to add a trip or
+  //         <br /> to see your previous ones
+  //       </p>
+  //       <Cta type="link" className="mt-6" to="/auth">
+  //         Let's get started
+  //       </Cta>
+  //     </div>
+  //   );
+  // }
 
   const LandingCard = forwardRef<
     HTMLDivElement,
@@ -210,7 +210,12 @@ export function Landing() {
         </div>
       </header>
 
-      <section className="bg-gradient-to-r from-[#0284C7] to-[#4F46E5] min-h-[90vh] grid place-content-center pb-12 px-10">
+      <section
+        className="bg-cover bg-center min-h-[90vh] grid place-content-center pb-12 px-10"
+        style={{
+          background: 'url("/gradient.png")',
+        }}
+      >
         <h1 className="text-3xl sm:text-5xl font-bold block max-w-3xl mb-4 sm:mb-8">
           L'application qui rend la conduite accompagnée agréable
         </h1>
@@ -219,7 +224,12 @@ export function Landing() {
           simplicité le nombre de kilomètres réalisés durant la conduite
           accompagnée
         </p>
-        <button onClick={() => setJoinBetaPopupShown(true)}>Join beta</button>
+        <button
+          onClick={() => setJoinBetaPopupShown(true)}
+          className="bg-brand-400 text-white hover:bg-brand-800 transition-colors duration-300 shadow-xl px-6 py-2 rounded-full mt-4 w-max"
+        >
+          Join beta <i className="block fi fi-rr-flask-potion" />
+        </button>
       </section>
 
       {/* <section

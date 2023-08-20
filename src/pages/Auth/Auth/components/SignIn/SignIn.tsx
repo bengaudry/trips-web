@@ -5,6 +5,7 @@ import { Notification, Cta, Modal } from "../../../../../components";
 import { Input } from "../../../../../components/form";
 import { getFirebaseAuth } from "../../../../../../server";
 import { ResetPassword } from "../ResetPassword/ResetPassword";
+import { NavLink } from "react-router-dom";
 
 export function SignInPage(props: { onRegisterClick: () => void }) {
   const [email, setEmail] = useState("");
@@ -83,13 +84,16 @@ export function SignInPage(props: { onRegisterClick: () => void }) {
         </button>
         <p className="block text-grayblue-500 w-full text-center text-md mb-4 mt-20">
           Don't have an account ?{" "}
-          <button
+          {/* <button
             type="button"
             className="text-brand-400 dark:text-white"
             onClick={props.onRegisterClick}
           >
             Register
-          </button>
+          </button> */}
+          <NavLink to="/" className="text-brand-400">
+            Become a beta tester
+          </NavLink>
           .
         </p>
         <Cta type="button" btnType="submit" onClick={handleSignIn}>
