@@ -86,7 +86,7 @@ export function ProfilePopup() {
   };
 
   return (
-    <>
+    <div className="relative h-full">
       <h2 className="text-3xl font-semibold mb-4">
         {t("settingsPage.popups.profile.title")}
       </h2>
@@ -122,10 +122,10 @@ export function ProfilePopup() {
           />
         </div>
 
-        <div className="flex flex-row items-center gap-2 pt-3 w-full">
+        <div className="flex flex-col sm:flex-row items-center gap-2 pt-3 w-full">
           <button
             onClick={() => setEditMode((prevEditMode) => !prevEditMode)}
-            className={`flex flex-row w-max items-center gap-2 border-2 rounded-full pr-6 pl-5 py-2 transition-colors duration-300 border-[#00000030] hover:border-[#00000060] dark:border-[#ffffff30] dark:hover:border-[#ffffff60]`}
+            className={`flex flex-row w-full items-center gap-2 border-2 rounded-full pr-6 pl-5 py-2 transition-colors duration-300 border-[#00000030] hover:border-[#00000060] dark:border-[#ffffff30] dark:hover:border-[#ffffff60]`}
           >
             <i
               className={`block translate-y-0.5 fi fi-rr-${
@@ -137,7 +137,7 @@ export function ProfilePopup() {
 
           <button
             onClick={handleEditProfile}
-            className={`bg-brand-400 w-max border-brand-400 hover:bg-brand-500 hover:border-brand-500 text-white flex flex-row items-center gap-2 border-2 rounded-full pr-6 pl-5 py-2 transition-[transform,background-color,border-color] origin-left duration-200 ${
+            className={`bg-brand-400 w-full border-brand-400 hover:bg-brand-500 hover:border-brand-500 text-white flex flex-row items-center gap-2 border-2 rounded-full pr-6 pl-5 py-2 transition-[transform,background-color,border-color] origin-left duration-200 ${
               editMode ? "scale-x-1" : "scale-x-0"
             }`}
           >
@@ -147,7 +147,7 @@ export function ProfilePopup() {
         </div>
       </section>
 
-      <div className="flex flex-col overflow-hidden gap-0.5 rounded-lg w-full">
+      <div className="flex flex-col overflow-hidden gap-0.5 rounded-lg w-full absolute bottom-6">
         <Button icon="lock" onClick={() => showModal("ChangePass")}>
           Change my password
         </Button>
@@ -172,6 +172,6 @@ export function ProfilePopup() {
       >
         {currentModalView}
       </Modal>
-    </>
+    </div>
   );
 }

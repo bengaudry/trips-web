@@ -6,7 +6,7 @@ export function Loader() {
   useEffect(() => {
     window.setTimeout(() => {
       setWarningVisible(true);
-    }, 5000);
+    }, 3000);
   }, []);
 
   return (

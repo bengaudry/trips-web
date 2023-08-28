@@ -26,21 +26,32 @@ export function Install() {
             alt=""
             className="h-calc(100vh-20rem) aspect-[828/1792] mx-auto"
           />
-          <ol className="py-4 flex flex-col gap-3">
+          <ol className="py-4 pl-6 flex flex-col gap-3 list-decimal">
             <li className="bg-grayblue-800 py-2 px-4 rounded-xl">
-              1 - Appuyez sur le bouton "share" en bas de l'écran
+              Appuyez sur le bouton "share" en bas de l'écran
             </li>
             <li className="bg-grayblue-800 py-2 px-4 rounded-xl">
-              2 - Appuyez sur "Ajouter à l'écran d'accueil"
+              Appuyez sur "Ajouter à l'écran d'accueil"
             </li>
             <li className="bg-grayblue-800 py-2 px-4 rounded-xl">
-              3 - Appuyez sur "Ajouter" en haut à droite
+              Appuyez sur "Ajouter" en haut à droite
             </li>
-            <li className="pt-2 text-center font-semibold">Et c'est tout !</li>
+            <p className="pt-2 text-center font-semibold">Et c'est tout !</p>
           </ol>
         </div>
       ) : (
-        <></>
+        <ol className="py-4 pl-6 flex flex-col gap-3 list-decimal">
+          <li>Sur votre appareil Android, ouvrez Chrome</li>
+          <li>
+            Accédez à un site Web comportant une PWA que vous souhaitez
+            installer.
+          </li>
+          <li>
+            Appuyez sur <strong>Installer</strong>.
+          </li>
+          <li>Suivez les instructions à l'écran.</li>
+          <p className="pt-2 text-center font-semibold">Et c'est tout !</p>
+        </ol>
       )}
     </div>
   );

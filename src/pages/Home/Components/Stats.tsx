@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { TripDisplayer } from "../../../components";
+import { SecondaryText, TripDisplayer } from "../../../components";
 import { StatsData, Trip } from "../../../types/types";
 import { StatPill } from "./StatPill";
 import { MAX_KMS_BEFORE_LICENSE } from "../../../lib/constants";
@@ -122,11 +122,8 @@ export function Stats(props: {
         <h2 className="block text-3xl font-semibold">
           {t("homepage.recent.title")}
         </h2>
-        <button
-          className="block h-fit text-grayblue-500"
-          onClick={() => props.setPanelFn(1)}
-        >
-          {t("common.seeAll")}
+        <button className="block h-fit" onClick={() => props.setPanelFn(1)}>
+          <SecondaryText>{t("common.seeAll")}</SecondaryText>
         </button>
       </div>
       {props.allTrips && props.allTrips.length > 0 ? (

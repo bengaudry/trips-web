@@ -13,3 +13,4 @@ export { NotVerifiedEmailPopup } from "./interaction/NotVerifiedEmail/NotVerifie
 export { Notification } from "./interaction/Notification/Notification";
 export { CenteredPopup } from "./interaction/CenteredPopup/CenteredPopup";
 export { NotStandaloneAlert } from "./interaction/NotStandaloneAlert/NotStandaloneAlert";
+export * from "./texts";

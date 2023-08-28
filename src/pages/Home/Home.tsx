@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import { t } from "i18next";
+import { useTranslation } from "react-i18next";
 
 import {
   getFirestore,
@@ -18,11 +18,14 @@ import {
   NotVerifiedEmailPopup,
   PageLayout,
   PanelSwitcher,
+  SecondaryText,
 } from "../../components";
 import { Trips } from "./Components/Trips";
 import { Stats } from "./Components/Stats";
 
 export function Home() {
+  const { t } = useTranslation();
+
   const [trips, setTrips] = useState<Trip[]>();
   const [currentPanel, setCurrentPanel] = useState<0 | 1>(0);
 
@@ -32,6 +35,7 @@ export function Home() {
     }
   };
 
+  // Fetches user data from firebase
   useEffect(() => {
     const db = getFirestore(getFirebaseApp());
     const tripsCollection = collection(db, "/trips");
@@ -71,9 +75,9 @@ export function Home() {
       <PageLayout className="overflow-y-scroll">
         <NotVerifiedEmailPopup className="mb-4" />
 
-        <p className="text-neutral-400 dark:text-grayblue-400 text-xl mt-1">
+        <SecondaryText className="text-xl mt-1">
           {t("homepage.header.subtitle")}
-        </p>
+        </SecondaryText>
 
         <h1 className="text-4xl font-bold">
           {getFirebaseAuth().currentUser?.displayName

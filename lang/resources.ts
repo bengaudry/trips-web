@@ -16,7 +16,7 @@ export const resources = {
         notStandalone: {
           title: "Install the app",
           text: "Hmm, looks like you are using Trips on your browser. Trips can be installed on your device and it is much more comfortable.",
-          buttonContent: "See how",
+          buttonContent: "Show me how",
         },
       },
     },
@@ -32,7 +32,7 @@ export const resources = {
         notStandalone: {
           title: "Installer l'app",
           text: "Il semblerait que vous utilisiez Trips sur votre navigateur. Trips peut être installé sur votre appareil et c'est beaucoup plus simple.",
-          buttonContent: "Installer",
+          buttonContent: "Montrez moi",
         },
       },
     },
