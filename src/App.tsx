@@ -3,7 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useEffect, useState } from "react";
 
 // App pages and layout
-import { Layout } from "./components";
+import { Layout, Loader } from "./components";
 import {
   Add,
   Home,
@@ -77,13 +77,7 @@ export default function App() {
 
   return (
     <>
-      {loaderVisible ? (
-        <div className="fixed inset-0 w-screen h-screen bg-neutral-100 dark:bg-black z-[70] grid place-content-center">
-          Loading app...
-        </div>
-      ) : (
-        <></>
-      )}
+      {loaderVisible ? <Loader /> : <></>}
 
       {userLoggedIn ? (
         <BrowserRouter>

@@ -1,16 +1,16 @@
-import {
-  MutableRefObject,
-  ReactNode,
-  forwardRef,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
+import { ReactNode, forwardRef, useEffect, useRef, useState } from "react";
 import { NavLink } from "react-router-dom";
 
 import { Input } from "../../../components/form";
 import { Cta } from "../../../components";
-import { getFirestore, collection, addDoc } from "firebase/firestore";
+import {
+  getFirestore,
+  collection,
+  addDoc,
+  getDocs,
+  query,
+  where,
+} from "firebase/firestore";
 import { getFirebaseApp } from "../../../../server";
 import { getFormattedDate } from "../../../lib/functions";
 
@@ -18,6 +18,10 @@ export function Landing() {
   const cardOne = useRef(null);
   const cardTwo = useRef(null);
   const cardThree = useRef(null);
+
+  const isStandaloneMode = () => {
+    return window.matchMedia("(display-mode: standalone)").matches;
+  };
 
   // const observer = new IntersectionObserver(
   //   (entries) => {
@@ -92,6 +96,8 @@ export function Landing() {
   const [betaEmailInputFocused, setBetaEmailInputFocused] = useState(false);
   const [betaEmail, setBetaEmail] = useState("");
   const [emailValid, setEmailValid] = useState<boolean | undefined>(false);
+  const [betaSuccessShown, setBetaSuccessShown] = useState(false);
+  const [emailInUse, setEmailInUse] = useState(true);
 
   function isValidEmail(email: string): boolean {
     const pattern: RegExp = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
@@ -105,6 +111,26 @@ export function Landing() {
     }
     setEmailValid(isValidEmail(betaEmail));
   }, [betaEmail]);
+
+  useEffect(() => {
+    const db = getFirestore(getFirebaseApp());
+    const tripsCollection = collection(db, "/trips");
+
+    const fetchData = async () => {
+      let q = query(tripsCollection, where("email", "==", betaEmail));
+      await getDocs(q)
+        .then((val) => {
+          if (val.docs.length >= 1) {
+            setEmailInUse(true);
+            return;
+          }
+          setEmailInUse(false);
+        })
+        .catch((err) => console.error(`Error while fetching data : ${err}`));
+    };
+
+    fetchData();
+  }, [emailValid]);
 
   const getUserDevice = () => {
     return navigator.platform;
@@ -124,6 +150,8 @@ export function Landing() {
       .then(() => {
         setBetaEmail("");
         setJoinBetaPopupShown(false);
+        setBetaSuccessShown(true);
+        window.setTimeout(() => setBetaSuccessShown(false), 3000);
       })
       .catch((err) => {
         console.log("Firebase error :", err);
@@ -136,8 +164,19 @@ export function Landing() {
     return true;
   };
 
+  if (isStandaloneMode()) {
+    window.location.href = "/auth";
+  }
+
   return (
     <main className="relative">
+      <div
+        className={`fixed z-50 bg-[#00ff8880] rounded-2xl px-6 py-3 backdrop-blur-md top-4 left-4 w-[calc(100vw-2rem)] transition-transform duration-300 ${
+          betaSuccessShown ? "translate-y-0" : "-translate-y-[calc(100%+1rem)]"
+        }`}
+      >
+        You are now on the waitlist
+      </div>
       <div
         className={`${
           joinBetaPopupShown
@@ -147,8 +186,11 @@ export function Landing() {
       >
         <button
           onClick={() => setJoinBetaPopupShown(false)}
-          className="absolute z-40 w-full h-screen"
+          className="absolute z-40 w-full h-screen hover:cursor-default"
         />
+        <button className="fixed top-4 right-4 hover:cursor-pointer">
+          <i className="fi fi-rr-cross"></i>
+        </button>
 
         <div
           className={`${
@@ -162,7 +204,7 @@ export function Landing() {
           </h2>
           <div
             className={`relative bg-[#00000040] rounded-2xl overflow-hidden  transition-all duration-300 border-2 ${
-              emailValid
+              emailValid && !emailInUse
                 ? "border-green-400"
                 : emailValid !== undefined
                 ? "border-red-400"
@@ -191,6 +233,12 @@ export function Landing() {
               <i className="fi fi-rr-angle-circle-right translate-y-0.5" />
             </button>
           </div>
+          <NavLink
+            to="/auth"
+            className="text-neutral-300 underline w-max block mx-auto"
+          >
+            I'm already tester
+          </NavLink>
         </div>
       </div>
 
@@ -203,9 +251,9 @@ export function Landing() {
               className="aspect-square w-12"
             />
           </div>
-          <NavLink to="/auth">
-            <span>Go to the app</span>
-            <i className="fi fi-rr-arrow-right" />
+          <NavLink to="/auth" className="flex flex-row gap-2 font-medium">
+            <span>Sign in</span>
+            <i className="fi fi-rr-arrow-right translate-y-0.5" />
           </NavLink>
         </div>
       </header>
