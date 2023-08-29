@@ -30,6 +30,7 @@ export function Input(props: InputProps) {
         }`}
       >
         {capitalizeString(props.name)}
+        {props.required && " *"}
       </SecondaryText>
       <input
         type={props.type}

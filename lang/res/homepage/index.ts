@@ -21,7 +21,11 @@ export const homepage = {
         tipsParagraph:
           "We have analyzed the way you drive and came up with a few advices for you so you will be more than ready to succeed on D-Day...",
       },
+      whyWaiting: "What are you waiting for ?",
+      seeStatsAppear: "to see your stats here.",
     },
+    addFirstTrip: "Add your first trip",
+    emptyTripsList: "No trips yet",
   },
   fr: {
     header: {
@@ -43,6 +47,10 @@ export const homepage = {
         tipsParagraph:
           "Nous avons analysé votre conduite et nous en avons déduit quelques conseils pour vous perfectionner et être plus que prêt le jour J...",
       },
+      whyWaiting: "Qu'attendez-vous ?",
+      seeStatsAppear: "pour voir vos stats apparaître ici.",
     },
+    addFirstTrip: "Ajoutez un premier trajet",
+    emptyTripsList: "Aucun trajet pour le moment",
   },
 };

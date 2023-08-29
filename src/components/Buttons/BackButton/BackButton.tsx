@@ -9,11 +9,11 @@ export function BackButton(props: {
 
   return (
     <button
-      className="font-medium text-lg mb-8 flex flex-row items-center gap-2"
+      className="font-medium text-lg mb-8 block"
       onClick={(e) => props.onClick(e)}
       aria-label="Go back to previous page"
     >
-      <SecondaryText>
+      <SecondaryText className="flex flex-row items-center gap-2">
         <i className="fi fi-rr-angle-left block text-sm"></i>
         <span className="block h-min -translate-y-0.5">
           {t("common.back", "Back")}

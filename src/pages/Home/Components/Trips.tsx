@@ -4,8 +4,11 @@ import { Trip } from "../../../types/types";
 import { getFirestore, deleteDoc, doc } from "firebase/firestore";
 import { getFirebaseApp } from "../../../../server";
 import { capitalizeString } from "../../../lib/functions";
+import { useTranslation } from "react-i18next";
 
 export function Trips(props: { data?: Trip[] }) {
+  const { t } = useTranslation();
+
   const [modalOpened, setModalOpened] = useState(false);
   const [modalContent, setModalContent] = useState<{
     trip: Trip;
@@ -70,14 +73,16 @@ export function Trips(props: { data?: Trip[] }) {
       ) : (
         <>
           <p className="text-center block w-full text-2xl my-4 mt-8">
-            No trips yet
+            {t("homepage.emptyTripsList")}
           </p>
           <img
-            src="/empty.png"
-            className="block m-auto w-9/12 py-8 rounded-lg overflow-hidden"
+            src="/illustrations/empty-list.png"
+            alt="An illustration of an empty place..."
+            width={300}
+            className="block mx-auto"
           />
           <Cta type="link" to="/add">
-            Add one here
+            {t("homepage.addFirstTrip")}
           </Cta>
         </>
       )}

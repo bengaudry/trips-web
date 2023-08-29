@@ -1,7 +1,6 @@
-import { useEffect, useState } from "react";
-import { t } from "i18next";
+import { useState } from "react";
 
-import { Input } from "../../components/form";
+import { Input, Select } from "../../components/form";
 import { Notification, Cta, PageLayout } from "../../components";
 import { OtherOptions } from "./components";
 import type { OtherOptionsT } from "./components";
@@ -10,6 +9,7 @@ import { getFirebaseAuth } from "../../../server";
 import { addTrip } from "../../lib/functions";
 import { Weather } from "../../types";
 import { MoreOptBtn } from "./components/MoreOptBtn/MoreOptBtn";
+import { useTranslation } from "react-i18next";
 
 const getCurrentTime = (): string => {
   const now = new Date();
@@ -23,6 +23,8 @@ const getCurrentDate = (): string => {
 };
 
 export function Add() {
+  const { t } = useTranslation();
+
   // Fields values
   const [date, setDate] = useState(getCurrentDate());
   const [time, setTime] = useState(getCurrentTime());

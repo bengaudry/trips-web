@@ -19,6 +19,7 @@ import { Setting } from "./Components/Setting";
 import { ProfilePopup } from "./Components/ProfilePopup/ProfilePopup";
 import { LangPopup } from "./Components/LangPopup/LangPopup";
 import { DrivingSchool } from "./Components/DrivingScool/DrivingSchool";
+import { BetaPage } from "./Components/BetaPage/BetaPage";
 
 type SlidingPages = "profile" | "help" | "language";
 
@@ -67,10 +68,17 @@ export function Settings() {
           {t("settingsPage.subtitles.settings")}
         </h3>
 
-        <Setting
+        {/* <Setting
           color="125, 211, 252"
           icon="interrogation"
           name={t("settingsPage.buttons.help")}
+          onClick={() => changeSlidingPage("help")}
+        /> */}
+
+        <Setting
+          color="125, 211, 252"
+          icon="test-tube"
+          name="Beta"
           onClick={() => changeSlidingPage("help")}
         />
 
@@ -119,7 +127,8 @@ export function Settings() {
         {slidingPageContent === "profile" ? (
           <ProfilePopup />
         ) : slidingPageContent === "help" ? (
-          <ReactMarkdown>{legal}</ReactMarkdown>
+          // <ReactMarkdown>{legal}</ReactMarkdown>
+          <BetaPage />
         ) : (
           <LangPopup />
         )}

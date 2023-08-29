@@ -1,5 +1,5 @@
 import { t } from "i18next";
-import { MultiSelect, Checkbox } from "../../../../components/form";
+import { Select, Checkbox } from "../../../../components/form";
 import { Dispatch, SetStateAction } from "react";
 
 export type OtherOptionsT = {
@@ -36,8 +36,9 @@ export function OtherOptions(props: OtherOptProps) {
       } transition-all duration-500 ease-in overflow-hidden`}
     >
       <div className="overflow-hidden">
-        <MultiSelect
+        <Select
           name={t("addpage.inputs.labels.roadtype")}
+          multi
           selectedOptions={roadTypes}
           setSelectedOptions={(val) => editValueInState("roadTypes", val)}
           options={[
@@ -55,8 +56,9 @@ export function OtherOptions(props: OtherOptProps) {
             },
           ]}
         />
-        <MultiSelect
+        <Select
           name={t("addpage.inputs.labels.traffic")}
+          multi
           selectedOptions={trafficDensities}
           setSelectedOptions={(val) =>
             editValueInState("trafficDensities", val)
@@ -64,20 +66,25 @@ export function OtherOptions(props: OtherOptProps) {
           options={[
             {
               name: t("common.trafficDensities.low"),
+              icon: "signal-alt",
             },
             {
               name: t("common.trafficDensities.average"),
+              icon: "signal-alt-1",
             },
             {
               name: t("common.trafficDensities.high"),
+              icon: "signal-alt-2",
             },
             {
               name: t("common.trafficDensities.heavy"),
+              icon: "comment-exclamation",
             },
           ]}
         />
-        <MultiSelect
+        <Select
           name={t("addpage.inputs.labels.weather")}
+          multi
           selectedOptions={weatherTypes}
           setSelectedOptions={(val) => editValueInState("weatherTypes", val)}
           options={[

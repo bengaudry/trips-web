@@ -1,12 +1,21 @@
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { SecondaryText, TripDisplayer } from "../../../components";
+import {
+  RoundedLoader,
+  SecondaryText,
+  TripDisplayer,
+} from "../../../components";
 import { StatsData, Trip } from "../../../types/types";
 import { StatPill } from "./StatPill";
 import { MAX_KMS_BEFORE_LICENSE } from "../../../lib/constants";
 import { ReachedMaxAlert } from "./ReachedMaxAlert";
 import { NavLink } from "react-router-dom";
 import { DrivingSteps } from "./DrivingSteps";
+
+import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
+import { Doughnut } from "react-chartjs-2";
+
+ChartJS.register(ArcElement, Tooltip, Legend);
 
 export function Stats(props: {
   allTrips?: Trip[];
@@ -27,6 +36,7 @@ export function Stats(props: {
   };
 
   const { t } = useTranslation();
+  const { countryside, expressway, highway, city } = props.data.tripsByRoadType;
 
   return (
     <div>
@@ -67,7 +77,7 @@ export function Stats(props: {
         </div>
       </section>
 
-      <section className="grid grid-cols-2 gap-4 mt-4">
+      {/* <section className="grid grid-cols-2 gap-4 my-4">
         <StatPill
           label={t("common.roadTypes.countryroad")}
           nb={props.data.tripsByRoadType.countryside}
@@ -84,7 +94,53 @@ export function Stats(props: {
           label={t("common.roadTypes.city")}
           nb={props.data.tripsByRoadType.city}
         />
-      </section>
+      </section> */}
+
+      {props.data.totalKms > 0 ||
+      countryside > 0 ||
+      expressway > 0 ||
+      highway > 0 ||
+      city > 0 ? (
+        <section className="bg-neutral-100 dark:bg-grayblue-800 rounded-lg p-6 mt-4">
+          <Doughnut
+            data={{
+              labels: [
+                t("common.roadtypes.countryroad"),
+                t("common.roadtypes.expressway"),
+                t("common.roadtypes.highway"),
+                t("common.roadtypes.city"),
+              ],
+              datasets: [
+                {
+                  label: "",
+                  data: [countryside, expressway, highway, city],
+                  backgroundColor: [
+                    "#355bdb",
+                    "#355bdb80",
+                    "#355bdb60",
+                    "#355bdb40",
+                  ],
+                  circumference: 180,
+                  rotation: 270,
+                },
+              ],
+            }}
+            options={{
+              borderColor: "transparent",
+            }}
+          />
+        </section>
+      ) : (
+        <SecondaryText className="text-center mt-4">
+          <NavLink
+            to="/add"
+            className="text-brand-500 underline underline-offset-2"
+          >
+            {t("homepage.addFirstTrip")}
+          </NavLink>{" "}
+          {t("homepage.stats.seeStatsAppear")}
+        </SecondaryText>
+      )}
 
       <section className="bg-neutral-100 dark:bg-grayblue-800 flex flex-row justify-between items-start rounded-lg p-4 mt-4 h-44">
         <DrivingSteps kmsPercent={getKmsPercent()} />
@@ -120,12 +176,12 @@ export function Stats(props: {
             width={300}
             className="block mx-auto"
           />
-          <p>What are you waiting for ?</p>
+          <p>{t("homepage.stats.whyWaiting")}</p>
           <NavLink
             to="/add"
             className="text-brand-400 underline underline-offset-2"
           >
-            Add your first trip
+            {t("homepage.addFirstTrip")}
           </NavLink>
         </div>
       )}
