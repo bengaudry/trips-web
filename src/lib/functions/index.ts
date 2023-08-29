@@ -4,3 +4,4 @@ export * from "./strings/strings";
 export * from "./stats/stats";
 export * from "./reachedMaxKms";
 export * from "./date";
+export { generateNewVersion } from "./versions/versions.js";

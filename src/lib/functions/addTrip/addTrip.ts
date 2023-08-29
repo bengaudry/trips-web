@@ -1,8 +1,7 @@
 import { Trip } from "../../../types/types";
 import { getFirestore, addDoc, collection } from "firebase/firestore";
 import { getFirebaseApp } from "../../../../server";
-import { strTruish } from "../../functions";
-import { anyTruish } from "../checkings/checkings";
+import { strTruish, anyTruish } from "../../functions";
 
 export async function addTrip(content: Trip) {
   const db = getFirestore(getFirebaseApp());

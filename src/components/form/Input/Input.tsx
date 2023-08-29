@@ -1,5 +1,6 @@
 import { ReactNode, useState } from "react";
 import { capitalizeString } from "../../../lib/functions";
+import { SecondaryText } from "../../../components";
 
 type InputProps = {
   name: string;
@@ -23,15 +24,13 @@ export function Input(props: InputProps) {
         props.children ? "relative" : ""
       } flex flex-col w-full mt-4 ${props.className}`}
     >
-      <span
+      <SecondaryText
         className={`font-medium mb-1 transition-colors duration-300 ${
-          inputFocused
-            ? "text-brand-400 dark:text-white"
-            : "text-neutral-400 dark:text-grayblue-500"
+          inputFocused ? "text-brand-400 dark:text-white" : ""
         }`}
       >
         {capitalizeString(props.name)}
-      </span>
+      </SecondaryText>
       <input
         type={props.type}
         id={props.name}

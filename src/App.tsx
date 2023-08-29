@@ -15,6 +15,7 @@ import {
 
 // Auth pages and layout
 import { AuthLayout, Landing, Auth } from "./pages/auth";
+import { Install as InstallPage } from "./pages";
 
 // Styles
 import "/src/assets/index.css";
@@ -25,7 +26,6 @@ import { getFirebaseAuth } from "../server";
 import { resources } from "../lang";
 import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
-import { Install as InstallPage } from "./pages";
 
 // Change the language of the app when it starts
 var lang = "fr";

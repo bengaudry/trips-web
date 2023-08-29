@@ -10,12 +10,16 @@ export function Loader() {
   }, []);
 
   return (
-    <div className="fixed inset-0 w-screen h-screen bg-neutral-100 dark:bg-black z-[70] grid place-content-center">
-      <i className="fi fi-rr-loading loader text-white"></i>
-      <p className="-translate-x-2">Loading...</p>
+    <div className="fixed inset-0 w-screen h-screen bg-neutral-100 dark:bg-black z-[70] flex flex-col justify-between items-center py-32">
+      <div />
+      <div className="flex flex-col items-center gap-2 text-center">
+        <i className="fi fi-rr-loading loader text-white"></i>
+        <p>Loading...</p>
+      </div>
+
       <div
-        className={`absolute bottom-5 left-1/2 -translate-x-1/2 place-content-center gap-2 ${
-          warningVisible ? "grid" : "hidden"
+        className={`grid place-content-center gap-2 px-6 max-w-xs text-center transition-opacity ${
+          warningVisible ? "opacity-1" : "opacity-0"
         }`}
       >
         <p className="text-neutral-400">
@@ -23,7 +27,7 @@ export function Loader() {
         </p>
         <button
           onClick={() => window.location.reload()}
-          className="bg-brand-500 px-6 py-1 rounded-full mx-auto"
+          className="bg-brand-500 text-white px-6 py-1 rounded-full mx-auto"
         >
           Refresh
         </button>

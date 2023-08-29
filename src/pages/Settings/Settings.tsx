@@ -12,6 +12,7 @@ import { APP_VERSION } from "../../lib/constants/appVersion";
 import {
   NotVerifiedEmailPopup,
   PageLayout,
+  SecondaryText,
   SlidingPage,
 } from "../../components";
 import { Setting } from "./Components/Setting";
@@ -97,19 +98,19 @@ export function Settings() {
       {window.location.toString() === "http://localhost:5173/settings" ? (
         <div className="relative p-6">
           <h3 className="text-3xl font-semibold mb-4 mt-10">Mon auto-école</h3>
-          <p className="text-lg text-neutral-400 dark:text-grayblue-500">
+          <SecondaryText className="text-lg">
             Vous n'avez pas rejoint d'auto école. Si votre auto-école utilise
             Trips, demandez leur un code pour rejoindre leur organisation.
-          </p>
+          </SecondaryText>
           <DrivingSchool />
         </div>
       ) : (
         <></>
       )}
 
-      <p className="w-full text-center text-neutral-400">
+      <SecondaryText className="w-full text-center">
         App version : {APP_VERSION}
-      </p>
+      </SecondaryText>
 
       <SlidingPage
         isOpened={slidingPageVisible}

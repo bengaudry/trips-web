@@ -42,11 +42,10 @@ body {
   font-size: 2rem;
   color: #555;
   width: fit-content;
-  height: 2rem;
+  aspect-ratio: 1 / 1;
   line-height: 1rem;
   display: block;
   transform-origin: center;
-  translate: calc(1.5rem - 50%);
   animation: mulShdSpin 2s infinite linear;
 }
 

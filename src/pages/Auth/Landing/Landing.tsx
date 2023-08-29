@@ -44,22 +44,25 @@ export function Landing() {
   //   });
   // });
 
-  // if (window.location.toString().includes("https://tripsapp.web.app/")) {
-  //   return (
-  //     <div className="p-8 pb-16 absolute bottom-0 dark:bg-grayblue-800 rounded-t-3xl w-full">
-  //       <h1 className="text-4xl font-semibold text-center dark:text-white">
-  //         Trips
-  //       </h1>
-  //       <p className="text-lg text-center text-grayblue-500 mt-4">
-  //         Sign in to add a trip or
-  //         <br /> to see your previous ones
-  //       </p>
-  //       <Cta type="link" className="mt-6" to="/auth">
-  //         Let's get started
-  //       </Cta>
-  //     </div>
-  //   );
-  // }
+  if (
+    window.location.toString().includes("https://tripsapp.web.app/") ||
+    isStandaloneMode()
+  ) {
+    return (
+      <div className="p-8 pb-16 absolute bottom-0 dark:bg-grayblue-800 rounded-t-3xl w-full">
+        <h1 className="text-4xl font-semibold text-center dark:text-white">
+          Trips
+        </h1>
+        <p className="text-lg text-center text-grayblue-500 mt-4">
+          Sign in to add a trip or
+          <br /> to see your previous ones
+        </p>
+        <Cta type="link" className="mt-6" to="/auth">
+          Let's get started
+        </Cta>
+      </div>
+    );
+  }
 
   const LandingCard = forwardRef<
     HTMLDivElement,
@@ -164,10 +167,6 @@ export function Landing() {
     return true;
   };
 
-  if (isStandaloneMode()) {
-    window.location.href = "/auth";
-  }
-
   return (
     <main className="relative">
       <div
@@ -188,7 +187,7 @@ export function Landing() {
           onClick={() => setJoinBetaPopupShown(false)}
           className="absolute z-40 w-full h-screen hover:cursor-default"
         />
-        <button className="fixed top-4 right-4 hover:cursor-pointer">
+        <button className="fixed top-4 right-4 hover:cursor-pointer text-white">
           <i className="fi fi-rr-cross"></i>
         </button>
 
@@ -197,9 +196,9 @@ export function Landing() {
             joinBetaPopupShown
               ? "translate-y-0 opacity-100"
               : "translate-y-10 opacity-0"
-          } flex flex-col z-50 gap-4 max-w-sm lg:max-w-none transition-all duration-500 delay-300`}
+          } flex flex-col z-50 gap-4 max-w-sm lg:max-w-none transition-all duration-500 delay-300 px-6`}
         >
-          <h2 className="text-3xl lg:text-5xl font-semibold">
+          <h2 className="text-3xl lg:text-5xl font-semibold text-white">
             Become a beta tester
           </h2>
           <div
@@ -242,7 +241,7 @@ export function Landing() {
         </div>
       </div>
 
-      <header className="backdrop-blur-md bg-[#ffffff20] fixed z-40 top-0 w-screen left-0 right-0 border-b border-b-[#ffffff50]">
+      <header className="backdrop-blur-md bg-[#ffffff20] text-white fixed z-40 top-0 w-screen left-0 right-0 border-b border-b-[#ffffff50]">
         <div className="max-w- flex flex-row justify-between items-center px-10 py-2">
           <div>
             <img
@@ -259,7 +258,7 @@ export function Landing() {
       </header>
 
       <section
-        className="bg-cover bg-center min-h-[90vh] grid place-content-center pb-12 px-10"
+        className="bg-contain bg-center min-h-[90vh] grid place-content-center pb-12 px-10 text-white"
         style={{
           background: 'url("/gradient.png")',
         }}

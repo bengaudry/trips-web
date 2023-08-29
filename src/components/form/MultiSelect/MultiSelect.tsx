@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { SelectOption } from "../types";
 import { capitalizeString } from "../../../lib/functions";
+import { SecondaryText } from "../../texts";
 
 interface MultiSelectProps {
   name: string;
@@ -33,7 +34,7 @@ export function MultiSelect(props: MultiSelectProps) {
 
   return (
     <div className={props.className}>
-      <p className="text-neutral-400 font-medium">{props.name}</p>
+      <SecondaryText className="font-medium">{props.name}</SecondaryText>
       <div
         role="container"
         style={{
@@ -49,16 +50,24 @@ export function MultiSelect(props: MultiSelectProps) {
             style={{
               scrollSnapAlign: "end",
             }}
-            className={`grid place-content-center aspect-square border-2 rounded-lg transition-colors duration-300 ${
+            className={`grid place-content-center py-6 border-2 rounded-lg transition-colors text-black dark:text-white ${
               selectedOptions.includes(index)
-                ? "bg-brand-200 border-brand-600 text-white"
-                : "bg-transparent border-neutral-100 hover:border-neutral-400"
+                ? "border-black hover:bg-neutral-100 dark:border-brand-500 bg-transparent dark:bg-brand-500/10"
+                : "border-neutral-100 hover:bg-neutral-100 dark:border-grayblue-800 dark:hover:border-grayblue-700"
             }`}
             onClick={() => handleOptionClick(index)}
             key={index}
           >
+            {opt.icon ? (
+              <i
+                className={`fi fi-rr-${opt.icon} ${
+                  opt.iconColor ? `text-${opt.iconColor}` : ""
+                }`}
+              ></i>
+            ) : (
+              ""
+            )}
             {opt.name}
-            {opt.icon ? <i className={`fi fi-rr-${opt.icon}`}></i> : ""}
           </button>
         ))}
       </div>

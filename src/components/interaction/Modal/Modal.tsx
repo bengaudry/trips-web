@@ -1,4 +1,5 @@
 import { ReactNode } from "react";
+import { SecondaryText } from "../../texts";
 
 interface ModalProps {
   isShown?: boolean;
@@ -35,7 +36,9 @@ export function Modal(props: ModalProps) {
             ""
           )}
           <button onClick={() => props.showFn(false)}>
-            <i className="hidden lg:block fi fi-rr-cross text-neutral-400 -translate-y-2 hover:text-black dark:hover:text-white transition-colors" />
+            <SecondaryText className="hidden lg:block  hover:text-black dark:hover:text-white transition-colors">
+              <i className="fi fi-rr-cross -translate-y-2" />
+            </SecondaryText>
           </button>
         </div>
         <>{props.children}</>

@@ -1,5 +1,5 @@
 import { test, expect } from "vitest";
-import { generateNewVersion } from "./updateAppVersion";
+import { generateNewVersion } from "../src/lib/functions";
 
 test("0.0.0", () => {
   expect(generateNewVersion("0.0.0")).toBe("0.0.1");

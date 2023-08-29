@@ -6,6 +6,7 @@ import { StatPill } from "./StatPill";
 import { MAX_KMS_BEFORE_LICENSE } from "../../../lib/constants";
 import { ReachedMaxAlert } from "./ReachedMaxAlert";
 import { NavLink } from "react-router-dom";
+import { DrivingSteps } from "./DrivingSteps";
 
 export function Stats(props: {
   allTrips?: Trip[];
@@ -86,36 +87,7 @@ export function Stats(props: {
       </section>
 
       <section className="bg-neutral-100 dark:bg-grayblue-800 flex flex-row justify-between items-start rounded-lg p-4 mt-4 h-44">
-        <div className="flex flex-row h-full gap-1.5">
-          <div className="w-1 rounded-full h-full bg-grayblue-600 overflow-hidden">
-            <div
-              className="w-full h-full bg-brand-300 rounded-full transition-transform origin-top"
-              style={{ transform: `scaleY(${getKmsPercent()}%)` }}
-            ></div>
-          </div>
-          <main className="flex flex-col justify-between h-full">
-            <div className="flex flex-row items-center gap-2">
-              <span className="inline-block w-12 sm:w-16 text-center font-medium text-md sm:text-xl bg-white rounded-full text-grayblue-900">
-                0
-              </span>
-              <span className="font-medium text-md sm:text-lg">
-                Rdv préalable
-              </span>
-            </div>
-            <div className="flex flex-row items-center gap-2">
-              <span className="inline-block w-12 sm:w-16 text-center font-medium text-md sm:text-xl bg-white rounded-full text-grayblue-900">
-                {MAX_KMS_BEFORE_LICENSE / 2}
-              </span>
-              <span className="font-medium text-md sm:text-lg">1er rdv</span>
-            </div>
-            <div className="flex flex-row items-center gap-2">
-              <span className="inline-block w-12 sm:w-16 text-center font-medium text-md sm:text-xl bg-white rounded-full text-grayblue-900">
-                {MAX_KMS_BEFORE_LICENSE}
-              </span>
-              <span className="font-medium text-md sm:text-lg">Permis</span>
-            </div>
-          </main>
-        </div>
+        <DrivingSteps kmsPercent={getKmsPercent()} />
       </section>
 
       <div className="flex flex-row items-center justify-between mt-8 mb-4 ">

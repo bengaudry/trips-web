@@ -48,7 +48,7 @@ export function SignInPage(props: { onRegisterClick: () => void }) {
   };
 
   return (
-    <div className="p-8 pb-16 absolute md:static md:grid md:place-content-center bottom-0 w-full">
+    <div className="px-8 py-16 overflow-scroll md:grid md:place-content-center w-full h-max">
       <Modal
         showFn={setResetPassModalShown}
         isShown={resetPassModalShown}
