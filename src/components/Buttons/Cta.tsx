@@ -21,7 +21,7 @@ export function Cta(props: CtaProps) {
       : props.color === "gradient"
       ? "bg-gradient-to-r from-[#DA22FF] to-[#9733EE]"
       : "bg-brand-600 hover:bg-brand-800"
-  } text-white font-semibold w-full rounded-xl px-8 p-4 flex items-center justify-center gap-4 transition-colors transition-opacity duration-300 disabled:bg-grayblue-500 disabled:opacity-50`;
+  } text-white font-semibold w-full rounded-xl px-8 p-4 flex items-center justify-center gap-4 transition-colors transition-opacity duration-300 disabled:bg-grayblue-500/70 disabled:text-neutral-300 disabled:opacity-100 disabled:cursor-not-allowed`;
 
   return props.type === "button" ? (
     <button

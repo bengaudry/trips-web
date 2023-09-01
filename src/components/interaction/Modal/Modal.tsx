@@ -5,7 +5,7 @@ interface ModalProps {
   isShown?: boolean;
   showFn: CallableFunction;
   children: ReactNode;
-  title?: string;
+  title?: string | ReactNode;
   unClosable?: boolean;
 }
 
@@ -49,11 +49,9 @@ export function Modal(props: ModalProps) {
         }`}
       >
         <div className="w-12 mb-10 h-1 bg-grayblue-500 rounded-full m-auto lg:hidden"></div>
-        <div className="flex flex-row items-center justify-between">
-          {props.title ? (
-            <h2 className="text-3xl font-semibold mb-4 px-8">{props.title}</h2>
-          ) : (
-            ""
+        <div className="flex flex-row items-center justify-between px-8">
+          {props.title && (
+            <h2 className="text-2xl font-semibold mb-4">{props.title}</h2>
           )}
           <button onClick={() => props.showFn(false)}>
             <SecondaryText className="hidden lg:block  hover:text-black dark:hover:text-white transition-colors">

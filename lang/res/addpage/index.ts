@@ -1,8 +1,6 @@
 export const addpage = {
   en: {
     title: "Add a trip",
-    moreoptbtn: "See more options",
-    lessoptbtn: "See less options",
     inputs: {
       labels: {
         date: "Date",
@@ -11,9 +9,9 @@ export const addpage = {
         to: "To",
         length: "Length",
         duration: "Duration",
-        roadtype: "Road type",
-        traffic: "Traffic density",
-        weather: "Weather",
+        roadtype: "Road types",
+        traffic: "Traffic densities",
+        weather: "Weathers",
         roundtrip: "Round trip",
       },
       placeholders: {
@@ -27,8 +25,6 @@ export const addpage = {
   },
   fr: {
     title: "Ajouter un trajet",
-    moreoptbtn: "Voir plus d'options",
-    lessoptbtn: "Voir moins d'options",
     inputs: {
       labels: {
         date: "Date",
@@ -37,9 +33,9 @@ export const addpage = {
         to: "Lieu d'arrivée",
         length: "Distance",
         duration: "Durée",
-        roadtype: "Type de voie",
-        traffic: "Densité de circulation",
-        weather: "Météo",
+        roadtype: "Type de voies",
+        traffic: "Densités de circulation",
+        weather: "Météos",
         roundtrip: "Aller-retour",
       },
       placeholders: {

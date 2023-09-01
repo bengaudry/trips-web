@@ -1,12 +1,25 @@
 import { useEffect, useState } from "react";
-import { TripDisplayer, Cta, Modal } from "../../../../components";
+import {
+  TripDisplayer,
+  Cta,
+  Modal,
+  SecondaryText,
+} from "../../../../components";
 import { Trip } from "../../../../types/types";
-import { getFirestore, deleteDoc, doc } from "firebase/firestore";
+import { getFirestore, deleteDoc, doc, updateDoc } from "firebase/firestore";
 import { getFirebaseApp } from "../../../../../server";
 import { capitalizeString } from "../../../../lib/functions";
 import { useTranslation } from "react-i18next";
+import { Checkbox } from "../../../../components/form";
 
-export function Trips(props: { data?: Trip[] }) {
+function removeElementAtIndex<T>(array: Array<T>, index: number) {
+  return array.slice(0, index).concat(array.slice(index + 1)); //remove the element at that position and concatenate
+}
+
+export function Trips(props: {
+  data?: Trip[];
+  onDataChange: (newData: Trip[]) => void;
+}) {
   const { t } = useTranslation();
 
   const [modalOpened, setModalOpened] = useState(false);
@@ -23,6 +36,14 @@ export function Trips(props: { data?: Trip[] }) {
     }
   }, [modalOpened]);
 
+  const [roundTrip, setRoundTrip] = useState<boolean | undefined>(
+    modalContent?.trip.roundTrip
+  );
+
+  useEffect(() => {
+    setRoundTrip(modalContent?.trip.roundTrip);
+  }, [modalContent]);
+
   const handleDeleteTrip = () => {
     if (confirm("Do you really want to delete this trip ?")) {
       const db = getFirestore(getFirebaseApp());
@@ -30,7 +51,15 @@ export function Trips(props: { data?: Trip[] }) {
       if (modalContent?.trip.id) {
         deleteDoc(doc(db, "/trips", modalContent?.trip.id as string))
           .then(() => {
-            window.location.href = "";
+            if (props.data) {
+              let newData = removeElementAtIndex(
+                [...props.data],
+                modalContent.key
+              );
+              props.onDataChange(newData);
+            } else {
+              window.location.reload();
+            }
           })
           .catch((err) => {
             alert(err);
@@ -39,6 +68,27 @@ export function Trips(props: { data?: Trip[] }) {
         console.error("Error: id is undefined");
       }
     }
+  };
+
+  const handleRoundTripChange = (val: boolean) => {
+    setRoundTrip(val);
+    const db = getFirestore(getFirebaseApp());
+    let ref = doc(db, "/trips", modalContent?.trip.id as string);
+    console.log("id", modalContent?.trip.id);
+    updateDoc(ref, { roundTrip: val })
+      .then(() => {
+        if (props.data && modalContent?.key !== undefined) {
+          let newData = [...props.data];
+          newData[modalContent.key] = {
+            ...newData[modalContent.key],
+            roundTrip: val,
+          };
+          props.onDataChange(newData);
+        } else {
+          window.location.reload();
+        }
+      })
+      .catch((err) => alert(err));
   };
 
   return (
@@ -55,16 +105,32 @@ export function Trips(props: { data?: Trip[] }) {
               }}
             />
           ))}
-          <Modal showFn={setModalOpened} isShown={modalOpened}>
-            <h2 className="text-xl mb-4 font-semibold">
-              <span>{capitalizeString(modalContent?.trip.from)}</span>
-              {modalContent?.trip.roundTrip ? (
-                <i className="fi fi-rr-exchange inline-block mx-3 translate-y-0.5"></i>
-              ) : (
-                <i className="fi fi-rr-arrow-right inline-block mx-3 translate-y-0.5"></i>
-              )}
-              <span>{capitalizeString(modalContent?.trip.to)}</span>
-            </h2>
+          <Modal
+            showFn={setModalOpened}
+            isShown={modalOpened}
+            title={
+              <>
+                <span>{capitalizeString(modalContent?.trip.from)}</span>
+                {modalContent?.trip.roundTrip ? (
+                  <i className="fi fi-rr-exchange inline-block mx-3 translate-y-0.5"></i>
+                ) : (
+                  <i className="fi fi-rr-arrow-right inline-block mx-3 translate-y-0.5"></i>
+                )}
+                <span>{capitalizeString(modalContent?.trip.to)}</span>
+              </>
+            }
+          >
+            <SecondaryText className="text-lg mb-4">
+              {modalContent?.trip.length}kms - {modalContent?.trip.duration}min
+              <br />
+              {modalContent?.trip.date &&
+                new Date(modalContent.trip.date).toLocaleDateString()}
+            </SecondaryText>
+            <Checkbox
+              name={t("addpage.inputs.labels.roundtrip")}
+              checked={!!roundTrip}
+              setChecked={handleRoundTripChange}
+            />
             <Cta type="button" color="danger" onClick={handleDeleteTrip}>
               Delete trip
             </Cta>

@@ -22,10 +22,9 @@ import {
   PanelSwitcher,
   SecondaryText,
 } from "../../../components";
-import { Input } from "../../../components/form";
 import { Trips } from "./Components/Trips";
 import { Stats } from "./Components/Stats";
-import { User, updateCurrentUser, updateProfile } from "firebase/auth";
+import { SetUserNameModal } from "./Components/SetUserNameModal";
 
 export function Home() {
   const { t } = useTranslation();
@@ -35,7 +34,6 @@ export function Home() {
 
   const displayName = getFirebaseAuth().currentUser?.displayName;
   const [userNameUnset, setUserNameUnset] = useState(!displayName);
-  const [newDisplayName, setNewDisplayName] = useState("");
 
   const changePanel = (val: number) => {
     if (val === 0 || val === 1) {
@@ -78,8 +76,6 @@ export function Home() {
   const memoizedData = useMemo(() => trips, [trips]);
   const allTrips = memoizedData ? memoizedData : trips ? trips : [];
 
-  console.log("name", getFirebaseAuth().currentUser?.displayName);
-
   return (
     <>
       <PageLayout className="overflow-y-scroll">
@@ -96,35 +92,7 @@ export function Home() {
             title="Hey ! We haven't met yet"
             unClosable
           >
-            <SecondaryText>
-              Looks like we haven't met yet ! How should we call you ?
-            </SecondaryText>
-            <Input
-              name="Your name"
-              type="text"
-              value={newDisplayName}
-              onChange={(e) => setNewDisplayName(e.target.value)}
-            />
-            <Cta
-              type="button"
-              className="mt-4"
-              onClick={() => {
-                if (
-                  newDisplayName.length >= 2 &&
-                  getFirebaseAuth().currentUser
-                ) {
-                  updateProfile(getFirebaseAuth().currentUser as User, {
-                    displayName: newDisplayName,
-                  })
-                    .then(() => setUserNameUnset(false))
-                    .catch((err) => {
-                      console.error(err);
-                    });
-                }
-              }}
-            >
-              Submit
-            </Cta>
+            <SetUserNameModal setUserNameUnset={setUserNameUnset} />
           </Modal>
         )}
 
@@ -149,7 +117,12 @@ export function Home() {
             data={calculateDataForStats(trips)}
           />
         ) : (
-          <Trips data={memoizedData} />
+          <Trips
+            data={memoizedData}
+            onDataChange={(newData) => {
+              setTrips(newData);
+            }}
+          />
         )}
       </PageLayout>
     </>
