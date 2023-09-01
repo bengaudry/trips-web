@@ -29,3 +29,10 @@ yarn run build
 ```sh
 yarn run deploy
 ```
+
+## Contribute
+### Commit 
+
+Please commit with the following types :
+
+![Commit types](https://github.com/bengaudry/trips-web/public/readme/commit-types.png?raw=true")
