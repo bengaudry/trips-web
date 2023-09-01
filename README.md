@@ -50,7 +50,7 @@ Please commit with the following types :
 
 See the example below :
 
-````sh
+```sh
 yarn pregit
 git commit -m "type: message"
 git push
