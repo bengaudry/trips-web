@@ -1,6 +1,6 @@
 # Trips
 
-Trips est une application web progressive qui permet d'enregistrer ses trajets de conduite accompagnée de manière simple et intuitive. 
+Trips est une application web qui permet d'enregistrer ses trajets de conduite accompagnée de manière simple et intuitive. 
 
 Elle se trouve sur [cette url](https://tripsapp.web.app).
 
@@ -11,31 +11,29 @@ Elle se trouve sur [cette url](https://tripsapp.web.app).
 ```sh
 git clone https://github.com/bengaudry/trips.git
 cd trips
-yarn install 
+yarn 
 ```
 
 ### Run
 
-```sh
-yarn dev
-```
+To run locally on your computer, use `yarn dev`.
 
-### Build
-```sh
-yarn run build
-```
+To try the app on your phone, use `yarn tunnel`. 
+
+### Tests
+
+The tests are made with Vitest. To run them, use `yarn test`.
 
 ### Deploy
-```sh
-yarn run deploy
-```
+
+To deploy a new version of the app online, use `yarn deploy`.
 
 ## Contribute
 ### Commit 
 
-Please avoid using `git add .`. Instead, use `yarn pregit`. It formats the entire code before commiting.
+Please avoid using `git add -A`. Instead, use `yarn pregit`. It formats the entire code before commiting.
 
-Please commit with the following types :
+Please commit using the following types :
 
 | ID        | Title                   | Description                                                   |
 |-----------|-------------------------|---------------------------------------------------------------|
