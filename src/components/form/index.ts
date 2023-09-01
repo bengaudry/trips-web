@@ -1,4 +1,4 @@
 export { Input } from "./Input/Input";
 export { Select } from "./Select/Select";
-export { Suggestions } from "./Suggestions/Suggestions";
+export { CitySuggestions } from "./CitySuggestions/CitySuggestions";
 export { Checkbox } from "./Checkbox/Checkbox";

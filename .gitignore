@@ -27,6 +27,9 @@ dist-ssr
 .firebase
 **.prproj
 
+# Temp
+vitest.config.ts.timestamp-**.mjs
+
 # Confidential
 server/firebase/config.ts
 .env

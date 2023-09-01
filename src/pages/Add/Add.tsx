@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import { Input, Select } from "../../components/form";
+import { Input, CitySuggestions } from "../../components/form";
 import { Notification, Cta, PageLayout } from "../../components";
 import { OtherOptions } from "./components";
 import type { OtherOptionsT } from "./components";
@@ -164,13 +164,13 @@ export function Add() {
             onBlur={() => setFromInputFocused(false)}
             required
           >
-            {/* <Suggestions
-          location={from}
-          onChange={(value: string) => {
-            setFrom(value);
-          }}
-          className={`${fromInputFocused ? "" : "hidden"}`}
-        /> */}
+            <CitySuggestions
+              location={from}
+              onChange={(value) => {
+                setFrom(value);
+              }}
+              shown={fromInputFocused && from.length >= 3}
+            />
           </Input>
           <Input
             name={t("addpage.inputs.labels.to")}
@@ -189,12 +189,13 @@ export function Add() {
             }}
             required
           >
-            {/* <Suggestions
-          onLocationChange={(value: string) => {
-            setTo(value);
-          }}
-          className={`${toInputFocused ? "" : "hidden"}`}
-        /> */}
+            <CitySuggestions
+              location={to}
+              onChange={(value) => {
+                setTo(value);
+              }}
+              shown={toInputFocused && to.length >= 3}
+            />
           </Input>
         </section>
 

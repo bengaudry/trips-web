@@ -22,15 +22,6 @@ export function Stats(props: {
   setPanelFn: CallableFunction;
   data: StatsData;
 }) {
-  const [congratsPopupVisible, setCongratsPopupVisible] = useState(false);
-
-  useEffect(() => {
-    if (props.data.totalKms >= MAX_KMS_BEFORE_LICENSE) {
-      setCongratsPopupVisible(true);
-      localStorage.setItem("max_kms_reached", JSON.stringify(true));
-    }
-  }, [props.data]);
-
   const getKmsPercent = (): number => {
     return Math.floor((props.data.totalKms / MAX_KMS_BEFORE_LICENSE) * 100);
   };
@@ -42,92 +33,66 @@ export function Stats(props: {
     <div>
       <ReachedMaxAlert />
 
-      <section className="rounded-xl h-max py-6 px-8 mt-2 text-white bg-gradient-to-tr from-sky-600 to-indigo-600">
-        <div className="grid grid-cols-3 items-center justify-between">
-          <div className="flex flex-col items-center">
-            <span className="text-3xl font-bold">
-              {props.data.totalKms > MAX_KMS_BEFORE_LICENSE
-                ? `${MAX_KMS_BEFORE_LICENSE}+`
-                : props.data.totalKms === MAX_KMS_BEFORE_LICENSE
-                ? MAX_KMS_BEFORE_LICENSE
-                : props.data.totalKms}
-            </span>
-            <span className="text-grayblue-200 text-lg font-medium">km</span>
-          </div>
+      {props.data.totalKms > 0 && (
+        <section className="rounded-xl h-max py-6 px-8 mt-2 text-white bg-gradient-to-tr from-sky-600 to-indigo-600">
+          <div className="grid grid-cols-3 items-center justify-between">
+            <div className="flex flex-col items-center">
+              <span className="text-3xl font-bold">
+                {props.data.totalKms > MAX_KMS_BEFORE_LICENSE
+                  ? `${MAX_KMS_BEFORE_LICENSE}+`
+                  : props.data.totalKms === MAX_KMS_BEFORE_LICENSE
+                  ? MAX_KMS_BEFORE_LICENSE
+                  : props.data.totalKms}
+              </span>
+              <span className="text-grayblue-200 text-lg font-medium">km</span>
+            </div>
 
-          <div className="flex flex-col items-center">
-            <span className="text-3xl font-bold">{props.allTrips?.length}</span>
-            <span className="text-grayblue-200 text-lg font-medium">
-              {t(
-                props.allTrips && props.allTrips.length > 1
-                  ? "common.trips"
-                  : "common.trip"
-              )}
-            </span>
-          </div>
+            <div className="flex flex-col items-center">
+              <span className="text-3xl font-bold">
+                {props.allTrips?.length}
+              </span>
+              <span className="text-grayblue-200 text-lg font-medium">
+                {t(
+                  props.allTrips && props.allTrips.length > 1
+                    ? "common.trips"
+                    : "common.trip"
+                )}
+              </span>
+            </div>
 
-          <div className="flex flex-col items-center">
-            <span className="text-3xl font-bold">
-              {props.data.totalDrivingTime.nb}
-            </span>
-            <span className="text-grayblue-200 text-lg font-medium">
-              {props.data.totalDrivingTime.unit}
-            </span>
+            <div className="flex flex-col items-center">
+              <span className="text-3xl font-bold">
+                {props.data.totalDrivingTime.nb}
+              </span>
+              <span className="text-grayblue-200 text-lg font-medium">
+                {props.data.totalDrivingTime.unit}
+              </span>
+            </div>
           </div>
-        </div>
-      </section>
-
-      {/* <section className="grid grid-cols-2 gap-4 my-4">
-        <StatPill
-          label={t("common.roadTypes.countryroad")}
-          nb={props.data.tripsByRoadType.countryside}
-        />
-        <StatPill
-          label={t("common.roadTypes.expressway")}
-          nb={props.data.tripsByRoadType.expressway}
-        />
-        <StatPill
-          label={t("common.roadTypes.highway")}
-          nb={props.data.tripsByRoadType.highway}
-        />
-        <StatPill
-          label={t("common.roadTypes.city")}
-          nb={props.data.tripsByRoadType.city}
-        />
-      </section> */}
+        </section>
+      )}
 
       {props.data.totalKms > 0 ||
       countryside > 0 ||
       expressway > 0 ||
       highway > 0 ||
       city > 0 ? (
-        <section className="bg-neutral-100 dark:bg-grayblue-800 rounded-lg p-6 mt-4">
-          <Doughnut
-            data={{
-              labels: [
-                t("common.roadtypes.countryroad"),
-                t("common.roadtypes.expressway"),
-                t("common.roadtypes.highway"),
-                t("common.roadtypes.city"),
-              ],
-              datasets: [
-                {
-                  label: "",
-                  data: [countryside, expressway, highway, city],
-                  backgroundColor: [
-                    "#355bdb",
-                    "#355bdb80",
-                    "#355bdb60",
-                    "#355bdb40",
-                  ],
-                  circumference: 180,
-                  rotation: 270,
-                },
-              ],
-            }}
-            options={{
-              borderColor: "transparent",
-            }}
+        <section className="grid grid-cols-2 gap-4 my-4">
+          <StatPill
+            label={t("common.roadTypes.countryroad")}
+            nb={props.data.tripsByRoadType.countryside}
+          />
+          <StatPill
+            label={t("common.roadTypes.expressway")}
+            nb={props.data.tripsByRoadType.expressway}
+          />
+          <StatPill
+            label={t("common.roadTypes.highway")}
+            nb={props.data.tripsByRoadType.highway}
+          />
+          <StatPill
+            label={t("common.roadTypes.city")}
+            nb={props.data.tripsByRoadType.city}
           />
         </section>
       ) : (

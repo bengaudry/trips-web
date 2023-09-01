@@ -35,6 +35,7 @@ export function Input(props: InputProps) {
       <input
         type={props.type}
         id={props.name}
+        autoComplete="off"
         className={`bg-transparent w-full py-3 px-6 rounded-lg outline-none border-2 border-neutral-200 dark:border-grayblue-700 shadow-sm shadow-transparent focus:shadow-blue-600/20 focus:border-blue-600 focus:shadow-2xl transition-colors dark:placeholder:text-grayblue-500`}
         onChange={(e) => {
           if (props.onChange) props.onChange(e);
@@ -44,13 +45,16 @@ export function Input(props: InputProps) {
           setInputFocused(true);
         }}
         onBlur={(e) => {
-          if (props.onBlur) props.onBlur(e);
-          setInputFocused(false);
+          setTimeout(() => {
+            if (props.onBlur) props.onBlur(e);
+            setInputFocused(false);
+          }, 200);
         }}
         value={props.value}
         required={props.required}
         placeholder={props.placeholder}
       />
+      {props.children}
     </div>
   );
 }
