@@ -33,6 +33,8 @@ yarn run deploy
 ## Contribute
 ### Commit 
 
+Please avoid using `git add .`. Instead, use `yarn pregit`. It formats the entire code before commiting.
+
 Please commit with the following types :
 
 | ID        | Title                   | Description                                                   |
@@ -46,3 +48,10 @@ Please commit with the following types :
 | style:    | Styles                  | Changes that do not affect the meaning of the code            |
 | test      | Tests                   | Adding missing tests or correcting existing ones              |
 
+See the example below :
+
+````sh
+yarn pregit
+git commit -m "type: message"
+git push
+```
