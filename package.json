@@ -9,7 +9,7 @@
     "tunnel": "vite --host",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "test": "vitest updateAppVersion",
+    "test": "vitest",
     "deploy": " node ./updateAppVersion.mjs && yarn run build && firebase deploy --only hosting:tripsapp --project trips-5bb9a",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",

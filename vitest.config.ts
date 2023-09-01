@@ -3,7 +3,7 @@ import { defineConfig } from 'vitest/config'
 
 export default defineConfig({
   test: {
-    name: "versionning",
-    root: "./__tests__"
+    includeSource: ["./src", "./__tests__"],
+    exclude: ["./node_modules", "./dist", "./server"]
   },
 })

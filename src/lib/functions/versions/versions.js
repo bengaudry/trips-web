@@ -4,10 +4,11 @@ export function generateNewVersion(oldVersion) {
   let one = parseInt(nbs[0]);
   let two = parseInt(nbs[1]);
   let three = parseInt(nbs[2]);
-  let four = parseInt(nbs[4]);
+  let four = parseInt(nbs[3]);
 
   if (four >= 9) {
     four = 0;
+
     if (three >= 9) {
       three = 0;
 
@@ -24,5 +25,5 @@ export function generateNewVersion(oldVersion) {
     four++;
   }
 
-  return `${one}.${two}.${three}`;
+  return `${one}.${two}.${three}.${four}`;
 }

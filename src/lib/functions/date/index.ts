@@ -1,13 +1,13 @@
 /**
  * Adds a zero before a number (ex: (7) => "07")
  */
-const addZeroBefore = (nb: number) => {
+export function addZeroBefore(nb: number) {
   let strNb = nb + "";
   if (strNb.length === 1) {
     return `0${nb}`;
   }
-  return nb;
-};
+  return nb.toString();
+}
 
 /**
  * Returns the current date in the format "dd/mm/yyyy"
