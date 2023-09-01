@@ -35,4 +35,14 @@ yarn run deploy
 
 Please commit with the following types :
 
-![Commit types](https://github.com/bengaudry/trips-web/public/readme/commit-types.png?raw=true)
+| ID        | Title                   | Description                                                   |
+|-----------|-------------------------|---------------------------------------------------------------|
+| build:    | Builds                  | Changes that affect the build system or external dependencies |
+| docs:     | Documentation           | Documentation only changes                                    |
+| feat:     | Features                | A new feature                                                 |
+| fix:      | Bug fixes               | A bug fix                                                     |
+| perf:     | Performance improvments | A code change that improves performances                      |
+| refactor: | Code refactoring        | A code change that neither fixes a bug nor add a feature      |
+| style:    | Styles                  | Changes that do not affect the meaning of the code            |
+| test      | Tests                   | Adding missing tests or correcting existing ones              |
+
