@@ -15,19 +15,27 @@ import { Trip } from "../../../types/types";
 import { calculateDataForStats } from "../../../lib/functions";
 
 import {
+  Cta,
+  Modal,
   NotVerifiedEmailPopup,
   PageLayout,
   PanelSwitcher,
   SecondaryText,
 } from "../../../components";
+import { Input } from "../../../components/form";
 import { Trips } from "./Components/Trips";
 import { Stats } from "./Components/Stats";
+import { User, updateCurrentUser, updateProfile } from "firebase/auth";
 
 export function Home() {
   const { t } = useTranslation();
 
   const [trips, setTrips] = useState<Trip[]>();
   const [currentPanel, setCurrentPanel] = useState<0 | 1>(0);
+
+  const displayName = getFirebaseAuth().currentUser?.displayName;
+  const [userNameUnset, setUserNameUnset] = useState(!displayName);
+  const [newDisplayName, setNewDisplayName] = useState("");
 
   const changePanel = (val: number) => {
     if (val === 0 || val === 1) {
@@ -70,6 +78,8 @@ export function Home() {
   const memoizedData = useMemo(() => trips, [trips]);
   const allTrips = memoizedData ? memoizedData : trips ? trips : [];
 
+  console.log("name", getFirebaseAuth().currentUser?.displayName);
+
   return (
     <>
       <PageLayout className="overflow-y-scroll">
@@ -78,6 +88,45 @@ export function Home() {
         <SecondaryText className="text-xl mt-1">
           {t("homepage.header.subtitle")}
         </SecondaryText>
+
+        {userNameUnset && (
+          <Modal
+            showFn={new Function()}
+            isShown={userNameUnset}
+            title="Hey ! We haven't met yet"
+            unClosable
+          >
+            <SecondaryText>
+              Looks like we haven't met yet ! How should we call you ?
+            </SecondaryText>
+            <Input
+              name="Your name"
+              type="text"
+              value={newDisplayName}
+              onChange={(e) => setNewDisplayName(e.target.value)}
+            />
+            <Cta
+              type="button"
+              className="mt-4"
+              onClick={() => {
+                if (
+                  newDisplayName.length >= 2 &&
+                  getFirebaseAuth().currentUser
+                ) {
+                  updateProfile(getFirebaseAuth().currentUser as User, {
+                    displayName: newDisplayName,
+                  })
+                    .then(() => setUserNameUnset(false))
+                    .catch((err) => {
+                      console.error(err);
+                    });
+                }
+              }}
+            >
+              Submit
+            </Cta>
+          </Modal>
+        )}
 
         <h1 className="text-4xl font-bold">
           {getFirebaseAuth().currentUser?.displayName

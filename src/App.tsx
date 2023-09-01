@@ -89,8 +89,8 @@ export default function App() {
               <Route path="certificate" element={<Certificate />} />
               <Route path="install" element={<InstallPage />} />
               <Route path="*" element={<NoPage />} />
+              <Route path="show-certificate" element={<ShowCertificate />} />
             </Route>
-            <Route path="show-certificate" element={<ShowCertificate />} />
           </Routes>
         </BrowserRouter>
       ) : (

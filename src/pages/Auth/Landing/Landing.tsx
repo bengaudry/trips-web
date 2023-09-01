@@ -145,24 +145,32 @@ export function Landing() {
     const db = getFirestore(getFirebaseApp());
     const betaTestersCollection = collection(db, "/betaTesters");
 
-    await addDoc(betaTestersCollection, {
-      email: betaEmail,
-      creationDate: getFormattedDate(),
-      device: getUserDevice(),
-    })
-      .then(() => {
-        setBetaEmail("");
-        setJoinBetaPopupShown(false);
-        setBetaSuccessShown(true);
-        window.setTimeout(() => setBetaSuccessShown(false), 3000);
-      })
-      .catch((err) => {
-        console.log("Firebase error :", err);
-        alert(
-          `Error while sending to the database, please contact us. (Error: ${err})`
-        );
-        return false;
-      });
+    let q = query(betaTestersCollection, where("email", "==", betaEmail));
+    await getDocs(q).then(async (val) => {
+      if (val.docs.length > 0) {
+        alert("This email is already awaiting for a beta tester account");
+        return;
+      } else {
+        await addDoc(betaTestersCollection, {
+          email: betaEmail,
+          creationDate: getFormattedDate(),
+          device: getUserDevice(),
+        })
+          .then(() => {
+            setBetaEmail("");
+            setJoinBetaPopupShown(false);
+            setBetaSuccessShown(true);
+            window.setTimeout(() => setBetaSuccessShown(false), 3000);
+          })
+          .catch((err) => {
+            console.log("Firebase error :", err);
+            alert(
+              `Error while sending to the database, please contact us. (Error: ${err})`
+            );
+            return false;
+          });
+      }
+    });
 
     return true;
   };
