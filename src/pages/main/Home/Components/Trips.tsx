@@ -8,13 +8,12 @@ import {
 import { Trip } from "../../../../types/types";
 import { getFirestore, deleteDoc, doc, updateDoc } from "firebase/firestore";
 import { getFirebaseApp } from "../../../../../server";
-import { capitalizeString } from "../../../../lib/functions";
+import {
+  capitalizeString,
+  removeElementAtIndex,
+} from "../../../../lib/functions";
 import { useTranslation } from "react-i18next";
 import { Checkbox } from "../../../../components/form";
-
-function removeElementAtIndex<T>(array: Array<T>, index: number) {
-  return array.slice(0, index).concat(array.slice(index + 1)); //remove the element at that position and concatenate
-}
 
 export function Trips(props: {
   data?: Trip[];
@@ -27,6 +26,7 @@ export function Trips(props: {
     trip: Trip;
     key: number;
   }>();
+
   // Disables scroll while popup is opened
   useEffect(() => {
     if (modalOpened) {

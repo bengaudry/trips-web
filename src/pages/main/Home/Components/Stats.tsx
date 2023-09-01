@@ -1,10 +1,5 @@
-import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import {
-  RoundedLoader,
-  SecondaryText,
-  TripDisplayer,
-} from "../../../../components";
+import { SecondaryText, TripDisplayer } from "../../../../components";
 import { StatsData, Trip } from "../../../../types/types";
 import { StatPill } from "./StatPill";
 import { MAX_KMS_BEFORE_LICENSE } from "../../../../lib/constants";
