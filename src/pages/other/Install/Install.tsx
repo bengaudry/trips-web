@@ -20,12 +20,7 @@ export function Install() {
         className="my-4"
       />
       {platforms[platform] === "Ios" ? (
-        <div>
-          <img
-            src="/ios-install.gif"
-            alt=""
-            className="h-calc(100vh-20rem) aspect-[828/1792] mx-auto"
-          />
+        <div className="sm:grid grid-cols-2 gap-4">
           <ol className="py-4 pl-6 flex flex-col gap-3 list-decimal">
             <li className="bg-grayblue-800 py-2 px-4 rounded-xl">
               Appuyez sur le bouton "share" en bas de l'écran
@@ -38,18 +33,26 @@ export function Install() {
             </li>
             <p className="pt-2 text-center font-semibold">Et c'est tout !</p>
           </ol>
+          <img
+            src="/ios-install.gif"
+            alt=""
+            className="max-h-calc(100vh-40rem) aspect-[828/1792] mx-auto"
+          />
         </div>
       ) : (
         <ol className="py-4 pl-6 flex flex-col gap-3 list-decimal">
-          <li>Sur votre appareil Android, ouvrez Chrome</li>
-          <li>
-            Accédez à un site Web comportant une PWA que vous souhaitez
-            installer.
+          <li className="bg-grayblue-800 py-2 px-4 rounded-xl">
+            Sur votre appareil Android, ouvrez Chrome
           </li>
-          <li>
+          <li className="bg-grayblue-800 py-2 px-4 rounded-xl">
+            Accédez à Trips.
+          </li>
+          <li className="bg-grayblue-800 py-2 px-4 rounded-xl">
             Appuyez sur <strong>Installer</strong>.
           </li>
-          <li>Suivez les instructions à l'écran.</li>
+          <li className="bg-grayblue-800 py-2 px-4 rounded-xl">
+            Suivez les instructions à l'écran.
+          </li>
           <p className="pt-2 text-center font-semibold">Et c'est tout !</p>
         </ol>
       )}
