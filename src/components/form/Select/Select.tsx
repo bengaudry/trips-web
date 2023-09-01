@@ -147,10 +147,8 @@ export function Select(props: MultiSelectProps) {
   //                   ) : null}
   //                   {opt.name}
   //                 </div>
-  //                 {props.selectedOptions.includes(index) ? (
+  //                 {props.selectedOptions.includes(index) && (
   //                   <i className="fi fi-rr-check"></i>
-  //                 ) : (
-  //                   <></>
   //                 )}
   //               </div>
   //             ))}

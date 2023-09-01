@@ -1,7 +1,7 @@
-export { Settings } from "./Settings/Settings";
-export { NoPage } from "./NoPage/NoPage";
-export { Home } from "./Home/Home";
-export { Add } from "./Add/Add";
-export { Certificate } from "./Certificate/Certificate";
-export { ShowCertificate } from "./ShowCertificate/ShowCertificate";
-export { Install } from "./Install/Install";
+export { Settings } from "./main/Settings/Settings";
+export { NoPage } from "./main/NoPage/NoPage";
+export { Home } from "./main/Home/Home";
+export { Add } from "./main/Add/Add";
+export { Certificate } from "./other/Certificate/Certificate";
+export { ShowCertificate } from "./other/ShowCertificate/ShowCertificate";
+export { Install } from "./other/Install/Install";

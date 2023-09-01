@@ -77,7 +77,7 @@ export default function App() {
 
   return (
     <>
-      {loaderVisible ? <Loader /> : <></>}
+      {loaderVisible && <Loader />}
 
       {userLoggedIn ? (
         <BrowserRouter>
