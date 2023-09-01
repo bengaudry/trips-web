@@ -12,11 +12,6 @@ import { ReachedMaxAlert } from "./ReachedMaxAlert";
 import { NavLink } from "react-router-dom";
 import { DrivingSteps } from "./DrivingSteps";
 
-import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
-import { Doughnut } from "react-chartjs-2";
-
-ChartJS.register(ArcElement, Tooltip, Legend);
-
 export function Stats(props: {
   allTrips?: Trip[];
   setPanelFn: CallableFunction;
