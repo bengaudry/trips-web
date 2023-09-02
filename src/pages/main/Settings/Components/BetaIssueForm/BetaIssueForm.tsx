@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Cta } from "../../../../../components";
-import { Input } from "../../../../../components/form";
+import { Input, Textarea } from "../../../../../components/form";
 import type { IssueCategory } from "../BetaPage/BetaPage";
 import { getFirestore, collection, addDoc } from "firebase/firestore";
 import { getFirebaseApp, getFirebaseAuth } from "../../../../../../server";
@@ -98,7 +98,7 @@ export function BetaIssueForm() {
           placeholder="How would you name this issue ?"
           required
         />
-        <label>
+        {/* <label>
           Description *
           <textarea
             placeholder="Describe as precisely as possible the issue you faced while using the app"
@@ -106,7 +106,15 @@ export function BetaIssueForm() {
             onChange={(e) => setIssueDesc(e.target.value)}
             className="bg-transparent border-2 border-grayblue-700 rounded-lg w-full h-36 resize-none outline-none px-6 py-3 placeholder:text-grayblue-500 focus:border-brand-500"
           />
-        </label>
+        </label> */}
+        <Textarea
+          name="Description"
+          required
+          placeholder="Describe as precisely as possible the issue you faced while using the app"
+          className="h-48"
+          value={issueDesc}
+          onChange={(val) => setIssueDesc(val)}
+        ></Textarea>
         <Input
           name="url"
           type="text"

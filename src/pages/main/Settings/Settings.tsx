@@ -119,7 +119,7 @@ export function Settings() {
         App version : {APP_VERSION}
       </SecondaryText>
       <SecondaryText className="w-full text-center">
-        Ben Gaudry - {new Date().getFullYear()} - All rights reserved
+        {new Date().getFullYear()} - All rights reserved
       </SecondaryText>
 
       <SlidingPage
