@@ -15,7 +15,6 @@ import { Trip } from "../../../types/types";
 import { calculateDataForStats } from "../../../lib/functions";
 
 import {
-  Cta,
   Modal,
   NotVerifiedEmailPopup,
   PageLayout,
@@ -26,10 +25,25 @@ import { Trips } from "./Components/Trips";
 import { Stats } from "./Components/Stats";
 import { SetUserNameModal } from "./Components/SetUserNameModal";
 
+function fetchCachedTrips() {
+  const data = localStorage.getItem("cached-trips-data");
+  if (data && JSON.parse(data)) {
+    return JSON.parse(data) as Trip[];
+  }
+  return undefined;
+}
+
+function setTripsInCache(data?: Trip[]) {
+  if (data) {
+    const trips = JSON.stringify(data);
+    localStorage.setItem("cached-trips-data", trips);
+  }
+}
+
 export function Home() {
   const { t } = useTranslation();
 
-  const [trips, setTrips] = useState<Trip[]>();
+  const [trips, setTrips] = useState<Trip[] | undefined>(fetchCachedTrips());
   const [currentPanel, setCurrentPanel] = useState<0 | 1>(0);
 
   const displayName = getFirebaseAuth().currentUser?.displayName;
@@ -67,6 +81,10 @@ export function Home() {
 
     fetchData();
   }, []);
+
+  useEffect(() => {
+    setTripsInCache(trips);
+  }, [trips]);
 
   // Scroll to top when panel changes
   useEffect(() => {
