@@ -69,17 +69,17 @@ export function Settings() {
         </h3>
 
         <Setting
-          color="125, 211, 252"
-          icon="interrogation"
-          name={t("settingsPage.buttons.help")}
-          onClick={() => changeSlidingPage("help")}
-        />
-
-        <Setting
           color="209, 96, 224"
           icon="test-tube"
           name="Beta"
           onClick={() => changeSlidingPage("beta")}
+        />
+
+        <Setting
+          color="125, 211, 252"
+          icon="interrogation"
+          name={t("settingsPage.buttons.help")}
+          onClick={() => changeSlidingPage("help")}
         />
 
         <Setting

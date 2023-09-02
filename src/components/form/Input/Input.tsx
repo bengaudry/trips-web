@@ -16,19 +16,13 @@ type InputProps = {
 };
 
 export function Input(props: InputProps) {
-  const [inputFocused, setInputFocused] = useState(false);
-
   return (
     <div
       className={`${
         props.children ? "relative" : ""
       } flex flex-col w-full mt-4 ${props.className}`}
     >
-      <SecondaryText
-        className={`font-medium mb-1 transition-colors duration-300 ${
-          inputFocused ? "text-brand-400 dark:text-white" : ""
-        }`}
-      >
+      <SecondaryText className="font-medium mb-1">
         {capitalizeString(props.name)}
         {props.required && " *"}
       </SecondaryText>
@@ -42,12 +36,10 @@ export function Input(props: InputProps) {
         }}
         onFocus={(e) => {
           if (props.onFocus) props.onFocus(e);
-          setInputFocused(true);
         }}
         onBlur={(e) => {
           setTimeout(() => {
             if (props.onBlur) props.onBlur(e);
-            setInputFocused(false);
           }, 200);
         }}
         value={props.value}
