@@ -2,6 +2,7 @@ import { useState } from "react";
 import { getFirebaseAuth } from "../../../../../../server";
 import { Modal, SecondaryText } from "../../../../../components";
 import { BetaIssueForm } from "../BetaIssueForm/BetaIssueForm";
+import { SuggestionForm } from "../SuggestionForm/SuggestionForm";
 
 export type IssueCategory =
   | "auth"
@@ -15,6 +16,9 @@ export type IssueCategory =
 
 export function BetaPage() {
   const [modalShown, setModalShown] = useState(false);
+  const [modalContent, setModalContent] = useState<"issue" | "suggestion">(
+    "issue"
+  );
 
   return (
     <>
@@ -25,13 +29,22 @@ export function BetaPage() {
       </SecondaryText>
       <div className="flex flex-col gap-3 py-6">
         <button
-          onClick={() => setModalShown(true)}
+          onClick={() => {
+            setModalShown(true);
+            setModalContent("issue");
+          }}
           className="w-full px-4 py-2 bg-red-500/40 hover:bg-red-500/60 transition-colors duration-300 rounded-full flex flex-row items-center gap-2 text-lg font-medium"
         >
           <i className="fi fi-rr-exclamation translate-y-0.5" />
           Report an issue
         </button>
-        <button className="w-full px-4 py-2 bg-sky-500/40 hover:bg-sky-500/60 transition-colors duration-300 rounded-full flex flex-row items-center gap-2 text-lg font-medium">
+        <button
+          onClick={() => {
+            setModalShown(true);
+            setModalContent("suggestion");
+          }}
+          className="w-full px-4 py-2 bg-sky-500/40 hover:bg-sky-500/60 transition-colors duration-300 rounded-full flex flex-row items-center gap-2 text-lg font-medium"
+        >
           <i className="fi fi-rr-bulb translate-y-0.5" />
           Submit a suggestion
         </button>
@@ -40,9 +53,11 @@ export function BetaPage() {
       <Modal
         showFn={setModalShown}
         isShown={modalShown}
-        title="Report an issue"
+        title={
+          modalContent === "issue" ? "Report an issue" : "Submit a suggestion"
+        }
       >
-        <BetaIssueForm />
+        {modalContent === "issue" ? <BetaIssueForm /> : <SuggestionForm />}
       </Modal>
     </>
   );

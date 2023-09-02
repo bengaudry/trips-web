@@ -39,6 +39,7 @@ Please commit using the following types :
 |-----------|-------------------------|---------------------------------------------------------------|
 | build:    | Builds                  | Changes that affect the build system or external dependencies |
 | docs:     | Documentation           | Documentation only changes                                    |
+| component:| New component           | A new component                                               |
 | feat:     | Features                | A new feature                                                 |
 | fix:      | Bug fixes               | A bug fix                                                     |
 | perf:     | Performance improvments | A code change that improves performances                      |
