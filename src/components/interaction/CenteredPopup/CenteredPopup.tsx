@@ -6,6 +6,7 @@ interface CenteredPopupProps {
   children: ReactNode;
   visible: boolean;
   setVisible: (val: boolean) => void;
+  hideCloseBtn?: boolean;
 }
 
 export function CenteredPopup(props: CenteredPopupProps) {
@@ -30,11 +31,17 @@ export function CenteredPopup(props: CenteredPopupProps) {
             : "scale-0 opacity-0 pointer-events-none"
         }`}
       >
-        <main className={`w-full text-left pb-16 relative`}>
+        <main
+          className={`w-full text-left ${
+            !props.hideCloseBtn && "pb-16"
+          } relative`}
+        >
           {props.children}
           <Cta
             type="button"
-            className="mx-auto absolute w-full inset-0 top-auto shadow-2xl dark:shadow-grayblue-900"
+            className={`mx-auto absolute w-full inset-0 top-auto shadow-2xl dark:shadow-grayblue-900 ${
+              props.hideCloseBtn && "hidden"
+            }`}
             onClick={() => props.setVisible(false)}
           >
             {t("common.close")}

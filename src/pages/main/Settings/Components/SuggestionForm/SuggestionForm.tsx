@@ -53,7 +53,7 @@ export function SuggestionForm() {
         value={suggContent}
         onChange={(val) => setSuggContent(val)}
       />
-      <Cta type="button" className="mt-6">
+      <Cta type="button" className="mt-6" onClick={handleSuggestionSubmit}>
         Submit suggestion
       </Cta>
     </form>

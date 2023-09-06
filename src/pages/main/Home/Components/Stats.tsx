@@ -1,17 +1,27 @@
 import { useTranslation } from "react-i18next";
-import { SecondaryText, TripDisplayer } from "../../../../components";
+import {
+  CenteredPopup,
+  Cta,
+  SecondaryText,
+  TripDisplayer,
+} from "../../../../components";
 import { StatsData, Trip } from "../../../../types/types";
 import { StatPill } from "./StatPill";
 import { MAX_KMS_BEFORE_LICENSE } from "../../../../lib/constants";
 import { ReachedMaxAlert } from "./ReachedMaxAlert";
 import { NavLink } from "react-router-dom";
 import { DrivingSteps } from "./DrivingSteps";
+import { getFirebaseAuth } from "../../../../../server";
+import { getDiffBetweenDates } from "../../../../lib/functions";
+import { useState } from "react";
 
 export function Stats(props: {
   allTrips?: Trip[];
   setPanelFn: CallableFunction;
   data: StatsData;
 }) {
+  const [premiumPopupShown, setPremiumPopupShown] = useState(false);
+
   const getKmsPercent = (): number => {
     return Math.floor((props.data.totalKms / MAX_KMS_BEFORE_LICENSE) * 100);
   };
@@ -19,9 +29,55 @@ export function Stats(props: {
   const { t } = useTranslation();
   const { countryside, expressway, highway, city } = props.data.tripsByRoadType;
 
+  const tenDaysInMilliSeconds = 864_000_000;
+
+  const canSeeStats =
+    tenDaysInMilliSeconds >=
+    getDiffBetweenDates(
+      new Date(getFirebaseAuth().currentUser?.metadata.creationTime as string)
+    );
+
   return (
     <div>
       <ReachedMaxAlert />
+
+      <CenteredPopup
+        visible={premiumPopupShown}
+        setVisible={(val) => setPremiumPopupShown(val)}
+        hideCloseBtn
+      >
+        <h1 className="mb-2 text-3xl font-bold mt-4">Mode premium</h1>
+        <h2 className="mb-3 text-xl font-semibold">
+          Pourquoi le mode premium ?
+        </h2>
+        <SecondaryText className="mb-3">
+          Grâce à ce mode, un algorithme analysera tes trajets et te proposera
+          des conseils en conséquence. Tu pourras voir de nombreuses
+          statistiques qui te permettront d'améliorer ta conduite.
+        </SecondaryText>
+        <SecondaryText>
+          Lorsque tu atteindras {MAX_KMS_BEFORE_LICENSE} kilomètres, tu recevras
+          un certificat prouvant que tu as bien fait le nombre de kilomètres
+          attendu.
+        </SecondaryText>
+        <h2 className="mt-5 mb-3 text-xl font-semibold">Le prix ?</h2>
+        <p className="text-lg">
+          C'est <span className="text-yellow-500">2.99€</span> seulement, et{" "}
+          <b>une seule fois</b>.
+        </p>
+        <SecondaryText className="mb-4">
+          Cette petite donation permet à cette app de se financer et d'éviter la
+          publicité qui, on le sait, est très pénible !
+        </SecondaryText>
+        <Cta
+          type="link"
+          to="https://buy.stripe.com/28o6oH27I7u46sw3cc"
+          target="_blank"
+          color="gradient"
+        >
+          Acheter premium pour 2.99€
+        </Cta>
+      </CenteredPopup>
 
       {props.data.totalKms > 0 && (
         <section className="rounded-xl h-max py-6 px-8 mt-2 text-white bg-gradient-to-tr from-sky-600 to-indigo-600">
@@ -62,39 +118,55 @@ export function Stats(props: {
         </section>
       )}
 
-      {props.data.totalKms > 0 ||
-      countryside > 0 ||
-      expressway > 0 ||
-      highway > 0 ||
-      city > 0 ? (
-        <section className="grid grid-cols-2 gap-4 my-4">
-          <StatPill
-            label={t("common.roadTypes.countryroad")}
-            nb={props.data.tripsByRoadType.countryside}
-          />
-          <StatPill
-            label={t("common.roadTypes.expressway")}
-            nb={props.data.tripsByRoadType.expressway}
-          />
-          <StatPill
-            label={t("common.roadTypes.highway")}
-            nb={props.data.tripsByRoadType.highway}
-          />
-          <StatPill
-            label={t("common.roadTypes.city")}
-            nb={props.data.tripsByRoadType.city}
-          />
-        </section>
+      {canSeeStats ? (
+        props.data.totalKms > 0 ||
+        countryside > 0 ||
+        expressway > 0 ||
+        highway > 0 ||
+        city > 0 ? (
+          <section className="grid grid-cols-2 gap-4 my-4">
+            <StatPill
+              label={t("common.roadTypes.countryroad")}
+              nb={props.data.tripsByRoadType.countryside}
+            />
+            <StatPill
+              label={t("common.roadTypes.expressway")}
+              nb={props.data.tripsByRoadType.expressway}
+            />
+            <StatPill
+              label={t("common.roadTypes.highway")}
+              nb={props.data.tripsByRoadType.highway}
+            />
+            <StatPill
+              label={t("common.roadTypes.city")}
+              nb={props.data.tripsByRoadType.city}
+            />
+          </section>
+        ) : (
+          <SecondaryText className="text-center mt-4">
+            <NavLink
+              to="/add"
+              className="text-brand-500 underline underline-offset-2"
+            >
+              {t("homepage.addFirstTrip")}
+            </NavLink>{" "}
+            {t("homepage.stats.seeStatsAppear")}
+          </SecondaryText>
+        )
       ) : (
-        <SecondaryText className="text-center mt-4">
-          <NavLink
-            to="/add"
-            className="text-brand-500 underline underline-offset-2"
+        <div className="bg-neutral-100 dark:bg-grayblue-800 p-6 rounded-lg flex flex-col gap-4">
+          <SecondaryText>
+            Your 10 days of free trial have expired. To see your stats again,
+            please
+          </SecondaryText>
+          <Cta
+            type="button"
+            color="gradient"
+            onClick={() => setPremiumPopupShown(true)}
           >
-            {t("homepage.addFirstTrip")}
-          </NavLink>{" "}
-          {t("homepage.stats.seeStatsAppear")}
-        </SecondaryText>
+            See premium
+          </Cta>
+        </div>
       )}
 
       <section className="bg-neutral-100 dark:bg-grayblue-800 flex flex-row justify-between items-start rounded-lg p-4 mt-4 h-44">

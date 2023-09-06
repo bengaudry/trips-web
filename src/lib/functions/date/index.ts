@@ -20,3 +20,14 @@ export function getFormattedDate() {
   )}/${now.getFullYear()}`;
   return strDate;
 }
+
+/**
+ * Returns the number of milliseconds between two dates
+ * @param date1
+ * @param date2 (optionnal : if not provided, calculate from todays dat)
+ */
+export function getDiffBetweenDates(date1: Date, date2?: Date) {
+  if (!date2) date2 = new Date();
+
+  return date2.valueOf() - date1.valueOf();
+}

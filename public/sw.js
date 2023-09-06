@@ -7,11 +7,21 @@ workbox.routing.registerRoute(
   new workbox.strategies.NetworkFirst()
 );
 
+// const appShellFiles = [
+//   "/index.html",
+//   "/assets"
+// ];
+
 // const VERSION = "v3";
 
-// self.addEventListener("install", () => {
-//   self.skipWaiting();
-//   console.log(`[${VERSION}] installing`);
+// self.addEventListener("install", (e) => {
+//   e.waitUntil(
+//     (async() => {
+//       const cache = await caches.open(cacheName);
+//       console.log("[Service Worker] Caching all");
+//       await cache.addAll(contentToCache);
+//     })();
+//   )
 // });
 
 // self.addEventListener("activate", () => {

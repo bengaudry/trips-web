@@ -1,15 +1,16 @@
-import { ReactNode } from "react";
+import { HTMLAttributeAnchorTarget, ReactNode } from "react";
 import { Link } from "react-router-dom";
 
-export type CtaProps = {
+export type CtaProps<T = "button" | "link"> = {
   children: string | ReactNode;
   className?: string;
   disabled?: boolean;
-  type: "button" | "link";
+  type: T;
   color?: "normal" | "warning" | "danger" | "gradient";
-  to?: string;
+  to?: T extends "link" ? string : string | undefined;
+  target?: HTMLAttributeAnchorTarget;
   onClick?: CallableFunction;
-  btnType?: "button" | "reset" | "submit";
+  btnType?: T extends "button" ? "button" | "reset" | "submit" : undefined;
 };
 
 export function Cta(props: CtaProps) {
@@ -38,6 +39,7 @@ export function Cta(props: CtaProps) {
     <Link
       to={props.to ? props.to : "/"}
       className={`${CtaStyle} ${props.className}`}
+      target={props.target}
     >
       {props.children}
     </Link>
