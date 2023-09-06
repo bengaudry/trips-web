@@ -160,8 +160,8 @@ export function ProfilePopup() {
       </div>
 
       <Modal
-        showFn={setModalShown}
-        isShown={modalShown}
+        visible={modalShown}
+        setVisible={setModalShown}
         title={
           currModal === "ChangePass"
             ? "Change password"

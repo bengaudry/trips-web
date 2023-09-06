@@ -106,8 +106,8 @@ export function Trips(props: {
             />
           ))}
           <Modal
-            showFn={setModalOpened}
-            isShown={modalOpened}
+            visible={modalOpened}
+            setVisible={setModalOpened}
             title={
               <>
                 <span>{capitalizeString(modalContent?.trip.from)}</span>

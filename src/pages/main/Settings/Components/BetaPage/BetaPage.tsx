@@ -51,8 +51,8 @@ export function BetaPage() {
       </div>
 
       <Modal
-        showFn={setModalShown}
-        isShown={modalShown}
+        visible={modalShown}
+        setVisible={setModalShown}
         title={
           modalContent === "issue" ? "Report an issue" : "Submit a suggestion"
         }

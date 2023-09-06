@@ -105,8 +105,7 @@ export function Home() {
 
         {userNameUnset && (
           <Modal
-            showFn={new Function()}
-            isShown={userNameUnset}
+            visible={userNameUnset}
             title="Hey ! We haven't met yet"
             unClosable
           >

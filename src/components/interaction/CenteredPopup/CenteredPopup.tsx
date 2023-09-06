@@ -1,11 +1,11 @@
-import { ReactNode } from "react";
+import { Dispatch, ReactNode, SetStateAction } from "react";
 import { Cta } from "../../Buttons/Cta";
 import { useTranslation } from "react-i18next";
 
 interface CenteredPopupProps {
   children: ReactNode;
   visible: boolean;
-  setVisible: (val: boolean) => void;
+  setVisible: Dispatch<SetStateAction<boolean>>;
   hideCloseBtn?: boolean;
 }
 

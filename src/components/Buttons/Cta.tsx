@@ -7,10 +7,10 @@ export type CtaProps<T = "button" | "link"> = {
   disabled?: boolean;
   type: T;
   color?: "normal" | "warning" | "danger" | "gradient";
-  to?: T extends "link" ? string : string | undefined;
+  to?: string;
   target?: HTMLAttributeAnchorTarget;
   onClick?: CallableFunction;
-  btnType?: T extends "button" ? "button" | "reset" | "submit" : undefined;
+  btnType?: "button" | "reset" | "submit";
 };
 
 export function Cta(props: CtaProps) {

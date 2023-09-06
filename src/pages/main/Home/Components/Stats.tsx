@@ -1,10 +1,5 @@
 import { useTranslation } from "react-i18next";
-import {
-  CenteredPopup,
-  Cta,
-  SecondaryText,
-  TripDisplayer,
-} from "../../../../components";
+import { Cta, SecondaryText, TripDisplayer } from "../../../../components";
 import { StatsData, Trip } from "../../../../types/types";
 import { StatPill } from "./StatPill";
 import { MAX_KMS_BEFORE_LICENSE } from "../../../../lib/constants";
@@ -14,13 +9,14 @@ import { DrivingSteps } from "./DrivingSteps";
 import { getFirebaseAuth } from "../../../../../server";
 import { getDiffBetweenDates } from "../../../../lib/functions";
 import { useState } from "react";
+import { PremiumPopup } from "./PremiumPopup";
 
 export function Stats(props: {
   allTrips?: Trip[];
   setPanelFn: CallableFunction;
   data: StatsData;
 }) {
-  const [premiumPopupShown, setPremiumPopupShown] = useState(false);
+  const [premiumPopupVisible, setPremiumPopupVisible] = useState(false);
 
   const getKmsPercent = (): number => {
     return Math.floor((props.data.totalKms / MAX_KMS_BEFORE_LICENSE) * 100);
@@ -41,43 +37,10 @@ export function Stats(props: {
     <div>
       <ReachedMaxAlert />
 
-      <CenteredPopup
-        visible={premiumPopupShown}
-        setVisible={(val) => setPremiumPopupShown(val)}
-        hideCloseBtn
-      >
-        <h1 className="mb-2 text-3xl font-bold mt-4">Mode premium</h1>
-        <h2 className="mb-3 text-xl font-semibold">
-          Pourquoi le mode premium ?
-        </h2>
-        <SecondaryText className="mb-3">
-          Grâce à ce mode, un algorithme analysera tes trajets et te proposera
-          des conseils en conséquence. Tu pourras voir de nombreuses
-          statistiques qui te permettront d'améliorer ta conduite.
-        </SecondaryText>
-        <SecondaryText>
-          Lorsque tu atteindras {MAX_KMS_BEFORE_LICENSE} kilomètres, tu recevras
-          un certificat prouvant que tu as bien fait le nombre de kilomètres
-          attendu.
-        </SecondaryText>
-        <h2 className="mt-5 mb-3 text-xl font-semibold">Le prix ?</h2>
-        <p className="text-lg">
-          C'est <span className="text-yellow-500">2.99€</span> seulement, et{" "}
-          <b>une seule fois</b>.
-        </p>
-        <SecondaryText className="mb-4">
-          Cette petite donation permet à cette app de se financer et d'éviter la
-          publicité qui, on le sait, est très pénible !
-        </SecondaryText>
-        <Cta
-          type="link"
-          to="https://buy.stripe.com/28o6oH27I7u46sw3cc"
-          target="_blank"
-          color="gradient"
-        >
-          Acheter premium pour 2.99€
-        </Cta>
-      </CenteredPopup>
+      <PremiumPopup
+        visible={premiumPopupVisible}
+        setVisible={setPremiumPopupVisible}
+      />
 
       {props.data.totalKms > 0 && (
         <section className="rounded-xl h-max py-6 px-8 mt-2 text-white bg-gradient-to-tr from-sky-600 to-indigo-600">
@@ -162,7 +125,7 @@ export function Stats(props: {
           <Cta
             type="button"
             color="gradient"
-            onClick={() => setPremiumPopupShown(true)}
+            onClick={() => setPremiumPopupVisible(true)}
           >
             See premium
           </Cta>

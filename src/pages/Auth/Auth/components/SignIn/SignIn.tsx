@@ -50,8 +50,8 @@ export function SignInPage(props: { onRegisterClick: () => void }) {
   return (
     <div className="px-8 py-16 overflow-scroll md:grid md:place-content-center w-full h-max">
       <Modal
-        showFn={setResetPassModalShown}
-        isShown={resetPassModalShown}
+        visible={resetPassModalShown}
+        setVisible={setResetPassModalShown}
         title="Forgot password ?"
       >
         <ResetPassword email={email} />
