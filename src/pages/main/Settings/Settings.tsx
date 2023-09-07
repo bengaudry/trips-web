@@ -12,7 +12,7 @@ import { APP_VERSION } from "../../../lib/constants/appVersion";
 import {
   NotVerifiedEmailPopup,
   PageLayout,
-  SecondaryText,
+  Text,
   SlidingPage,
 } from "../../../components";
 import { Setting } from "./Components/Setting";
@@ -46,11 +46,7 @@ export function Settings() {
 
   return (
     <PageLayout title={t("settingsPage.title")}>
-      <section>
-        <h3 className="block text-3xl font-semibold mt-4">
-          {t("settingsPage.subtitles.account")}
-        </h3>
-
+      <section className="my-5 bg-neutral-100 dark:bg-grayblue-800 rounded-xl">
         <Setting
           color="82, 82, 82"
           icon="user"
@@ -58,16 +54,13 @@ export function Settings() {
           name={getFirebaseAuth().currentUser?.displayName as string}
           onClick={() => changeSlidingPage("profile")}
           bigIcon
+          className="w-full h-full py-5 px-6"
         />
 
         <NotVerifiedEmailPopup />
       </section>
 
-      <section>
-        <h3 className="text-3xl font-semibold mb-4 mt-10">
-          {t("settingsPage.subtitles.settings")}
-        </h3>
-
+      <section className="py-5">
         <Setting
           color="209, 96, 224"
           icon="test-tube"
@@ -106,21 +99,21 @@ export function Settings() {
       {/* {window.location.toString() === "http://localhost:5173/settings" && (
         <div className="relative p-6">
           <h3 className="text-3xl font-semibold mb-4 mt-10">Mon auto-école</h3>
-          <SecondaryText className="text-lg">
+          <Text.Secondary className="text-lg">
             Vous n'avez pas rejoint d'auto école. Si votre auto-école utilise
             Trips, demandez leur un code pour rejoindre leur organisation.
-          </SecondaryText>
+          </Text.Secondary>
           <DrivingSchool />
         </div>
       )
    */}
 
-      <SecondaryText className="w-full text-center">
+      <Text.Secondary className="w-full text-center">
         App version : {APP_VERSION}
-      </SecondaryText>
-      <SecondaryText className="w-full text-center">
+      </Text.Secondary>
+      <Text.Secondary className="w-full text-center">
         {new Date().getFullYear()} - All rights reserved
-      </SecondaryText>
+      </Text.Secondary>
 
       <SlidingPage
         isOpened={slidingPageVisible}

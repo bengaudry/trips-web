@@ -19,7 +19,7 @@ import {
   NotVerifiedEmailPopup,
   PageLayout,
   PanelSwitcher,
-  SecondaryText,
+  Text,
 } from "../../../components";
 import { Trips } from "./Components/Trips";
 import { Stats } from "./Components/Stats";
@@ -99,9 +99,9 @@ export function Home() {
       <PageLayout className="overflow-y-scroll">
         <NotVerifiedEmailPopup className="mb-4" />
 
-        <SecondaryText className="text-xl mt-1">
+        <Text.Secondary className="text-xl mt-1">
           {t("homepage.header.subtitle")}
-        </SecondaryText>
+        </Text.Secondary>
 
         {userNameUnset && (
           <Modal
@@ -113,11 +113,15 @@ export function Home() {
           </Modal>
         )}
 
-        <h1 className="text-4xl font-bold">
+        <Text.Title>
           {getFirebaseAuth().currentUser?.displayName
             ? `${getFirebaseAuth().currentUser?.displayName} 👋`
             : ""}
-        </h1>
+        </Text.Title>
+
+        <Text.Title>This is H1</Text.Title>
+        <Text.Title rank={2}>This is H2</Text.Title>
+        <Text.Title rank={3}>This is H3</Text.Title>
 
         <div className="dark:bg-grayblue-900/90 backdrop-blur-lg sticky z-20 top-0 py-3">
           <PanelSwitcher

@@ -1,10 +1,5 @@
 import { useEffect, useState } from "react";
-import {
-  TripDisplayer,
-  Cta,
-  Modal,
-  SecondaryText,
-} from "../../../../components";
+import { TripDisplayer, Cta, Modal, Text } from "../../../../components";
 import { Trip } from "../../../../types/types";
 import { getFirestore, deleteDoc, doc, updateDoc } from "firebase/firestore";
 import { getFirebaseApp } from "../../../../../server";
@@ -120,12 +115,12 @@ export function Trips(props: {
               </>
             }
           >
-            <SecondaryText className="text-lg mb-4">
+            <Text.Secondary className="text-lg mb-4">
               {modalContent?.trip.length}kms - {modalContent?.trip.duration}min
               <br />
               {modalContent?.trip.date &&
                 new Date(modalContent.trip.date).toLocaleDateString()}
-            </SecondaryText>
+            </Text.Secondary>
             <Checkbox
               name={t("addpage.inputs.labels.roundtrip")}
               checked={!!roundTrip}

@@ -1,5 +1,6 @@
 import i18n from "i18next";
 import { useTranslation } from "react-i18next";
+import { Text } from "../../../../../components";
 
 function LangBtn(props: {
   lang: "fr" | "en" | "auto";
@@ -37,9 +38,9 @@ export function LangPopup() {
   const { t } = useTranslation();
   return (
     <>
-      <h2 className="text-3xl font-semibold mb-4">
+      <Text.Title rank={2} className="mb-4">
         {t("settingsPage.popups.chooseLang.title")}
-      </h2>
+      </Text.Title>
       <div className="flex flex-col w-full gap-2">
         {/* <LangBtn lang="auto" flag="🇫🇷">
           Auto

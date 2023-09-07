@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { getFirebaseAuth } from "../../../../../../server";
-import { Modal, SecondaryText } from "../../../../../components";
+import { Modal, Text } from "../../../../../components";
 import { BetaIssueForm } from "../BetaIssueForm/BetaIssueForm";
 import { SuggestionForm } from "../SuggestionForm/SuggestionForm";
 
@@ -22,11 +22,11 @@ export function BetaPage() {
 
   return (
     <>
-      <h1 className="text-3xl font-semibold">Beta</h1>
-      <SecondaryText className="text-lg">
+      <Text.Title>Beta</Text.Title>
+      <Text.Secondary className="text-lg">
         Welcome to your beta tester space{" "}
         {getFirebaseAuth().currentUser?.displayName} !
-      </SecondaryText>
+      </Text.Secondary>
       <div className="flex flex-col gap-3 py-6">
         <button
           onClick={() => {

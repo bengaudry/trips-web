@@ -1,4 +1,5 @@
 import { ReactNode } from "react";
+import { Text } from "../../components";
 
 export function PageLayout(props: {
   title?: string | null;
@@ -7,7 +8,7 @@ export function PageLayout(props: {
 }) {
   return (
     <main className={`px-5 py-12 ${props.className}`} role="page">
-      <h1 className="text-4xl font-bold mb-3">{props.title ?? ""}</h1>
+      <Text.Title className="mb-3">{props.title ?? ""}</Text.Title>
       {props.children}
     </main>
   );

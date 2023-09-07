@@ -7,7 +7,7 @@ import {
   sendEmailVerification,
   updateProfile,
 } from "firebase/auth";
-import { Notification, Cta } from "../../../../../components";
+import { Notification, Cta, Text } from "../../../../../components";
 import { Input } from "../../../../../components/form";
 import { getFirebaseAuth } from "../../../../../../server";
 
@@ -28,8 +28,8 @@ export function RegisterPage(props: { onSignInClick: () => void }) {
         type="error"
         content={errorContent}
       />
-      <h2 className="text-3xl font-semibold">Let's register you</h2>
-      <p className="text-grayblue-500">Welcome to Trips !</p>
+      <Text.Title rank={2}>Let's register you</Text.Title>
+      <Text.Secondary>Welcome to Trips !</Text.Secondary>
       <form onSubmit={(e) => e.preventDefault()}>
         <Input
           name="email"
@@ -56,7 +56,7 @@ export function RegisterPage(props: { onSignInClick: () => void }) {
           }}
           required
         />
-        <p className="block text-grayblue-500 w-full text-center text-md mb-4 mt-20">
+        <Text.Secondary className="block w-full text-center text-md mb-4 mt-20">
           Already have an account ?{" "}
           <button
             type="button"
@@ -66,7 +66,7 @@ export function RegisterPage(props: { onSignInClick: () => void }) {
             Sign In
           </button>
           .
-        </p>
+        </Text.Secondary>
         <Cta
           type="button"
           btnType="submit"

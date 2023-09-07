@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next";
-import { Cta, SecondaryText, TripDisplayer } from "../../../../components";
+import { Cta, Text, TripDisplayer } from "../../../../components";
 import { StatsData, Trip } from "../../../../types/types";
 import { StatPill } from "./StatPill";
 import { MAX_KMS_BEFORE_LICENSE } from "../../../../lib/constants";
@@ -106,7 +106,7 @@ export function Stats(props: {
             />
           </section>
         ) : (
-          <SecondaryText className="text-center mt-4">
+          <Text.Secondary className="text-center mt-4">
             <NavLink
               to="/add"
               className="text-brand-500 underline underline-offset-2"
@@ -114,14 +114,14 @@ export function Stats(props: {
               {t("homepage.addFirstTrip")}
             </NavLink>{" "}
             {t("homepage.stats.seeStatsAppear")}
-          </SecondaryText>
+          </Text.Secondary>
         )
       ) : (
         <div className="bg-neutral-100 dark:bg-grayblue-800 p-6 rounded-lg flex flex-col gap-4">
-          <SecondaryText>
+          <Text.Secondary>
             Your 10 days of free trial have expired. To see your stats again,
             please
-          </SecondaryText>
+          </Text.Secondary>
           <Cta
             type="button"
             color="gradient"
@@ -137,11 +137,11 @@ export function Stats(props: {
       </section>
 
       <div className="flex flex-row items-center justify-between mt-8 mb-4 ">
-        <h2 className="block text-3xl font-semibold">
+        <Text.Title rank={2} className="block">
           {t("homepage.recent.title")}
-        </h2>
+        </Text.Title>
         <button className="block h-fit" onClick={() => props.setPanelFn(1)}>
-          <SecondaryText>{t("common.seeAll")}</SecondaryText>
+          <Text.Secondary>{t("common.seeAll")}</Text.Secondary>
         </button>
       </div>
       {props.allTrips && props.allTrips.length > 0 ? (
@@ -159,11 +159,11 @@ export function Stats(props: {
           );
         })
       ) : !navigator.onLine ? (
-        <SecondaryText className="text-lg text-center py-5">
+        <Text.Secondary className="text-lg text-center py-5">
           Unable to load your trips,
           <br />
           it appears you are no longer connected to the internet.
-        </SecondaryText>
+        </Text.Secondary>
       ) : (
         <div className="text-center">
           <img

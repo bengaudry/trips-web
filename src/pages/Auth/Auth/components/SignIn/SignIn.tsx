@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { Notification, Cta, Modal } from "../../../../../components";
+import { Notification, Cta, Modal, Text } from "../../../../../components";
 import { Input } from "../../../../../components/form";
 import { getFirebaseAuth } from "../../../../../../server";
 import { ResetPassword } from "../ResetPassword/ResetPassword";
@@ -62,8 +62,8 @@ export function SignInPage(props: { onRegisterClick: () => void }) {
         type="error"
         content={errorContent}
       />
-      <h2 className="text-3xl font-semibold">Let's sign you in</h2>
-      <p className="text-grayblue-500">Welcome back !</p>
+      <Text.Title rank={2}>Let's sign you in</Text.Title>
+      <Text.Secondary>Welcome back !</Text.Secondary>
       <form onSubmit={(e) => e.preventDefault()}>
         <Input
           name="email"
@@ -82,7 +82,7 @@ export function SignInPage(props: { onRegisterClick: () => void }) {
         >
           Forgot password ?
         </button>
-        <p className="block text-grayblue-500 w-full text-center text-md mb-4 mt-20">
+        <Text.Secondary className="block w-full text-center text-md mb-4 mt-20">
           Don't have an account ?{" "}
           {/* <button
             type="button"
@@ -95,7 +95,7 @@ export function SignInPage(props: { onRegisterClick: () => void }) {
             Become a beta tester
           </NavLink>
           .
-        </p>
+        </Text.Secondary>
         <Cta type="button" btnType="submit" onClick={handleSignIn}>
           Sign in
         </Cta>

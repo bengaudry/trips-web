@@ -1,6 +1,5 @@
-import { useState } from "react";
 import { capitalizeString } from "../../../lib/functions";
-import { SecondaryText } from "../../texts";
+import { Text } from "../../texts";
 
 type TextareaProps = {
   className?: string;
@@ -27,10 +26,10 @@ export function Textarea(props: TextareaProps) {
 
   return (
     <div className={`flex flex-col w-full mt-4 ${props.className}`}>
-      <SecondaryText className="font-medium mb-1 transition-colors duration-300">
+      <Text.Secondary className="font-medium mb-1 transition-colors duration-300">
         {capitalizeString(props.name)}
         {props.required && " *"}
-      </SecondaryText>
+      </Text.Secondary>
       <textarea
         id={props.name}
         autoComplete="off"

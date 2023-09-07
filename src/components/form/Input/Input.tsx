@@ -1,6 +1,6 @@
 import { ReactNode, useState } from "react";
 import { capitalizeString } from "../../../lib/functions";
-import { SecondaryText } from "../../../components";
+import { Text } from "../../../components";
 
 type InputProps = {
   name: string;
@@ -22,10 +22,10 @@ export function Input(props: InputProps) {
         props.children ? "relative" : ""
       } flex flex-col w-full mt-4 ${props.className}`}
     >
-      <SecondaryText className="font-medium mb-1">
+      <Text.Secondary className="font-medium mb-1">
         {capitalizeString(props.name)}
         {props.required && " *"}
-      </SecondaryText>
+      </Text.Secondary>
       <input
         type={props.type}
         id={props.name}

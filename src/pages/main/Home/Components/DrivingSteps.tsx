@@ -1,4 +1,4 @@
-import { SecondaryText } from "../../../../components";
+import { Text } from "../../../../components";
 import { MAX_KMS_BEFORE_LICENSE } from "../../../../lib/constants";
 
 function Step(props: {
@@ -17,7 +17,7 @@ function Step(props: {
       >
         {props.kmsNecessary}
       </span>
-      <SecondaryText
+      <Text.Secondary
         className={`font-medium text-md sm:text-lg ${
           props.reached ? "text-neutral-900 dark:text-white" : ""
         }`}
@@ -28,7 +28,7 @@ function Step(props: {
             props.reached ? "inline-block" : "hidden"
           } ml-2 fi fi-rr-check`}
         />
-      </SecondaryText>
+      </Text.Secondary>
     </div>
   );
 }

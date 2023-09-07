@@ -5,7 +5,7 @@ import {
   useEffect,
   useState,
 } from "react";
-import { SecondaryText } from "../../texts";
+import { Text } from "../../texts";
 
 interface ModalProps {
   visible?: boolean;
@@ -112,7 +112,9 @@ class ModalComponents {
   );
 
   public static Title = (props: { value: string | ReactNode }) => (
-    <h2 className="text-2xl font-semibold mb-4">{props.value}</h2>
+    <Text.Title rank={2} className="mb-4">
+      {props.value}
+    </Text.Title>
   );
 
   public static CloseBtn = (props: {
@@ -124,13 +126,13 @@ class ModalComponents {
         if (props.setVisible) props.setVisible(false);
       }}
     >
-      <SecondaryText className="hidden lg:block  hover:text-black dark:hover:text-white transition-colors">
+      <Text.Secondary className="hidden lg:block  hover:text-black dark:hover:text-white transition-colors">
         <i
           className={`fi fi-rr-cross -translate-y-2  ${
             props.unClosable && "hidden"
           }`}
         />
-      </SecondaryText>
+      </Text.Secondary>
     </button>
   );
 }

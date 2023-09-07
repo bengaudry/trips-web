@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { PanelSwitcher } from "../../../components";
+import { PanelSwitcher, Text } from "../../../components";
 
 export function Install() {
   const platforms = ["Ios", "Android"];
@@ -7,12 +7,12 @@ export function Install() {
 
   return (
     <div className="px-6 py-16">
-      <h1 className="text-4xl font-bold mb-4">Install Trips</h1>
-      <p className="text-grayblue-500">
+      <Text.Title className="mb-4">Install Trips</Text.Title>
+      <Text.Secondary>
         Trips est une application web, donc elle n'est pas disponible sur les
         stores de votre appareil. L'installation de l'app reste très simple, il
         vous suffit de suivre ces étapes :
-      </p>
+      </Text.Secondary>
       <PanelSwitcher
         onChange={setPlatform}
         tabs={platforms}

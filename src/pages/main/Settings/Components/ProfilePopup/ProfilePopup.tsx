@@ -1,16 +1,17 @@
 import { useState, ReactNode } from "react";
-import { Modal } from "../../../../../components";
 import { useTranslation } from "react-i18next";
+
+import { updateEmail, updateProfile } from "firebase/auth";
+import { getFirebaseAuth } from "../../../../../../server";
+
+import { Modal, Text } from "../../../../../components";
 import {
   ChangePass as ChangePassModal,
   DeleteAccount as DeleteAccountModal,
   RequestData as RequestDataModal,
 } from "./components";
-import { Input } from "../../../../../components/form";
-import { getFirebaseAuth } from "../../../../../../server";
-import { updateCurrentUser, updateEmail, updateProfile } from "firebase/auth";
 
-export function Button(props: {
+function Button(props: {
   children: ReactNode;
   icon: string;
   noborder?: boolean;
@@ -87,9 +88,9 @@ export function ProfilePopup() {
 
   return (
     <div className="relative h-full">
-      <h2 className="text-3xl font-semibold mb-4">
+      <Text.Title rank={2} className="text-3xl font-semibold mb-4">
         {t("settingsPage.popups.profile.title")}
-      </h2>
+      </Text.Title>
 
       <section className="flex flex-col gap-2 mb-12">
         <div className="flex flex-row items-center gap-3">

@@ -3,7 +3,7 @@ import { useState } from "react";
 import { updateProfile, User } from "firebase/auth";
 import { Input } from "../../../../components/form";
 import { getFirebaseAuth } from "../../../../../server";
-import { SecondaryText, Cta } from "../../../../components";
+import { Cta, Text } from "../../../../components";
 
 export function SetUserNameModal(props: {
   setUserNameUnset: (val: boolean) => void;
@@ -12,9 +12,9 @@ export function SetUserNameModal(props: {
 
   return (
     <>
-      <SecondaryText>
+      <Text.Secondary>
         Looks like we haven't met yet ! How should we call you ?
-      </SecondaryText>
+      </Text.Secondary>
       <Input
         name="Your name"
         type="text"

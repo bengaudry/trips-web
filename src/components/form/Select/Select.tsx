@@ -1,6 +1,5 @@
-import { useState } from "react";
 import { SelectOption } from "../types";
-import { SecondaryText } from "../../texts";
+import { Text } from "../../texts";
 
 interface MultiSelectProps {
   name: string;
@@ -13,10 +12,6 @@ interface MultiSelectProps {
 
 export function Select(props: MultiSelectProps) {
   const { selectedOptions, setSelectedOptions } = props;
-
-  const labelToId = (label: string) => {
-    return label.toLowerCase().replaceAll(" ", "-");
-  };
 
   const handleOptionClick = (index: number) => {
     if (props.multi) {
@@ -37,7 +32,7 @@ export function Select(props: MultiSelectProps) {
 
   return (
     <div className={props.className}>
-      <SecondaryText className="font-medium">{props.name}</SecondaryText>
+      <Text.Secondary className="font-medium">{props.name}</Text.Secondary>
       <div
         role="container"
         style={{

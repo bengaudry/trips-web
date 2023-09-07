@@ -6,10 +6,11 @@ export function Setting(props: {
   onClick?: CallableFunction;
   reduceIconSize?: boolean;
   bigIcon?: boolean;
+  className?: string;
 }) {
   return (
     <div
-      className="flex flex-row items-center justify-between py-3"
+      className={`flex flex-row items-center justify-between py-3 ${props.className}`}
       onClick={() => (props.onClick ? props.onClick() : "")}
     >
       <div className="flex flex-row items-center gap-4">

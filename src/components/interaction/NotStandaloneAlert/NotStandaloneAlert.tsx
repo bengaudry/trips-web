@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next";
 import { NavLink } from "react-router-dom";
-import { SecondaryText } from "../../texts";
+import { Text } from "../../texts";
 
 type NotStandaloneAlertProps = {
   shown: boolean;
@@ -21,18 +21,16 @@ export function NotStandaloneAlert(props: NotStandaloneAlertProps) {
         style={{ gridRow: "1 / span 2" }}
       >
         <div className="flex flex-row items-center justify-between">
-          <h3 className="text-2xl font-semibold">
-            {t("popups.notStandalone.title")}
-          </h3>
+          <Text.Title rank={3}>{t("popups.notStandalone.title")}</Text.Title>
           <button onClick={() => props.setShown(false)}>
-            <SecondaryText>
+            <Text.Secondary>
               <i className="fi fi-rr-cross" />
-            </SecondaryText>
+            </Text.Secondary>
           </button>
         </div>
-        <SecondaryText className="mt-2 mb-4">
+        <Text.Secondary className="mt-2 mb-4">
           {t("popups.notStandalone.text")}
-        </SecondaryText>
+        </Text.Secondary>
         {props.shown}
         <NavLink
           to="/install"
