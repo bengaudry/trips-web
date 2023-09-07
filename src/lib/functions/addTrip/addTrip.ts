@@ -1,11 +1,10 @@
 import { Trip } from "../../../types/types";
-import { getFirestore, addDoc, collection } from "firebase/firestore";
-import { getFirebaseApp } from "../../../../server";
+import { addDoc, collection } from "firebase/firestore";
+import { getFirebaseDb } from "../../../../server";
 import { strTruish, anyTruish } from "../../functions";
 
 export async function addTrip(content: Trip) {
-  const db = getFirestore(getFirebaseApp());
-  const tripsCollection = collection(db, "/trips");
+  const tripsCollection = collection(getFirebaseDb(), "/trips");
 
   await addDoc(tripsCollection, content)
     .then(() => {

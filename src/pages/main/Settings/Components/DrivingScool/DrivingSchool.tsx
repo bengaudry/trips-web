@@ -2,7 +2,6 @@ import { Input } from "../../../../../components/form";
 import { Cta } from "../../../../../components";
 import { useState } from "react";
 import {
-  getFirestore,
   collection,
   query,
   where,
@@ -11,7 +10,7 @@ import {
   doc,
   getDoc,
 } from "firebase/firestore";
-import { getFirebaseApp } from "../../../../../../server";
+import { getFirebaseDb } from "../../../../../../server";
 import { Notification } from "../../../../../components";
 
 export function DrivingSchool() {
@@ -27,8 +26,7 @@ export function DrivingSchool() {
 
   const [notificationVisible, setNotificationVisible] = useState(false);
 
-  const db = getFirestore(getFirebaseApp());
-  const schoolsCodesCollection = collection(db, "/schoolsCodes");
+  const schoolsCodesCollection = collection(getFirebaseDb(), "/schoolsCodes");
   const [schoolName, setSchoolName] = useState("");
 
   // Fetches in firestore where the codes equals to the code in the input
@@ -43,7 +41,7 @@ export function DrivingSchool() {
 
         if (fetchedDoc && data.value === code) {
           // Delete the code after it has been used
-          deleteDoc(doc(db, "/schoolsCodes", id))
+          deleteDoc(doc(getFirebaseDb(), "/schoolsCodes", id))
             .then(() => {
               fetchSchoolWithId(data.schoolId);
               setNotificationContent({
@@ -54,7 +52,7 @@ export function DrivingSchool() {
             })
             .catch((err) => {
               setNotificationContent({
-                content: `Erreur. Veuillez contacter le développeur.`,
+                content: `Erreur. Veuillez contacter le développeur. (${err})`,
                 type: "error",
               });
             });
@@ -79,7 +77,7 @@ export function DrivingSchool() {
   };
 
   const fetchSchoolWithId = (id: string) => {
-    const schoolsDoc = doc(db, "schools", id);
+    const schoolsDoc = doc(getFirebaseDb(), "schools", id);
 
     getDoc(schoolsDoc).then((val) => {
       console.log(val.data());

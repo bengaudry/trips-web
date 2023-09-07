@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { TripDisplayer, Cta, Modal, Text } from "../../../../components";
 import { Trip } from "../../../../types/types";
 import { getFirestore, deleteDoc, doc, updateDoc } from "firebase/firestore";
-import { getFirebaseApp } from "../../../../../server";
+import { getFirebaseApp, getFirebaseDb } from "../../../../../server";
 import {
   capitalizeString,
   removeElementAtIndex,
@@ -41,10 +41,10 @@ export function Trips(props: {
 
   const handleDeleteTrip = () => {
     if (confirm("Do you really want to delete this trip ?")) {
-      const db = getFirestore(getFirebaseApp());
-      console.log("[db] :", db);
       if (modalContent?.trip.id) {
-        deleteDoc(doc(db, "/trips", modalContent?.trip.id as string))
+        deleteDoc(
+          doc(getFirebaseDb(), "/trips", modalContent?.trip.id as string)
+        )
           .then(() => {
             if (props.data) {
               let newData = removeElementAtIndex(
@@ -52,6 +52,7 @@ export function Trips(props: {
                 modalContent.key
               );
               props.onDataChange(newData);
+              setModalOpened(false);
             } else {
               window.location.reload();
             }
@@ -67,8 +68,7 @@ export function Trips(props: {
 
   const handleRoundTripChange = (val: boolean) => {
     setRoundTrip(val);
-    const db = getFirestore(getFirebaseApp());
-    let ref = doc(db, "/trips", modalContent?.trip.id as string);
+    let ref = doc(getFirebaseDb(), "/trips", modalContent?.trip.id as string);
     console.log("id", modalContent?.trip.id);
     updateDoc(ref, { roundTrip: val })
       .then(() => {

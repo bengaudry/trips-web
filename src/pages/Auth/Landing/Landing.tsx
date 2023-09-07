@@ -11,7 +11,7 @@ import {
   query,
   where,
 } from "firebase/firestore";
-import { getFirebaseApp } from "../../../../server";
+import { getFirebaseApp, getFirebaseDb } from "../../../../server";
 import { getFormattedDate } from "../../../lib/functions";
 
 export function Landing() {
@@ -116,8 +116,7 @@ export function Landing() {
   }, [betaEmail]);
 
   useEffect(() => {
-    const db = getFirestore(getFirebaseApp());
-    const tripsCollection = collection(db, "/trips");
+    const tripsCollection = collection(getFirebaseDb(), "/trips");
 
     const fetchData = async () => {
       let q = query(tripsCollection, where("email", "==", betaEmail));
@@ -142,8 +141,7 @@ export function Landing() {
   const handleNewBetaTester = async () => {
     if (!betaEmail || betaEmail === "" || !isValidEmail(betaEmail)) return;
 
-    const db = getFirestore(getFirebaseApp());
-    const betaTestersCollection = collection(db, "/betaTesters");
+    const betaTestersCollection = collection(getFirebaseDb(), "/betaTesters");
 
     let q = query(betaTestersCollection, where("email", "==", betaEmail));
     await getDocs(q).then(async (val) => {

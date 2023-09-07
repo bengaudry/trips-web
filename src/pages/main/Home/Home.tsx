@@ -9,7 +9,11 @@ import {
   query,
   orderBy,
 } from "firebase/firestore";
-import { getFirebaseApp, getFirebaseAuth } from "../../../../server";
+import {
+  getFirebaseApp,
+  getFirebaseAuth,
+  getFirebaseDb,
+} from "../../../../server";
 
 import { Trip } from "../../../types/types";
 import { calculateDataForStats } from "../../../lib/functions";
@@ -57,8 +61,7 @@ export function Home() {
 
   // Fetches user data from firebase
   useEffect(() => {
-    const db = getFirestore(getFirebaseApp());
-    const tripsCollection = collection(db, "/trips");
+    const tripsCollection = collection(getFirebaseDb(), "/trips");
 
     const fetchData = async () => {
       let q = query(

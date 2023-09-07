@@ -2,8 +2,8 @@ import { useState } from "react";
 import { Cta } from "../../../../../components";
 import { Input, Textarea } from "../../../../../components/form";
 import type { IssueCategory } from "../BetaPage/BetaPage";
-import { getFirestore, collection, addDoc } from "firebase/firestore";
-import { getFirebaseApp, getFirebaseAuth } from "../../../../../../server";
+import { collection, addDoc } from "firebase/firestore";
+import { getFirebaseDb, getFirebaseAuth } from "../../../../../../server";
 import { strTruish } from "../../../../../lib/functions";
 
 export async function addIssue(content: {
@@ -13,8 +13,7 @@ export async function addIssue(content: {
   description: string;
   issueUrl?: string;
 }) {
-  const db = getFirestore(getFirebaseApp());
-  const tripsCollection = collection(db, "/betaIssues");
+  const tripsCollection = collection(getFirebaseDb(), "/betaIssues");
 
   await addDoc(tripsCollection, {
     ...content,

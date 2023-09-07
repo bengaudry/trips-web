@@ -7,14 +7,8 @@ import {
   StyleSheet,
   Image,
 } from "@react-pdf/renderer";
-import { getFirebaseApp, getFirebaseAuth } from "../../../../server";
-import {
-  collection,
-  getDocs,
-  getFirestore,
-  query,
-  where,
-} from "firebase/firestore";
+import { getFirebaseDb, getFirebaseAuth } from "../../../../server";
+import { collection, getDocs, query, where } from "firebase/firestore";
 import { useEffect, useState } from "react";
 // import QRCode from "qrcode";
 
@@ -46,8 +40,7 @@ type Certificate = { code: string; uid: string; userName: string };
 export function ShowCertificate() {
   const [certificate, setCertificate] = useState<Certificate>();
 
-  const db = getFirestore(getFirebaseApp());
-  const certificatesCol = collection(db, "/certificates");
+  const certificatesCol = collection(getFirebaseDb(), "/certificates");
 
   const [qrCodeDataUri, setQRCodeDataUri] = useState("");
 
