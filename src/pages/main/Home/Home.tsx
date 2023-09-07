@@ -99,8 +99,6 @@ export function Home() {
       <PageLayout className="overflow-y-scroll">
         <NotVerifiedEmailPopup className="mb-4" />
 
-        {!navigator.onLine && "Offline"}
-
         <SecondaryText className="text-xl mt-1">
           {t("homepage.header.subtitle")}
         </SecondaryText>

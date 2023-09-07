@@ -6,7 +6,7 @@ export function PageLayout(props: {
   className?: string;
 }) {
   return (
-    <main className={`px-5 py-12 pb-44 ${props.className}`} role="page">
+    <main className={`px-5 py-12 ${props.className}`} role="page">
       <h1 className="text-4xl font-bold mb-3">{props.title ?? ""}</h1>
       {props.children}
     </main>

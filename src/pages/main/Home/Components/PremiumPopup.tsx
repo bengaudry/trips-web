@@ -23,7 +23,7 @@ export function PremiumPopup(props: {
       </SecondaryText>
       <h2 className="mt-5 mb-3 text-xl font-semibold">Le prix ?</h2>
       <p className="text-lg">
-        C'est <span className="text-yellow-500">2.99€</span> seulement, et{" "}
+        C'est <span className="text-[#DA22FF]">2.99€</span> seulement, et{" "}
         <b>une seule fois</b>.
       </p>
       <SecondaryText className="mb-4">

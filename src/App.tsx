@@ -55,6 +55,7 @@ i18n.use(initReactI18next).init({
 export default function App() {
   const [userLoggedIn, setUserLoggedIn] = useState(false);
   const [loaderVisible, setLoaderVisible] = useState(true);
+  const [offline, setOffline] = useState(!navigator.onLine);
 
   // Show the app if connected, if not, show the login page
   useEffect(() => {
@@ -64,6 +65,22 @@ export default function App() {
       setLoaderVisible(true);
     }
   }, [userLoggedIn]);
+
+  addEventListener("offline", () => {
+    setOffline(true);
+  });
+
+  addEventListener("online", () => {
+    setOffline(false);
+  });
+
+  useEffect(() => {
+    if (offline) {
+      setTimeout(() => {
+        setOffline(false);
+      }, 3000);
+    }
+  }, [offline]);
 
   onAuthStateChanged(getFirebaseAuth(), (user) => {
     if (user) {
@@ -78,6 +95,16 @@ export default function App() {
   return (
     <>
       {loaderVisible && <Loader />}
+
+      {offline && (
+        <button
+          className="fixed top-6 right-6 bg-red-500/50 backdrop-blur-lg px-6 py-2 rounded-full hover:scale-110 transition-transform duration-300"
+          onClick={() => setOffline(false)}
+        >
+          <i className="inline-block fi fi-rr-down-left-and-up-right-to-center mr-2 translate-y-0.5"></i>
+          <span>App is offline</span>
+        </button>
+      )}
 
       {userLoggedIn ? (
         <BrowserRouter>

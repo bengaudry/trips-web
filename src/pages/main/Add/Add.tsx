@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-import { Input, CitySuggestions } from "../../../components/form";
+import { Input, CitySuggestions, Checkbox } from "../../../components/form";
 import { Notification, Cta, PageLayout } from "../../../components";
 import { OtherOptions } from "./components";
 import type { OtherOptionsT } from "./components";
@@ -42,6 +42,8 @@ export function Add() {
   const [length, setLength] = useState("");
   const [duration, setDuration] = useState("");
 
+  const [roundTrip, setRoundTrip] = useState(false);
+
   // Functionnal states
   const [fromInputFocused, setFromInputFocused] = useState(false);
   const [toInputFocused, setToInputFocused] = useState(false);
@@ -53,7 +55,6 @@ export function Add() {
     roadTypes: [],
     trafficDensities: [],
     weatherTypes: [],
-    roundTrip: false,
   };
 
   const [otherOptState, setOtherOptState] = useState(defaultOtherOptions);
@@ -74,7 +75,7 @@ export function Add() {
       to: to,
       length: parseInt(length),
       duration: parseInt(duration),
-      roundTrip: otherOptState.roundTrip,
+      roundTrip: roundTrip,
       uid: getFirebaseAuth().currentUser?.uid as string,
     });
   };
@@ -86,7 +87,7 @@ export function Add() {
     if (to === "" || !to) return false;
     if (parseInt(length) <= 0 || length === "" || !length) return false;
     if (parseInt(duration) <= 0 || duration === "" || !duration) return false;
-    if (typeof otherOptState.roundTrip !== "boolean") return false;
+    if (typeof roundTrip !== "boolean") return false;
     return true;
   };
 
@@ -249,6 +250,11 @@ export function Add() {
                 required
               />
             </section>
+            <Checkbox
+              name={t("addpage.inputs.labels.roundtrip")}
+              checked={roundTrip}
+              setChecked={(val) => setRoundTrip(val)}
+            />
           </>
         ) : (
           <OtherOptions

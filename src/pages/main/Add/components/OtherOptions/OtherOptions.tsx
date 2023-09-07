@@ -6,7 +6,6 @@ export type OtherOptionsT = {
   roadTypes: number[];
   trafficDensities: number[];
   weatherTypes: number[];
-  roundTrip: boolean;
 };
 
 type OtherOptProps = {
@@ -15,8 +14,7 @@ type OtherOptProps = {
 };
 
 export function OtherOptions(props: OtherOptProps) {
-  const { roadTypes, trafficDensities, weatherTypes, roundTrip } =
-    props.otherOptState;
+  const { roadTypes, trafficDensities, weatherTypes } = props.otherOptState;
 
   const editValueInState = <K extends keyof OtherOptionsT>(
     key: K,
@@ -109,11 +107,6 @@ export function OtherOptions(props: OtherOptProps) {
             icon: "snowflake",
           },
         ]}
-      />
-      <Checkbox
-        name={t("addpage.inputs.labels.roundtrip")}
-        checked={roundTrip}
-        setChecked={(val) => editValueInState("roundTrip", val)}
       />
     </div>
   );
