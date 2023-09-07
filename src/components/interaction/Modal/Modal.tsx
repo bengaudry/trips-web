@@ -1,4 +1,5 @@
 import {
+  Component,
   Dispatch,
   ReactNode,
   SetStateAction,
@@ -15,60 +16,75 @@ interface ModalProps {
   unClosable?: boolean;
 }
 
-export function Modal(props: ModalProps) {
-  const [shakingAnim, setShakingAnim] = useState(false);
+export class Modal extends Component {
+  props: ModalProps;
+  state: { shakingAnim: boolean };
 
-  // Start shaking animation if user tries to dismiss when not allowed
-  useEffect(() => {
-    if (shakingAnim) {
+  constructor(props: ModalProps) {
+    super(props);
+    this.props = props;
+
+    this.state = {
+      shakingAnim: false,
+    };
+  }
+
+  setShakingAnim = (val: boolean) => {
+    this.setState({ shakingAnim: val });
+  };
+
+  componentDidUpdate() {
+    // Start shaking animation if user tries to dismiss when not allowed
+    if (this.state.shakingAnim) {
       setTimeout(() => {
-        setShakingAnim(false);
+        this.setShakingAnim(false);
       }, 300);
     }
-  }, [shakingAnim]);
 
-  // Disables scrolling on body when popup is visible
-  useEffect(() => {
-    if (props.visible) {
+    // Disables scrolling on body when popup is visible
+    if (this.props.visible) {
       document.body.style.overflow = "hidden";
     } else {
       document.body.style.overflow = "auto";
     }
-  }, [props.visible]);
+  }
 
-  return (
-    <div
-      role="modal"
-      className={`${
-        props.visible
-          ? "bg-black/80 pointer-events-auto"
-          : "bg-transparent pointer-events-none"
-      } fixed flex flex-row items-end justify-start inset-0 transition-colors duration-500 z-50 lg:items-center`}
-    >
-      <ModalComponents.CloseBackgroundBtn
-        setShakingAnim={setShakingAnim}
-        {...props}
-      />
-      <ModalComponents.MainContainer shakingAnim={shakingAnim} {...props}>
-        <ModalComponents.RoundedBar />
-        <div className="flex flex-row items-center justify-between px-8">
-          {props.title ? (
-            <ModalComponents.Title value={props.title} />
-          ) : (
-            <div />
-          )}
-          <ModalComponents.CloseBtn {...props} />
-        </div>
-        <main className="max-h-[70vh] overflow-scroll px-8 pb-10">
-          {props.children}
-        </main>
-      </ModalComponents.MainContainer>
-    </div>
-  );
-}
+  render() {
+    const { visible, setVisible, children, title, unClosable } = this.props;
 
-class ModalComponents {
-  constructor() {}
+    return (
+      <div
+        role="modal"
+        className={`${
+          this.props.visible
+            ? "bg-black/80 pointer-events-auto"
+            : "bg-transparent pointer-events-none"
+        } fixed flex flex-row items-end justify-start inset-0 transition-colors duration-500 z-50 lg:items-center`}
+      >
+        <Modal.CloseBackgroundBtn
+          setShakingAnim={this.setShakingAnim}
+          {...this.props}
+        />
+        <Modal.MainContainer
+          shakingAnim={this.state.shakingAnim}
+          {...this.props}
+        >
+          <Modal.RoundedBar />
+          <div className="flex flex-row items-center justify-between px-8">
+            {this.props.title ? (
+              <Modal.Title value={this.props.title} />
+            ) : (
+              <div />
+            )}
+            <Modal.CloseBtn {...this.props} />
+          </div>
+          <main className="max-h-[70vh] overflow-scroll px-8 pb-10">
+            {this.props.children}
+          </main>
+        </Modal.MainContainer>
+      </div>
+    );
+  }
 
   public static CloseBackgroundBtn = (props: {
     unClosable?: boolean;
