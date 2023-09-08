@@ -1,61 +1,37 @@
+import { useState } from "react";
+
 import { sendEmailVerification, User } from "firebase/auth";
 import { getFirebaseAuth } from "../../../../server";
-import { useState } from "react";
-import { Notification } from "../Notification/Notification";
 
-type NotifContent = {
-  content: string;
-  type: "success" | "error";
-};
+import { toast } from "react-toastify";
 
 export function NotVerifiedEmailPopup(props: { className?: string }) {
-  const [notification, setNotification] = useState<NotifContent>({
-    content: "",
-    type: "error",
-  });
-  const [notifVisible, setNotifVisible] = useState(false);
-
   const sendEmail = () => {
     if (getFirebaseAuth().currentUser) {
       sendEmailVerification(getFirebaseAuth().currentUser as User)
         .then(() => {
-          // Email sent with success
-          showNotif(
-            "We sent you an email. Don't forget to check your spam !",
-            "success"
-          );
+          toast("We sent you an email. Don't forget to check your spam !", {
+            type: "info",
+          });
         })
         .catch((err) => {
-          // Error while sending email
-          showNotif(
+          toast(
             `Error while sending ${err.replaceAll(
               "FirebaseError: Firebase: Error",
               ""
             )}`,
-            "error"
+            { type: "error" }
           );
         });
     } else {
-      showNotif(
-        "Error while sending. Please sign out and sign in again.",
-        "error"
-      );
+      toast("Error while sending. Please sign out and sign in again.", {
+        type: "error",
+      });
     }
-  };
-
-  const showNotif = (content: string, type: "success" | "error") => {
-    setNotification({ content: content, type: type });
-    setNotifVisible(true);
   };
 
   return !getFirebaseAuth().currentUser?.emailVerified ? (
     <>
-      <Notification
-        visible={notifVisible}
-        setVisible={setNotifVisible}
-        content={notification.content}
-        type={notification.type}
-      />
       <div
         className={`w-full flex flex-col items-center rounded-lg px-4 py-2 mt-2 bg-yellow-600 ${props.className}`}
       >

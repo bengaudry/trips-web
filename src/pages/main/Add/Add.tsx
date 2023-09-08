@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 
-import { Notification, Cta, PageLayout } from "components";
+import { Cta, PageLayout } from "components";
 import { Input, CitySuggestions, Checkbox } from "components/form";
 import { OtherOptions } from "./components";
 import type { OtherOptionsT } from "./components";
+import { toast } from "react-toastify";
 
 import { getFirebaseAuth } from "../../../../server";
 import { addTrip } from "../../../lib/functions";
@@ -61,7 +62,9 @@ export function Add() {
 
   const handleSubmit = () => {
     if (!getFirebaseAuth().currentUser?.emailVerified) {
-      alert("Please verify your email before adding a trip");
+      toast("Please verify your email before adding a trip", {
+        type: "warning",
+      });
       return;
     }
 
@@ -131,13 +134,6 @@ export function Add() {
 
   return (
     <PageLayout title={t("addpage.title")}>
-      <Notification
-        visible={errorVisible}
-        setVisible={setErrorVisible}
-        type="error"
-        content="Veuillez remplir tous les champs"
-      />
-
       <div className="relative bg-grayblue-800 h-2 w-full rounded-lg overflow-hidden">
         <div
           className={`${
@@ -266,19 +262,18 @@ export function Add() {
           type="button"
           btnType="submit"
           className="mt-8 sticky bottom-32 shadow-2xl shadow-brand-200/70 dark:shadow-grayblue-900 lg:bottom-8"
-          disabled={!allFieldsFilled()}
+          // disabled={!allFieldsFilled()}
           onClick={() => {
-            if (step === 1) {
-              setStep(2);
-              return;
-            }
             if (allFieldsFilled()) {
+              if (step === 1) {
+                setStep(2);
+                return;
+              }
               setStep("submitted");
               handleSubmit();
-              setErrorVisible(false);
               return;
             }
-            setErrorVisible(true);
+            toast("Please fill all fields", { type: "error" });
           }}
         >
           {step === 1 ? "Suivant" : "Add trip"}

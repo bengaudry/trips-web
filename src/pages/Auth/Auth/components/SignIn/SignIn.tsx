@@ -1,20 +1,17 @@
 import { useState } from "react";
+import { NavLink } from "react-router-dom";
 
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { Notification, Cta, Modal, Text } from "components";
-import { Input } from "components/form";
 import { getFirebaseAuth } from "../../../../../../server";
+
+import { Cta, Modal, Text } from "components";
+import { Input } from "components/form";
 import { ResetPassword } from "../ResetPassword/ResetPassword";
-import { NavLink } from "react-router-dom";
+import { toast } from "react-toastify";
 
 export function SignInPage(props: { onRegisterClick: () => void }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
-  // Error popup state
-  const [errorVisible, setErrorVisible] = useState(false);
-  const [errorContent, setErrorContent] = useState("");
-
   const [resetPassModalShown, setResetPassModalShown] = useState(false);
 
   const handleSignIn = () => {
@@ -24,26 +21,10 @@ export function SignInPage(props: { onRegisterClick: () => void }) {
         window.location.href = "/";
       })
       .catch((err) => {
-        var error: string;
-        switch (err.code) {
-          case "auth/wrong-password":
-            error = "Wrong password";
-            break;
-
-          case "auth/user-not-found":
-            error = "This email is not registered";
-            break;
-
-          case "auth/invalid-email":
-            error = "Email format is invalid";
-            break;
-
-          default:
-            error = err.code.replaceAll("auth/", "").replaceAll("-", " ");
-            break;
-        }
-        setErrorContent(error);
-        setErrorVisible(true);
+        toast(
+          `Error while signing you in. Please try again. (Code: ${err.code})`,
+          { type: "error" }
+        );
       });
   };
 
@@ -56,12 +37,6 @@ export function SignInPage(props: { onRegisterClick: () => void }) {
       >
         <ResetPassword email={email} />
       </Modal>
-      <Notification
-        visible={errorVisible}
-        setVisible={setErrorVisible}
-        type="error"
-        content={errorContent}
-      />
       <Text.Title rank={2}>Let's sign you in</Text.Title>
       <Text.Secondary>Welcome back !</Text.Secondary>
       <form onSubmit={(e) => e.preventDefault()}>

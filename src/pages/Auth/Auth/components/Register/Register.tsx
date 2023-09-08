@@ -10,24 +10,43 @@ import {
 import { Notification, Cta, Text } from "components";
 import { Input } from "components/form";
 import { getFirebaseAuth } from "../../../../../../server";
+import { toast } from "react-toastify";
 
 export function RegisterPage(props: { onSignInClick: () => void }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
 
-  // Error popup states
-  const [errorVisible, setErrorVisible] = useState(false);
-  const [errorContent, setErrorContent] = useState("");
+  const handleRegister = () => {
+    createUserWithEmailAndPassword(getFirebaseAuth(), email, password)
+      .then(() => {
+        if (getFirebaseAuth().currentUser) {
+          sendEmailVerification(getFirebaseAuth().currentUser as User);
+          updateProfile(getFirebaseAuth().currentUser as User, {
+            displayName: name,
+          })
+            .then(() => {
+              localStorage.setItem("connected", "true");
+              window.location.href = "/";
+            })
+            .catch((err) => {
+              toast(
+                `Error while creating your profile. Please try again. (Code: ${err.code})`,
+                { type: "error" }
+              );
+            });
+        }
+      })
+      .catch((err) => {
+        toast(
+          `Error while creating your profile. Please try again. (Code: ${err.code})`,
+          { type: "error" }
+        );
+      });
+  };
 
   return (
     <div className="p-8 pb-16 absolute md:static md:grid place-content-center bottom-0 w-full">
-      <Notification
-        visible={errorVisible}
-        setVisible={setErrorVisible}
-        type="error"
-        content={errorContent}
-      />
       <Text.Title rank={2}>Let's register you</Text.Title>
       <Text.Secondary>Welcome to Trips !</Text.Secondary>
       <form onSubmit={(e) => e.preventDefault()}>
@@ -67,33 +86,7 @@ export function RegisterPage(props: { onSignInClick: () => void }) {
           </button>
           .
         </Text.Secondary>
-        <Cta
-          type="button"
-          btnType="submit"
-          onClick={() => {
-            createUserWithEmailAndPassword(getFirebaseAuth(), email, password)
-              .then(() => {
-                if (getFirebaseAuth().currentUser) {
-                  sendEmailVerification(getFirebaseAuth().currentUser as User);
-                  updateProfile(getFirebaseAuth().currentUser as User, {
-                    displayName: name,
-                  })
-                    .then(() => {
-                      localStorage.setItem("connected", "true");
-                      window.location.href = "/";
-                    })
-                    .catch((err) => {
-                      setErrorContent(err.code);
-                      setErrorVisible(true);
-                    });
-                }
-              })
-              .catch((err) => {
-                setErrorContent(err.code);
-                setErrorVisible(true);
-              });
-          }}
-        >
+        <Cta type="button" btnType="submit" onClick={handleRegister}>
           Register
         </Cta>
       </form>

@@ -1,7 +1,8 @@
-import { Trip } from "../../../types/types";
 import { addDoc, collection } from "firebase/firestore";
 import { getFirebaseDb } from "../../../../server";
 import { strTruish, anyTruish } from "../../functions";
+import { Trip } from "../../../types/types";
+import { toast } from "react-toastify";
 
 export async function addTrip(content: Trip) {
   const tripsCollection = collection(getFirebaseDb(), "/trips");
@@ -11,14 +12,10 @@ export async function addTrip(content: Trip) {
       window.location.href = "/";
     })
     .catch((err) => {
-      console.log("Firebase error :", err);
-      alert(
-        `Error while sending to the database, please contact us. (Error: ${err})`
-      );
-      return false;
+      toast(`Error while adding trip to database. (Code: ${err.code})`, {
+        type: "error",
+      });
     });
-
-  return true;
 }
 
 export function checkTripBeforeSending(content: Trip) {

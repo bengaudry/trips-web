@@ -12,20 +12,10 @@ import {
 import { getFirebaseDb } from "../../../../../../server";
 
 import { Input } from "components/form";
-import { Cta, Notification } from "components";
+import { Cta } from "components";
 
 export function DrivingSchool() {
   const [code, setCode] = useState("");
-
-  const [notificationContent, setNotificationContent] = useState<{
-    content: string;
-    type: "success" | "error";
-  }>({
-    content: "Vous avez rejoint l'auto-école ...",
-    type: "success",
-  });
-
-  const [notificationVisible, setNotificationVisible] = useState(false);
 
   const schoolsCodesCollection = collection(getFirebaseDb(), "/schoolsCodes");
   const [schoolName, setSchoolName] = useState("");
@@ -45,36 +35,14 @@ export function DrivingSchool() {
           deleteDoc(doc(getFirebaseDb(), "/schoolsCodes", id))
             .then(() => {
               fetchSchoolWithId(data.schoolId);
-              setNotificationContent({
-                content: `Vous avez rejoint l'auto-école ${schoolName}`,
-                type: "success",
-              });
-              setNotificationVisible(true);
             })
-            .catch((err) => {
-              setNotificationContent({
-                content: `Erreur. Veuillez contacter le développeur. (${err})`,
-                type: "error",
-              });
-            });
+            .catch((err) => {});
         } else {
           console.log("fetched doc :", fetchedDoc);
           console.log("data.value :", data.value);
-
-          setNotificationContent({
-            content: "Le code ne semble pas être valide",
-            type: "error",
-          });
-          setNotificationVisible(true);
         }
       })
-      .catch((err) => {
-        setNotificationContent({
-          content: `Le code ne semble pas être valide.`,
-          type: "error",
-        });
-        setNotificationVisible(true);
-      });
+      .catch((err) => {});
   };
 
   const fetchSchoolWithId = (id: string) => {
@@ -89,12 +57,6 @@ export function DrivingSchool() {
 
   return (
     <>
-      <Notification
-        visible={notificationVisible}
-        setVisible={setNotificationVisible}
-        content={notificationContent.content}
-        type={notificationContent.type}
-      />
       <form onSubmit={(e) => e.preventDefault()}>
         <Input
           name="Votre code"

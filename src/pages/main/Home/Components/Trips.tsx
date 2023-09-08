@@ -12,6 +12,7 @@ import {
   capitalizeString,
   removeElementAtIndex,
 } from "../../../../lib/functions";
+import { toast } from "react-toastify";
 
 export function Trips(props: {
   data?: Trip[];
@@ -45,9 +46,7 @@ export function Trips(props: {
   const handleDeleteTrip = () => {
     if (confirm("Do you really want to delete this trip ?")) {
       if (modalContent?.trip.id) {
-        deleteDoc(
-          doc(getFirebaseDb(), "/trips", modalContent?.trip.id as string)
-        )
+        deleteDoc(doc(getFirebaseDb(), "/trips", modalContent.trip.id))
           .then(() => {
             if (props.data) {
               let newData = removeElementAtIndex(
@@ -61,10 +60,15 @@ export function Trips(props: {
             }
           })
           .catch((err) => {
-            alert(err);
+            toast(
+              `Error while deleting trip. Please try again. (Code: ${err.code})`,
+              { type: "error" }
+            );
           });
       } else {
-        console.error("Error: id is undefined");
+        toast(`Error while deleting trip. Please contact us.`, {
+          type: "error",
+        });
       }
     }
   };
@@ -86,7 +90,12 @@ export function Trips(props: {
           window.location.reload();
         }
       })
-      .catch((err) => alert(err));
+      .catch((err) =>
+        toast(
+          `Error while editing your trip. Please try again. (Code: ${err.code})`,
+          { type: "error" }
+        )
+      );
   };
 
   return (

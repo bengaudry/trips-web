@@ -18,8 +18,7 @@ import { Trips } from "./Components/Trips";
 import { Stats } from "./Components/Stats";
 import { SetUserNameModal } from "./Components/SetUserNameModal";
 
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { toast } from "react-toastify";
 
 function fetchCachedTrips() {
   const data = localStorage.getItem("cached-trips-data");
@@ -77,6 +76,7 @@ export function Home() {
     fetchData();
   }, []);
 
+  // Caches the fetched trips
   useEffect(() => {
     setTripsInCache(trips);
   }, [trips]);
@@ -92,14 +92,6 @@ export function Home() {
   return (
     <>
       <PageLayout className="overflow-y-scroll">
-        <ToastContainer newestOnTop limit={1} />
-        <button
-          onClick={() =>
-            toast("You are toasted", { autoClose: 2000, closeButton: true })
-          }
-        >
-          Toast me
-        </button>
         <NotVerifiedEmailPopup className="mb-4" />
 
         <Text.Secondary className="text-xl mt-1">

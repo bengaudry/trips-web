@@ -6,8 +6,12 @@ import { getFirebaseDb, getFirebaseAuth } from "../../../../../../server";
 import { strTruish } from "../../../../../lib/functions";
 import { Cta } from "components";
 import { Input, Textarea } from "components/form";
+import { toast } from "react-toastify";
 
-async function addSuggestion(content: { name: string; content: string }) {
+async function addSuggestion(
+  content: { name: string; content: string },
+  onSuccess: () => void
+) {
   const tripsCollection = collection(getFirebaseDb(), "/betaSuggestions");
 
   await addDoc(tripsCollection, {
@@ -15,29 +19,28 @@ async function addSuggestion(content: { name: string; content: string }) {
     testerEmail: getFirebaseAuth().currentUser?.email,
   })
     .then(() => {
-      window.location.href = "/settings";
+      onSuccess();
     })
     .catch((err) => {
-      console.log("Firebase error :", err);
-      alert(
-        `Error while sending to the database, please contact us. (Error: ${err})`
-      );
-      return false;
+      toast(`Error while adding suggestion to database. (Code: ${err.code})`, {
+        type: "error",
+      });
     });
-
-  return true;
 }
 
-export function SuggestionForm() {
+export function SuggestionForm(props: { onSubmit: () => void }) {
   const [suggName, setSuggName] = useState("");
   const [suggContent, setSuggContent] = useState("");
 
   const handleSuggestionSubmit = () => {
     if (strTruish(suggName) && strTruish(suggContent)) {
-      addSuggestion({
-        name: suggName,
-        content: suggContent,
-      });
+      addSuggestion(
+        {
+          name: suggName,
+          content: suggContent,
+        },
+        props.onSubmit
+      );
     }
   };
 

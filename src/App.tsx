@@ -27,6 +27,9 @@ import { resources } from "../lang";
 import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
 
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 // Change the language of the app when it starts
 var lang = "fr";
 const savedLang = localStorage.getItem("app-lang") as string;
@@ -105,6 +108,15 @@ export default function App() {
           <span>App is offline</span>
         </button>
       )}
+
+      <ToastContainer
+        newestOnTop
+        limit={1}
+        closeButton
+        theme="light"
+        bodyClassName="bg-transparent"
+        toastClassName="bg-neutral-100/80 text-black dark:text-white dark:bg-grayblue-800/80 backdrop-blur-lg"
+      />
 
       {userLoggedIn ? (
         <BrowserRouter>

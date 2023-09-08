@@ -12,6 +12,7 @@ import {
 } from "firebase/firestore";
 import { getFirebaseApp, getFirebaseDb } from "../../../../server";
 import { getFormattedDate } from "../../../lib/functions";
+import { toast } from "react-toastify";
 
 export function Landing() {
   const cardOne = useRef(null);
@@ -114,6 +115,7 @@ export function Landing() {
     setEmailValid(isValidEmail(betaEmail));
   }, [betaEmail]);
 
+  // Checks if the beta email is in use
   useEffect(() => {
     const tripsCollection = collection(getFirebaseDb(), "/trips");
 
@@ -145,8 +147,9 @@ export function Landing() {
     let q = query(betaTestersCollection, where("email", "==", betaEmail));
     await getDocs(q).then(async (val) => {
       if (val.docs.length > 0) {
-        alert("This email is already awaiting for a beta tester account");
-        return;
+        toast("This email is already awaiting for a beta tester account", {
+          type: "warning",
+        });
       } else {
         await addDoc(betaTestersCollection, {
           email: betaEmail,
@@ -156,20 +159,18 @@ export function Landing() {
           .then(() => {
             setBetaEmail("");
             setJoinBetaPopupShown(false);
-            setBetaSuccessShown(true);
-            window.setTimeout(() => setBetaSuccessShown(false), 3000);
+            toast("You are on the waitlist. Congratulations !", {
+              type: "success",
+            });
           })
           .catch((err) => {
-            console.log("Firebase error :", err);
-            alert(
-              `Error while sending to the database, please contact us. (Error: ${err})`
+            toast(
+              `Error while sending to the database, please contact us. (Code: ${err.code})`,
+              { type: "error" }
             );
-            return false;
           });
       }
     });
-
-    return true;
   };
 
   return (
