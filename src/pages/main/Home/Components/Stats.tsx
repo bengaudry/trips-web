@@ -1,15 +1,18 @@
-import { useTranslation } from "react-i18next";
-import { Cta, Text, TripDisplayer } from "../../../../components";
-import { StatsData, Trip } from "../../../../types/types";
-import { StatPill } from "./StatPill";
-import { MAX_KMS_BEFORE_LICENSE } from "../../../../lib/constants";
-import { ReachedMaxAlert } from "./ReachedMaxAlert";
-import { NavLink } from "react-router-dom";
-import { DrivingSteps } from "./DrivingSteps";
-import { getFirebaseAuth } from "../../../../../server";
-import { getDiffBetweenDates } from "../../../../lib/functions";
 import { useState } from "react";
+import { NavLink } from "react-router-dom";
+import { useTranslation } from "react-i18next";
+
+import { Cta, Text, TripDisplayer } from "components";
+import { StatPill } from "./StatPill";
+import { ReachedMaxAlert } from "./ReachedMaxAlert";
+import { DrivingSteps } from "./DrivingSteps";
 import { PremiumPopup } from "./PremiumPopup";
+
+import { getDiffBetweenDates } from "../../../../lib/functions";
+import { MAX_KMS_BEFORE_LICENSE } from "../../../../lib/constants";
+import { StatsData, Trip } from "../../../../types/types";
+
+import { getFirebaseAuth } from "../../../../../server";
 
 export function Stats(props: {
   allTrips?: Trip[];

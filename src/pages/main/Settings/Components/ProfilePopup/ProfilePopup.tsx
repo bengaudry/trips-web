@@ -4,7 +4,7 @@ import { useTranslation } from "react-i18next";
 import { updateEmail, updateProfile } from "firebase/auth";
 import { getFirebaseAuth } from "../../../../../../server";
 
-import { Modal, Text } from "../../../../../components";
+import { Modal, Text } from "components";
 import {
   ChangePass as ChangePassModal,
   DeleteAccount as DeleteAccountModal,

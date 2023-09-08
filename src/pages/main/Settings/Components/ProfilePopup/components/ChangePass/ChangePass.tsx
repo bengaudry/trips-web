@@ -1,10 +1,11 @@
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 
 import { updatePassword as firebaseUpdatePassword, User } from "firebase/auth";
-import { Input } from "../../../../../../../components/form";
 import { getFirebaseAuth } from "../../../../../../../../server";
-import { Cta } from "../../../../../../../components";
-import { useTranslation } from "react-i18next";
+
+import { Cta } from "components";
+import { Input } from "components/form";
 
 export function ChangePass() {
   const [newPass, setNewPass] = useState("");

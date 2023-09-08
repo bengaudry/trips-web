@@ -14,7 +14,7 @@ import {
   PageLayout,
   Text,
   SlidingPage,
-} from "../../../components";
+} from "components";
 import { Setting } from "./Components/Setting";
 import { ProfilePopup } from "./Components/ProfilePopup/ProfilePopup";
 import { LangPopup } from "./Components/LangPopup/LangPopup";

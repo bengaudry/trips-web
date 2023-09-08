@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import { BackButton } from "../../components";
+import { BackButton } from "components";
 
 export function SlidingPage(props: {
   children: ReactNode;

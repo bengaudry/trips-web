@@ -1,6 +1,5 @@
-import { Input } from "../../../../../components/form";
-import { Cta } from "../../../../../components";
 import { useState } from "react";
+
 import {
   collection,
   query,
@@ -11,7 +10,9 @@ import {
   getDoc,
 } from "firebase/firestore";
 import { getFirebaseDb } from "../../../../../../server";
-import { Notification } from "../../../../../components";
+
+import { Input } from "components/form";
+import { Cta, Notification } from "components";
 
 export function DrivingSchool() {
   const [code, setCode] = useState("");

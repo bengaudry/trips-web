@@ -1,5 +1,5 @@
 import { Outlet } from "react-router-dom";
-import { NavBar, NotStandaloneAlert } from "../../components";
+import { NavBar, NotStandaloneAlert } from "components";
 import { useState, useEffect } from "react";
 
 export function Layout() {

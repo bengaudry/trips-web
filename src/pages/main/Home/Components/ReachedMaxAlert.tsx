@@ -1,5 +1,5 @@
 import { t } from "i18next";
-import { Cta, Text } from "../../../../components";
+import { Cta, Text } from "components";
 import { hasUserReachedMaxKms } from "../../../../lib/functions";
 
 export function ReachedMaxAlert() {

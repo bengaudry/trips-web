@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import { Text } from "../../components";
+import { Text } from "components";
 
 export function PageLayout(props: {
   title?: string | null;

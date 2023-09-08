@@ -1,19 +1,8 @@
 import { useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 
-import {
-  getFirestore,
-  collection,
-  getDocs,
-  where,
-  query,
-  orderBy,
-} from "firebase/firestore";
-import {
-  getFirebaseApp,
-  getFirebaseAuth,
-  getFirebaseDb,
-} from "../../../../server";
+import { collection, getDocs, where, query, orderBy } from "firebase/firestore";
+import { getFirebaseAuth, getFirebaseDb } from "../../../../server";
 
 import { Trip } from "../../../types/types";
 import { calculateDataForStats } from "../../../lib/functions";
@@ -24,10 +13,13 @@ import {
   PageLayout,
   PanelSwitcher,
   Text,
-} from "../../../components";
+} from "components";
 import { Trips } from "./Components/Trips";
 import { Stats } from "./Components/Stats";
 import { SetUserNameModal } from "./Components/SetUserNameModal";
+
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function fetchCachedTrips() {
   const data = localStorage.getItem("cached-trips-data");
@@ -100,6 +92,14 @@ export function Home() {
   return (
     <>
       <PageLayout className="overflow-y-scroll">
+        <ToastContainer newestOnTop limit={1} />
+        <button
+          onClick={() =>
+            toast("You are toasted", { autoClose: 2000, closeButton: true })
+          }
+        >
+          Toast me
+        </button>
         <NotVerifiedEmailPopup className="mb-4" />
 
         <Text.Secondary className="text-xl mt-1">

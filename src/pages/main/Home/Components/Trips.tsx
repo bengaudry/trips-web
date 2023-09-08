@@ -1,14 +1,17 @@
 import { useEffect, useState } from "react";
-import { TripDisplayer, Cta, Modal, Text } from "../../../../components";
-import { Trip } from "../../../../types/types";
+import { useTranslation } from "react-i18next";
+
 import { getFirestore, deleteDoc, doc, updateDoc } from "firebase/firestore";
 import { getFirebaseApp, getFirebaseDb } from "../../../../../server";
+
+import { TripDisplayer, Cta, Modal, Text } from "components";
+import { Checkbox } from "components/form";
+
+import { Trip } from "../../../../types/types";
 import {
   capitalizeString,
   removeElementAtIndex,
 } from "../../../../lib/functions";
-import { useTranslation } from "react-i18next";
-import { Checkbox } from "../../../../components/form";
 
 export function Trips(props: {
   data?: Trip[];

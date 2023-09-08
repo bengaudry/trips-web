@@ -1,4 +1,4 @@
-import { Text } from "../../../../components";
+import { Text } from "components";
 import { MAX_KMS_BEFORE_LICENSE } from "../../../../lib/constants";
 
 function Step(props: {

@@ -1,7 +1,7 @@
 import { sendPasswordResetEmail } from "firebase/auth";
-import { Input } from "../../../../../components/form";
+import { Cta } from "components";
+import { Input } from "components/form";
 import { getFirebaseAuth } from "../../../../../../server";
-import { Cta } from "../../../../../components";
 import { useEffect, useState } from "react";
 
 export function ResetPassword(props: { email?: string }) {

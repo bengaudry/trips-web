@@ -1,6 +1,6 @@
 import i18n from "i18next";
 import { useTranslation } from "react-i18next";
-import { Text } from "../../../../../components";
+import { Text } from "components";
 
 function LangBtn(props: {
   lang: "fr" | "en" | "auto";

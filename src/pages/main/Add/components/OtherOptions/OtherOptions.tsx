@@ -1,5 +1,5 @@
 import { t } from "i18next";
-import { Select, Checkbox } from "../../../../../components/form";
+import { Select } from "components/form";
 import { Dispatch, SetStateAction } from "react";
 
 export type OtherOptionsT = {

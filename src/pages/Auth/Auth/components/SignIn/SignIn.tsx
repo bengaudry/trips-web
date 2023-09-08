@@ -1,8 +1,8 @@
 import { useState } from "react";
 
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { Notification, Cta, Modal, Text } from "../../../../../components";
-import { Input } from "../../../../../components/form";
+import { Notification, Cta, Modal, Text } from "components";
+import { Input } from "components/form";
 import { getFirebaseAuth } from "../../../../../../server";
 import { ResetPassword } from "../ResetPassword/ResetPassword";
 import { NavLink } from "react-router-dom";

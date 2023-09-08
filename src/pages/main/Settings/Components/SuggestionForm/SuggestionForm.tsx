@@ -1,9 +1,11 @@
 import { useState } from "react";
-import { Input, Textarea } from "../../../../../components/form";
-import { Cta } from "../../../../../components";
-import { strTruish } from "../../../../../lib/functions";
+
 import { collection, addDoc } from "firebase/firestore";
 import { getFirebaseDb, getFirebaseAuth } from "../../../../../../server";
+
+import { strTruish } from "../../../../../lib/functions";
+import { Cta } from "components";
+import { Input, Textarea } from "components/form";
 
 async function addSuggestion(content: { name: string; content: string }) {
   const tripsCollection = collection(getFirebaseDb(), "/betaSuggestions");

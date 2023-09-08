@@ -1,8 +1,7 @@
 import { ReactNode, forwardRef, useEffect, useRef, useState } from "react";
 import { NavLink } from "react-router-dom";
 
-import { Input } from "../../../components/form";
-import { Cta } from "../../../components";
+import { Cta } from "components";
 import {
   getFirestore,
   collection,

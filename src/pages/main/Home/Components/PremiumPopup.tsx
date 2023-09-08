@@ -1,5 +1,5 @@
 import { Dispatch, SetStateAction } from "react";
-import { Modal, Text, Cta } from "../../../../components";
+import { Modal, Text, Cta } from "components";
 import { MAX_KMS_BEFORE_LICENSE } from "../../../../lib/constants";
 
 export function PremiumPopup(props: {

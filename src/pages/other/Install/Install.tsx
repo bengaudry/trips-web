@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { PanelSwitcher, Text } from "../../../components";
+import { PanelSwitcher, Text } from "components";
 
 export function Install() {
   const platforms = ["Ios", "Android"];

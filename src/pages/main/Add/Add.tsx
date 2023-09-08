@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
-import { Input, CitySuggestions, Checkbox } from "../../../components/form";
-import { Notification, Cta, PageLayout } from "../../../components";
+import { Notification, Cta, PageLayout } from "components";
+import { Input, CitySuggestions, Checkbox } from "components/form";
 import { OtherOptions } from "./components";
 import type { OtherOptionsT } from "./components";
 

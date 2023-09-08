@@ -7,8 +7,8 @@ import {
   sendEmailVerification,
   updateProfile,
 } from "firebase/auth";
-import { Notification, Cta, Text } from "../../../../../components";
-import { Input } from "../../../../../components/form";
+import { Notification, Cta, Text } from "components";
+import { Input } from "components/form";
 import { getFirebaseAuth } from "../../../../../../server";
 
 export function RegisterPage(props: { onSignInClick: () => void }) {

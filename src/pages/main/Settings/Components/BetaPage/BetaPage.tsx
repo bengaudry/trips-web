@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { getFirebaseAuth } from "../../../../../../server";
-import { Modal, Text } from "../../../../../components";
+import { Modal, Text } from "components";
 import { BetaIssueForm } from "../BetaIssueForm/BetaIssueForm";
 import { SuggestionForm } from "../SuggestionForm/SuggestionForm";
 

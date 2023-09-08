@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { Cta } from "../../../../../components";
-import { Input, Textarea } from "../../../../../components/form";
+import { Cta } from "components";
+import { Input, Textarea } from "components/form";
 import type { IssueCategory } from "../BetaPage/BetaPage";
 import { collection, addDoc } from "firebase/firestore";
 import { getFirebaseDb, getFirebaseAuth } from "../../../../../../server";
