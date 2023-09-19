@@ -159,7 +159,7 @@ export function Landing() {
           .then(() => {
             setBetaEmail("");
             setJoinBetaPopupShown(false);
-            toast("You are on the waitlist. Congratulations !", {
+            toast("You are on the waitlist !", {
               type: "success",
             });
           })

@@ -10,6 +10,8 @@ import {
   DeleteAccount as DeleteAccountModal,
   RequestData as RequestDataModal,
 } from "./components";
+import { toast } from "react-toastify";
+import { capitalizeString } from "lib/functions";
 
 function Button(props: {
   children: ReactNode;
@@ -67,22 +69,34 @@ export function ProfilePopup() {
 
   const handleEditProfile = () => {
     const user = getFirebaseAuth().currentUser;
-    if (!email || email === "" || !userName || userName === "" || !user) return;
+    if (!email || email === "" || !userName || userName === "" || !user) {
+      return toast("Please fill in all fields correctly", { type: "warning" });
+    }
 
     updateEmail(user, email)
-      .then((val) => {
+      .then(() => {
         updateProfile(user, { displayName: userName })
           .then(() => {
-            alert("success");
+            toast("Updated your profile successfully", { type: "success" });
             setEditMode(false);
           })
           .catch((err) => {
-            alert(err);
+            console.log(err.code);
+            toast(
+              capitalizeString(
+                err.code.replaceAll("-", " ").replaceAll("auth/", "")
+              ),
+              { type: "error" }
+            );
           });
       })
       .catch((err) => {
-        setEmail(user.email as string);
-        alert(err);
+        toast(
+          capitalizeString(
+            err.code.replaceAll("-", " ").replaceAll("auth/", "")
+          ),
+          { type: "error" }
+        );
       });
   };
 
@@ -94,14 +108,13 @@ export function ProfilePopup() {
 
       <section className="flex flex-col gap-2 mb-12">
         <div className="flex flex-row items-center gap-3">
-          <i className="fi fi-rr-envelope translate-y-0.5" />
+          <i className="fi fi-rr-envelope translate-y-0.5 absolute left-4" />
           <input
             type="email"
+            autoComplete="false"
             className={`${
-              editMode
-                ? "text-black dark:text-white px-4"
-                : "text-grayblue-500 px-0"
-            } bg-transparent border-2 disabled:border-transparent border-grayblue-700 rounded-xl py-2 w-full focus:border-black dark:focus:border-brand-500 outline-none transition-[border-color,color,padding] duration-300`}
+              editMode ? "text-black dark:text-white" : "dark:text-grayblue-500"
+            } pl-10 bg-transparent border-2 disabled:border-neutral-300/40 dark:disabled:border-grayblue-700/40 border-neutral-300 dark:border-grayblue-700 rounded-xl py-2 w-full focus:border-brand-300 dark:focus:border-brand-500 outline-none transition-all duration-300`}
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             disabled={!editMode}
@@ -109,14 +122,13 @@ export function ProfilePopup() {
         </div>
 
         <div className="flex flex-row items-center gap-3">
-          <i className="fi fi-rr-id-badge translate-y-0.5" />
+          <i className="fi fi-rr-id-badge translate-y-0.5 absolute left-4" />
           <input
             type="text"
+            autoComplete="false"
             className={`${
-              editMode
-                ? "text-black dark:text-white px-4"
-                : "text-grayblue-500 px-0"
-            } bg-transparent border-2 disabled:border-transparent border-grayblue-700 rounded-xl py-2 w-full focus:border-black dark:focus:border-brand-500 outline-none transition-[border-color,color,padding] duration-300`}
+              editMode ? "text-black dark:text-white" : "dark:text-grayblue-500"
+            } pl-10 bg-transparent border-2 disabled:border-neutral-300/40 dark:disabled:border-grayblue-700/40 border-neutral-300 dark:border-grayblue-700 rounded-xl py-2 w-full focus:border-brand-300 dark:focus:border-brand-500 outline-none transition-all duration-300`}
             value={userName}
             onChange={(e) => setUserName(e.target.value)}
             disabled={!editMode}
@@ -138,17 +150,21 @@ export function ProfilePopup() {
 
           <button
             onClick={handleEditProfile}
-            className={`bg-brand-400 w-full border-brand-400 hover:bg-brand-500 hover:border-brand-500 text-white flex flex-row items-center gap-2 border-2 rounded-full pr-6 pl-5 py-2 transition-[transform,background-color,border-color] origin-left duration-200 ${
-              editMode ? "scale-x-1" : "scale-x-0"
+            className={`bg-brand-400 w-full overflow-hidden border-brand-400 hover:bg-brand-500 hover:border-brand-500 text-white grid rounded-full pr-6 pl-5 transition-all origin-left duration-200 ${
+              editMode
+                ? "grid-rows-[1fr] py-2 border-2"
+                : "grid-rows-[0fr] py-0 border-none"
             }`}
           >
-            <i className="block translate-y-0.5 fi fi-rr-user-pen p-0 m-0" />
-            <span>Update my profile</span>
+            <div className="w-full overflow-hidden flex flex-row items-center gap-2">
+              <i className="block translate-y-0.5 fi fi-rr-user-pen p-0 m-0" />
+              <span>Update my profile</span>
+            </div>
           </button>
         </div>
       </section>
 
-      <div className="flex flex-col overflow-hidden gap-0.5 rounded-lg w-full absolute bottom-6">
+      <div className="flex flex-col overflow-hidden gap-0.5 rounded-lg w-full absolute bottom-12">
         <Button icon="lock" onClick={() => showModal("ChangePass")}>
           Change my password
         </Button>

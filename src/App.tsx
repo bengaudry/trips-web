@@ -18,8 +18,8 @@ import { AuthLayout, Landing, Auth } from "./pages/auth";
 import { Install as InstallPage } from "./pages";
 
 // Styles
-import "/src/assets/index.css";
-import { onAuthStateChanged, User } from "firebase/auth";
+import "./styles/index.css";
+import { onAuthStateChanged } from "firebase/auth";
 import { getFirebaseAuth } from "../server";
 
 // Translations
@@ -109,14 +109,7 @@ export default function App() {
         </button>
       )}
 
-      <ToastContainer
-        newestOnTop
-        limit={1}
-        closeButton
-        theme="light"
-        bodyClassName="bg-transparent"
-        toastClassName="bg-neutral-100/80 text-black dark:text-white dark:bg-grayblue-800/80 backdrop-blur-lg"
-      />
+      <ToastContainer newestOnTop limit={1} closeButton theme="light" />
 
       {userLoggedIn ? (
         <BrowserRouter>
@@ -127,7 +120,6 @@ export default function App() {
               <Route path="settings" element={<Settings />} />
               <Route path="certificate" element={<Certificate />} />
               <Route path="install" element={<InstallPage />} />
-              <Route path="offline" element="Offline" />
               <Route path="*" element={<NoPage />} />
               <Route path="show-certificate" element={<ShowCertificate />} />
             </Route>

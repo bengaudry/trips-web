@@ -10,6 +10,7 @@ import {
 import { getFirebaseDb, getFirebaseAuth } from "../../../../server";
 import { collection, getDocs, query, where } from "firebase/firestore";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 // import QRCode from "qrcode";
 
 const styles = StyleSheet.create({
@@ -44,6 +45,8 @@ export function ShowCertificate() {
 
   const [qrCodeDataUri, setQRCodeDataUri] = useState("");
 
+  const navigate = useNavigate();
+
   // Fetches in firestore where the uid equals the users id
   const fetchData = async () => {
     let q = query(
@@ -68,7 +71,7 @@ export function ShowCertificate() {
             });
           } else {
             // user not logged in
-            window.location.href = "";
+            navigate("/");
           }
         }
       })

@@ -44,6 +44,13 @@ export function Settings() {
     setSlidingPageVisible(true);
   };
 
+  const CurrPageView = {
+    profile: <ProfilePopup />,
+    help: <ReactMarkdown>{legal}</ReactMarkdown>,
+    beta: <BetaPage />,
+    language: <LangPopup />,
+  }[slidingPageContent];
+
   return (
     <PageLayout title={t("settingsPage.title")}>
       <section className="my-5 bg-neutral-100 dark:bg-grayblue-800 rounded-xl">
@@ -119,15 +126,7 @@ export function Settings() {
         isOpened={slidingPageVisible}
         setPanelOpened={(val) => setSlidingPageVisible(val)}
       >
-        {slidingPageContent === "profile" ? (
-          <ProfilePopup />
-        ) : slidingPageContent === "help" ? (
-          <ReactMarkdown>{legal}</ReactMarkdown>
-        ) : slidingPageContent === "beta" ? (
-          <BetaPage />
-        ) : (
-          <LangPopup />
-        )}
+        {CurrPageView}
       </SlidingPage>
     </PageLayout>
   );

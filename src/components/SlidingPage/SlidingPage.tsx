@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import { ReactNode, useEffect } from "react";
 import { BackButton } from "components";
 
 export function SlidingPage(props: {
@@ -8,6 +8,13 @@ export function SlidingPage(props: {
   className?: string;
   outerClassName?: string;
 }) {
+  useEffect(() => {
+    if (props.isOpened) {
+      document.body.style.overflow = "hidden";
+      return;
+    }
+    document.body.style.overflow = "auto";
+  });
   return (
     <div
       className={`${

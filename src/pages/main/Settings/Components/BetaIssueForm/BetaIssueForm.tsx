@@ -67,7 +67,7 @@ export function BetaIssueForm(props: { onSubmit: () => void }) {
     <form onSubmit={(e) => e.preventDefault()}>
       Issue type
       <select
-        className="bg-grayblue-900 w-full py-2 px-4 rounded-lg"
+        className="dark:bg-grayblue-900 w-full py-2 px-4 rounded-lg"
         onChange={(e) => setIssueCategory(e.target.value as IssueCategory)}
       >
         <option value="auth" selected>

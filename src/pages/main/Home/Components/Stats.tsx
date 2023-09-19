@@ -45,101 +45,103 @@ export function Stats(props: {
         setVisible={setPremiumPopupVisible}
       />
 
-      {props.data.totalKms > 0 && (
-        <section className="rounded-xl h-max py-6 px-8 mt-2 text-white bg-gradient-to-tr from-sky-600 to-indigo-600">
-          <div className="grid grid-cols-3 items-center justify-between">
-            <div className="flex flex-col items-center">
-              <span className="text-3xl font-bold">
-                {props.data.totalKms > MAX_KMS_BEFORE_LICENSE
-                  ? `${MAX_KMS_BEFORE_LICENSE}+`
-                  : props.data.totalKms === MAX_KMS_BEFORE_LICENSE
-                  ? MAX_KMS_BEFORE_LICENSE
-                  : props.data.totalKms}
-              </span>
-              <span className="text-grayblue-200 text-lg font-medium">km</span>
-            </div>
+      <div className="flex flex-col gap-4 pt-2 pb-8">
+        {props.data.totalKms > 0 && (
+          <section className="rounded-xl h-max py-6 px-8 text-white bg-gradient-to-tr from-sky-600 to-indigo-600">
+            <div className="grid grid-cols-3 items-center justify-between">
+              <div className="flex flex-col items-center">
+                <span className="text-3xl font-bold">
+                  {props.data.totalKms >= MAX_KMS_BEFORE_LICENSE
+                    ? `${MAX_KMS_BEFORE_LICENSE}+`
+                    : props.data.totalKms}
+                </span>
+                <span className="text-grayblue-200 text-lg font-medium">
+                  km
+                </span>
+              </div>
 
-            <div className="flex flex-col items-center">
-              <span className="text-3xl font-bold">
-                {props.allTrips?.length}
-              </span>
-              <span className="text-grayblue-200 text-lg font-medium">
-                {t(
-                  props.allTrips && props.allTrips.length > 1
-                    ? "common.trips"
-                    : "common.trip"
-                )}
-              </span>
-            </div>
+              <div className="flex flex-col items-center">
+                <span className="text-3xl font-bold">
+                  {props.allTrips?.length}
+                </span>
+                <span className="text-grayblue-200 text-lg font-medium">
+                  {t(
+                    props.allTrips && props.allTrips.length > 1
+                      ? "common.trips"
+                      : "common.trip"
+                  )}
+                </span>
+              </div>
 
-            <div className="flex flex-col items-center">
-              <span className="text-3xl font-bold">
-                {props.data.totalDrivingTime.nb}
-              </span>
-              <span className="text-grayblue-200 text-lg font-medium">
-                {props.data.totalDrivingTime.unit}
-              </span>
+              <div className="flex flex-col items-center">
+                <span className="text-3xl font-bold">
+                  {props.data.totalDrivingTime.nb}
+                </span>
+                <span className="text-grayblue-200 text-lg font-medium">
+                  {props.data.totalDrivingTime.unit}
+                </span>
+              </div>
             </div>
-          </div>
-        </section>
-      )}
-
-      {canSeeStats ? (
-        props.data.totalKms > 0 ||
-        countryside > 0 ||
-        expressway > 0 ||
-        highway > 0 ||
-        city > 0 ? (
-          <section className="grid grid-cols-2 gap-4 my-4">
-            <StatPill
-              label={t("common.roadTypes.countryroad")}
-              nb={props.data.tripsByRoadType.countryside}
-            />
-            <StatPill
-              label={t("common.roadTypes.expressway")}
-              nb={props.data.tripsByRoadType.expressway}
-            />
-            <StatPill
-              label={t("common.roadTypes.highway")}
-              nb={props.data.tripsByRoadType.highway}
-            />
-            <StatPill
-              label={t("common.roadTypes.city")}
-              nb={props.data.tripsByRoadType.city}
-            />
           </section>
+        )}
+
+        {canSeeStats ? (
+          props.data.totalKms > 0 ||
+          countryside > 0 ||
+          expressway > 0 ||
+          highway > 0 ||
+          city > 0 ? (
+            <section className="grid grid-cols-2 gap-4">
+              <StatPill
+                label={t("common.roadTypes.countryroad")}
+                nb={props.data.tripsByRoadType.countryside}
+              />
+              <StatPill
+                label={t("common.roadTypes.expressway")}
+                nb={props.data.tripsByRoadType.expressway}
+              />
+              <StatPill
+                label={t("common.roadTypes.highway")}
+                nb={props.data.tripsByRoadType.highway}
+              />
+              <StatPill
+                label={t("common.roadTypes.city")}
+                nb={props.data.tripsByRoadType.city}
+              />
+            </section>
+          ) : (
+            <Text.Secondary className="text-center">
+              <NavLink
+                to="/add"
+                className="text-brand-500 underline underline-offset-2"
+              >
+                {t("homepage.addFirstTrip")}
+              </NavLink>{" "}
+              {t("homepage.stats.seeStatsAppear")}
+            </Text.Secondary>
+          )
         ) : (
-          <Text.Secondary className="text-center mt-4">
-            <NavLink
-              to="/add"
-              className="text-brand-500 underline underline-offset-2"
+          <div className="bg-neutral-100 dark:bg-grayblue-800 p-6 rounded-lg flex flex-col gap-4">
+            <Text.Secondary className="text-lg">
+              Your 10 days of free trial have expired. To see your stats again,
+              please
+            </Text.Secondary>
+            <Cta
+              type="button"
+              color="gradient"
+              onClick={() => setPremiumPopupVisible(true)}
             >
-              {t("homepage.addFirstTrip")}
-            </NavLink>{" "}
-            {t("homepage.stats.seeStatsAppear")}
-          </Text.Secondary>
-        )
-      ) : (
-        <div className="bg-neutral-100 dark:bg-grayblue-800 p-6 rounded-lg flex flex-col gap-4">
-          <Text.Secondary>
-            Your 10 days of free trial have expired. To see your stats again,
-            please
-          </Text.Secondary>
-          <Cta
-            type="button"
-            color="gradient"
-            onClick={() => setPremiumPopupVisible(true)}
-          >
-            See premium
-          </Cta>
-        </div>
-      )}
+              See premium
+            </Cta>
+          </div>
+        )}
 
-      <section className="bg-neutral-100 dark:bg-grayblue-800 flex flex-row justify-between items-start rounded-lg p-4 mt-4 h-44">
-        <DrivingSteps kmsPercent={getKmsPercent()} />
-      </section>
+        <section className="bg-neutral-100 dark:bg-grayblue-800 flex flex-row justify-between items-start rounded-lg p-4 h-44">
+          <DrivingSteps kmsPercent={getKmsPercent()} />
+        </section>
+      </div>
 
-      <div className="flex flex-row items-center justify-between mt-8 mb-4 ">
+      <div className="flex flex-row items-center justify-between mb-4 ">
         <Text.Title rank={2} className="block">
           {t("homepage.recent.title")}
         </Text.Title>
@@ -147,6 +149,7 @@ export function Stats(props: {
           <Text.Secondary>{t("common.seeAll")}</Text.Secondary>
         </button>
       </div>
+
       {props.allTrips && props.allTrips.length > 0 ? (
         props.allTrips?.slice(0, 5).map((trip) => {
           return (

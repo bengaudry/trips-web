@@ -4,7 +4,7 @@ import { MAX_KMS_BEFORE_LICENSE } from "../../../../lib/constants";
 function Step(props: {
   kmsNecessary: number;
   name: string;
-  reached?: boolean;
+  reached?: (() => boolean) | boolean;
 }) {
   return (
     <div className="flex flex-row items-center gap-2">
@@ -46,10 +46,18 @@ export function DrivingSteps(props: { kmsPercent: number }) {
         <Step
           kmsNecessary={0}
           name="Rdv préalable"
-          reached={props.kmsPercent > 0}
+          reached={() => props.kmsPercent > 0}
         />
-        <Step kmsNecessary={MAX_KMS_BEFORE_LICENSE / 2} name="1er rdv" />
-        <Step kmsNecessary={MAX_KMS_BEFORE_LICENSE} name="Permis" />
+        <Step
+          kmsNecessary={MAX_KMS_BEFORE_LICENSE / 2}
+          name="1er rdv"
+          reached={() => props.kmsPercent >= MAX_KMS_BEFORE_LICENSE / 2}
+        />
+        <Step
+          kmsNecessary={MAX_KMS_BEFORE_LICENSE}
+          name="Permis"
+          reached={() => props.kmsPercent >= MAX_KMS_BEFORE_LICENSE}
+        />
       </main>
     </div>
   );

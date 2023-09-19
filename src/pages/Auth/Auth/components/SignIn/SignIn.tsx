@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { getFirebaseAuth } from "../../../../../../server";
@@ -14,11 +14,13 @@ export function SignInPage(props: { onRegisterClick: () => void }) {
   const [password, setPassword] = useState("");
   const [resetPassModalShown, setResetPassModalShown] = useState(false);
 
+  const navigate = useNavigate();
+
   const handleSignIn = () => {
     signInWithEmailAndPassword(getFirebaseAuth(), email, password)
       .then(() => {
         localStorage.setItem("connected", "true");
-        window.location.href = "/";
+        navigate("/");
       })
       .catch((err) => {
         toast(

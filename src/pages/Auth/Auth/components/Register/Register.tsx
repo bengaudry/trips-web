@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 
 import {
@@ -17,6 +17,8 @@ export function RegisterPage(props: { onSignInClick: () => void }) {
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
 
+  const navigate = useNavigate();
+
   const handleRegister = () => {
     createUserWithEmailAndPassword(getFirebaseAuth(), email, password)
       .then(() => {
@@ -27,7 +29,10 @@ export function RegisterPage(props: { onSignInClick: () => void }) {
           })
             .then(() => {
               localStorage.setItem("connected", "true");
-              window.location.href = "/";
+              toast("Created your account successfully. Welcome aboard !", {
+                type: "success",
+              });
+              navigate("/");
             })
             .catch((err) => {
               toast(
