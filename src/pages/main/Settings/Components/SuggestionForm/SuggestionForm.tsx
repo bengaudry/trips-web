@@ -1,12 +1,13 @@
 import { useState } from "react";
 
 import { collection, addDoc } from "firebase/firestore";
-import { getFirebaseDb, getFirebaseAuth } from "../../../../../../server";
+import { getFirebaseDb } from "../../../../../../server";
 
 import { strTruish } from "../../../../../lib/functions";
 import { Cta } from "components";
 import { Input, Textarea } from "components/form";
 import { toast } from "react-toastify";
+import { CurrentUser } from "api";
 
 async function addSuggestion(
   content: { name: string; content: string },
@@ -16,7 +17,7 @@ async function addSuggestion(
 
   await addDoc(tripsCollection, {
     ...content,
-    testerEmail: getFirebaseAuth().currentUser?.email,
+    testerEmail: CurrentUser.getEmail(),
   })
     .then(() => {
       onSuccess();

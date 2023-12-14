@@ -6,10 +6,10 @@ import { OtherOptions } from "./components";
 import type { OtherOptionsT } from "./components";
 import { toast } from "react-toastify";
 
-import { getFirebaseAuth } from "../../../../server";
 import { addTrip } from "../../../lib/functions";
 import { Weather } from "../../../types";
 import { useTranslation } from "react-i18next";
+import { CurrentUser } from "api";
 
 const getCurrentTime = (): string => {
   const now = new Date();
@@ -61,7 +61,7 @@ export function Add() {
   const [otherOptState, setOtherOptState] = useState(defaultOtherOptions);
 
   const handleSubmit = () => {
-    if (!getFirebaseAuth().currentUser?.emailVerified) {
+    if (!CurrentUser.isEmailVerified()) {
       toast("Please verify your email before adding a trip", {
         type: "warning",
       });
@@ -79,7 +79,7 @@ export function Add() {
       length: parseInt(length),
       duration: parseInt(duration),
       roundTrip: roundTrip,
-      uid: getFirebaseAuth().currentUser?.uid as string,
+      uid: CurrentUser.getUid() as string,
     });
   };
 

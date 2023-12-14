@@ -20,6 +20,7 @@ import { ProfilePopup } from "./Components/ProfilePopup/ProfilePopup";
 import { LangPopup } from "./Components/LangPopup/LangPopup";
 import { DrivingSchool } from "./Components/DrivingScool/DrivingSchool";
 import { BetaPage } from "./Components/BetaPage/BetaPage";
+import { CurrentUser } from "api";
 
 type SlidingPages = "profile" | "help" | "beta" | "language";
 
@@ -53,12 +54,12 @@ export function Settings() {
 
   return (
     <PageLayout title={t("settingsPage.title")}>
-      <section className="my-5 bg-neutral-100 dark:bg-grayblue-800 rounded-xl">
+      <section className="my-5 bg-neutral-100 dark:bg-grayblue-800 rounded-full">
         <Setting
           color="82, 82, 82"
           icon="user"
           subTitle={t("settingsPage.personalInfo") as string}
-          name={getFirebaseAuth().currentUser?.displayName as string}
+          name={CurrentUser.getDisplayName() as string}
           onClick={() => changeSlidingPage("profile")}
           bigIcon
           className="w-full h-full py-5 px-6"

@@ -5,6 +5,7 @@ import { getFirebaseAuth } from "../../../../../server";
 
 import { Cta, Text } from "components";
 import { Input } from "components/form";
+import { CurrentUser } from "api";
 
 export function SetUserNameModal(props: {
   setUserNameUnset: (val: boolean) => void;
@@ -26,8 +27,8 @@ export function SetUserNameModal(props: {
         type="button"
         className="mt-4"
         onClick={() => {
-          if (newDisplayName.length >= 2 && getFirebaseAuth().currentUser) {
-            updateProfile(getFirebaseAuth().currentUser as User, {
+          if (newDisplayName.length >= 2 && CurrentUser.isLoggedIn()) {
+            updateProfile(CurrentUser.getUser() as User, {
               displayName: newDisplayName,
             })
               .then(() => props.setUserNameUnset(false))

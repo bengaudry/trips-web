@@ -1,14 +1,12 @@
-import { useState } from "react";
-
 import { sendEmailVerification, User } from "firebase/auth";
 import { getFirebaseAuth } from "../../../../server";
-
 import { toast } from "react-toastify";
+import { CurrentUser } from "api";
 
 export function NotVerifiedEmailPopup(props: { className?: string }) {
   const sendEmail = () => {
-    if (getFirebaseAuth().currentUser) {
-      sendEmailVerification(getFirebaseAuth().currentUser as User)
+    if (CurrentUser.isLoggedIn()) {
+      sendEmailVerification(CurrentUser.getUser() as User)
         .then(() => {
           toast("We sent you an email. Don't forget to check your spam !", {
             type: "info",
@@ -30,7 +28,7 @@ export function NotVerifiedEmailPopup(props: { className?: string }) {
     }
   };
 
-  return !getFirebaseAuth().currentUser?.emailVerified ? (
+  return !CurrentUser.isEmailVerified() ? (
     <>
       <div
         className={`w-full flex flex-col items-center rounded-lg px-4 py-2 mt-2 bg-yellow-600 ${props.className}`}

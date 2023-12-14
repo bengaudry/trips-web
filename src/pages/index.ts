@@ -5,3 +5,4 @@ export { Add } from "./main/Add/Add";
 export { Certificate } from "./other/Certificate/Certificate";
 export { ShowCertificate } from "./other/ShowCertificate/ShowCertificate";
 export { Install } from "./other/Install/Install";
+export { Premium } from "./other/Premium/Premium";

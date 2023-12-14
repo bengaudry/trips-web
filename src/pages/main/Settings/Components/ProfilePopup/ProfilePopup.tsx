@@ -1,8 +1,7 @@
 import { useState, ReactNode } from "react";
 import { useTranslation } from "react-i18next";
 
-import { updateEmail, updateProfile } from "firebase/auth";
-import { getFirebaseAuth } from "../../../../../../server";
+import { User, updateEmail, updateProfile } from "firebase/auth";
 
 import { Modal, Text } from "components";
 import {
@@ -12,6 +11,7 @@ import {
 } from "./components";
 import { toast } from "react-toastify";
 import { capitalizeString } from "lib/functions";
+import { CurrentUser } from "api";
 
 function Button(props: {
   children: ReactNode;
@@ -48,10 +48,10 @@ export function ProfilePopup() {
   const [modalShown, setModalShown] = useState(false);
 
   const [email, setEmail] = useState(
-    getFirebaseAuth().currentUser?.email as string
+    CurrentUser.getEmail() as string
   );
   const [userName, setUserName] = useState(
-    getFirebaseAuth().currentUser?.displayName as string
+    CurrentUser.getDisplayName() as string
   );
 
   const [editMode, setEditMode] = useState(false);
@@ -68,10 +68,11 @@ export function ProfilePopup() {
   };
 
   const handleEditProfile = () => {
-    const user = getFirebaseAuth().currentUser;
-    if (!email || email === "" || !userName || userName === "" || !user) {
+    if (!email || email === "" || !userName || userName === "" || !CurrentUser.isLoggedIn()) {
       return toast("Please fill in all fields correctly", { type: "warning" });
     }
+
+    const user = CurrentUser.getUser() as User;
 
     updateEmail(user, email)
       .then(() => {

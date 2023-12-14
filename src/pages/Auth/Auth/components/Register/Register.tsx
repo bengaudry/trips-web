@@ -11,6 +11,7 @@ import { Notification, Cta, Text } from "components";
 import { Input } from "components/form";
 import { getFirebaseAuth } from "../../../../../../server";
 import { toast } from "react-toastify";
+import { CurrentUser } from "api";
 
 export function RegisterPage(props: { onSignInClick: () => void }) {
   const [email, setEmail] = useState("");
@@ -22,9 +23,9 @@ export function RegisterPage(props: { onSignInClick: () => void }) {
   const handleRegister = () => {
     createUserWithEmailAndPassword(getFirebaseAuth(), email, password)
       .then(() => {
-        if (getFirebaseAuth().currentUser) {
-          sendEmailVerification(getFirebaseAuth().currentUser as User);
-          updateProfile(getFirebaseAuth().currentUser as User, {
+        if (CurrentUser.isLoggedIn()) {
+          sendEmailVerification(CurrentUser.getUser() as User);
+          updateProfile(CurrentUser.getUser() as User, {
             displayName: name,
           })
             .then(() => {

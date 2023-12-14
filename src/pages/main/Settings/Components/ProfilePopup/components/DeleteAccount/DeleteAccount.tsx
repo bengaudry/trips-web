@@ -1,13 +1,13 @@
 import { deleteUser, User } from "firebase/auth";
-import { getFirebaseAuth } from "../../../../../../../../server";
 import { Cta } from "components";
+import { CurrentUser } from "api";
 
 export function DeleteAccount() {
   const deleteAccount = () => {
     if (confirm("Confirmez la suppression")) {
-      if (getFirebaseAuth().currentUser) {
+      if (CurrentUser.isLoggedIn()) {
         localStorage.setItem("connected", "false");
-        deleteUser(getFirebaseAuth().currentUser as User);
+        deleteUser(CurrentUser.getUser() as User);
       }
     }
   };

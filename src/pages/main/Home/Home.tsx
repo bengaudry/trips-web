@@ -19,6 +19,7 @@ import { Stats } from "./Components/Stats";
 import { SetUserNameModal } from "./Components/SetUserNameModal";
 
 import { toast } from "react-toastify";
+import { CurrentUser } from "api";
 
 function fetchCachedTrips() {
   const data = localStorage.getItem("cached-trips-data");
@@ -41,8 +42,7 @@ export function Home() {
   const [trips, setTrips] = useState<Trip[] | undefined>(fetchCachedTrips());
   const [currentPanel, setCurrentPanel] = useState<0 | 1>(0);
 
-  const displayName = getFirebaseAuth().currentUser?.displayName;
-  const [userNameUnset, setUserNameUnset] = useState(!displayName);
+  const [userNameUnset, setUserNameUnset] = useState(!CurrentUser.getDisplayName());
 
   const changePanel = (val: number) => {
     if (val === 0 || val === 1) {
@@ -57,7 +57,7 @@ export function Home() {
     const fetchData = async () => {
       let q = query(
         tripsCollection,
-        where("uid", "==", getFirebaseAuth().currentUser?.uid),
+        where("uid", "==", CurrentUser.getUid()),
         orderBy("date", "desc")
       );
       await getDocs(q)
@@ -109,9 +109,7 @@ export function Home() {
         )}
 
         <Text.Title>
-          {getFirebaseAuth().currentUser?.displayName
-            ? `${getFirebaseAuth().currentUser?.displayName} 👋`
-            : ""}
+          {CurrentUser.getDisplayName() && `${CurrentUser.getDisplayName()} 👋`}
         </Text.Title>
 
         <div className="dark:bg-grayblue-900/90 backdrop-blur-lg sticky z-20 top-0 py-3">

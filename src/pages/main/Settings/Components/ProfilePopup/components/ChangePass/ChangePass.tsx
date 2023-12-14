@@ -2,10 +2,10 @@ import { useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import { updatePassword as firebaseUpdatePassword, User } from "firebase/auth";
-import { getFirebaseAuth } from "../../../../../../../../server";
 
 import { Cta } from "components";
 import { Input } from "components/form";
+import { CurrentUser } from "api";
 
 export function ChangePass() {
   const [newPass, setNewPass] = useState("");
@@ -16,7 +16,7 @@ export function ChangePass() {
   const updatePassword = () => {
     if (newPass === newPassConfirm) {
       firebaseUpdatePassword(
-        getFirebaseAuth().currentUser as User,
+        CurrentUser.getUser() as User,
         newPass
       ).catch((err) => alert(err));
     }

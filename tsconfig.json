@@ -20,6 +20,6 @@
       "components/*": ["components/*"],
     }
   },
-  "include": ["src", "updateAppVersion.mjs"],
+  "include": ["src", "updateAppVersion.mjs", "src/api/CurrentUser.ts"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

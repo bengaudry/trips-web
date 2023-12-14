@@ -2338,6 +2338,19 @@
   dependencies:
     defer-to-connect "^1.0.1"
 
+"@typeform/embed-react@^3.9.0":
+  version "3.9.0"
+  resolved "https://registry.yarnpkg.com/@typeform/embed-react/-/embed-react-3.9.0.tgz#25973afb86a04fd96d086523de844a9fb85a1cfd"
+  integrity sha512-vzKl7s2zrSWqeRWR8tuQ8ryNxcnJ4/90LTPGihs8gYvXunix2efzaVTQjuRMj42PAArf5Ajxwl3hd6eUvS6R4A==
+  dependencies:
+    "@typeform/embed" "4.4.0"
+    fast-deep-equal "^3.1.3"
+
+"@typeform/embed@4.4.0":
+  version "4.4.0"
+  resolved "https://registry.yarnpkg.com/@typeform/embed/-/embed-4.4.0.tgz#de332f742f06485175353e0d17a01514aae697a2"
+  integrity sha512-veNv4Kwq5sqHtVul50JvsFGNEwDtNb+1biHZ1gGfeO8t1D1gRkYBvJgLcIxuntfn3GIKTgo/msK+1KiisQZBLQ==
+
 "@types/babel__core@^7.0.0":
   version "7.20.0"
   resolved "https://registry.yarnpkg.com/@types/babel__core/-/babel__core-7.20.0.tgz#61bc5a4cae505ce98e1e36c5445e4bee060d8891"

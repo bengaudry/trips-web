@@ -7,10 +7,11 @@ import {
   StyleSheet,
   Image,
 } from "@react-pdf/renderer";
-import { getFirebaseDb, getFirebaseAuth } from "../../../../server";
+import { getFirebaseDb } from "../../../../server";
 import { collection, getDocs, query, where } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { CurrentUser } from "api";
 // import QRCode from "qrcode";
 
 const styles = StyleSheet.create({
@@ -51,7 +52,7 @@ export function ShowCertificate() {
   const fetchData = async () => {
     let q = query(
       certificatesCol,
-      where("uid", "==", getFirebaseAuth().currentUser?.uid)
+      where("uid", "==", CurrentUser.getUid())
     );
     await getDocs(q)
       .then((val) => {
@@ -63,11 +64,11 @@ export function ShowCertificate() {
           setCertificate(docs[0].data() as Certificate);
         } else {
           // create new certificate
-          if (getFirebaseAuth().currentUser) {
+          if (CurrentUser.isLoggedIn()) {
             setCertificate({
               code: generateCertificate(),
-              uid: getFirebaseAuth().currentUser?.uid as string,
-              userName: getFirebaseAuth().currentUser?.displayName as string,
+              uid: CurrentUser.getUid() as string,
+              userName: CurrentUser.getDisplayName() as string,
             });
           } else {
             // user not logged in

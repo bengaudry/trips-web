@@ -1,8 +1,8 @@
 import { useState } from "react";
-import { getFirebaseAuth } from "../../../../../../server";
 import { Modal, Text } from "components";
 import { BetaIssueForm } from "../BetaIssueForm/BetaIssueForm";
 import { SuggestionForm } from "../SuggestionForm/SuggestionForm";
+import { CurrentUser } from "api";
 
 export type IssueCategory =
   | "auth"
@@ -25,7 +25,7 @@ export function BetaPage() {
       <Text.Title>Beta</Text.Title>
       <Text.Secondary className="text-lg">
         Welcome to your beta tester space{" "}
-        {getFirebaseAuth().currentUser?.displayName} !
+        {CurrentUser.getDisplayName()} !
       </Text.Secondary>
       <div className="flex flex-col gap-3 py-6">
         <button

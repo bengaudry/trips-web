@@ -1,18 +1,14 @@
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-
 import { Cta, Text, TripDisplayer } from "components";
 import { StatPill } from "./StatPill";
 import { ReachedMaxAlert } from "./ReachedMaxAlert";
 import { DrivingSteps } from "./DrivingSteps";
 import { PremiumPopup } from "./PremiumPopup";
-
-import { getDiffBetweenDates } from "../../../../lib/functions";
 import { MAX_KMS_BEFORE_LICENSE } from "../../../../lib/constants";
 import { StatsData, Trip } from "../../../../types/types";
-
-import { getFirebaseAuth } from "../../../../../server";
+import { CurrentUser } from "api";
 
 export function Stats(props: {
   allTrips?: Trip[];
@@ -27,15 +23,7 @@ export function Stats(props: {
 
   const { t } = useTranslation();
   const { countryside, expressway, highway, city } = props.data.tripsByRoadType;
-
-  const tenDaysInMilliSeconds = 864_000_000;
-
-  const canSeeStats =
-    tenDaysInMilliSeconds >=
-    getDiffBetweenDates(
-      new Date(getFirebaseAuth().currentUser?.metadata.creationTime as string)
-    );
-
+  
   return (
     <div>
       <ReachedMaxAlert />
@@ -85,7 +73,7 @@ export function Stats(props: {
           </section>
         )}
 
-        {canSeeStats ? (
+        {CurrentUser.isPremium() ? (
           props.data.totalKms > 0 ||
           countryside > 0 ||
           expressway > 0 ||
@@ -121,14 +109,14 @@ export function Stats(props: {
             </Text.Secondary>
           )
         ) : (
-          <div className="bg-neutral-100 dark:bg-grayblue-800 p-6 rounded-lg flex flex-col gap-4">
-            <Text.Secondary className="text-lg">
+          <div className="bg-gradient-to-r from-[#DA22FF] to-[#9733EE] p-6 rounded-lg flex flex-col gap-4">
+            <p className="text-lg text-white">
               Your 10 days of free trial have expired. To see your stats again,
               please
-            </Text.Secondary>
+            </p>
             <Cta
               type="button"
-              color="gradient"
+              color="white"
               onClick={() => setPremiumPopupVisible(true)}
             >
               See premium

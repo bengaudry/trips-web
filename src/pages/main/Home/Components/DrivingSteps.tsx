@@ -4,13 +4,13 @@ import { MAX_KMS_BEFORE_LICENSE } from "../../../../lib/constants";
 function Step(props: {
   kmsNecessary: number;
   name: string;
-  reached?: (() => boolean) | boolean;
+  reached: () => boolean;
 }) {
   return (
     <div className="flex flex-row items-center gap-2">
       <span
         className={`inline-block w-16 text-center font-medium text-md sm:text-xl ${
-          props.reached
+          props.reached()
             ? "bg-brand-500 text-white"
             : "bg-neutral-200 text-black dark:bg-grayblue-700 dark:text-white"
         } rounded-full`}
@@ -19,13 +19,13 @@ function Step(props: {
       </span>
       <Text.Secondary
         className={`font-medium text-md sm:text-lg ${
-          props.reached ? "text-neutral-900 dark:text-white" : ""
+          props.reached() ? "text-neutral-900 dark:text-white" : ""
         }`}
       >
         {props.name}
         <i
           className={`${
-            props.reached ? "inline-block" : "hidden"
+            props.reached() ? "inline-block" : "hidden"
           } ml-2 fi fi-rr-check`}
         />
       </Text.Secondary>

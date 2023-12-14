@@ -11,6 +11,7 @@ import {
   Certificate,
   ShowCertificate,
   NoPage,
+  Premium,
 } from "./pages";
 
 // Auth pages and layout
@@ -120,8 +121,9 @@ export default function App() {
               <Route path="settings" element={<Settings />} />
               <Route path="certificate" element={<Certificate />} />
               <Route path="install" element={<InstallPage />} />
-              <Route path="*" element={<NoPage />} />
               <Route path="show-certificate" element={<ShowCertificate />} />
+              <Route path="premium" element={<Premium />} />
+              <Route path="*" element={<NoPage />} />
             </Route>
           </Routes>
         </BrowserRouter>
