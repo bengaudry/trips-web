@@ -22,13 +22,13 @@ export function Install() {
       {platforms[platform] === "Ios" ? (
         <div className="sm:grid grid-cols-2 gap-4">
           <ol className="py-4 pl-6 flex flex-col gap-3 list-decimal">
-            <li className="bg-grayblue-800 py-2 px-4 rounded-xl">
+            <li className="bg-neutral-100 dark:bg-grayblue-800 py-2 px-4 rounded-xl">
               Appuyez sur le bouton "share" en bas de l'écran
             </li>
-            <li className="bg-grayblue-800 py-2 px-4 rounded-xl">
+            <li className="bg-neutral-100 dark:bg-grayblue-800 py-2 px-4 rounded-xl">
               Appuyez sur "Ajouter à l'écran d'accueil"
             </li>
-            <li className="bg-grayblue-800 py-2 px-4 rounded-xl">
+            <li className="bg-neutral-100 dark:bg-grayblue-800 py-2 px-4 rounded-xl">
               Appuyez sur "Ajouter" en haut à droite
             </li>
             <p className="pt-2 text-center font-semibold">Et c'est tout !</p>
@@ -41,16 +41,16 @@ export function Install() {
         </div>
       ) : (
         <ol className="py-4 pl-6 flex flex-col gap-3 list-decimal">
-          <li className="bg-grayblue-800 py-2 px-4 rounded-xl">
+          <li className="bg-neutral-100 dark:bg-grayblue-800 py-2 px-4 rounded-xl">
             Sur votre appareil Android, ouvrez Chrome
           </li>
-          <li className="bg-grayblue-800 py-2 px-4 rounded-xl">
+          <li className="bg-neutral-100 dark:bg-grayblue-800 py-2 px-4 rounded-xl">
             Accédez à Trips.
           </li>
-          <li className="bg-grayblue-800 py-2 px-4 rounded-xl">
+          <li className="bg-neutral-100 dark:bg-grayblue-800 py-2 px-4 rounded-xl">
             Appuyez sur <strong>Installer</strong>.
           </li>
-          <li className="bg-grayblue-800 py-2 px-4 rounded-xl">
+          <li className="bg-neutral-100 dark:bg-grayblue-800 py-2 px-4 rounded-xl">
             Suivez les instructions à l'écran.
           </li>
           <p className="pt-2 text-center font-semibold">Et c'est tout !</p>

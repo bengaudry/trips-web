@@ -134,7 +134,7 @@ export function Add() {
 
   return (
     <PageLayout title={t("addpage.title")}>
-      <div className="relative bg-grayblue-800 h-2 w-full rounded-lg overflow-hidden">
+      <div className="relative bg-gray-200 dark:bg-grayblue-800 h-2 w-full rounded-lg overflow-hidden">
         <div
           className={`${
             step === 1
