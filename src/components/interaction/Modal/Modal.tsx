@@ -142,7 +142,7 @@ export class Modal extends Component {
         if (props.setVisible) props.setVisible(false);
       }}
     >
-      <Text.Secondary className="hidden lg:block  hover:text-black dark:hover:text-white transition-colors">
+      <Text.Secondary className="hidden lg:block  md:hover:text-black dark:md:hover:text-white transition-colors">
         <i
           className={`fi fi-rr-cross -translate-y-2  ${
             props.unClosable && "hidden"

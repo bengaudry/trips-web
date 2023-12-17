@@ -10,6 +10,7 @@ import { addTrip } from "../../../lib/functions";
 import { Weather } from "../../../types";
 import { useTranslation } from "react-i18next";
 import { CurrentUser } from "api";
+import { useNavigate } from "react-router-dom";
 
 const getCurrentTime = (): string => {
   const now = new Date();
@@ -24,6 +25,7 @@ const getCurrentDate = (): string => {
 
 export function Add() {
   const { t } = useTranslation();
+  const navigate = useNavigate();
 
   const [step, setStep] = useState<0 | 1 | 2 | "submitted">(0);
 
@@ -49,9 +51,6 @@ export function Add() {
   const [fromInputFocused, setFromInputFocused] = useState(false);
   const [toInputFocused, setToInputFocused] = useState(false);
 
-  // Error states
-  const [errorVisible, setErrorVisible] = useState(false);
-
   const defaultOtherOptions: OtherOptionsT = {
     roadTypes: [],
     trafficDensities: [],
@@ -59,14 +58,17 @@ export function Add() {
   };
 
   const [otherOptState, setOtherOptState] = useState(defaultOtherOptions);
+  const [addTripPending, setAddTripPending] = useState(true);
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if (!CurrentUser.isEmailVerified()) {
       toast("Please verify your email before adding a trip", {
         type: "warning",
       });
       return;
     }
+
+    setAddTripPending(true);
 
     addTrip({
       date: date,
@@ -80,6 +82,9 @@ export function Add() {
       duration: parseInt(duration),
       roundTrip: roundTrip,
       uid: CurrentUser.getUid() as string,
+    }).then(() => {
+      setAddTripPending(false);
+      navigate("/");
     });
   };
 
@@ -263,6 +268,7 @@ export function Add() {
           btnType="submit"
           className="mt-8 sticky bottom-32 shadow-2xl shadow-brand-200/70 dark:shadow-grayblue-900 lg:bottom-8"
           // disabled={!allFieldsFilled()}
+          loading={addTripPending}
           onClick={() => {
             if (allFieldsFilled()) {
               if (step === 1) {

@@ -3,16 +3,11 @@ import { getFirebaseDb } from "../../../../server";
 import { strTruish, anyTruish } from "../../functions";
 import { Trip } from "../../../types/types";
 import { toast } from "react-toastify";
-import { useNavigate } from "react-router-dom";
 
 export async function addTrip(content: Trip) {
   const tripsCollection = collection(getFirebaseDb(), "/trips");
-  const navigate = useNavigate();
 
-  await addDoc(tripsCollection, content)
-    .then(() => {
-      navigate("/");
-    })
+  return await addDoc(tripsCollection, content)
     .catch((err) => {
       toast(`Error while adding trip to database. (Code: ${err.code})`, {
         type: "error",

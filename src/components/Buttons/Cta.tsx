@@ -8,6 +8,7 @@ export type CtaProps<T = "button" | "link"> = {
   type: T;
   color?: "normal" | "warning" | "danger" | "gradient" | "white";
   to?: string;
+  loading?: boolean;
   target?: HTMLAttributeAnchorTarget;
   onClick?: CallableFunction;
   btnType?: "button" | "reset" | "submit";
@@ -16,25 +17,26 @@ export type CtaProps<T = "button" | "link"> = {
 export function Cta(props: CtaProps) {
   const CtaStyle = `${
     props.color === "danger"
-      ? "bg-red-600 hover:bg-red-800  text-white"
+      ? "bg-red-600 md:hover:bg-red-800  text-white"
       : props.color === "warning"
-      ? "bg-orange-600 hover:bg-orange-800  text-white"
+      ? "bg-orange-600 md:hover:bg-orange-800  text-white"
       : props.color === "gradient"
       ? "bg-gradient-to-r from-[#DA22FF] to-[#9733EE]  text-white"
       : props.color === "white"
-      ? "bg-white hover:bg-gray-100 text-black"
-      : " text-white bg-brand-600 hover:bg-brand-800"
-  }  font-semibold w-full rounded-xl px-8 p-4 flex items-center justify-center gap-4 transition-colors transition-opacity duration-300 disabled:bg-grayblue-500/70 disabled:text-neutral-300 disabled:opacity-100 disabled:cursor-not-allowed`;
+      ? "bg-white md:hover:bg-gray-100 text-black"
+      : " text-white bg-brand-600 md:hover:bg-brand-800"
+  }  font-semibold w-full rounded-full px-8 p-4 flex items-center justify-center gap-4 transition-colors transition-opacity duration-300 disabled:bg-gray-400 dark:disabled:bg-gray-800 dark:disabled:text-neutral-400`;
 
   return props.type === "button" ? (
     <button
       className={`${CtaStyle} ${props.className}`}
       type={props.btnType ? props.btnType : "button"}
-      disabled={props.disabled}
+      disabled={props.disabled || props.loading}
       onClick={(e) => {
         if (props.onClick) props.onClick(e);
-      }}
+      }} 
     >
+      {props.loading && <i className="fi fi-rr-loading block text-md translate-y-0.5" />}
       {props.children}
     </button>
   ) : (

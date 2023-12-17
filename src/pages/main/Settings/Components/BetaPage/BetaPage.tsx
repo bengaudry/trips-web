@@ -33,7 +33,7 @@ export function BetaPage() {
             setModalContent("issue");
             setModalShown(true);
           }}
-          className="w-full px-4 py-2 bg-red-500/40 hover:bg-red-500/60 transition-colors duration-300 rounded-full flex flex-row items-center gap-2 text-lg font-medium"
+          className="w-full px-4 py-2 bg-red-500/40 md:hover:bg-red-500/60 transition-colors duration-300 rounded-full flex flex-row items-center gap-2 text-lg font-medium"
         >
           <i className="fi fi-rr-exclamation translate-y-0.5" />
           Report an issue
@@ -43,7 +43,7 @@ export function BetaPage() {
             setModalContent("suggestion");
             setModalShown(true);
           }}
-          className="w-full px-4 py-2 bg-sky-500/40 hover:bg-sky-500/60 transition-colors duration-300 rounded-full flex flex-row items-center gap-2 text-lg font-medium"
+          className="w-full px-4 py-2 bg-sky-500/40 md:hover:bg-sky-500/60 transition-colors duration-300 rounded-full flex flex-row items-center gap-2 text-lg font-medium"
         >
           <i className="fi fi-rr-bulb translate-y-0.5" />
           Submit a suggestion

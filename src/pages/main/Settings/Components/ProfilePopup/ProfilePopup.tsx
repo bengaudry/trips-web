@@ -24,8 +24,8 @@ function Button(props: {
     <button
       className={`${
         props.danger
-          ? "text-red-500  hover:bg-red-500 hover:text-white dark:hover:text-grayblue-800"
-          : "text-grayblue-500 hover:text-black dark:hover:text-grayblue-200  dark:bg-grayblue-800"
+          ? "text-red-500  md:hover:bg-red-500 md:hover:text-white dark:md:hover:text-grayblue-800"
+          : "text-grayblue-500 md:hover:text-black dark:md:hover:text-grayblue-200  dark:bg-grayblue-800"
       } bg-neutral-100 dark:bg-grayblue-800 w-full text-left  transition-colors duration-300 px-4 py-2`}
       onClick={() => {
         if (props.onClick) props.onClick();
@@ -139,7 +139,7 @@ export function ProfilePopup() {
         <div className="flex flex-col sm:flex-row items-center gap-2 pt-3 w-full">
           <button
             onClick={() => setEditMode((prevEditMode) => !prevEditMode)}
-            className={`flex flex-row w-full items-center gap-2 border-2 rounded-full pr-6 pl-5 py-2 transition-colors duration-300 border-[#00000030] hover:border-[#00000060] dark:border-[#ffffff30] dark:hover:border-[#ffffff60]`}
+            className={`flex flex-row w-full items-center gap-2 border-2 rounded-full pr-6 pl-5 py-2 transition-colors duration-300 border-[#00000030] md:hover:border-[#00000060] dark:border-[#ffffff30] dark:md:hover:border-[#ffffff60]`}
           >
             <i
               className={`block translate-y-0.5 fi fi-rr-${
@@ -151,7 +151,7 @@ export function ProfilePopup() {
 
           <button
             onClick={handleEditProfile}
-            className={`bg-brand-400 w-full overflow-hidden border-brand-400 hover:bg-brand-500 hover:border-brand-500 text-white grid rounded-full pr-6 pl-5 transition-all origin-left duration-200 ${
+            className={`bg-brand-400 w-full overflow-hidden border-brand-400 md:hover:bg-brand-500 md:hover:border-brand-500 text-white grid rounded-full pr-6 pl-5 transition-all origin-left duration-200 ${
               editMode
                 ? "grid-rows-[1fr] py-2 border-2"
                 : "grid-rows-[0fr] py-0 border-none"

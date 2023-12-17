@@ -192,9 +192,9 @@ export function Landing() {
       >
         <button
           onClick={() => setJoinBetaPopupShown(false)}
-          className="absolute z-40 w-full h-screen hover:cursor-default"
+          className="absolute z-40 w-full h-screen md:hover:cursor-default"
         />
-        <button className="fixed top-4 right-4 hover:cursor-pointer text-white">
+        <button className="fixed top-4 right-4 md:hover:cursor-pointer text-white">
           <i className="fi fi-rr-cross"></i>
         </button>
 
@@ -280,7 +280,7 @@ export function Landing() {
         </p>
         <button
           onClick={() => setJoinBetaPopupShown(true)}
-          className="bg-brand-400 text-white hover:bg-brand-800 transition-colors duration-300 shadow-xl px-6 py-2 rounded-full mt-4 w-max"
+          className="bg-brand-400 text-white md:hover:bg-brand-800 transition-colors duration-300 shadow-xl px-6 py-2 rounded-full mt-4 w-max"
         >
           Join beta <i className="block fi fi-rr-flask-potion" />
         </button>

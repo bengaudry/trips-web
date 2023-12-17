@@ -102,7 +102,7 @@ export default function App() {
 
       {offline && (
         <button
-          className="fixed top-6 right-6 bg-red-500/50 backdrop-blur-lg px-6 py-2 rounded-full hover:scale-110 transition-transform duration-300"
+          className="fixed top-6 right-6 bg-red-500/50 backdrop-blur-lg px-6 py-2 rounded-full md:hover:scale-110 transition-transform duration-300"
           onClick={() => setOffline(false)}
         >
           <i className="inline-block fi fi-rr-down-left-and-up-right-to-center mr-2 translate-y-0.5"></i>
