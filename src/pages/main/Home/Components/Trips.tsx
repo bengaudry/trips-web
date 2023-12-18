@@ -1,22 +1,22 @@
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 
-import { getFirestore, deleteDoc, doc, updateDoc } from "firebase/firestore";
-import { getFirebaseApp, getFirebaseDb } from "../../../../../server";
+import { deleteDoc, doc, updateDoc } from "firebase/firestore";
+import { getFirebaseDb } from "../../../../../server";
 
-import { TripDisplayer, Cta, Modal, Text } from "components";
+import { Cta, Modal, Text, TripDisplayer } from "components";
 import { Checkbox } from "components/form";
 
-import { Trip } from "../../../../types/types";
+import { toast } from "react-toastify";
 import {
   capitalizeString,
   removeElementAtIndex,
 } from "../../../../lib/functions";
-import { toast } from "react-toastify";
+import { Trip } from "../../../../types/types";
 
 export function Trips(props: {
-  data?: Trip[];
-  onDataChange: (newData: Trip[]) => void;
+  data?: Array<Trip>;
+  onDataChange: (newData: Array<Trip>) => void;
 }) {
   const { t } = useTranslation();
 
@@ -28,11 +28,7 @@ export function Trips(props: {
 
   // Disables scroll while popup is opened
   useEffect(() => {
-    if (modalOpened) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "auto";
-    }
+    document.body.style.overflow = modalOpened ? "hidden" : "auto";
   }, [modalOpened]);
 
   const [roundTrip, setRoundTrip] = useState<boolean | undefined>(
@@ -45,9 +41,12 @@ export function Trips(props: {
 
   const handleDeleteTrip = () => {
     if (confirm("Do you really want to delete this trip ?")) {
+      // Checking if the modal contains an id to avoid errors
       if (modalContent?.trip.id) {
+        // Deletes the trip from the database 
         deleteDoc(doc(getFirebaseDb(), "/trips", modalContent.trip.id))
           .then(() => {
+            // Deletes the trip from cache and closes the modal if there is cache
             if (props.data) {
               let newData = removeElementAtIndex(
                 [...props.data],
@@ -56,6 +55,7 @@ export function Trips(props: {
               props.onDataChange(newData);
               setModalOpened(false);
             } else {
+              // Refetch the data if there is no cache
               window.location.reload();
             }
           })

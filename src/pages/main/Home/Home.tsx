@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import { collection, getDocs, where, query, orderBy } from "firebase/firestore";
-import { getFirebaseAuth, getFirebaseDb } from "../../../../server";
+import { getFirebaseDb } from "../../../../server";
 
 import { Trip } from "../../../types/types";
 import { calculateDataForStats } from "../../../lib/functions";
@@ -17,8 +17,6 @@ import {
 import { Trips } from "./Components/Trips";
 import { Stats } from "./Components/Stats";
 import { SetUserNameModal } from "./Components/SetUserNameModal";
-
-import { toast } from "react-toastify";
 import { CurrentUser } from "api";
 
 function fetchCachedTrips() {
