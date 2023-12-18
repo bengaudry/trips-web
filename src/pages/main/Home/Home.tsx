@@ -20,6 +20,7 @@ import { Stats } from "./Components/Stats";
 import { SetUserNameModal } from "./Components/SetUserNameModal";
 import { CurrentUser } from "api";
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
 
 function fetchCachedTrips() {
   const data = localStorage.getItem("cached-trips-data");
@@ -92,8 +93,12 @@ export function Home() {
   const allTrips = memoizedData ? memoizedData : trips ? trips : [];
 
   return (
-    <>
-      <PageLayout className="overflow-y-scroll">
+    <motion.div
+      initial={{ transform: "translateX(-100%)" }}
+      animate={{ transform: "translateX(0)" }}
+      exit={{ transform: "translateX(-100%)" }}
+    >
+      <PageLayout className="relative overflow-y-scroll">
         <NotVerifiedEmailPopup className="mb-4" />
 
         {userNameUnset && (
@@ -116,7 +121,10 @@ export function Home() {
                 `${CurrentUser.getDisplayName()} 👋`}
             </Text.Title>
           </div>
-          <Link className="bg-gradient-to-br from-gray-400 to-gray-600 w-12 h-12 aspect-square rounded-full grid place-content-center overflow-hidden" to="/settings">
+          <Link
+            className="bg-gradient-to-br from-gray-400 to-gray-600 w-12 h-12 aspect-square rounded-full grid place-content-center overflow-hidden"
+            to="/settings"
+          >
             <i className="fi fi-rr-user text-3xl opacity-50 translate-y-1" />
           </Link>
         </div>
@@ -145,9 +153,11 @@ export function Home() {
         )}
 
         <div className="fixed bottom-10 right-10 h-14 w-14 overflow-hidden">
-          <Cta type="link" to="/add" className="w-full h-full px-0 py-0"><i className="fi fi-rr-plus text-2xl translate-y-1" /></Cta>
+          <Cta type="link" to="/add" className="w-full h-full px-0 py-0">
+            <i className="fi fi-rr-plus text-2xl translate-y-1" />
+          </Cta>
         </div>
       </PageLayout>
-    </>
+    </motion.div>
   );
 }

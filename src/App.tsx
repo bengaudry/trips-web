@@ -1,22 +1,6 @@
 // React routing
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
-
-// App pages and layout
-import { Layout, Loader } from "./components";
-import {
-  Add,
-  Home,
-  Settings,
-  Certificate,
-  ShowCertificate,
-  NoPage,
-  Premium,
-} from "./pages";
-
-// Auth pages and layout
-import { AuthLayout, Landing, Auth } from "./pages/auth";
-import { Install as InstallPage } from "./pages";
 
 // Styles
 import "./styles/index.css";
@@ -25,11 +9,12 @@ import { getFirebaseAuth } from "../server";
 
 // Translations
 import { resources } from "../lang";
-import i18n from "i18next";
+import i18n, { use } from "i18next";
 import { initReactI18next } from "react-i18next";
 
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { Routing } from "Routing";
 
 // Change the language of the app when it starts
 var lang = "fr";
@@ -97,47 +82,12 @@ export default function App() {
   });
 
   return (
-    <>
-      {loaderVisible && <Loader />}
-
-      {offline && (
-        <button
-          className="fixed top-6 right-6 bg-red-500/50 backdrop-blur-lg px-6 py-2 rounded-full md:hover:scale-110 transition-transform duration-300"
-          onClick={() => setOffline(false)}
-        >
-          <i className="inline-block fi fi-rr-down-left-and-up-right-to-center mr-2 translate-y-0.5"></i>
-          <span>App is offline</span>
-        </button>
-      )}
-
-      <ToastContainer newestOnTop limit={1} closeButton theme="light" />
-
-      {userLoggedIn ? (
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<Layout />}>
-              <Route index element={<Home />} />
-              <Route path="add" element={<Add />} />
-              <Route path="settings" element={<Settings />} />
-              <Route path="certificate" element={<Certificate />} />
-              <Route path="install" element={<InstallPage />} />
-              <Route path="show-certificate" element={<ShowCertificate />} />
-              <Route path="premium" element={<Premium />} />
-              <Route path="*" element={<NoPage />} />
-            </Route>
-          </Routes>
-        </BrowserRouter>
-      ) : (
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<AuthLayout />}>
-              <Route index element={<Landing />} />
-              <Route path="auth" element={<Auth />} />
-              <Route path="*" element={<Landing />} />
-            </Route>
-          </Routes>
-        </BrowserRouter>
-      )}
-    </>
+    <BrowserRouter>
+      <Routing
+        userLoggedIn={userLoggedIn}
+        offline={offline}
+        loaderVisible={loaderVisible}
+      />
+    </BrowserRouter>
   );
 }

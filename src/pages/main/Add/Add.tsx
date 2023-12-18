@@ -11,6 +11,7 @@ import { Weather } from "../../../types";
 import { useTranslation } from "react-i18next";
 import { CurrentUser } from "api";
 import { useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
 
 const getCurrentTime = (): string => {
   const now = new Date();
@@ -138,156 +139,162 @@ export function Add() {
   };
 
   return (
-    <PageLayout>
-      <BackButton onClick={() => navigate("/")} />
-      <Text.Title className="mb-3">{t("addpage.title")}</Text.Title>
+    <motion.div
+      initial={{ transform: "translateX(100%)" }}
+      animate={{ transform: "translateX(0)" }}
+      exit={{ transform: "translateX(100%)" }}
+    >
+      <PageLayout>
+        <BackButton onClick={() => navigate("/")} />
+        <Text.Title className="mb-3">{t("addpage.title")}</Text.Title>
 
-      <div className="relative bg-gray-200 dark:bg-grayblue-800 h-2 w-full rounded-lg overflow-hidden">
-        <div
-          className={`${
-            step === 1
-              ? "scale-x-[.33]"
-              : step === 2
-              ? "scale-x-[.66]"
-              : step === "submitted"
-              ? "scale-x-[1]"
-              : "scale-x-0"
-          } w-full transition-transform translate-x-0 origin-left duration-500 h-full bg-gradient-to-r from-brand-600 to-brand-300 rounded-lg`}
-        ></div>
-      </div>
+        <div className="relative bg-gray-200 dark:bg-grayblue-800 h-2 w-full rounded-lg overflow-hidden">
+          <div
+            className={`${
+              step === 1
+                ? "scale-x-[.33]"
+                : step === 2
+                ? "scale-x-[.66]"
+                : step === "submitted"
+                ? "scale-x-[1]"
+                : "scale-x-0"
+            } w-full transition-transform translate-x-0 origin-left duration-500 h-full bg-gradient-to-r from-brand-600 to-brand-300 rounded-lg`}
+          ></div>
+        </div>
 
-      <form onSubmit={(e) => e.preventDefault()}>
-        {step === 1 ? (
-          <>
-            {/* Date and time inputs */}
+        <form onSubmit={(e) => e.preventDefault()}>
+          {step === 1 ? (
+            <>
+              {/* Date and time inputs */}
 
-            <section className="grid grid-flow-col-dense gap-4">
-              <Input
-                name={t("addpage.inputs.labels.date")}
-                type="date"
-                value={date}
-                onChange={(event) => setDate(event.target.value)}
-                required
-              />
-              <Input
-                name={t("addpage.inputs.labels.time")}
-                type="time"
-                value={time}
-                onChange={(event) => setTime(event.target.value)}
-                required
-              />
-            </section>
-
-            {/* From and destination inputs */}
-
-            <section>
-              <Input
-                name={t("addpage.inputs.labels.from")}
-                type="text"
-                value={from}
-                placeholder={
-                  t("addpage.inputs.placeholders.from") satisfies string
-                }
-                onChange={(event) => setFrom(event.target.value)}
-                onFocus={() => setFromInputFocused(true)}
-                onBlur={() => setFromInputFocused(false)}
-                required
-              >
-                <CitySuggestions
-                  location={from}
-                  onChange={(value) => {
-                    setFrom(value);
-                  }}
-                  shown={fromInputFocused && from.length >= 3}
+              <section className="grid grid-flow-col-dense gap-4">
+                <Input
+                  name={t("addpage.inputs.labels.date")}
+                  type="date"
+                  value={date}
+                  onChange={(event) => setDate(event.target.value)}
+                  required
                 />
-              </Input>
-              <Input
-                name={t("addpage.inputs.labels.to")}
-                type="text"
-                value={to}
-                placeholder={
-                  t("addpage.inputs.placeholders.to") satisfies string
-                }
-                onChange={(event) => {
-                  setTo(event.target.value);
-                }}
-                onFocus={() => {
-                  setToInputFocused(true);
-                }}
-                onBlur={(event) => {
-                  setToInputFocused(false);
-                  console.log(fetchWeather(event.target.value));
-                }}
-                required
-              >
-                <CitySuggestions
-                  location={to}
-                  onChange={(value) => {
-                    setTo(value);
-                  }}
-                  shown={toInputFocused && to.length >= 3}
+                <Input
+                  name={t("addpage.inputs.labels.time")}
+                  type="time"
+                  value={time}
+                  onChange={(event) => setTime(event.target.value)}
+                  required
                 />
-              </Input>
-            </section>
+              </section>
 
-            {/* Length and duration inputs */}
+              {/* From and destination inputs */}
 
-            <section className="grid grid-cols-2 gap-4">
-              <Input
-                name={t("addpage.inputs.labels.length")}
-                type="number"
-                value={length}
-                placeholder={
-                  t("addpage.inputs.placeholders.length") satisfies string
-                }
-                onChange={(event) => setLength(event.target.value)}
-                required
+              <section>
+                <Input
+                  name={t("addpage.inputs.labels.from")}
+                  type="text"
+                  value={from}
+                  placeholder={
+                    t("addpage.inputs.placeholders.from") satisfies string
+                  }
+                  onChange={(event) => setFrom(event.target.value)}
+                  onFocus={() => setFromInputFocused(true)}
+                  onBlur={() => setFromInputFocused(false)}
+                  required
+                >
+                  <CitySuggestions
+                    location={from}
+                    onChange={(value) => {
+                      setFrom(value);
+                    }}
+                    shown={fromInputFocused && from.length >= 3}
+                  />
+                </Input>
+                <Input
+                  name={t("addpage.inputs.labels.to")}
+                  type="text"
+                  value={to}
+                  placeholder={
+                    t("addpage.inputs.placeholders.to") satisfies string
+                  }
+                  onChange={(event) => {
+                    setTo(event.target.value);
+                  }}
+                  onFocus={() => {
+                    setToInputFocused(true);
+                  }}
+                  onBlur={(event) => {
+                    setToInputFocused(false);
+                    console.log(fetchWeather(event.target.value));
+                  }}
+                  required
+                >
+                  <CitySuggestions
+                    location={to}
+                    onChange={(value) => {
+                      setTo(value);
+                    }}
+                    shown={toInputFocused && to.length >= 3}
+                  />
+                </Input>
+              </section>
+
+              {/* Length and duration inputs */}
+
+              <section className="grid grid-cols-2 gap-4">
+                <Input
+                  name={t("addpage.inputs.labels.length")}
+                  type="number"
+                  value={length}
+                  placeholder={
+                    t("addpage.inputs.placeholders.length") satisfies string
+                  }
+                  onChange={(event) => setLength(event.target.value)}
+                  required
+                />
+                <Input
+                  name={t("addpage.inputs.labels.duration")}
+                  type="number"
+                  value={duration}
+                  placeholder={
+                    t("addpage.inputs.placeholders.duration") satisfies string
+                  }
+                  onChange={(event) => setDuration(event.target.value)}
+                  required
+                />
+              </section>
+              <Checkbox
+                name={t("addpage.inputs.labels.roundtrip")}
+                checked={roundTrip}
+                setChecked={(val) => setRoundTrip(val)}
               />
-              <Input
-                name={t("addpage.inputs.labels.duration")}
-                type="number"
-                value={duration}
-                placeholder={
-                  t("addpage.inputs.placeholders.duration") satisfies string
-                }
-                onChange={(event) => setDuration(event.target.value)}
-                required
-              />
-            </section>
-            <Checkbox
-              name={t("addpage.inputs.labels.roundtrip")}
-              checked={roundTrip}
-              setChecked={(val) => setRoundTrip(val)}
+            </>
+          ) : (
+            <OtherOptions
+              otherOptState={otherOptState}
+              setOtherOptState={setOtherOptState}
             />
-          </>
-        ) : (
-          <OtherOptions
-            otherOptState={otherOptState}
-            setOtherOptState={setOtherOptState}
-          />
-        )}
-        <Cta
-          type="button"
-          btnType="submit"
-          className="mt-8 sticky bottom-32 shadow-2xl shadow-brand-200/70 dark:shadow-grayblue-900 lg:bottom-8"
-          // disabled={!allFieldsFilled()}
-          loading={addTripPending}
-          onClick={() => {
-            if (allFieldsFilled()) {
-              if (step === 1) {
-                setStep(2);
+          )}
+          <Cta
+            type="button"
+            btnType="submit"
+            className="mt-8 sticky bottom-6 shadow-2xl shadow-brand-200/70 dark:shadow-grayblue-900 lg:bottom-8"
+            // disabled={!allFieldsFilled()}
+            loading={addTripPending}
+            onClick={() => {
+              if (allFieldsFilled()) {
+                if (step === 1) {
+                  setStep(2);
+                  return;
+                }
+                setStep("submitted");
+                handleSubmit();
                 return;
               }
-              setStep("submitted");
-              handleSubmit();
-              return;
-            }
-            toast("Please fill all fields", { type: "error" });
-          }}
-        >
-          {step === 1 ? "Suivant" : "Add trip"}
-        </Cta>
-      </form>
-    </PageLayout>
+              toast("Please fill all fields", { type: "error" });
+            }}
+          >
+            {step === 1 ? "Suivant" : "Add trip"}
+          </Cta>
+        </form>
+      </PageLayout>
+    </motion.div>
   );
 }
