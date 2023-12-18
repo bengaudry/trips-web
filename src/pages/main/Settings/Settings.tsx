@@ -14,6 +14,7 @@ import {
   PageLayout,
   Text,
   SlidingPage,
+  BackButton,
 } from "components";
 import { Setting } from "./Components/Setting";
 import { ProfilePopup } from "./Components/ProfilePopup/ProfilePopup";
@@ -21,11 +22,13 @@ import { LangPopup } from "./Components/LangPopup/LangPopup";
 import { DrivingSchool } from "./Components/DrivingScool/DrivingSchool";
 import { BetaPage } from "./Components/BetaPage/BetaPage";
 import { CurrentUser } from "api";
+import { useNavigate } from "react-router-dom";
 
 type SlidingPages = "profile" | "help" | "beta" | "language";
 
 export function Settings() {
   const { t } = useTranslation();
+  const navigate = useNavigate()
 
   const [slidingPageVisible, setSlidingPageVisible] = useState(false);
   const [slidingPageContent, setSlidingPageContent] =
@@ -53,7 +56,10 @@ export function Settings() {
   }[slidingPageContent];
 
   return (
-    <PageLayout title={t("settingsPage.title")}>
+    <PageLayout>
+      <BackButton onClick={() => navigate("/")} />
+      <Text.Title className="mb-3">{t("settingsPage.title")}</Text.Title>
+
       <section className="my-5 bg-neutral-100 dark:bg-grayblue-800 rounded-full">
         <Setting
           color="82, 82, 82"

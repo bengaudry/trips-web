@@ -100,8 +100,10 @@ export function Trips(props: {
 
   return (
     <div className="pt-3">
+      <Cta type="link" to="/add">Add trip</Cta>
+
       {props.data && props.data.length > 0 ? (
-        <>
+        <div className="pt-5">
           {props.data.map((trip, key) => (
             <TripDisplayer
               {...trip}
@@ -142,7 +144,7 @@ export function Trips(props: {
               Delete trip
             </Cta>
           </Modal>
-        </>
+        </div>
       ) : (
         <>
           <p className="text-center block w-full text-2xl my-4 mt-8">

@@ -8,6 +8,7 @@ import { Trip } from "../../../types/types";
 import { calculateDataForStats } from "../../../lib/functions";
 
 import {
+  Cta,
   Modal,
   NotVerifiedEmailPopup,
   PageLayout,
@@ -18,6 +19,7 @@ import { Trips } from "./Components/Trips";
 import { Stats } from "./Components/Stats";
 import { SetUserNameModal } from "./Components/SetUserNameModal";
 import { CurrentUser } from "api";
+import { Link } from "react-router-dom";
 
 function fetchCachedTrips() {
   const data = localStorage.getItem("cached-trips-data");
@@ -40,7 +42,9 @@ export function Home() {
   const [trips, setTrips] = useState<Trip[] | undefined>(fetchCachedTrips());
   const [currentPanel, setCurrentPanel] = useState<0 | 1>(0);
 
-  const [userNameUnset, setUserNameUnset] = useState(!CurrentUser.getDisplayName());
+  const [userNameUnset, setUserNameUnset] = useState(
+    !CurrentUser.getDisplayName()
+  );
 
   const changePanel = (val: number) => {
     if (val === 0 || val === 1) {
@@ -92,10 +96,6 @@ export function Home() {
       <PageLayout className="overflow-y-scroll">
         <NotVerifiedEmailPopup className="mb-4" />
 
-        <Text.Secondary className="text-xl mt-1">
-          {t("homepage.header.subtitle")}
-        </Text.Secondary>
-
         {userNameUnset && (
           <Modal
             visible={userNameUnset}
@@ -106,9 +106,20 @@ export function Home() {
           </Modal>
         )}
 
-        <Text.Title>
-          {CurrentUser.getDisplayName() && `${CurrentUser.getDisplayName()} 👋`}
-        </Text.Title>
+        <div className="flex flex-row justify-between w-full items-center">
+          <div>
+            <Text.Secondary className="text-xl mt-1">
+              {t("homepage.header.subtitle")}
+            </Text.Secondary>
+            <Text.Title>
+              {CurrentUser.getDisplayName() &&
+                `${CurrentUser.getDisplayName()} 👋`}
+            </Text.Title>
+          </div>
+          <Link className="bg-gradient-to-br from-gray-400 to-gray-600 w-12 h-12 aspect-square rounded-full grid place-content-center overflow-hidden" to="/settings">
+            <i className="fi fi-rr-user text-3xl opacity-50 translate-y-1" />
+          </Link>
+        </div>
 
         <div className="dark:bg-grayblue-900/90 backdrop-blur-lg sticky z-20 top-0 py-3">
           <PanelSwitcher
@@ -132,6 +143,10 @@ export function Home() {
             }}
           />
         )}
+
+        <div className="fixed bottom-10 right-10 h-14 w-14 overflow-hidden">
+          <Cta type="link" to="/add" className="w-full h-full px-0 py-0"><i className="fi fi-rr-plus text-2xl translate-y-1" /></Cta>
+        </div>
       </PageLayout>
     </>
   );

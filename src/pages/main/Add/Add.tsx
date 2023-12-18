@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-import { Cta, PageLayout } from "components";
+import { BackButton, Cta, PageLayout, Text } from "components";
 import { Input, CitySuggestions, Checkbox } from "components/form";
 import { OtherOptions } from "./components";
 import type { OtherOptionsT } from "./components";
@@ -138,7 +138,10 @@ export function Add() {
   };
 
   return (
-    <PageLayout title={t("addpage.title")}>
+    <PageLayout>
+      <BackButton onClick={() => navigate("/")} />
+      <Text.Title className="mb-3">{t("addpage.title")}</Text.Title>
+
       <div className="relative bg-gray-200 dark:bg-grayblue-800 h-2 w-full rounded-lg overflow-hidden">
         <div
           className={`${
