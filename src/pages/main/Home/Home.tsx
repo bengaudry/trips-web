@@ -94,11 +94,14 @@ export function Home() {
 
   return (
     <motion.div
+      key="home"
       initial={{ transform: "translateX(-100%)" }}
       animate={{ transform: "translateX(0)" }}
       exit={{ transform: "translateX(-100%)" }}
+      transition={{ duration: 0.25, bounce: false }}
+      className="h-screen overflow-scroll"
     >
-      <PageLayout className="relative overflow-y-scroll">
+      <PageLayout>
         <NotVerifiedEmailPopup className="mb-4" />
 
         {userNameUnset && (
@@ -151,13 +154,10 @@ export function Home() {
             }}
           />
         )}
-
-        <div className="fixed bottom-10 right-10 h-14 w-14 overflow-hidden">
-          <Cta type="link" to="/add" className="w-full h-full px-0 py-0">
-            <i className="fi fi-rr-plus text-2xl translate-y-1" />
-          </Cta>
-        </div>
       </PageLayout>
+      <button className="fixed top- bg-brand-500 w-12 h-12 rounded-full">
+        <i className="fi fi-rr-plus text-2xl translate-y-0.5" />
+      </button>
     </motion.div>
   );
 }

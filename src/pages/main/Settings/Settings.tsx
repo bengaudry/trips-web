@@ -58,9 +58,11 @@ export function Settings() {
 
   return (
     <motion.div
-      initial={{ transform: "translateX(0)" }}
-      animate={{ transform: "translateX(-100%)" }}
-      exit={{ transform: "translateX(0)" }}
+      key={"settings"}
+      initial={{ transform: "translateX(100%)"}}
+      animate={{ transform: "translateX(0)"}}
+      exit={{ transform: "translateX(100%)"}}
+      transition={{ duration: 0.25, bounce: false }}
     >
       <PageLayout>
         <BackButton onClick={() => navigate("/")} />

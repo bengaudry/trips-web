@@ -31,13 +31,13 @@ export function Layout({ offline, loaderVisible }: { offline: boolean, loaderVis
 
       <NavBar />
       <div className="max-w-screen-md mx-auto">
-        <NotStandaloneAlert
+        {/* <NotStandaloneAlert
           shown={
             runningInBrowser &&
             document.location.href !== "http://localhost:5173"
           }
           setShown={setRunningInBrowser}
-        />
+        /> */}
         <Outlet />
       </div>
     </div>

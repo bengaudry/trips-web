@@ -16,4 +16,4 @@ export const CurrentUser = {
     // For now, returning true by default
     return true;
   },
-};
+} as const;

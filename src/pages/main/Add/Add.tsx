@@ -140,9 +140,11 @@ export function Add() {
 
   return (
     <motion.div
+      key={"add"}
       initial={{ transform: "translateX(100%)" }}
       animate={{ transform: "translateX(0)" }}
       exit={{ transform: "translateX(100%)" }}
+      transition={{ duration: 0.25, bounce: false }}
     >
       <PageLayout>
         <BackButton onClick={() => navigate("/")} />

@@ -9,7 +9,7 @@ import { getFirebaseAuth } from "../server";
 
 // Translations
 import { resources } from "../lang";
-import i18n, { use } from "i18next";
+import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
 
 import { ToastContainer } from "react-toastify";
