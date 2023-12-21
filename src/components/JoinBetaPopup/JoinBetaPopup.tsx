@@ -16,7 +16,6 @@ export function JoinBetaPopup({
 }: {
   opened: boolean;
   onClose: () => void;
-  onSubmit: (success: boolean) => void;
 }) {
   const [betaEmailInputFocused, setBetaEmailInputFocused] = useState(false);
   const [betaEmail, setBetaEmail] = useState("");

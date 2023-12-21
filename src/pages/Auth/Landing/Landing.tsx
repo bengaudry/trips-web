@@ -83,7 +83,7 @@ export function Landing() {
       <footer className="h-[10vh] grid place-content-center text-center">
         <span>© 2022 TRIPS. ALL RIGHTS RESERVED</span>
         <a href="https://github.com/bengaudry/trips-web" className="underline">
-          Soutenir le projet
+          See on GitHub
         </a>
       </footer>
     </main>
