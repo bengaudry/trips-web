@@ -3,12 +3,14 @@ import { homepage } from "./res/homepage";
 import { menu } from "./res/menu";
 import { settingsPage } from "./res/settingsPage";
 import { addpage } from "./res/addpage";
+import { landing } from "./res/landing";
 
 export const resources = {
   en: {
     translation: {
       common: common.en,
       menu: menu.en,
+      landing: landing.en,
       homepage: homepage.en,
       addpage: addpage.en,
       settingsPage: settingsPage.en,
@@ -25,6 +27,7 @@ export const resources = {
     translation: {
       common: common.fr,
       menu: menu.fr,
+      landing: landing.en,
       homepage: homepage.fr,
       addpage: addpage.fr,
       settingsPage: settingsPage.fr,

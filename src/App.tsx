@@ -13,14 +13,14 @@ import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
 
 import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import { Routing } from "Routing";
+import "react-toastify/dist/ReactToastify.css";
 
 // Change the language of the app when it starts
 var lang = "fr";
 const savedLang = localStorage.getItem("app-lang") as string;
 // If a language is prefered by the user, do nothing
-if (savedLang === undefined || savedLang === null || savedLang === "") {
+if (!savedLang || savedLang === "") {
   if (navigator.language.includes("fr")) {
     lang = "fr";
   } else {
@@ -36,6 +36,7 @@ console.log(`Switching lang to ${lang}`);
 i18n.use(initReactI18next).init({
   resources,
   lng: lang,
+  fallbackLng: "fr",
   interpolation: {
     escapeValue: false,
   },

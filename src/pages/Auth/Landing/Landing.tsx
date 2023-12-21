@@ -1,8 +1,11 @@
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import { Cta, JoinBetaPopup, Text } from "components";
+import { useTranslation } from "react-i18next";
 
 export function Landing() {
+  const { t } = useTranslation();
+
   const isStandaloneMode = () => {
     return window.matchMedia("(display-mode: standalone)").matches;
   };
@@ -44,7 +47,7 @@ export function Landing() {
             />
           </div>
           <NavLink to="/auth" className="flex flex-row gap-2 font-medium">
-            <span>Sign in</span>
+            <span>{t("landing.header.signInBtnContent")}</span>
             <i className="fi fi-rr-arrow-right translate-y-0.5" />
           </NavLink>
         </div>
@@ -57,18 +60,16 @@ export function Landing() {
         }}
       >
         <h1 className="text-3xl sm:text-5xl font-bold block max-w-3xl mb-4 sm:mb-8">
-          L'application qui rend la conduite accompagnée agréable
+          {t("landing.body.title")}
         </h1>
         <p className="text-md sm:text-xl max-w-3xl">
-          Trips est une application web permettant de compter en toute
-          simplicité le nombre de kilomètres réalisés durant la conduite
-          accompagnée
+          {t("landing.body.description")}
         </p>
         <button
           onClick={() => setJoinBetaPopupShown(true)}
           className="bg-blue-600 text-white md:hover:bg-brand-800 transition-colors duration-300 shadow-xl px-6 py-2 rounded-full mt-4 w-max"
         >
-          Join beta <i className="block fi fi-rr-flask-potion" />
+          {t("landing.body.joinBetaBtnContent")}
         </button>
       </section>
 
@@ -81,9 +82,9 @@ export function Landing() {
       </section> */}
 
       <footer className="h-[10vh] grid place-content-center text-center">
-        <span>© 2022 TRIPS. ALL RIGHTS RESERVED</span>
+        <span>{t("landing.footer.copyright")}</span>
         <a href="https://github.com/bengaudry/trips-web" className="underline">
-          See on GitHub
+          {t("landing.footer.githubBtnContent")}
         </a>
       </footer>
     </main>

@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import { toast } from "react-toastify";
 import { getFirebaseDb } from "../../../server";
+import { useTranslation } from "react-i18next";
 
 function isEmailValid(email: string): boolean {
   const pattern: RegExp = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
@@ -17,6 +18,8 @@ export function JoinBetaPopup({
   opened: boolean;
   onClose: () => void;
 }) {
+  const { t } = useTranslation();
+
   const [betaEmailInputFocused, setBetaEmailInputFocused] = useState(false);
   const [betaEmail, setBetaEmail] = useState("");
   const [emailValid, setEmailValid] = useState<boolean | undefined>(false);
@@ -61,7 +64,7 @@ export function JoinBetaPopup({
     let q = query(betaTestersCollection, where("email", "==", betaEmail));
     await getDocs(q).then(async (val) => {
       if (val.docs.length > 0) {
-        toast("This email is already awaiting for a beta tester account", {
+        toast(t("landing.betaModal.errors.alreadyUsed"), {
           type: "warning",
         });
       } else {
@@ -109,7 +112,7 @@ export function JoinBetaPopup({
         } flex flex-col z-50 gap-4 max-w-sm lg:max-w-none transition-all duration-500 delay-300 px-6`}
       >
         <h2 className="text-3xl lg:text-5xl font-semibold text-white">
-          Become a beta tester
+          {t("landing.betaModal.title")}
         </h2>
         <div
           className={`relative bg-[#00000040] rounded-2xl overflow-hidden transition-all duration-300 border-2 ${
@@ -126,7 +129,7 @@ export function JoinBetaPopup({
         >
           <input
             type="email"
-            placeholder="Your email"
+            placeholder={t("landing.betaModal.inputPlaceholder") as string}
             className="w-full bg-transparent px-6 py-3 outline-none"
             onChange={(e) => setBetaEmail(e.target.value)}
             onFocus={() => setBetaEmailInputFocused(true)}
@@ -145,21 +148,15 @@ export function JoinBetaPopup({
             emailValid !== undefined && !emailValid ? "opacity-1" : "opacity-0"
           } text-red-400 font-medium`}
         >
-          The email is not in a valid format
+          {t("landing.betaModal.errors.emailFormat")}
         </span>
         <span
           className={`${
             emailValid && emailInUse ? "opacity-1" : "opacity-0"
           } text-red-400 font-medium`}
         >
-          You are already in the waitlist. Be a little more patient !
+          {t("landing.betaModal.errors.alreadyUsed")}
         </span>
-        <NavLink
-          to="/auth"
-          className="text-neutral-300 underline w-max block mx-auto"
-        >
-          I'm already tester
-        </NavLink>
       </div>
     </div>
   );
