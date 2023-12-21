@@ -59,9 +59,9 @@ export function Settings() {
   return (
     <motion.div
       key={"settings"}
-      initial={{ transform: "translateX(100%)"}}
-      animate={{ transform: "translateX(0)"}}
-      exit={{ transform: "translateX(100%)"}}
+      initial={{ transform: "translateX(50%)", opacity: 0 }}
+      animate={{ transform: "translateX(0)", opacity: 1 }}
+      exit={{ transform: "translateX(50%)", opacity: 0 }}
       transition={{ duration: 0.25, bounce: false }}
     >
       <PageLayout>

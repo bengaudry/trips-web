@@ -20,7 +20,8 @@ import { Stats } from "./Components/Stats";
 import { SetUserNameModal } from "./Components/SetUserNameModal";
 import { CurrentUser } from "api";
 import { Link } from "react-router-dom";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
+import { transform } from "@babel/core";
 
 function fetchCachedTrips() {
   const data = localStorage.getItem("cached-trips-data");
@@ -95,11 +96,9 @@ export function Home() {
   return (
     <motion.div
       key="home"
-      initial={{ transform: "translateX(-100%)" }}
-      animate={{ transform: "translateX(0)" }}
-      exit={{ transform: "translateX(-100%)" }}
-      transition={{ duration: 0.25, bounce: false }}
-      className="h-screen overflow-scroll"
+      initial={{ transform: "translateX(-50%)", opacity: 0 }}
+      animate={{ transform: "translateX(0)", opacity: 1 }}
+      exit={{ transform: "translateX(-50%)", opacity: 0 }}
     >
       <PageLayout>
         <NotVerifiedEmailPopup className="mb-4" />
@@ -140,20 +139,38 @@ export function Home() {
           />
         </div>
 
-        {currentPanel === 0 ? (
-          <Stats
-            allTrips={allTrips}
-            setPanelFn={setCurrentPanel}
-            data={calculateDataForStats(trips)}
-          />
-        ) : (
-          <Trips
-            data={memoizedData}
-            onDataChange={(newData) => {
-              setTrips(newData);
-            }}
-          />
-        )}
+        <div className="overflow-x-hidden">
+          <AnimatePresence mode="popLayout" initial={false}>
+            {currentPanel === 0 ? (
+              <motion.div
+                key={currentPanel}
+                initial={{ transform: "translateX(-50%)", opacity: 0 }}
+                animate={{ transform: "translateX(0)", opacity: 1 }}
+                exit={{ transform: "translateX(-50%)", opacity: 0 }}
+              >
+                <Stats
+                  allTrips={allTrips}
+                  setPanelFn={setCurrentPanel}
+                  data={calculateDataForStats(trips)}
+                />
+              </motion.div>
+            ) : (
+              <motion.div
+                key={currentPanel}
+                initial={{ transform: "translateX(50%)", opacity: 0 }}
+                animate={{ transform: "translateX(0)", opacity: 1 }}
+                exit={{ transform: "translateX(50%)", opacity: 0 }}
+              >
+                <Trips
+                  data={memoizedData}
+                  onDataChange={(newData) => {
+                    setTrips(newData);
+                  }}
+                />
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </div>
       </PageLayout>
       <button className="fixed top- bg-brand-500 w-12 h-12 rounded-full">
         <i className="fi fi-rr-plus text-2xl translate-y-0.5" />

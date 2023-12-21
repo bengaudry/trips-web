@@ -1,5 +1,5 @@
 // React routing
-import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
+import { BrowserRouter } from "react-router-dom";
 import { useEffect, useState } from "react";
 
 // Styles
@@ -83,6 +83,7 @@ export default function App() {
 
   return (
     <BrowserRouter>
+      <ToastContainer newestOnTop limit={1} closeButton theme="dark" />
       <Routing
         userLoggedIn={userLoggedIn}
         offline={offline}

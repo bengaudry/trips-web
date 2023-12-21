@@ -14,4 +14,5 @@ export { Notification } from "./interaction/Notification/Notification";
 export { CenteredPopup } from "./interaction/CenteredPopup/CenteredPopup";
 export { NotStandaloneAlert } from "./interaction/NotStandaloneAlert/NotStandaloneAlert";
 export { RoundedLoader } from "./RoundedLoader/RoundedLoader";
+export { JoinBetaPopup } from "./JoinBetaPopup/JoinBetaPopup";
 export * from "./texts";

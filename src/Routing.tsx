@@ -26,7 +26,7 @@ export function Routing({
   const location = useLocation();
 
   return (
-    <AnimatePresence mode="wait" initial={true}>
+    <AnimatePresence mode="popLayout">
       <Routes location={location} key={location.pathname}>
         {userLoggedIn ? (
           <Route

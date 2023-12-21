@@ -1,7 +1,6 @@
 import { Outlet } from "react-router-dom";
 import { Loader, NavBar, NotStandaloneAlert } from "components";
 import { useState, useEffect } from "react";
-import { ToastContainer } from "react-toastify";
 
 export function Layout({ offline, loaderVisible }: { offline: boolean, loaderVisible: boolean}) {
   const [runningInBrowser, setRunningInBrowser] = useState(false);
@@ -26,8 +25,6 @@ export function Layout({ offline, loaderVisible }: { offline: boolean, loaderVis
           <span>App is offline</span>
         </div>
       )}
-
-      <ToastContainer newestOnTop limit={1} closeButton theme="dark" />
 
       <NavBar />
       <div className="max-w-screen-md mx-auto">
