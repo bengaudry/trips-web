@@ -16,7 +16,7 @@ export function PageLayout(props: {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      transition={{ duration: 0.15, bounce: false }}
+      transition={{ duration: 0.1, bounce: false }}
     >
       <Text.Title className="mb-3">{props.title ?? ""}</Text.Title>
       {props.children}
