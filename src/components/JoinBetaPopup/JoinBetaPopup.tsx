@@ -1,7 +1,6 @@
 import { collection, query, where, getDocs, addDoc } from "firebase/firestore";
 import { getFormattedDate } from "lib/functions";
 import { useState, useEffect } from "react";
-import { NavLink } from "react-router-dom";
 import { toast } from "react-toastify";
 import { getFirebaseDb } from "../../../server";
 import { useTranslation } from "react-i18next";

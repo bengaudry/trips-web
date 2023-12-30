@@ -23,7 +23,6 @@ import { DrivingSchool } from "./Components/DrivingScool/DrivingSchool";
 import { BetaPage } from "./Components/BetaPage/BetaPage";
 import { CurrentUser } from "api";
 import { useNavigate } from "react-router-dom";
-import { motion } from "framer-motion";
 
 type SlidingPages = "profile" | "help" | "beta" | "language";
 
@@ -57,68 +56,61 @@ export function Settings() {
   }[slidingPageContent];
 
   return (
-    <motion.div
-      key={"settings"}
-      initial={{ transform: "translateX(50%)", opacity: 0 }}
-      animate={{ transform: "translateX(0)", opacity: 1 }}
-      exit={{ transform: "translateX(50%)", opacity: 0 }}
-      transition={{ duration: 0.25, bounce: false }}
-    >
-      <PageLayout>
-        <BackButton onClick={() => navigate("/")} />
-        <Text.Title className="mb-3">{t("settingsPage.title")}</Text.Title>
+    <PageLayout key="settings">
+      <BackButton onClick={() => navigate("/")} />
+      <Text.Title className="mb-3">{t("settingsPage.title")}</Text.Title>
 
-        <section className="my-5 bg-neutral-100 dark:bg-grayblue-800 rounded-full">
-          <Setting
-            color="82, 82, 82"
-            icon="user"
-            subTitle={t("settingsPage.personalInfo") as string}
-            name={CurrentUser.getDisplayName() as string}
-            onClick={() => changeSlidingPage("profile")}
-            bigIcon
-            className="w-full h-full py-5 px-6"
-          />
+      <section className="my-5 bg-neutral-100 dark:bg-grayblue-800 rounded-full">
+        <Setting
+          color="82, 82, 82"
+          icon="user"
+          subTitle={t("settingsPage.personalInfo") as string}
+          name={CurrentUser.getDisplayName() as string}
+          onClick={() => changeSlidingPage("profile")}
+          bigIcon
+          className="w-full h-full py-5 px-6"
+        />
 
-          <NotVerifiedEmailPopup />
-        </section>
+        <NotVerifiedEmailPopup />
+      </section>
 
-        <section className="py-5">
-          <Setting
-            color="209, 96, 224"
-            icon="test-tube"
-            name="Beta"
-            onClick={() => changeSlidingPage("beta")}
-          />
+      <section className="py-5">
+        <Setting
+          color="209, 96, 224"
+          icon="test-tube"
+          name="Beta"
+          onClick={() => changeSlidingPage("beta")}
+        />
 
-          <Setting
-            color="125, 211, 252"
-            icon="interrogation"
-            name={t("settingsPage.buttons.help")}
-            onClick={() => changeSlidingPage("help")}
-          />
+        <Setting
+          color="125, 211, 252"
+          icon="interrogation"
+          name={t("settingsPage.buttons.help")}
+          onClick={() => changeSlidingPage("help")}
+        />
 
-          <Setting
-            color="253, 186, 116"
-            icon="world"
-            name={t("settingsPage.buttons.lang")}
-            onClick={() => changeSlidingPage("language")}
-          />
+        <Setting
+          color="253, 186, 116"
+          icon="world"
+          name={t("settingsPage.buttons.lang")}
+          onClick={() => changeSlidingPage("language")}
+        />
 
-          <Setting
-            color="252, 165, 165"
-            icon="exit"
-            name={t("settingsPage.buttons.logout")}
-            onClick={() => {
-              if (confirm(t("common.messages.logoutConfirm") as string)) {
-                localStorage.removeItem("connected");
-                signOut(getFirebaseAuth());
-              }
-            }}
-            reduceIconSize
-          />
-        </section>
+        <Setting
+          color="252, 165, 165"
+          icon="exit"
+          name={t("settingsPage.buttons.logout")}
+          onClick={() => {
+            if (confirm(t("common.messages.logoutConfirm") as string)) {
+              localStorage.removeItem("connected");
+              signOut(getFirebaseAuth());
+            }
+          }}
+          reduceIconSize
+        />
+      </section>
 
-        {/* {window.location.toString() === "http://localhost:5173/settings" && (
+      {/* {window.location.toString() === "http://localhost:5173/settings" && (
         <div className="relative p-6">
           <h3 className="text-3xl font-semibold mb-4 mt-10">Mon auto-école</h3>
           <Text.Secondary className="text-lg">
@@ -130,20 +122,19 @@ export function Settings() {
       )
    */}
 
-        <Text.Secondary className="w-full text-center">
-          App version : {APP_VERSION}
-        </Text.Secondary>
-        <Text.Secondary className="w-full text-center">
-          {new Date().getFullYear()} - All rights reserved
-        </Text.Secondary>
+      <Text.Secondary className="w-full text-center">
+        App version : {APP_VERSION}
+      </Text.Secondary>
+      <Text.Secondary className="w-full text-center">
+        {new Date().getFullYear()} - All rights reserved
+      </Text.Secondary>
 
-        <SlidingPage
-          isOpened={slidingPageVisible}
-          setPanelOpened={(val) => setSlidingPageVisible(val)}
-        >
-          {CurrPageView}
-        </SlidingPage>
-      </PageLayout>
-    </motion.div>
+      <SlidingPage
+        isOpened={slidingPageVisible}
+        setPanelOpened={(val) => setSlidingPageVisible(val)}
+      >
+        {CurrPageView}
+      </SlidingPage>
+    </PageLayout>
   );
 }

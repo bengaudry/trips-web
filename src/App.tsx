@@ -15,6 +15,9 @@ import { initReactI18next } from "react-i18next";
 import { ToastContainer } from "react-toastify";
 import { Routing } from "Routing";
 import "react-toastify/dist/ReactToastify.css";
+import { useModal } from "hooks/modal";
+import ModalContainer from "components/ModalContainer/ModalContainer";
+import { NotStandaloneAlert } from "./components";
 
 // Change the language of the app when it starts
 var lang = "fr";
@@ -43,6 +46,8 @@ i18n.use(initReactI18next).init({
 });
 
 export default function App() {
+  const { modalContent } = useModal();
+
   const [userLoggedIn, setUserLoggedIn] = useState(false);
   const [loaderVisible, setLoaderVisible] = useState(true);
   const [offline, setOffline] = useState(!navigator.onLine);
@@ -82,14 +87,31 @@ export default function App() {
     }
   });
 
+  const [runningInBrowser, setRunningInBrowser] = useState(false);
+
+  // Check if the web app is running in standalone mode on iOS devices
+  const isInStandaloneMode = () =>
+    window.matchMedia("(display-mode: standalone)").matches;
+
+  useEffect(() => {
+    setRunningInBrowser(!isInStandaloneMode());
+  }, []);
+
   return (
     <BrowserRouter>
+      {/* <NotStandaloneAlert
+        shown={
+          runningInBrowser && document.location.href !== "http://localhost:5173"
+        }
+        setShown={setRunningInBrowser}
+      /> */}
       <ToastContainer newestOnTop limit={1} closeButton theme="dark" />
       <Routing
         userLoggedIn={userLoggedIn}
         offline={offline}
         loaderVisible={loaderVisible}
       />
+      {modalContent}
     </BrowserRouter>
   );
 }
