@@ -28,7 +28,6 @@ type SlidingPages = "profile" | "help" | "beta" | "language";
 
 export function Settings() {
   const { t } = useTranslation();
-  const navigate = useNavigate();
 
   const [slidingPageVisible, setSlidingPageVisible] = useState(false);
   const [slidingPageContent, setSlidingPageContent] =
@@ -57,7 +56,6 @@ export function Settings() {
 
   return (
     <PageLayout key="settings">
-      <BackButton onClick={() => navigate("/")} />
       <Text.Title className="mb-3">{t("settingsPage.title")}</Text.Title>
 
       <section className="my-5 bg-neutral-100 dark:bg-grayblue-800 rounded-full">
@@ -68,7 +66,7 @@ export function Settings() {
           name={CurrentUser.getDisplayName() as string}
           onClick={() => changeSlidingPage("profile")}
           bigIcon
-          className="w-full h-full py-5 px-6"
+          className="w-full h-full p-3"
         />
 
         <NotVerifiedEmailPopup />
@@ -119,8 +117,8 @@ export function Settings() {
           </Text.Secondary>
           <DrivingSchool />
         </div>
-      )
-   */}
+      )} */}
+  
 
       <Text.Secondary className="w-full text-center">
         App version : {APP_VERSION}

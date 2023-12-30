@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-import { BackButton, Cta, PageLayout, Text } from "components";
+import { Cta, PageLayout, Text } from "components";
 import { Input, CitySuggestions, Checkbox } from "components/form";
 import { OtherOptions } from "./components";
 import type { OtherOptionsT } from "./components";
@@ -58,7 +58,7 @@ export function Add() {
   };
 
   const [otherOptState, setOtherOptState] = useState(defaultOtherOptions);
-  const [addTripPending, setAddTripPending] = useState(true);
+  const [addTripPending, setAddTripPending] = useState(false);
 
   const handleSubmit = async () => {
     if (!CurrentUser.isEmailVerified()) {
@@ -139,7 +139,6 @@ export function Add() {
 
   return (
     <PageLayout key="add">
-      <BackButton onClick={() => navigate("/")} />
       <Text.Title className="mb-3">{t("addpage.title")}</Text.Title>
 
       <div className="relative bg-gray-200 dark:bg-grayblue-800 h-2 w-full rounded-lg overflow-hidden">
@@ -155,6 +154,8 @@ export function Add() {
           } w-full transition-transform translate-x-0 origin-left duration-500 h-full bg-gradient-to-r from-brand-600 to-brand-300 rounded-lg`}
         ></div>
       </div>
+
+      {addTripPending}
 
       <form onSubmit={(e) => e.preventDefault()}>
         {step === 1 ? (
@@ -270,7 +271,7 @@ export function Add() {
           type="button"
           btnType="submit"
           className="mt-8 sticky bottom-6 shadow-2xl shadow-brand-200/70 dark:shadow-grayblue-900 lg:bottom-8"
-          // disabled={!allFieldsFilled()}
+          disabled={!allFieldsFilled()}
           loading={addTripPending}
           onClick={() => {
             if (allFieldsFilled()) {

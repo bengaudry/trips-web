@@ -131,7 +131,7 @@ export function Home() {
         />
       </div>
 
-      <div className="overflow-x-hidden">
+      <div className="overflow-x-hidden h-max">
         <AnimatePresence mode="popLayout" initial={false}>
           {currentPanel === 0 ? (
             <motion.div
@@ -139,6 +139,7 @@ export function Home() {
               initial={{ transform: "translateX(-50%)", opacity: 0 }}
               animate={{ transform: "translateX(0)", opacity: 1 }}
               exit={{ transform: "translateX(-50%)", opacity: 0 }}
+              className="overflow-hidden"
             >
               <Stats
                 allTrips={allTrips}
@@ -152,6 +153,7 @@ export function Home() {
               initial={{ transform: "translateX(50%)", opacity: 0 }}
               animate={{ transform: "translateX(0)", opacity: 1 }}
               exit={{ transform: "translateX(50%)", opacity: 0 }}
+              className="overflow-hidden"
             >
               <Trips
                 data={memoizedData}

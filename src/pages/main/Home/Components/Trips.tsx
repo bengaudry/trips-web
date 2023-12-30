@@ -43,7 +43,7 @@ export function Trips(props: {
     if (confirm("Do you really want to delete this trip ?")) {
       // Checking if the modal contains an id to avoid errors
       if (modalContent?.trip.id) {
-        // Deletes the trip from the database 
+        // Deletes the trip from the database
         deleteDoc(doc(getFirebaseDb(), "/trips", modalContent.trip.id))
           .then(() => {
             // Deletes the trip from cache and closes the modal if there is cache
@@ -100,10 +100,8 @@ export function Trips(props: {
 
   return (
     <div className="pt-3">
-      <Cta type="link" to="/add">Add trip</Cta>
-
       {props.data && props.data.length > 0 ? (
-        <div className="pt-5">
+        <div>
           {props.data.map((trip, key) => (
             <TripDisplayer
               {...trip}
