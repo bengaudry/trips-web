@@ -1,4 +1,4 @@
-import { Cta, Text } from "components";
+import { Cta, Text } from "@/components";
 
 export function Certificate() {
   return (

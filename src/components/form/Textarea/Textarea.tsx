@@ -1,5 +1,5 @@
-import { capitalizeString } from "../../../lib/functions";
-import { Text } from "../../texts";
+import { capitalizeString } from "@/lib/functions";
+import { Text } from "@/components/texts";
 
 type TextareaProps = {
   className?: string;

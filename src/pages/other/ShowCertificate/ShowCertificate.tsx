@@ -11,7 +11,7 @@ import { getFirebaseDb } from "../../../../server";
 import { collection, getDocs, query, where } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { CurrentUser } from "api";
+import { CurrentUser } from "@/api";
 // import QRCode from "qrcode";
 
 const styles = StyleSheet.create({

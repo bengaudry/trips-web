@@ -1,6 +1,6 @@
-import { useTranslation } from "react-i18next";
+import { Text } from "@/components/texts";
 import { MouseEvent } from "react";
-import { Text } from "../../texts";
+import { useTranslation } from "react-i18next";
 
 export function BackButton(props: {
   onClick: (e: MouseEvent<HTMLButtonElement>) => void;

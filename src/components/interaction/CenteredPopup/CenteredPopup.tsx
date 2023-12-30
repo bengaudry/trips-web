@@ -1,5 +1,5 @@
 import { Dispatch, ReactNode, SetStateAction } from "react";
-import { Cta } from "../../Buttons/Cta";
+import { Cta } from "@/components";
 import { useTranslation } from "react-i18next";
 
 interface CenteredPopupProps {

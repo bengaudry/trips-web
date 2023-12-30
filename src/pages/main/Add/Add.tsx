@@ -1,15 +1,15 @@
 import { useEffect, useState } from "react";
 
-import { Cta, PageLayout, Text } from "components";
-import { Input, CitySuggestions, Checkbox } from "components/form";
-import { OtherOptions } from "./components";
-import type { OtherOptionsT } from "./components";
+import { Cta, PageLayout, Text } from "@/components";
+import { Checkbox, CitySuggestions, Input } from "@/components/form";
 import { toast } from "react-toastify";
+import type { OtherOptionsT } from "./components";
+import { OtherOptions } from "./components";
 
-import { addTrip } from "../../../lib/functions";
-import { Weather } from "../../../types";
+import { CurrentUser } from "@/api";
+import { addTrip } from "@/lib/functions";
+import { Weather } from "@/types";
 import { useTranslation } from "react-i18next";
-import { CurrentUser } from "api";
 import { useNavigate } from "react-router-dom";
 
 const getCurrentTime = (): string => {

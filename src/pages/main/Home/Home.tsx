@@ -1,27 +1,25 @@
 import { useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 
-import { collection, getDocs, where, query, orderBy } from "firebase/firestore";
+import { collection, getDocs, orderBy, query, where } from "firebase/firestore";
 import { getFirebaseDb } from "../../../../server";
 
-import { Trip } from "../../../types/types";
-import { calculateDataForStats } from "../../../lib/functions";
+import { calculateDataForStats } from "@/lib/functions";
+import { Trip } from "@/types";
 
+import { CurrentUser } from "@/api";
 import {
-  Cta,
   Modal,
   NotVerifiedEmailPopup,
   PageLayout,
   PanelSwitcher,
-  Text,
-} from "components";
-import { Trips } from "./Components/Trips";
-import { Stats } from "./Components/Stats";
-import { SetUserNameModal } from "./Components/SetUserNameModal";
-import { CurrentUser } from "api";
-import { Link } from "react-router-dom";
+  Text
+} from "@/components";
+import { useModal } from "@/hooks/modal";
 import { AnimatePresence, motion } from "framer-motion";
-import { useModal } from "hooks/modal";
+import { SetUserNameModal } from "./Components/SetUserNameModal";
+import { Stats } from "./Components/Stats";
+import { Trips } from "./Components/Trips";
 
 function fetchCachedTrips() {
   const data = localStorage.getItem("cached-trips-data");

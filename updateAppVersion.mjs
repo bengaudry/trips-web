@@ -1,6 +1,6 @@
 import { writeFileSync } from "fs";
-import { APP_VERSION } from "./src/lib/constants/appVersion.js";
-import { generateNewVersion } from "./src/lib/functions/versions/versions.js";
+import { APP_VERSION } from "@/lib/constants/appVersion.js";
+import { generateNewVersion } from "@/lib/functions/versions/versions.js";
 
 const versionFilePath = "./src/lib/constants/appVersion.js";
 

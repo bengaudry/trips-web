@@ -1,8 +1,8 @@
+import { anyTruish, strTruish } from "@/lib/functions";
+import { Trip } from "@/types";
 import { addDoc, collection } from "firebase/firestore";
-import { getFirebaseDb } from "../../../../server";
-import { strTruish, anyTruish } from "../../functions";
-import { Trip } from "../../../types/types";
 import { toast } from "react-toastify";
+import { getFirebaseDb } from "../../../../server";
 
 export async function addTrip(content: Trip) {
   const tripsCollection = collection(getFirebaseDb(), "/trips");

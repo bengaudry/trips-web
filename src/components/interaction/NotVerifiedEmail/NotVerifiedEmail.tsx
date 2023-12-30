@@ -1,7 +1,6 @@
 import { sendEmailVerification, User } from "firebase/auth";
-import { getFirebaseAuth } from "../../../../server";
 import { toast } from "react-toastify";
-import { CurrentUser } from "api";
+import { CurrentUser } from "@/api";
 
 export function NotVerifiedEmailPopup(props: { className?: string }) {
   const sendEmail = () => {
@@ -29,19 +28,17 @@ export function NotVerifiedEmailPopup(props: { className?: string }) {
   };
 
   return !CurrentUser.isEmailVerified() ? (
-    <>
-      <div
-        className={`w-full flex flex-col items-center rounded-lg px-4 py-2 mt-2 bg-yellow-600 ${props.className}`}
-      >
-        <p className="flex flex-row items-center gap-2">
-          <i className="fi fi-rr-exclamation"></i>
-          <span className="-translate-y-0.5">Your email is not verified !</span>
-        </p>
-        <button onClick={sendEmail} className="underline font-semibold">
-          Send me an email
-        </button>
-      </div>
-    </>
+    <div
+      className={`w-full flex flex-col items-center rounded-lg px-4 py-2 mt-2 bg-yellow-600 ${props.className}`}
+    >
+      <p className="flex flex-row items-center gap-2">
+        <i className="fi fi-rr-exclamation"></i>
+        <span className="-translate-y-0.5">Your email is not verified !</span>
+      </p>
+      <button onClick={sendEmail} className="underline font-semibold">
+        Send me an email
+      </button>
+    </div>
   ) : (
     <></>
   );

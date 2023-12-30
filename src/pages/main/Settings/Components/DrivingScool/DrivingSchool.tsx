@@ -11,8 +11,8 @@ import {
 } from "firebase/firestore";
 import { getFirebaseDb } from "../../../../../../server";
 
-import { Input } from "components/form";
-import { Cta } from "components";
+import { Input } from "@/components/form";
+import { Cta } from "@/components";
 
 export function DrivingSchool() {
   const [code, setCode] = useState("");

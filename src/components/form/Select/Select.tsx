@@ -1,5 +1,5 @@
 import { SelectOption } from "../types";
-import { Text } from "../../texts";
+import { Text } from "@/components/texts";
 
 interface MultiSelectProps {
   name: string;

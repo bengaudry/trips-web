@@ -1,18 +1,17 @@
+import { Layout } from "@/components";
 import {
-  Home,
   Add,
-  Settings,
   Certificate,
-  ShowCertificate,
-  Premium,
-  NoPage,
+  Home,
   Install as InstallPage,
-} from "pages";
-
-import { AuthLayout, Landing, Auth } from "pages/auth";
-import { Route, Routes, useLocation } from "react-router-dom";
-import { Layout } from "./components";
+  NoPage,
+  Premium,
+  Settings,
+  ShowCertificate,
+} from "@/pages";
+import { Auth, AuthLayout, Landing } from "@/pages/auth";
 import { AnimatePresence } from "framer-motion";
+import { Route, Routes, useLocation } from "react-router-dom";
 
 export function Routing({
   userLoggedIn,

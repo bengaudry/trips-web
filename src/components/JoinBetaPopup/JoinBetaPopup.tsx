@@ -1,9 +1,9 @@
-import { collection, query, where, getDocs, addDoc } from "firebase/firestore";
-import { getFormattedDate } from "lib/functions";
-import { useState, useEffect } from "react";
+import { getFormattedDate } from "@/lib/functions";
+import { addDoc, collection, getDocs, query, where } from "firebase/firestore";
+import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { toast } from "react-toastify";
 import { getFirebaseDb } from "../../../server";
-import { useTranslation } from "react-i18next";
 
 function isEmailValid(email: string): boolean {
   const pattern: RegExp = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;

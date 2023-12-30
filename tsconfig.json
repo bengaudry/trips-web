@@ -15,9 +15,8 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
-    "baseUrl": "src",
     "paths": {
-      "components/*": ["components/*"],
+      "@/*": ["./src/*"],
     }
   },
   "include": ["src", "updateAppVersion.mjs", "src/api/CurrentUser.ts"],

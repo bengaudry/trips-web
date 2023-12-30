@@ -1,4 +1,4 @@
-import { MAX_KMS_BEFORE_LICENSE } from "../../lib/constants";
+import { MAX_KMS_BEFORE_LICENSE } from "@/lib/constants";
 import { Number } from "./components/Number";
 
 export function PrettyProgress(props: { percent: number; className?: string }) {

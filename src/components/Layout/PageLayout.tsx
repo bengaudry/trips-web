@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import { Text } from "components";
+import { Text } from "@/components";
 import { motion } from "framer-motion";
 
 export function PageLayout(props: {

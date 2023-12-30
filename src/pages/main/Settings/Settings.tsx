@@ -7,22 +7,19 @@ import { useTranslation } from "react-i18next";
 import { ReactMarkdown } from "react-markdown/lib/react-markdown";
 
 import { legal } from "../../../../public/texts/legal";
-import { APP_VERSION } from "../../../lib/constants/appVersion";
+import { APP_VERSION } from "@/lib/constants/appVersion";
 
+import { CurrentUser } from "@/api";
 import {
   NotVerifiedEmailPopup,
   PageLayout,
-  Text,
   SlidingPage,
-  BackButton,
-} from "components";
-import { Setting } from "./Components/Setting";
-import { ProfilePopup } from "./Components/ProfilePopup/ProfilePopup";
-import { LangPopup } from "./Components/LangPopup/LangPopup";
-import { DrivingSchool } from "./Components/DrivingScool/DrivingSchool";
+  Text
+} from "@/components";
 import { BetaPage } from "./Components/BetaPage/BetaPage";
-import { CurrentUser } from "api";
-import { useNavigate } from "react-router-dom";
+import { LangPopup } from "./Components/LangPopup/LangPopup";
+import { ProfilePopup } from "./Components/ProfilePopup/ProfilePopup";
+import { Setting } from "./Components/Setting";
 
 type SlidingPages = "profile" | "help" | "beta" | "language";
 

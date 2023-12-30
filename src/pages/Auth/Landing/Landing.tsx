@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
-import { Cta, JoinBetaPopup, Text } from "components";
+import { Cta, JoinBetaPopup, Text } from "@/components";
 import { useTranslation } from "react-i18next";
 
 export function Landing() {

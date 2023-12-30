@@ -1,12 +1,12 @@
+import { CurrentUser } from "@/api";
+import { Cta } from "@/components";
+import { Input, Textarea } from "@/components/form";
+import { strTruish } from "@/lib/functions";
+import { addDoc, collection } from "firebase/firestore";
 import { useState } from "react";
-import { Cta } from "components";
-import { Input, Textarea } from "components/form";
-import type { IssueCategory } from "../BetaPage/BetaPage";
-import { collection, addDoc } from "firebase/firestore";
-import { getFirebaseDb } from "../../../../../../server";
-import { strTruish } from "../../../../../lib/functions";
 import { toast } from "react-toastify";
-import { CurrentUser } from "api";
+import { getFirebaseDb } from "../../../../../../server";
+import type { IssueCategory } from "../BetaPage/BetaPage";
 
 export async function addIssue(
   content: {

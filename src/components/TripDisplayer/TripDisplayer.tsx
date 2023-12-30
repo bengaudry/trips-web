@@ -1,5 +1,5 @@
-import { Trip } from "../../types/types";
-import { capitalizeString } from "../../lib/functions";
+import { Trip } from "@/types";
+import { capitalizeString } from "@/lib/functions";
 
 function convertDuration(min: number | undefined): string {
   if (min === undefined) {

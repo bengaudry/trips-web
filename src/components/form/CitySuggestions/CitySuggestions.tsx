@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { strTruish } from "../../../lib/functions";
+import { strTruish } from "@/lib/functions";
 
 function Location(props: { value: string; onClick?: () => void }) {
   return (

@@ -1,6 +1,6 @@
 import { deleteUser, User } from "firebase/auth";
-import { Cta } from "components";
-import { CurrentUser } from "api";
+import { Cta } from "@/components";
+import { CurrentUser } from "@/api";
 
 export function DeleteAccount() {
   const deleteAccount = () => {

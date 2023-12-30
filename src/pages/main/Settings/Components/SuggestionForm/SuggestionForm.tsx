@@ -3,11 +3,11 @@ import { useState } from "react";
 import { collection, addDoc } from "firebase/firestore";
 import { getFirebaseDb } from "../../../../../../server";
 
-import { strTruish } from "../../../../../lib/functions";
-import { Cta } from "components";
-import { Input, Textarea } from "components/form";
+import { strTruish } from "@/lib/functions";
+import { Cta } from "@/components";
+import { Input, Textarea } from "@/components/form";
 import { toast } from "react-toastify";
-import { CurrentUser } from "api";
+import { CurrentUser } from "@/api";
 
 async function addSuggestion(
   content: { name: string; content: string },

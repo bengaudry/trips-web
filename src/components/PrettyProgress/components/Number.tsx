@@ -1,5 +1,3 @@
-import { MAX_KMS_BEFORE_LICENSE } from "../../../lib/constants";
-
 export function Number(props: {
   nb: 0 | 1500 | 3000;
   active?: boolean;

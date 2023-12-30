@@ -4,10 +4,10 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { getFirebaseAuth } from "../../../../../../server";
 
-import { Cta, Modal, Text } from "components";
-import { Input } from "components/form";
-import { ResetPassword } from "../ResetPassword/ResetPassword";
+import { Cta, Modal, Text } from "@/components";
+import { Input } from "@/components/form";
 import { toast } from "react-toastify";
+import { ResetPassword } from "../ResetPassword/ResetPassword";
 
 export function SignInPage(props: { onRegisterClick: () => void }) {
   const [email, setEmail] = useState("");

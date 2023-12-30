@@ -1,5 +1,5 @@
-import { Trip, StatsData } from "../../../types/types";
-import { MAX_KMS_BEFORE_LICENSE } from "../../constants";
+import { Trip, StatsData } from "@/types";
+import { MAX_KMS_BEFORE_LICENSE } from "@/lib/constants";
 
 export function calculateDataForStats(trips?: Trip[]): StatsData {
   // Define a basic object to return

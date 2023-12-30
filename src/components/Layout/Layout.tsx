@@ -1,6 +1,5 @@
 import { Outlet } from "react-router-dom";
-import { Loader, NavBar, NotStandaloneAlert } from "components";
-import { useState, useEffect } from "react";
+import { Loader, NavBar } from "@/components";
 
 export function Layout({ offline, loaderVisible }: { offline: boolean, loaderVisible: boolean}) {
   return (

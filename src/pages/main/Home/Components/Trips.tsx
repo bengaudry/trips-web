@@ -4,15 +4,15 @@ import { useTranslation } from "react-i18next";
 import { deleteDoc, doc, updateDoc } from "firebase/firestore";
 import { getFirebaseDb } from "../../../../../server";
 
-import { Cta, Modal, Text, TripDisplayer } from "components";
-import { Checkbox } from "components/form";
+import { Cta, Modal, Text, TripDisplayer } from "@/components";
+import { Checkbox } from "@/components/form";
 
-import { toast } from "react-toastify";
 import {
   capitalizeString,
   removeElementAtIndex,
-} from "../../../../lib/functions";
-import { Trip } from "../../../../types/types";
+} from "@/lib/functions";
+import { Trip } from "@/types";
+import { toast } from "react-toastify";
 
 export function Trips(props: {
   data?: Array<Trip>;

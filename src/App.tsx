@@ -1,23 +1,22 @@
 // React routing
-import { BrowserRouter } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { BrowserRouter } from "react-router-dom";
 
 // Styles
-import "./styles/index.css";
 import { onAuthStateChanged } from "firebase/auth";
 import { getFirebaseAuth } from "../server";
+import "./styles/index.css";
 
 // Translations
-import { resources } from "../lang";
 import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
+import { resources } from "../lang";
 
+import { NotStandaloneAlert } from "@/components";
+import { useModal } from "@/hooks/modal";
 import { ToastContainer } from "react-toastify";
-import { Routing } from "Routing";
 import "react-toastify/dist/ReactToastify.css";
-import { useModal } from "hooks/modal";
-import ModalContainer from "components/ModalContainer/ModalContainer";
-import { NotStandaloneAlert } from "./components";
+import { Routing } from "./Routing";
 
 // Change the language of the app when it starts
 var lang = "fr";

@@ -1,11 +1,10 @@
 import { useState } from "react";
 
 import { updateProfile, User } from "firebase/auth";
-import { getFirebaseAuth } from "../../../../../server";
 
-import { Cta, Text } from "components";
-import { Input } from "components/form";
-import { CurrentUser } from "api";
+import { CurrentUser } from "@/api";
+import { Cta, Text } from "@/components";
+import { Input } from "@/components/form";
 
 export function SetUserNameModal(props: {
   setUserNameUnset: (val: boolean) => void;

@@ -3,15 +3,15 @@ import { useTranslation } from "react-i18next";
 
 import { User, updateEmail, updateProfile } from "firebase/auth";
 
-import { Modal, Text } from "components";
+import { Modal, Text } from "@/components";
 import {
   ChangePass as ChangePassModal,
   DeleteAccount as DeleteAccountModal,
   RequestData as RequestDataModal,
 } from "./components";
 import { toast } from "react-toastify";
-import { capitalizeString } from "lib/functions";
-import { CurrentUser } from "api";
+import { capitalizeString } from "@/lib/functions";
+import { CurrentUser } from "@/api";
 
 function Button(props: {
   children: ReactNode;

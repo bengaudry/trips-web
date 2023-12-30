@@ -1,4 +1,3 @@
-import { ReactNode } from "react-markdown/lib/ast-to-react";
 import { Description } from "./Description";
 import { Number } from "./Number";
 

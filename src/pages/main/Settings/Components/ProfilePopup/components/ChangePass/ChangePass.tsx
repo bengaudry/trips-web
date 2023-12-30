@@ -3,9 +3,9 @@ import { useTranslation } from "react-i18next";
 
 import { updatePassword as firebaseUpdatePassword, User } from "firebase/auth";
 
-import { Cta } from "components";
-import { Input } from "components/form";
-import { CurrentUser } from "api";
+import { Cta } from "@/components";
+import { Input } from "@/components/form";
+import { CurrentUser } from "@/api";
 
 export function ChangePass() {
   const [newPass, setNewPass] = useState("");

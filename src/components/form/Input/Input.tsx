@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
-import { capitalizeString } from "../../../lib/functions";
-import { Text } from "components";
+import { capitalizeString } from "@/lib/functions";
+import { Text } from "@/components";
 
 type InputProps = {
   name: string;

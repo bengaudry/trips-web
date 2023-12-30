@@ -1,27 +1,27 @@
+import { CurrentUser } from "@/api";
+import { Cta, Text, TripDisplayer } from "@/components";
+import { MAX_KMS_BEFORE_LICENSE } from "@/lib/constants";
+import { StatsData, Trip } from "@/types";
 import { useState } from "react";
-import { NavLink } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { Cta, Text, TripDisplayer } from "components";
-import { StatPill } from "./StatPill";
-import { ReachedMaxAlert } from "./ReachedMaxAlert";
+import { NavLink } from "react-router-dom";
 import { DrivingSteps } from "./DrivingSteps";
 import { PremiumPopup } from "./PremiumPopup";
-import { MAX_KMS_BEFORE_LICENSE } from "../../../../lib/constants";
-import { StatsData, Trip } from "../../../../types/types";
-import { CurrentUser } from "api";
+import { ReachedMaxAlert } from "./ReachedMaxAlert";
+import { StatPill } from "./StatPill";
 
 export function Stats(props: {
   allTrips?: Trip[];
   setPanelFn: CallableFunction;
   data: StatsData;
 }) {
+  const { t } = useTranslation();
   const [premiumPopupVisible, setPremiumPopupVisible] = useState(false);
 
   const getKmsPercent = (): number => {
     return Math.floor((props.data.totalKms / MAX_KMS_BEFORE_LICENSE) * 100);
   };
 
-  const { t } = useTranslation();
   const { countryside, expressway, highway, city } = props.data.tripsByRoadType;
   
   return (

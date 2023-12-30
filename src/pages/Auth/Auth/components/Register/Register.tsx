@@ -1,17 +1,16 @@
-import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
-
+import { useNavigate } from "react-router-dom";
+import { CurrentUser } from "@/api";
+import { Cta, Text } from "@/components";
+import { Input } from "@/components/form";
 import {
   User,
   createUserWithEmailAndPassword,
   sendEmailVerification,
   updateProfile,
 } from "firebase/auth";
-import { Notification, Cta, Text } from "components";
-import { Input } from "components/form";
-import { getFirebaseAuth } from "../../../../../../server";
 import { toast } from "react-toastify";
-import { CurrentUser } from "api";
+import { getFirebaseAuth } from "../../../../../../server";
 
 export function RegisterPage(props: { onSignInClick: () => void }) {
   const [email, setEmail] = useState("");

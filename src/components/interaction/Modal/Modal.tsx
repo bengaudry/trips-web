@@ -3,10 +3,8 @@ import {
   Dispatch,
   ReactNode,
   SetStateAction,
-  useEffect,
-  useState,
 } from "react";
-import { Text } from "../../texts";
+import { Text } from "@/components/texts";
 
 interface ModalProps {
   visible?: boolean;

@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next";
 import { NavLink } from "react-router-dom";
-import { Text } from "../../texts";
+import { Text } from "@/components/texts";
 
 type NotStandaloneAlertProps = {
   shown: boolean;
