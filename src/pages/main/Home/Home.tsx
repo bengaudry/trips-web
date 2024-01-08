@@ -91,16 +91,10 @@ export function Home() {
 
   const memoizedData = useMemo(() => trips, [trips]);
   const allTrips = memoizedData ? memoizedData : trips ? trips : [];
-
-  const testModal = () => {
-    openModal(<div>Contenu personnalisé de la modal pour cette page</div>);
-  };
-
+  
   return (
     <PageLayout key="home">
       <NotVerifiedEmailPopup className="mb-4" />
-
-      <button onClick={testModal}>Test modal</button>
 
       {userNameUnset && (
         <Modal

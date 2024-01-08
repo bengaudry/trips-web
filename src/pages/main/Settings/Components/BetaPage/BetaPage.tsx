@@ -47,6 +47,18 @@ export function BetaPage() {
           <i className="fi fi-rr-bulb translate-y-0.5" />
           Submit a suggestion
         </button>
+        <a
+          href="https://github.com/bengaudry/trips-web"
+          target="_blank"
+          onClick={() => {
+            setModalContent("suggestion");
+            setModalShown(true);
+          }}
+          className="w-full px-4 py-2 bg-black/40 md:hover:bg-black/60 text-white transition-colors duration-300 rounded-full flex flex-row items-center gap-2 text-lg font-medium"
+        >
+          <img src="/github-mark-white.svg" className="h-5" />
+          See on Github
+        </a>
       </div>
 
       <Modal
