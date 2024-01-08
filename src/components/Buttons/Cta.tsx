@@ -34,9 +34,11 @@ export function Cta(props: CtaProps) {
       disabled={props.disabled || props.loading}
       onClick={(e) => {
         if (props.onClick) props.onClick(e);
-      }} 
+      }}
     >
-      {props.loading && <i className="fi fi-rr-loading block text-md translate-y-0.5" />}
+      {props.loading && (
+        <i className="fi fi-rr-loading block text-md translate-y-0.5" />
+      )}
       {props.children}
     </button>
   ) : (

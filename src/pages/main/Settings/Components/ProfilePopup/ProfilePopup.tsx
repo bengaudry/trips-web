@@ -47,9 +47,7 @@ export function ProfilePopup() {
   const [currModal, setCurrModal] = useState<Modals>("ChangePass");
   const [modalShown, setModalShown] = useState(false);
 
-  const [email, setEmail] = useState(
-    CurrentUser.getEmail() as string
-  );
+  const [email, setEmail] = useState(CurrentUser.getEmail() as string);
   const [userName, setUserName] = useState(
     CurrentUser.getDisplayName() as string
   );
@@ -68,7 +66,13 @@ export function ProfilePopup() {
   };
 
   const handleEditProfile = () => {
-    if (!email || email === "" || !userName || userName === "" || !CurrentUser.isLoggedIn()) {
+    if (
+      !email ||
+      email === "" ||
+      !userName ||
+      userName === "" ||
+      !CurrentUser.isLoggedIn()
+    ) {
       return toast("Please fill in all fields correctly", { type: "warning" });
     }
 

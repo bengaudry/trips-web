@@ -14,7 +14,7 @@ import {
   NotVerifiedEmailPopup,
   PageLayout,
   SlidingPage,
-  Text
+  Text,
 } from "@/components";
 import { BetaPage } from "./Components/BetaPage/BetaPage";
 import { LangPopup } from "./Components/LangPopup/LangPopup";
@@ -115,7 +115,6 @@ export function Settings() {
           <DrivingSchool />
         </div>
       )} */}
-  
 
       <Text.Secondary className="w-full text-center">
         App version : {APP_VERSION}

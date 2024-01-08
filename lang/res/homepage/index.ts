@@ -1,4 +1,4 @@
-import { MAX_KMS_BEFORE_LICENSE } from "@/lib/constants";
+import { MAX_KMS_BEFORE_LICENSE } from "../../../src/lib/constants";
 
 export const homepage = {
   en: {

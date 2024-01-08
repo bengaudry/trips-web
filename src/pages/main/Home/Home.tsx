@@ -13,7 +13,7 @@ import {
   NotVerifiedEmailPopup,
   PageLayout,
   PanelSwitcher,
-  Text
+  Text,
 } from "@/components";
 import { useModal } from "@/hooks/modal";
 import { AnimatePresence, motion } from "framer-motion";

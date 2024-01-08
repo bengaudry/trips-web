@@ -1,9 +1,4 @@
-import {
-  Component,
-  Dispatch,
-  ReactNode,
-  SetStateAction,
-} from "react";
+import { Component, Dispatch, ReactNode, SetStateAction } from "react";
 import { Text } from "@/components/texts";
 
 interface ModalProps {

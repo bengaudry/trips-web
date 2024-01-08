@@ -16,9 +16,9 @@ export const landing = {
       inputPlaceholder: "Your email",
       errors: {
         emailFormat: "The email is not in a correct format",
-        alreadyUsed: "You are already in the waitlist ! Wait a liiitle more :)"
-      }
-    }
+        alreadyUsed: "You are already in the waitlist ! Wait a liiitle more :)",
+      },
+    },
   },
   fr: {
     header: { signInBtnContent: "Se connecter" },
@@ -37,8 +37,9 @@ export const landing = {
       inputPlaceholder: "Votre email",
       errors: {
         emailFormat: "Le format de l'email est incorrect",
-        alreadyUsed: "Vous êtes déjà dans la liste d'attente ! Soyez encore un peu patient :)"
-      }
-    }
+        alreadyUsed:
+          "Vous êtes déjà dans la liste d'attente ! Soyez encore un peu patient :)",
+      },
+    },
   },
 };

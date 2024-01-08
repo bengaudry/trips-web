@@ -1,3 +1,3 @@
-export function Premium () {
-  return <></>
+export function Premium() {
+  return <></>;
 }

@@ -1,6 +1,6 @@
-import { useModal } from 'hooks';
-import React, { ReactNode, useEffect } from 'react';
-import ReactDOM from 'react-dom';
+import { useModal } from "hooks";
+import React, { ReactNode, useEffect } from "react";
+import ReactDOM from "react-dom";
 
 interface ModalContainerProps {
   isOpen: boolean;
@@ -8,10 +8,14 @@ interface ModalContainerProps {
   children: ReactNode;
 }
 
-const ModalContainer: React.FC<ModalContainerProps> = ({ isOpen, onClose, children }) => {
-  const { modalContent } = useModal()
-  const modalRoot = document.getElementById('modal-root') as HTMLElement;
-  const modalWrapper = document.createElement('div');
+const ModalContainer: React.FC<ModalContainerProps> = ({
+  isOpen,
+  onClose,
+  children,
+}) => {
+  const { modalContent } = useModal();
+  const modalRoot = document.getElementById("modal-root") as HTMLElement;
+  const modalWrapper = document.createElement("div");
 
   useEffect(() => {
     modalRoot.appendChild(modalContent);

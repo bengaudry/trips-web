@@ -7,12 +7,11 @@ import { getFirebaseDb } from "../../../../server";
 export async function addTrip(content: Trip) {
   const tripsCollection = collection(getFirebaseDb(), "/trips");
 
-  return await addDoc(tripsCollection, content)
-    .catch((err) => {
-      toast(`Error while adding trip to database. (Code: ${err.code})`, {
-        type: "error",
-      });
+  return await addDoc(tripsCollection, content).catch((err) => {
+    toast(`Error while adding trip to database. (Code: ${err.code})`, {
+      type: "error",
     });
+  });
 }
 
 export function checkTripBeforeSending(content: Trip) {

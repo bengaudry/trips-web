@@ -23,7 +23,7 @@ export function Stats(props: {
   };
 
   const { countryside, expressway, highway, city } = props.data.tripsByRoadType;
-  
+
   return (
     <div>
       <ReachedMaxAlert />

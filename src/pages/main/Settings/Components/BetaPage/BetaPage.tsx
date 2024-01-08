@@ -24,8 +24,7 @@ export function BetaPage() {
     <>
       <Text.Title>Beta</Text.Title>
       <Text.Secondary className="text-lg">
-        Welcome to your beta tester space{" "}
-        {CurrentUser.getDisplayName()} !
+        Welcome to your beta tester space {CurrentUser.getDisplayName()} !
       </Text.Secondary>
       <div className="flex flex-col gap-3 py-6">
         <button

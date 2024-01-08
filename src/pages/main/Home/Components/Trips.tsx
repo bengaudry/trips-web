@@ -7,10 +7,7 @@ import { getFirebaseDb } from "../../../../../server";
 import { Cta, Modal, Text, TripDisplayer } from "@/components";
 import { Checkbox } from "@/components/form";
 
-import {
-  capitalizeString,
-  removeElementAtIndex,
-} from "@/lib/functions";
+import { capitalizeString, removeElementAtIndex } from "@/lib/functions";
 import { Trip } from "@/types";
 import { toast } from "react-toastify";
 

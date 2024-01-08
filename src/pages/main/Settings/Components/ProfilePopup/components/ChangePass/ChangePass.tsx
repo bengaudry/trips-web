@@ -15,10 +15,9 @@ export function ChangePass() {
 
   const updatePassword = () => {
     if (newPass === newPassConfirm) {
-      firebaseUpdatePassword(
-        CurrentUser.getUser() as User,
-        newPass
-      ).catch((err) => alert(err));
+      firebaseUpdatePassword(CurrentUser.getUser() as User, newPass).catch(
+        (err) => alert(err)
+      );
     }
   };
 

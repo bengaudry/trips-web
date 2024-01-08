@@ -50,10 +50,7 @@ export function ShowCertificate() {
 
   // Fetches in firestore where the uid equals the users id
   const fetchData = async () => {
-    let q = query(
-      certificatesCol,
-      where("uid", "==", CurrentUser.getUid())
-    );
+    let q = query(certificatesCol, where("uid", "==", CurrentUser.getUid()));
     await getDocs(q)
       .then((val) => {
         // fetched data
