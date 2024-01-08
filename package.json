@@ -10,7 +10,7 @@
     "build": "tsc && vite build",
     "preview": "vite preview",
     "test": "vitest",
-    "deploy": " node ./updateAppVersion.mjs && yarn run build && firebase deploy --only hosting:tripsapp --project trips-5bb9a",
+    "deploy": " node ./updateAppVersion.mjs && yarn run build && firebase deploy --only hosting:tripsapp --project trips-5bb9a && git add . && git commit -m \"Deploy : New deployment on server\"",
     "pregit": "yarn run format && git add . && cls && echo Commit now",
     "format": "prettier --write ./lang ./public ./server ./src"
   },
