@@ -16,13 +16,12 @@ export function PrettyProgress(props: { percent: number; className?: string }) {
         <div className="w-full flex flex-row justify-between absolute">
           <Number active desc="Préalable" nb={0} />
           <Number
-            isActivating={props.percent >= 50 && props.percent < 100}
-            active={props.percent === 100}
+            active={props.percent >= 50}
             desc="1er rdv"
             nb={(MAX_KMS_BEFORE_LICENSE / 2) as 1500}
           />
           <Number
-            isActivating={props.percent === 100}
+            active={props.percent >= 100}
             desc="Permis"
             nb={MAX_KMS_BEFORE_LICENSE}
           />
