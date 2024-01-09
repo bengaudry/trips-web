@@ -7,7 +7,6 @@ export { PageLayout } from "./Layout/PageLayout";
 export { Cta } from "./Buttons/Cta";
 export { BackButton } from "./Buttons/BackButton/BackButton";
 export { Modal } from "./interaction/Modal/Modal";
-export { PrettyProgress } from "./PrettyProgress/PrettyProgress";
 export { PanelSwitcher } from "./interaction/PanelSwitcher/PanelSwitcher";
 export { NotVerifiedEmailPopup } from "./interaction/NotVerifiedEmail/NotVerifiedEmail";
 export { Notification } from "./interaction/Notification/Notification";
