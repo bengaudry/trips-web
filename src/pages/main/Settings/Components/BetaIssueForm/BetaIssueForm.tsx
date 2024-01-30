@@ -14,6 +14,7 @@ export async function addIssue(
     otherCategory?: string;
     title: string;
     description: string;
+    fixed: false;
     issueUrl?: string;
   },
   onSuccess: () => void
@@ -55,6 +56,7 @@ export function BetaIssueForm(props: { onSubmit: () => void }) {
               : issueCategory,
           title: issueTitle,
           description: issueDesc,
+          fixed: false,
           issueUrl: issueUrl,
         },
         props.onSubmit

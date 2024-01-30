@@ -13,7 +13,7 @@ export function Landing() {
   if (isStandaloneMode()) {
     return (
       <div className="p-8 pb-16 absolute bottom-0 dark:bg-grayblue-800 rounded-t-3xl w-full">
-        <h1 className="text-4xl font-semibold text-center dark:text-white">
+        <h1 className="text-4xl font-semibold text-center dark:text-grayblue-100">
           Trips
         </h1>
         <p className="text-lg text-center text-grayblue-500 mt-4">
@@ -37,7 +37,7 @@ export function Landing() {
         onClose={() => setJoinBetaPopupShown(false)}
       />
 
-      <header className="backdrop-blur-md bg-[#ffffff20] text-white fixed z-40 top-0 w-screen left-0 right-0 border-b border-b-[#ffffff50]">
+      <header className="backdrop-blur-md bg-[#ffffff20] text-grayblue-100 fixed z-40 top-0 w-screen left-0 right-0 border-b border-b-[#ffffff50]">
         <div className="max-w- flex flex-row justify-between items-center px-10 py-2">
           <div>
             <img
@@ -54,7 +54,7 @@ export function Landing() {
       </header>
 
       <section
-        className="bg-contain bg-center min-h-[90vh] grid place-content-center pb-12 px-10 text-white"
+        className="bg-contain bg-center min-h-[90vh] grid place-content-center pb-12 px-10 text-grayblue-100"
         style={{
           background: 'url("/gradient.png")',
         }}
@@ -67,7 +67,7 @@ export function Landing() {
         </p>
         <button
           onClick={() => setJoinBetaPopupShown(true)}
-          className="bg-blue-600 text-white md:hover:bg-brand-800 transition-colors duration-300 shadow-xl px-6 py-2 rounded-full mt-4 w-max"
+          className="bg-blue-600 text-grayblue-100 md:hover:bg-brand-800 transition-colors duration-300 shadow-xl px-6 py-2 rounded-full mt-4 w-max"
         >
           {t("landing.body.joinBetaBtnContent")}
         </button>

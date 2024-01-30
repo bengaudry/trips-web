@@ -17,14 +17,14 @@ export type CtaProps<T = "button" | "link"> = {
 export function Cta(props: CtaProps) {
   const CtaStyle = `${
     props.color === "danger"
-      ? "bg-red-600 md:hover:bg-red-800  text-white"
+      ? "bg-red-600 md:hover:bg-red-800 text-grayblue-100"
       : props.color === "warning"
-      ? "bg-orange-600 md:hover:bg-orange-800  text-white"
+      ? "bg-orange-600 md:hover:bg-orange-800  text-grayblue-100"
       : props.color === "gradient"
-      ? "bg-gradient-to-r from-[#DA22FF] to-[#9733EE]  text-white"
+      ? "bg-gradient-to-r from-[#DA22FF] to-[#9733EE]  text-grayblue-100"
       : props.color === "white"
       ? "bg-white md:hover:bg-gray-100 text-black"
-      : " text-white bg-brand-600 md:hover:bg-brand-800"
+      : " text-grayblue-100 bg-brand-600 md:hover:bg-brand-800"
   }  font-semibold w-full rounded-full px-8 p-4 flex items-center justify-center gap-4 transition-colors transition-opacity duration-300 disabled:bg-gray-400 dark:disabled:bg-gray-800 dark:disabled:text-neutral-400`;
 
   return props.type === "button" ? (

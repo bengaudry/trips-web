@@ -34,7 +34,7 @@ export function NotStandaloneAlert(props: NotStandaloneAlertProps) {
         {props.shown}
         <NavLink
           to="/install"
-          className="flex items-center justify-center gap-2 w-full bg-brand-500 text-white px-4 py-1 rounded-full"
+          className="flex items-center justify-center gap-2 w-full bg-brand-500 text-grayblue-100 px-4 py-1 rounded-full"
           onClick={() => props.setShown(false)}
         >
           {t("popups.notStandalone.buttonContent")}

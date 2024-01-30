@@ -5,7 +5,7 @@ export function SecondaryText(props: {
   className?: string;
 }) {
   return (
-    <p className={`text-neutral-400 dark:text-grayblue-400 ${props.className}`}>
+    <p className={`text-neutral-400 dark:text-grayblue-200 ${props.className}`}>
       {props.children}
     </p>
   );

@@ -48,7 +48,7 @@ export function Select(props: MultiSelectProps) {
             style={{
               scrollSnapAlign: index === 0 ? "start" : "end",
             }}
-            className={`grid place-content-center py-6 border-2 rounded-lg transition-colors text-black dark:text-white ${
+            className={`grid place-content-center py-6 border-2 rounded-lg transition-colors text-black dark:text-grayblue-100 ${
               selectedOptions.includes(index)
                 ? " md:md:hover:bg-neutral-100 border-brand-300 dark:border-brand-500 bg-brand-100/10 text-brand-500 md:dark:md:hover:bg-brand-500/10 dark:bg-brand-500/10"
                 : "border-neutral-100 md:md:hover:bg-neutral-100 dark:border-grayblue-800 md:dark:md:hover:bg-grayblue-800"

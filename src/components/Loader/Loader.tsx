@@ -13,7 +13,7 @@ export function Loader() {
     <div className="fixed inset-0 w-screen h-screen bg-neutral-100 dark:bg-black z-[70] flex flex-col justify-between items-center py-32">
       <div />
       <div className="flex flex-col items-center gap-2 text-center">
-        <i className="fi fi-rr-loading loader text-white"></i>
+        <i className="fi fi-rr-loading loader text-grayblue-100"></i>
         <p>Loading...</p>
       </div>
 
@@ -27,7 +27,7 @@ export function Loader() {
         </p>
         <button
           onClick={() => window.location.reload()}
-          className="bg-brand-500 text-white px-6 py-1 rounded-full mx-auto"
+          className="bg-brand-500 text-grayblue-100 px-6 py-1 rounded-full mx-auto"
         >
           Refresh
         </button>

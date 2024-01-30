@@ -24,7 +24,7 @@ function Button(props: {
     <button
       className={`${
         props.danger
-          ? "text-red-500  md:hover:bg-red-500 md:hover:text-white dark:md:hover:text-grayblue-800"
+          ? "text-red-500  md:hover:bg-red-500 md:hover:text-grayblue-100 dark:md:hover:text-grayblue-800"
           : "text-grayblue-500 md:hover:text-black dark:md:hover:text-grayblue-200  dark:bg-grayblue-800"
       } bg-neutral-100 dark:bg-grayblue-800 w-full text-left  transition-colors duration-300 px-4 py-2`}
       onClick={() => {
@@ -118,7 +118,9 @@ export function ProfilePopup() {
             type="email"
             autoComplete="false"
             className={`${
-              editMode ? "text-black dark:text-white" : "dark:text-grayblue-500"
+              editMode
+                ? "text-black dark:text-grayblue-100"
+                : "dark:text-grayblue-500"
             } pl-10 bg-transparent border-2 disabled:border-neutral-300/40 dark:disabled:border-grayblue-700/40 border-neutral-300 dark:border-grayblue-700 rounded-xl py-2 w-full focus:border-brand-300 dark:focus:border-brand-500 outline-none transition-all duration-300`}
             value={email}
             onChange={(e) => setEmail(e.target.value)}
@@ -132,7 +134,9 @@ export function ProfilePopup() {
             type="text"
             autoComplete="false"
             className={`${
-              editMode ? "text-black dark:text-white" : "dark:text-grayblue-500"
+              editMode
+                ? "text-black dark:text-grayblue-100"
+                : "dark:text-grayblue-500"
             } pl-10 bg-transparent border-2 disabled:border-neutral-300/40 dark:disabled:border-grayblue-700/40 border-neutral-300 dark:border-grayblue-700 rounded-xl py-2 w-full focus:border-brand-300 dark:focus:border-brand-500 outline-none transition-all duration-300`}
             value={userName}
             onChange={(e) => setUserName(e.target.value)}
@@ -155,7 +159,7 @@ export function ProfilePopup() {
 
           <button
             onClick={handleEditProfile}
-            className={`bg-brand-400 w-full overflow-hidden border-brand-400 md:hover:bg-brand-500 md:hover:border-brand-500 text-white grid rounded-full pr-6 pl-5 transition-all origin-left duration-200 ${
+            className={`bg-brand-400 w-full overflow-hidden border-brand-400 md:hover:bg-brand-500 md:hover:border-brand-500 text-grayblue-100 grid rounded-full pr-6 pl-5 transition-all origin-left duration-200 ${
               editMode
                 ? "grid-rows-[1fr] py-2 border-2"
                 : "grid-rows-[0fr] py-0 border-none"

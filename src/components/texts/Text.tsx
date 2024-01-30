@@ -9,13 +9,13 @@ export class Text {
   constructor() {}
 
   public static Secondary = (props: TextProps) => (
-    <p className={`text-neutral-400 dark:text-grayblue-400 ${props.className}`}>
+    <p className={`text-neutral-400 dark:text-grayblue-200 ${props.className}`}>
       {props.children}
     </p>
   );
 
   public static Plain = (props: TextProps) => {
-    <p className={`text-black dark:text-white ${props.className}`}>
+    <p className={`text-black dark:text-grayblue-100 ${props.className}`}>
       {props.children}
     </p>;
   };

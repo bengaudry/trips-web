@@ -84,7 +84,7 @@ export function RegisterPage(props: { onSignInClick: () => void }) {
           Already have an account ?{" "}
           <button
             type="button"
-            className="text-brand-400 dark:text-white"
+            className="text-brand-400 dark:text-grayblue-100"
             onClick={props.onSignInClick}
           >
             Sign In

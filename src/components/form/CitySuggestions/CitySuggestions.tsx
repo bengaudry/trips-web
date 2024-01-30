@@ -4,7 +4,7 @@ import { strTruish } from "@/lib/functions";
 function Location(props: { value: string; onClick?: () => void }) {
   return (
     <button
-      className="block text-left px-4 py-0.5 text-neutral-500 dark:text-grayblue-400 transition-colors duration-100 md:hover:bg-gray-100 dark:md:hover:bg-grayblue-700 dark:md:hover:text-white"
+      className="block text-left px-4 py-0.5 text-neutral-500 dark:text-grayblue-400 transition-colors duration-100 md:hover:bg-gray-100 dark:md:hover:bg-grayblue-700 dark:md:hover:text-grayblue-100"
       onClick={props.onClick}
     >
       {props.value}
@@ -59,7 +59,7 @@ export function CitySuggestions(props: {
             <span className="px-4 font-semibold mt-2">Nearby</span>
             <span className="px-4 font-semibold mt-2">Recent</span>
             <span
-              className="block px-4 py-0.5 text-grayblue-400 transition-colors duration-100 md:hover:bg-gray-100 dark:md:hover:bg-grayblue-700 md:hover:text-white"
+              className="block px-4 py-0.5 text-grayblue-400 transition-colors duration-100 md:hover:bg-gray-100 dark:md:hover:bg-grayblue-700 md:hover:text-grayblue-100"
               onClick={() => {
                 props.onChange("Feurs");
               }}

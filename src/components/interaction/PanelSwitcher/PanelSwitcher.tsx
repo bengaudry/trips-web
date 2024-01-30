@@ -28,7 +28,7 @@ export function PanelSwitcher(props: {
           <span
             className={`${
               props.current === index
-                ? "dark:text-white"
+                ? "dark:text-grayblue-100"
                 : "text-neutral-400 dark:text-grayblue-400"
             } transition-colors font-medium duration-500`}
           >

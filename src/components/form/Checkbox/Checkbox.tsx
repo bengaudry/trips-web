@@ -12,7 +12,7 @@ export function Checkbox(props: {
         htmlFor="round-trip"
         className={`${
           props.checked
-            ? "dark:text-white"
+            ? "dark:text-grayblue-100"
             : "text-neutral-400 dark:text-grayblue-500"
         } transition-colors duration-300 pointer-events-none font-medium`}
       >

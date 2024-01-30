@@ -101,7 +101,7 @@ export function JoinBetaPopup({
         onClick={onClose}
         className="absolute z-40 w-full h-screen md:hover:cursor-default"
       />
-      <button className="fixed top-4 right-4 md:hover:cursor-pointer text-white">
+      <button className="fixed top-4 right-4 md:hover:cursor-pointer text-grayblue-100">
         <i className="fi fi-rr-cross"></i>
       </button>
 
@@ -110,7 +110,7 @@ export function JoinBetaPopup({
           opened ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
         } flex flex-col z-50 gap-4 max-w-sm lg:max-w-none transition-all duration-500 delay-300 px-6`}
       >
-        <h2 className="text-3xl lg:text-5xl font-semibold text-white">
+        <h2 className="text-3xl lg:text-5xl font-semibold text-grayblue-100">
           {t("landing.betaModal.title")}
         </h2>
         <div

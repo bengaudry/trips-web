@@ -35,7 +35,9 @@ export function Stats(props: {
 
       <div className="flex flex-col gap-4 pt-2 pb-8">
         {props.data.totalKms > 0 && (
-          <section className="rounded-xl h-max py-6 px-8 text-white bg-gradient-to-tr from-sky-600 to-indigo-600">
+          <section
+            className={`rounded-xl h-max py-6 px-8 text-grayblue-100 bg-gradient-to-tr from-sky-600 to-indigo-600 bg-[url("/gradient.png")] bg-center bg-cover`}
+          >
             <div className="grid grid-cols-3 items-center justify-between">
               <div className="flex flex-col items-center">
                 <span className="text-3xl font-bold">
@@ -110,7 +112,7 @@ export function Stats(props: {
           )
         ) : (
           <div className="bg-gradient-to-r from-[#DA22FF] to-[#9733EE] p-6 rounded-lg flex flex-col gap-4">
-            <p className="text-lg text-white">
+            <p className="text-lg text-grayblue-100">
               Your 10 days of free trial have expired. To see your stats again,
               please
             </p>

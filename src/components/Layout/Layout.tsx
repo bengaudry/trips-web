@@ -9,7 +9,7 @@ export function Layout({
   loaderVisible: boolean;
 }) {
   return (
-    <div className="App dark:text-white dark:bg-grayblue-900 mb-20 mx-auto lg:pl-72">
+    <div className="App dark:text-grayblue-100 dark:bg-grayblue-900 mb-20 mx-auto lg:pl-72">
       {loaderVisible && <Loader />}
 
       {offline && (
