@@ -195,11 +195,11 @@ export function Add() {
                 required
               >
                 <CitySuggestions
-                  location={from}
+                  searchInput={from}
                   onChange={(value) => {
                     setFrom(value);
                   }}
-                  shown={fromInputFocused && from.length >= 3}
+                  shown={fromInputFocused}
                 />
               </Input>
               <Input
@@ -222,11 +222,11 @@ export function Add() {
                 required
               >
                 <CitySuggestions
-                  location={to}
+                  searchInput={to}
                   onChange={(value) => {
                     setTo(value);
                   }}
-                  shown={toInputFocused && to.length >= 3}
+                  shown={toInputFocused}
                 />
               </Input>
             </section>

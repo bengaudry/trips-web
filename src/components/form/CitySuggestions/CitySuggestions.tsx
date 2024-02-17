@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { strTruish } from "@/lib/functions";
+import { Trip } from "@/types";
 
 function Location(props: { value: string; onClick?: () => void }) {
   return (
@@ -13,17 +14,36 @@ function Location(props: { value: string; onClick?: () => void }) {
 }
 
 export function CitySuggestions(props: {
-  location: string;
+  searchInput: string;
   onChange: (val: string) => void;
   shown?: boolean;
   className?: string;
 }) {
-  const [citySuggestions, setCitySuggestions] = useState([]);
+  const [cityAutocompletion, setCityAutocompletion] = useState([]);
+  const [cityRecentSuggestions, setCityRecentSuggestions] = useState<string[]>(
+    []
+  );
+
+  const fetchRecentTowns = () => {
+    const local = localStorage.getItem("cached-trips-data");
+
+    if (local) {
+      const storedTrips: Array<Trip> | undefined = JSON.parse(local);
+      if (storedTrips) {
+        setCityRecentSuggestions([
+          storedTrips[0].from ?? "",
+          storedTrips[0].to ?? "",
+          storedTrips[1].from ?? "",
+          storedTrips[1].to ?? "",
+        ]);
+      }
+    }
+  };
 
   const fetchCitySuggestions = async () => {
-    if (!strTruish(props.location)) return;
+    if (!strTruish(props.searchInput)) return;
 
-    const url = `https://api-adresse.data.gouv.fr/search/?q=${props.location}&limit=5&type=municipality`;
+    const url = `https://api-adresse.data.gouv.fr/search/?q=${props.searchInput}&limit=5&type=municipality`;
     const options = {
       method: "GET",
     };
@@ -31,17 +51,19 @@ export function CitySuggestions(props: {
     try {
       const response = await fetch(url, options);
       const result = await response.text();
-      setCitySuggestions(JSON.parse(result).features);
+      setCityAutocompletion(JSON.parse(result).features);
     } catch (error) {
       console.error(error);
     }
+
+    fetchRecentTowns();
   };
 
   useEffect(() => {
-    if (props.location.length >= 3) {
+    if (props.searchInput.length >= 3) {
       fetchCitySuggestions();
     }
-  }, [props.location]);
+  }, [props.searchInput]);
 
   return (
     <div
@@ -54,29 +76,28 @@ export function CitySuggestions(props: {
       }`}
     >
       <div className="bg-white dark:bg-grayblue-800 border border-grayblue-600 rounded-lg py-2 flex flex-col max-h-44 overflow-y-scroll">
-        {props.location.length < 3 ? (
+        {props.searchInput.length < 3 && cityRecentSuggestions.length > 0 ? (
           <>
             <span className="px-4 font-semibold mt-2">Nearby</span>
-            <span className="px-4 font-semibold mt-2">Recent</span>
-            <span
-              className="block px-4 py-0.5 text-grayblue-400 transition-colors duration-100 md:hover:bg-gray-100 dark:md:hover:bg-grayblue-700 md:hover:text-grayblue-100"
-              onClick={() => {
-                props.onChange("Feurs");
-              }}
-            >
-              Feurs
-            </span>
+            <div>
+              <span className="px-4 font-semibold">Recent</span>
+              {cityRecentSuggestions.map((city) => (
+                <Location value={city} onClick={() => props.onChange(city)} />
+              ))}
+            </div>
           </>
         ) : (
-          <>
+          <div>
             <span className="px-4 font-semibold">Based on your search</span>
-            {citySuggestions.map((city: { properties: { label: string } }) => {
-              const name = city.properties.label;
-              return (
-                <Location value={name} onClick={() => props.onChange(name)} />
-              );
-            })}
-          </>
+            {cityAutocompletion.map(
+              (city: { properties: { label: string } }) => {
+                const name = city.properties.label;
+                return (
+                  <Location value={name} onClick={() => props.onChange(name)} />
+                );
+              }
+            )}
+          </div>
         )}
       </div>
     </div>
