@@ -14,11 +14,11 @@ export function SortMostUsedDestinations(
     console.log("trip", trip);
 
     if (trip.from) {
-      destinations.push(trip.from.replaceAll("-", "").toLowerCase());
+      destinations.push(trip.from.replaceAll("-", " ").toLowerCase());
     }
 
     if (trip.to) {
-      destinations.push(trip.to.replaceAll("-", "").toLowerCase());
+      destinations.push(trip.to.replaceAll("-", " ").toLowerCase());
     }
   }
 
