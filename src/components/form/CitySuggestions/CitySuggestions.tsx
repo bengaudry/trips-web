@@ -6,7 +6,7 @@ import { SortMostUsedDestinations } from "@/lib/functions/sortDestinations";
 function Location(props: { value: string; onClick?: () => void }) {
   return (
     <button
-      className="block w-full text-left px-4 py-0.5 text-neutral-500 dark:text-grayblue-400 transition-colors duration-100 md:hover:bg-gray-100 dark:md:hover:bg-grayblue-700 dark:md:hover:text-grayblue-100"
+      className="block normal-case w-full text-left px-4 py-0.5 text-neutral-500 dark:text-grayblue-400 transition-colors duration-100 md:hover:bg-gray-100 dark:md:hover:bg-grayblue-700 dark:md:hover:text-grayblue-100"
       onClick={props.onClick}
     >
       {props.value}
