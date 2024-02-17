@@ -7,10 +7,11 @@ import type { OtherOptionsT } from "./components";
 import { OtherOptions } from "./components";
 
 import { CurrentUser } from "@/api";
-import { addTrip } from "@/lib/functions";
+import { addTrip, sortByOccurencesNumber } from "@/lib/functions";
 import { Weather } from "@/types";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
+import { SortMostUsedDestinations } from "@/lib/functions/sortDestinations";
 
 const getCurrentTime = (): string => {
   const now = new Date();
