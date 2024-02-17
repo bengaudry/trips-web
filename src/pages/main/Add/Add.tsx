@@ -270,7 +270,7 @@ export function Add() {
         <Cta
           type="button"
           btnType="submit"
-          className="mt-8 sticky bottom-6 shadow-2xl shadow-brand-200/70 dark:shadow-grayblue-900 lg:bottom-8"
+          className="mt-8 sticky bottom-6 lg:bottom-8"
           disabled={!allFieldsFilled()}
           loading={addTripPending}
           onClick={() => {

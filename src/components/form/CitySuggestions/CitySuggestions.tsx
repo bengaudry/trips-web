@@ -43,63 +43,79 @@ export function CitySuggestions(props: {
   const fetchCitySuggestions = async () => {
     if (!strTruish(props.searchInput)) return;
 
-    const url = `https://api-adresse.data.gouv.fr/search/?q=${props.searchInput}&limit=5&type=municipality`;
-    const options = {
-      method: "GET",
-    };
+    if (props.searchInput.length >= 3) {
+      const url = `https://api-adresse.data.gouv.fr/search/?q=${props.searchInput}&limit=5&type=municipality`;
+      const options = {
+        method: "GET",
+      };
 
-    try {
-      const response = await fetch(url, options);
-      const result = await response.text();
-      setCityAutocompletion(JSON.parse(result).features);
-    } catch (error) {
-      console.error(error);
+      try {
+        const response = await fetch(url, options);
+        const result = await response.text();
+        setCityAutocompletion(JSON.parse(result).features);
+      } catch (error) {
+        console.error(error);
+      }
     }
 
     fetchRecentTowns();
   };
 
   useEffect(() => {
-    if (props.searchInput.length >= 3) {
-      fetchCitySuggestions();
-    }
+    fetchCitySuggestions();
+  }, []);
+
+  useEffect(() => {
+    fetchCitySuggestions();
   }, [props.searchInput]);
 
-  return (
-    <div
-      className={`${
-        props.className
-      } absolute z-30 top-full left-0 w-full h-max pt-2 ${
-        props.shown
-          ? "opacity-1 pointer-events-auto"
-          : "opacity-0 pointer-events-none"
-      }`}
-    >
-      <div className="bg-white dark:bg-grayblue-800 border border-grayblue-600 rounded-lg py-2 flex flex-col max-h-44 overflow-y-scroll">
-        {props.searchInput.length < 3 && cityRecentSuggestions.length > 0 ? (
+  if (cityRecentSuggestions.length > 0 || cityAutocompletion.length > 0) {
+    return (
+      <div
+        className={`${
+          props.className
+        } absolute z-30 top-full left-0 w-full h-max pt-2 ${
+          props.shown
+            ? "opacity-1 pointer-events-auto"
+            : "opacity-0 pointer-events-none"
+        }`}
+      >
+        <div className="bg-white dark:bg-grayblue-800 border border-grayblue-600 rounded-lg py-2 flex flex-col max-h-44 overflow-y-scroll">
           <>
-            <span className="px-4 font-semibold mt-2">Nearby</span>
-            <div>
-              <span className="px-4 font-semibold">Recent</span>
-              {cityRecentSuggestions.map((city) => (
-                <Location value={city} onClick={() => props.onChange(city)} />
-              ))}
-            </div>
-          </>
-        ) : (
-          <div>
-            <span className="px-4 font-semibold">Based on your search</span>
-            {cityAutocompletion.map(
-              (city: { properties: { label: string } }) => {
-                const name = city.properties.label;
-                return (
-                  <Location value={name} onClick={() => props.onChange(name)} />
-                );
-              }
+            {props.searchInput.length < 3 ? (
+              <>
+                <div>
+                  <span className="px-4 font-semibold">Recent</span>
+                  {cityRecentSuggestions.map((city) => (
+                    <Location
+                      value={city}
+                      onClick={() => props.onChange(city)}
+                    />
+                  ))}
+                </div>
+                {/* <span className="px-4 font-semibold mt-2">Nearby</span> */}
+              </>
+            ) : (
+              <div>
+                <span className="px-4 font-semibold">Based on your search</span>
+                {cityAutocompletion.map(
+                  (city: { properties: { label: string } }) => {
+                    const name = city.properties.label;
+                    return (
+                      <Location
+                        value={name}
+                        onClick={() => props.onChange(name)}
+                      />
+                    );
+                  }
+                )}
+              </div>
             )}
-          </div>
-        )}
+          </>
+        </div>
       </div>
-    </div>
-  );
+    );
+  }
+
+  return <></>;
 }
