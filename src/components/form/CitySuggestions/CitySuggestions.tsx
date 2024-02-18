@@ -66,7 +66,7 @@ export function CitySuggestions(props: {
     fetchCitySuggestions();
   }, [props.searchInput]);
 
-  if (cityRecentSuggestions.length > 0 || cityAutocompletion.length > 0) {
+  if (cityRecentSuggestions.length >= 0 || cityAutocompletion.length >= 0) {
     return (
       <div
         className={`${
