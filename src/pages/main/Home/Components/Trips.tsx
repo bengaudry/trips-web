@@ -1,15 +1,6 @@
-import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-
-import { deleteDoc, doc, updateDoc } from "firebase/firestore";
-import { getFirebaseDb } from "../../../../../server";
-
-import { Cta, Modal, Text, TripDisplayer } from "@/components";
-import { Checkbox } from "@/components/form";
-
-import { capitalizeString, removeElementAtIndex } from "@/lib/functions";
+import { Cta, TripDisplayer } from "@/components";
 import { Trip } from "@/types";
-import { toast } from "react-toastify";
 
 export function Trips(props: {
   data?: Array<Trip>;

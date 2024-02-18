@@ -147,7 +147,7 @@ export function ProfilePopup() {
         <div className="flex flex-col sm:flex-row items-center gap-2 pt-3 w-full">
           <button
             onClick={() => setEditMode((prevEditMode) => !prevEditMode)}
-            className={`flex flex-row w-full items-center gap-2 border-2 rounded-full pr-6 pl-5 py-2 transition-colors duration-300 border-[#00000030] md:hover:border-[#00000060] dark:border-[#ffffff30] dark:md:hover:border-[#ffffff60]`}
+            className={`flex flex-row w-full items-center gap-2 border-2 rounded-full pr-6 pl-5 py-2 transition-colors duration-300 border-[#00000030] md:hover:border-[#00000060] dark:border-white/10 dark:md:hover:border-white/20`}
           >
             <i
               className={`block translate-y-0.5 fi fi-rr-${

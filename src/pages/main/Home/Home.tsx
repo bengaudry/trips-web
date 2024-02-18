@@ -29,7 +29,6 @@ import {
   PanelSwitcher,
   Text,
 } from "@/components";
-import { useModal } from "@/hooks/modal";
 import { AnimatePresence, motion } from "framer-motion";
 import { SetUserNameModal } from "./Components/SetUserNameModal";
 import { Stats } from "./Components/Stats";

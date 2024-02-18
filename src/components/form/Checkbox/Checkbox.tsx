@@ -5,7 +5,7 @@ export function Checkbox(props: {
 }) {
   return (
     <div
-      className="flex flex-row items-center justify-between my-4 py-1 px-3 w-full border-2 rounded-lg dark:border-grayblue-700"
+      className="flex flex-row items-center justify-between my-4 py-1 px-3 w-full border-2 rounded-lg dark:border-white/10"
       onClick={() => props.setChecked(!props.checked)}
     >
       <label
