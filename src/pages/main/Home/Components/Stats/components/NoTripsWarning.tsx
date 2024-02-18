@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 
 export function NoTripsWarning() {
   const { t } = useTranslation();
-  
+
   return (
     <div className="text-center">
       <img
