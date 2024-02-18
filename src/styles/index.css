@@ -80,3 +80,10 @@ body {
     transform: translateX(0);
   }
 }
+
+@media screen and (prefers-color-scheme: dark) {
+  ::-webkit-calendar-picker-indicator {
+    filter: invert(1);
+    opacity: 0.4;
+  }
+}

@@ -94,6 +94,11 @@ export function Add() {
     if (time === "" || !time) return false;
     if (from === "" || !from) return false;
     if (to === "" || !to) return false;
+    if (
+      to.toLowerCase().replaceAll(" ", "-") ===
+      from.toLowerCase().replaceAll(" ", "-")
+    )
+      return false;
     if (parseInt(length) <= 0 || length === "" || !length) return false;
     if (parseInt(duration) <= 0 || duration === "" || !duration) return false;
     if (typeof roundTrip !== "boolean") return false;
