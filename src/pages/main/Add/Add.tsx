@@ -62,6 +62,21 @@ export function Add() {
   const [addTripPending, setAddTripPending] = useState(false);
 
   const handleSubmit = async () => {
+    if (checkFieldsValue()) {
+      if (step === 1) {
+        setStep(2);
+        return;
+      }
+      setStep("submitted");
+      handleAddTrip();
+      return;
+    }
+    toast("Please fill all fields", { type: "error" });
+  };
+
+  const handleAddTrip = () => {
+    setAddTripPending(true);
+    
     if (!CurrentUser.isEmailVerified()) {
       toast("Please verify your email before adding a trip", {
         type: "warning",
@@ -69,7 +84,6 @@ export function Add() {
       return;
     }
 
-    setAddTripPending(true);
 
     addTrip({
       date: date,
@@ -89,7 +103,7 @@ export function Add() {
     });
   };
 
-  const allFieldsFilled = (): boolean => {
+  const checkFieldsValue = (): boolean => {
     if (date === "" || !date) return false;
     if (time === "" || !time) return false;
     if (from === "" || !from) return false;
@@ -106,28 +120,30 @@ export function Add() {
   };
 
   const fetchWeather = (city: string) => {
-    if (city.length > 1) {
-      const OPW_API_KEY = import.meta.env.VITE_OPENWEATHER_API_KEY;
+    /* Fetches weather from open weather map api for a given city */
+
+    if (city.length >= 2) {
+      const OWM_API_KEY = import.meta.env.VITE_OPENWEATHER_API_KEY;
 
       fetch(
         `https://api.openweathermap.org/data/2.5/weather?q=${city
           .toLowerCase()
-          .replaceAll(" ", "-")}&appid=${OPW_API_KEY}`
+          .replaceAll(" ", "-")}&appid=${OWM_API_KEY}`
       )
         .then((value) => value.json())
         .then((json) => {
-          console.log(json);
-
           if ("weather" in json) {
             const w = json.weather[0].main;
 
+            // Associates the result with the known possible weather conditions
+            // stored in const Weather
             if (Weather.includes(w)) {
-              console.log(Weather.findIndex((elem) => elem === w));
               setOtherOptState((prevState) => ({
                 ...prevState,
-                weatherTypes: [0],
+                weatherTypes: [Weather.findIndex((elem) => elem === w)],
               }));
             } else if (w === "Clear") {
+              // Replaces "Clear" weather with "Sun" weather as it is in const Weather
               setOtherOptState((prevState) => ({
                 ...prevState,
                 weatherTypes: [2],
@@ -138,7 +154,9 @@ export function Add() {
           }
         })
         .catch((err) => {
-          console.error(`[api weather] : ${err}`);
+          if (document.location.href.includes("localhost")) {
+            console.error(`[api weather] : ${err}`);
+          }
         });
     }
   };
@@ -158,7 +176,7 @@ export function Add() {
               ? "scale-x-[1]"
               : "scale-x-0"
           } w-full transition-transform translate-x-0 origin-left duration-500 h-full bg-gradient-to-r from-brand-600 to-brand-300 rounded-lg`}
-        ></div>
+        />
       </div>
 
       {addTripPending}
@@ -173,14 +191,14 @@ export function Add() {
                 name={t("addpage.inputs.labels.date")}
                 type="date"
                 value={date}
-                onChange={(event) => setDate(event.target.value)}
+                onChange={(e) => setDate(e.target.value)}
                 required
               />
               <Input
                 name={t("addpage.inputs.labels.time")}
                 type="time"
                 value={time}
-                onChange={(event) => setTime(event.target.value)}
+                onChange={(e) => setTime(e.target.value)}
                 required
               />
             </section>
@@ -277,20 +295,9 @@ export function Add() {
           type="button"
           btnType="submit"
           className="mt-8 sticky bottom-6 lg:bottom-8"
-          disabled={!allFieldsFilled()}
+          disabled={!checkFieldsValue()}
           loading={addTripPending}
-          onClick={() => {
-            if (allFieldsFilled()) {
-              if (step === 1) {
-                setStep(2);
-                return;
-              }
-              setStep("submitted");
-              handleSubmit();
-              return;
-            }
-            toast("Please fill all fields", { type: "error" });
-          }}
+          onClick={handleSubmit}
         >
           {step === 1 ? "Suivant" : "Add trip"}
         </Cta>
