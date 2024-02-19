@@ -1,8 +1,11 @@
 import { sendEmailVerification, User } from "firebase/auth";
 import { toast } from "react-toastify";
 import { CurrentUser } from "@/api";
+import { useEffect, useState } from "react";
 
 export function NotVerifiedEmailPopup(props: { className?: string }) {
+  const [visible, setVisible] = useState(false);
+
   const sendEmail = () => {
     if (CurrentUser.isLoggedIn()) {
       sendEmailVerification(CurrentUser.getUser() as User)
@@ -26,6 +29,19 @@ export function NotVerifiedEmailPopup(props: { className?: string }) {
       });
     }
   };
+
+  // Showing the email not verified box only after three seconds
+  // to avoid making content flash
+  useEffect(() => {
+    if (CurrentUser.isEmailVerified()) {
+      setVisible(true);
+    } else {
+      setVisible(false);
+      setInterval(() => {
+        if (!CurrentUser.isEmailVerified()) setVisible(true);
+      }, 3000)
+    }
+  }, [visible])
 
   return !CurrentUser.isEmailVerified() ? (
     <div
