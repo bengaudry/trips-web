@@ -77,6 +77,8 @@ export default function App() {
     if (user) {
       setLoaderVisible(false);
       setUserLoggedIn(true);
+      if (user.displayName)
+        localStorage.setItem("cached-display-name", user.displayName);
     } else {
       setLoaderVisible(false);
       setUserLoggedIn(false);

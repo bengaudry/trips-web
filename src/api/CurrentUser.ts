@@ -6,7 +6,10 @@ export const CurrentUser = {
 
   getUid: () => getFirebaseAuth().currentUser?.uid || null,
   getEmail: () => getFirebaseAuth().currentUser?.email || null,
-  getDisplayName: () => getFirebaseAuth().currentUser?.displayName || null,
+  getDisplayName: () =>
+    getFirebaseAuth().currentUser?.displayName ||
+    localStorage.getItem("cached-display-name") ||
+    null,
   getPhoneNumber: () => getFirebaseAuth().currentUser?.phoneNumber || null,
 
   isLoggedIn: () => (getFirebaseAuth().currentUser ? true : false),
