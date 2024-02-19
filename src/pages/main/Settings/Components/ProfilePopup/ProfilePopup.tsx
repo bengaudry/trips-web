@@ -106,14 +106,14 @@ export function ProfilePopup() {
   };
 
   return (
-    <div className="relative h-full">
+    <div>
       <Text.Title rank={2} className="text-3xl font-semibold mb-4">
         {t("settingsPage.popups.profile.title")}
       </Text.Title>
 
       <section className="flex flex-col gap-2 mb-12">
         <div className="flex flex-row items-center gap-3">
-          <i className="fi fi-rr-envelope translate-y-0.5 absolute left-4" />
+          <i className="fi fi-rr-envelope translate-y-0.5 absolute left-8" />
           <input
             type="email"
             autoComplete="false"
@@ -129,7 +129,7 @@ export function ProfilePopup() {
         </div>
 
         <div className="flex flex-row items-center gap-3">
-          <i className="fi fi-rr-id-badge translate-y-0.5 absolute left-4" />
+          <i className="fi fi-rr-id-badge translate-y-0.5 absolute left-8" />
           <input
             type="text"
             autoComplete="false"
@@ -173,7 +173,7 @@ export function ProfilePopup() {
         </div>
       </section>
 
-      <div className="flex flex-col overflow-hidden gap-0.5 rounded-lg w-full absolute bottom-12">
+      <div className="flex flex-col overflow-hidden gap-0.5 rounded-lg">
         <Button icon="lock" onClick={() => showModal("ChangePass")}>
           Change my password
         </Button>
