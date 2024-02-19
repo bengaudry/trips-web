@@ -10,7 +10,7 @@ export function Layout({
 }) {
   return (
     <div className="App dark:text-grayblue-100 dark:bg-grayblue-900 mx-auto lg:pl-72">
-      {loaderVisible && <Loader />}
+      {/* {loaderVisible && <Loader />} */}
 
       {offline && (
         <div className="fixed top-6 right-6 bg-red-500/50 backdrop-blur-lg px-6 py-2 rounded-full md:hover:scale-110 transition-transform duration-300">
