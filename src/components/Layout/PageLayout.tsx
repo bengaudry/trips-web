@@ -10,7 +10,7 @@ export function PageLayout(props: {
 }) {
   return (
     <motion.div
-      className={`px-5 py-12 h-[100%-6rem] ${props.className}`}
+      className={`px-5 py-12 pb-32 h-[100%-6rem] ${props.className}`}
       role="page"
       key={props.key}
       initial={{ opacity: 0 }}

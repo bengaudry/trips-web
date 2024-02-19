@@ -76,14 +76,13 @@ export function Add() {
 
   const handleAddTrip = () => {
     setAddTripPending(true);
-    
+
     if (!CurrentUser.isEmailVerified()) {
       toast("Please verify your email before adding a trip", {
         type: "warning",
       });
       return;
     }
-
 
     addTrip({
       date: date,
