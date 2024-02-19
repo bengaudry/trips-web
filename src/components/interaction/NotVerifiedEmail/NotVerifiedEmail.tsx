@@ -39,9 +39,9 @@ export function NotVerifiedEmailPopup(props: { className?: string }) {
       setVisible(false);
       setInterval(() => {
         if (!CurrentUser.isEmailVerified()) setVisible(true);
-      }, 3000)
+      }, 3000);
     }
-  }, [visible])
+  }, [visible]);
 
   return !CurrentUser.isEmailVerified() ? (
     <div
