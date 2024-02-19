@@ -56,7 +56,7 @@ export default function App() {
     // Set loader visible if a previous connexion is detected
     const previouslyConnected = localStorage.getItem("connected");
     if (previouslyConnected && previouslyConnected === "true") {
-      setLoaderVisible(true);
+      setUserLoggedIn(true);
     }
   }, [userLoggedIn]);
 
