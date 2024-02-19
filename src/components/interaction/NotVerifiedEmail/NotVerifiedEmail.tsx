@@ -34,16 +34,18 @@ export function NotVerifiedEmailPopup(props: { className?: string }) {
   // to avoid making content flash
   useEffect(() => {
     if (CurrentUser.isEmailVerified()) {
-      setVisible(true);
+      setVisible(false);
     } else {
+      console.log("Setting to false");
       setVisible(false);
       setInterval(() => {
         if (!CurrentUser.isEmailVerified()) setVisible(true);
+        console.log("Setting to true");
       }, 3000);
     }
-  }, [visible]);
+  }, []);
 
-  return !CurrentUser.isEmailVerified() ? (
+  return visible ? (
     <div
       className={`w-full flex flex-col items-center rounded-lg px-4 py-2 mt-2 bg-yellow-600 ${props.className}`}
     >
