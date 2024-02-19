@@ -13,7 +13,6 @@ import { initReactI18next } from "react-i18next";
 import { resources } from "../lang";
 
 import { NotStandaloneAlert } from "@/components";
-import { useModal } from "@/hooks";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Routing } from "./Routing";
@@ -45,8 +44,6 @@ i18n.use(initReactI18next).init({
 });
 
 export default function App() {
-  const { modalContent } = useModal();
-
   const [userLoggedIn, setUserLoggedIn] = useState(false);
   const [loaderVisible, setLoaderVisible] = useState(true);
   const [offline, setOffline] = useState(!navigator.onLine);
@@ -110,7 +107,6 @@ export default function App() {
         offline={offline}
         loaderVisible={loaderVisible}
       />
-      {modalContent}
     </BrowserRouter>
   );
 }

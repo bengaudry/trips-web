@@ -188,7 +188,7 @@ export function Home() {
     <PageLayout key="home">
       <NotVerifiedEmailPopup className="mb-4" />
 
-      {userNameUnset && (
+      {/* {userNameUnset && (
         <Modal
           visible={userNameUnset}
           title="Hey ! We haven't met yet"
@@ -196,7 +196,7 @@ export function Home() {
         >
           <SetUserNameModal setUserNameUnset={setUserNameUnset} />
         </Modal>
-      )}
+      )} */}
 
       <Modal
         visible={modalOpened}
